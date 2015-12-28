@@ -60,6 +60,8 @@ public class TutorialManagerController : MonoBehaviour {
 
 		tutoUIPrefab = Resources.Load("prefabs/hud/BasicTutorial") as GameObject;
 
+		tutorials = TutorialParser.parseTutorials();
+
 
 	}
 	
@@ -98,7 +100,7 @@ public class TutorialManagerController : MonoBehaviour {
 
 		foreach (Tutorial tuto in tutorials) {
 			if (!tuto.Played && tuto.requestTrigger()) {
-				launchFreeze(tuto.Text,tuto.ImagePath);
+				launchFreeze(tuto.Title,tuto.ImagePath, tuto.Text, tuto.Attack);
 				tuto.Played = true;
 			}
 		}
@@ -110,10 +112,12 @@ public class TutorialManagerController : MonoBehaviour {
 	/**
 	 * Launch the FREEZE mode, adding the tutorial on te screen
 	 */
-	private void launchFreeze(string text, string imagePath) {
+	private void launchFreeze(string title, string imagePath, string text, string attack) {
 		tutoUIInstance = Instantiate(tutoUIPrefab) as GameObject;
 		TutorialUIManager uiMan = tutoUIInstance.GetComponent<TutorialUIManager> ();
-		uiMan.setText (text);
+		uiMan.setTitle (title);
+		uiMan.setAttack (attack);
+		uiMan.setDescription (text);
 		uiMan.setImage (imagePath);
 		
 		state = TutorialState.FREEZE;
