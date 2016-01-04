@@ -8,6 +8,8 @@ public class KMManager : MonoBehaviour {
 
 	GameObject fireballGO;
 	GameObject fireball = null;
+	GameObject vortexGO;
+	GameObject vortex = null;
 
 	float swordMovTime = 0;
 	float shieldMovTime = 0;
@@ -32,6 +34,8 @@ public class KMManager : MonoBehaviour {
 		}
 
 		fireballGO = Resources.Load ("prefabs/leapmotion/Fireball") as GameObject;
+
+		vortexGO = Resources.Load ("prefabs/leapmotion/Vortex") as GameObject;
 
 		leftHand = Instantiate (leftHandGO);
 		rightHand = Instantiate (rightHandGO);
@@ -172,5 +176,26 @@ public class KMManager : MonoBehaviour {
 		v3.z = rightHand.transform.position.z;
 		
 		rightHand.transform.position = v3;
+
+
+
+
+		if (Input.GetKey(KeyCode.Space) && vortex == null) {
+			vortex = Instantiate(vortexGO);
+			
+			vortex.transform.parent = leftHand.transform.FindChild("HandContainer").transform;
+			vortex.transform.localPosition = new Vector3(0f, 0f, 0f);
+			
+		}else if (!Input.GetKey(KeyCode.Space) && vortex != null) {
+
+			vortex.transform.parent = transform.parent; //attach to camera
+			//vortex.transform.localPosition = new Vector3(0f, 0.3f, 1.5f);
+			
+			vortex.GetComponent<VortexController>().isDropped();
+			
+			vortex.GetComponentInChildren<CapsuleCollider>().enabled = true;
+			//it is dropped so the size is bigger
+			vortex.GetComponent<ParticleSystem>().startSize = 0.8f;
+		}
 	}
 }
