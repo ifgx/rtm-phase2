@@ -11,6 +11,8 @@ public class KMManager : MonoBehaviour {
 	GameObject vortexGO;
 	GameObject vortex = null;
 
+	Camera cam = null;
+
 	float swordMovTime = 0;
 	float shieldMovTime = 0;
 
@@ -19,6 +21,16 @@ public class KMManager : MonoBehaviour {
 	string heroClass = "Wizard";
 
 	float movSpeed = 0.2f;
+
+	float screenBoundRatioFactor = 640;
+	float screenBoundX;
+
+
+	public void setCamera(Camera camera) {
+		this.cam = camera;
+	}
+
+
 	// Use this for initialization
 	void Start () {
 
@@ -49,7 +61,10 @@ public class KMManager : MonoBehaviour {
 //		//pos.z = 7;
 //		rightHand.transform.position = pos;
 
+		if (cam == null)
+			cam = Camera.main;
 
+		screenBoundX = cam.pixelWidth / screenBoundRatioFactor;
 	}
 	
 
@@ -141,15 +156,17 @@ public class KMManager : MonoBehaviour {
 	}
 
 	private void WizardUpdate() {
+		Debug.Log (leftHand.transform.position);
+		Debug.Log (cam.pixelWidth + " -- " + cam.pixelHeight);
 		if (Input.GetKey (KeyCode.Z)) {
 			leftHand.transform.Translate(new Vector3(0, movSpeed, 0));
 		} else if (Input.GetKey (KeyCode.S)) {
 			leftHand.transform.Translate(new Vector3(0, -movSpeed, 0));
 		}
-		
-		if (Input.GetKey (KeyCode.Q)) {
+		Debug.Log (leftHand.transform.position.x + " | " + screenBoundX);
+		if (Input.GetKey (KeyCode.Q) && leftHand.transform.position.x > -screenBoundX) {
 			leftHand.transform.Translate(new Vector3(0, 0, movSpeed));
-		} else if (Input.GetKey (KeyCode.D)) {
+		} else if (Input.GetKey (KeyCode.D) && leftHand.transform.position.x < screenBoundX) {
 			leftHand.transform.Translate(new Vector3(0, 0, -movSpeed));
 			
 		}
