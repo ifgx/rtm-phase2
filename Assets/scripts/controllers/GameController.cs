@@ -174,43 +174,14 @@ public class GameController : MonoBehaviour {
 
 		//génération du héros
 
-		//instanciate a hero using the class contained in the model
-		Hero modelHero = GameModel.Hero;
-		string heroClass = modelHero.GetType ().ToString ();
+		
+		if (GameModel.MultiplayerModeOn) {
+			initMulti ();
+		} else {
+			initMono ();
+		}
 
-		if (heroClass == "Warrior")
-			heroGameObject = Instantiate (warrior);
-		else if (heroClass == "Monk")
-			heroGameObject = Instantiate (monk);
-		else if (heroClass == "Wizard")
-			heroGameObject = Instantiate (wizard);
-		else
-			heroGameObject = Instantiate (warrior);
-			
-		//Debug.Log (heroGameObject);
-		GameModel.HerosInGame.Add (heroGameObject.GetComponent<Hero> ());
-		hero = GameModel.HerosInGame [0];
 		float vitesseHeros = hero.MovementSpeed;
-		hero.XpQuantity = modelHero.XpQuantity;
-
-		//LEAP
-		leapInstance = Instantiate (leapPrefab);
-		//Debug.Log ("leapInstance : " + leapInstance);
-		//the leap motion scene is child of camera so it follow the translation
-		leapInstance.transform.parent = Camera.allCameras[0].transform;
-		leapInstance.transform.position = new Vector3 (0f, 2.5f, 1.6f);
-		//sets the "hand parent" field so the arms also are child of camera and don't flicker
-		leapControl = leapInstance.GetComponent<HandController> ();
-		leapControl.setModel(handSide, hero);
-		leapControl.setGameController(this);
-
-		leapControl.handParent = Camera.allCameras[0].transform;
-		
-		leapCanvas = Instantiate(leapCanvasPrefab);
-
-		
-
-
 
 
 		//Génération de terrain
@@ -272,15 +243,12 @@ public class GameController : MonoBehaviour {
 			}
 		}
 
-		//Génération du HUD
-		hudMaster = Instantiate (hud).GetComponent<HudMaster>();
+		
 		//Debug.Log ("hudMaster : " + hudMaster);
 		state = GameState.PLAY;
 
 
-		Camera.main.transform.parent = heroGameObject.transform;
-		Camera.main.transform.position = new Vector3 (0, 2.18f, 0);
-		//Camera.main.transform.Translate(new Vector3(0, 2.18f, 0));
+		
 
 
 		pausedMenu = GameObject.Find("Canvas");
@@ -316,6 +284,118 @@ public class GameController : MonoBehaviour {
 		 	Instantiate (tutoGO);
 		}
 		
+	}
+
+	void initMono() {
+			//instanciate a hero using the class contained in the model
+			Hero modelHero = GameModel.Hero;
+			string heroClass = modelHero.GetType ().ToString ();
+			
+			if (heroClass == "Warrior")
+				heroGameObject = Instantiate (warrior);
+			else if (heroClass == "Monk")
+				heroGameObject = Instantiate (monk);
+			else if (heroClass == "Wizard")
+				heroGameObject = Instantiate (wizard);
+			else
+				heroGameObject = Instantiate (warrior);
+
+			//Debug.Log (heroGameObject);
+			GameModel.HerosInGame.Add (heroGameObject.GetComponent<Hero> ());
+			hero = GameModel.HerosInGame [0];
+
+			hero.XpQuantity = modelHero.XpQuantity;
+
+
+			//LEAP
+			leapInstance = Instantiate (leapPrefab);
+			//Debug.Log ("leapInstance : " + leapInstance);
+			//the leap motion scene is child of camera so it follow the translation
+			leapInstance.transform.parent = Camera.allCameras[0].transform;
+			leapInstance.transform.position = new Vector3 (0f, 2.5f, 1.6f);
+			//sets the "hand parent" field so the arms also are child of camera and don't flicker
+			leapControl = leapInstance.GetComponent<HandController> ();
+			leapControl.setModel(handSide, hero);
+			leapControl.setGameController(this);
+			
+			leapControl.handParent = Camera.allCameras[0].transform;
+			
+			leapCanvas = Instantiate(leapCanvasPrefab);
+
+
+
+			Camera.main.transform.parent = heroGameObject.transform;
+			Camera.main.transform.position = new Vector3 (0, 2.18f, 0);
+			//Camera.main.transform.Translate(new Vector3(0, 2.18f, 0));
+
+
+			//Génération du HUD
+			hudMaster = Instantiate (hud).GetComponent<HudMaster>();
+	}
+
+	void initMulti() {
+
+			int i = 0;
+			foreach (Hero modelHero in GameModel.Heros) {
+				//instanciate a hero using the class contained in the model
+
+				string heroClass = modelHero.GetType ().ToString ();
+				
+				if (heroClass == "Warrior")
+					heroGameObject = Instantiate (warrior);
+				else if (heroClass == "Monk")
+					heroGameObject = Instantiate (monk);
+				else if (heroClass == "Wizard")
+					heroGameObject = Instantiate (wizard);
+				else
+					heroGameObject = Instantiate (warrior);
+
+				heroGameObject.transform.Translate(new Vector3(-1.5f+i*3f,0,0));
+				//Debug.Log (heroGameObject);
+				GameModel.HerosInGame.Add (heroGameObject.GetComponent<Hero> ());
+				GameModel.HerosInGame [i].XpQuantity = modelHero.XpQuantity;
+
+				i++;
+			}
+
+			hero = GameModel.HerosInGame [0];
+
+			GameObject camL = GameObject.Find ("CameraL");
+			//LEAP
+			leapInstance = Instantiate (leapPrefab);
+			//Debug.Log ("leapInstance : " + leapInstance);
+			//the leap motion scene is child of camera so it follow the translation
+			leapInstance.transform.parent = camL.transform;
+			leapInstance.transform.position = new Vector3 (0f, 2.5f, 1.6f);
+			//sets the "hand parent" field so the arms also are child of camera and don't flicker
+			leapControl = leapInstance.GetComponent<HandController> ();
+			leapControl.setModel(handSide, GameModel.HerosInGame [0]);
+			leapControl.setGameController(this);
+			
+			leapControl.handParent = camL.transform;
+			
+			leapCanvas = Instantiate(leapCanvasPrefab);
+			
+			
+			
+			camL.transform.parent = GameModel.HerosInGame [0].transform;
+			camL.transform.position = new Vector3 (GameModel.HerosInGame [0].transform.position.x, 2.18f, 0);
+			camL.GetComponent<Camera> ().enabled = true;
+			//Camera.main.transform.Translate(new Vector3(0, 2.18f, 0));
+
+
+
+			//instancier clavier
+			GameObject camR = GameObject.Find ("CameraR");
+
+			camR.transform.parent = GameModel.HerosInGame [1].transform;
+			camR.transform.position = new Vector3 (GameModel.HerosInGame [1].transform.position.x, 2.18f, 0);
+			camR.GetComponent<Camera> ().enabled = true;
+
+			Camera.main.enabled = false;
+
+			//Génération du HUD
+			hudMaster = Instantiate (hud).GetComponent<HudMaster>();
 	}
 	
 	/**

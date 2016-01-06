@@ -17,6 +17,8 @@ public class GameModel {
 	 */
 	private static Hero hero;
 
+	private static List<Hero> heros;
+
 	private static List<Hero> herosInGame;
 
 	private static List<NPC> npcsInGame;
@@ -36,6 +38,7 @@ public class GameModel {
 	private static int score;
 
 	private static int slot;
+
 
 	public static int Slot {
 		get {
@@ -64,6 +67,16 @@ public class GameModel {
 
 		set {
 			hero = value;
+		}
+	}
+
+	public static List<Hero> Heros {
+		get {
+			return heros;
+		}
+		
+		set {
+			heros = value;
 		}
 	}
 
@@ -177,7 +190,12 @@ public class GameModel {
 		ActualLevelId = 0;
 		//Debug.Log (actualLevel.Name + " is the actual level");
 
+		heros = new List<Hero> ();
+		heros.Add (new Warrior ());
+		heros.Add (new Wizard ());
+
 		herosInGame = new List<Hero> ();
+
 
 		//create saves
 		saves = SaveParser.parseLevelFile ();
@@ -237,6 +255,14 @@ public class GameModel {
 		set {
 			customLevel = value;
 		}
+	}
+
+	public static bool MultiplayerModeOn {
+		get {
+			//return (heros.Count == 2);
+			return true;
+		}
+
 	}
 
 	

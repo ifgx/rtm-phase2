@@ -26,7 +26,7 @@ public class HudMaster : MonoBehaviour {
 	private float timerShield = 0.0f;
 	private float maxTimerShield = 0.5f;
 
-	private float groundOnCam;
+	//private float groundOnCam;
 
     // Use this for initialization
     /**
@@ -49,7 +49,7 @@ public class HudMaster : MonoBehaviour {
 		shieldActivated = false;
 
 
-		groundOnCam = Camera.main.WorldToViewportPoint(new Vector3 (0.0f, 0.0f, GameModel.HerosInGame[0].GetPosition().z + 3.0f)).y*this.gameObject.GetComponent<RectTransform>().sizeDelta.y;
+		//groundOnCam = Camera.main.WorldToViewportPoint(new Vector3 (0.0f, 0.0f, GameModel.HerosInGame[0].GetPosition().z + 3.0f)).y*this.gameObject.GetComponent<RectTransform>().sizeDelta.y;
 
     }
 	
