@@ -18,6 +18,7 @@ public class AudioManager : MonoBehaviour {
 	Texture2D textureCursor;
     float[] samples;
     AudioSource audioSource;
+    AudioSource audioSourceHB;
     AudioClip clip;
     public GameObject image;
     private RawImage img;
@@ -38,27 +39,31 @@ public class AudioManager : MonoBehaviour {
 
 	public void Init(){
 		if (musicName != null) {
+            audioSourceHB = gameObject.AddComponent<AudioSource>();
+            audioSourceHB.clip = Resources.Load("Musics/Hearbeat") as AudioClip;
+            audioSourceHB.volume = 0;
+            audioSourceHB.Play();
 
-			audioSource = GetComponent<AudioSource>();
-			samples = new float[size];
+            audioSource = GetComponent<AudioSource>();
+            samples = new float[size];
 
-
-
-			//clip = Resources.Load ("Musics/" + musicName, typeof(AudioClip)) as AudioClip;
-			//USING WWW to load the audioclip in root/Musics
-			string path = "file://" + Application.dataPath + "/../Musics/" + musicName + ".wav";
+            //clip = Resources.Load ("Musics/" + musicName, typeof(AudioClip)) as AudioClip;
+            //USING WWW to load the audioclip in root/Musics
+            
+            string path = "file://" + Application.dataPath + "/../Musics/"+musicName+".wav";
 			//Debug.Log ("music : " + path);
 			WWW www = new WWW(path);
-			while (!www.isDone) {
+            while (!www.isDone) {
 				//Debug.Log ("loading music ...");
 			}
 
-			clip = www.GetAudioClip(false);
 
-			audioSource.clip = clip;
+            clip = www.GetAudioClip(false);
+            
+            audioSource.clip = clip;
 
-			// create the texture and assign to the guiTexture:
-			img = (RawImage) image.GetComponent<RawImage>();
+            // create the texture and assign to the guiTexture:
+            img = (RawImage) image.GetComponent<RawImage>();
 			cursorImg = (RawImage) cursor.GetComponent<RawImage>();
 
 			width = (int) GetComponent<RectTransform>().rect.width;
@@ -86,11 +91,16 @@ public class AudioManager : MonoBehaviour {
 	}
 	public void Pause(){
 		audioSource.Pause ();
-	}
+        audioSourceHB.Pause();
+    }
 	public void Play(){
-		if(!audioSource.isPlaying){
+        if (!audioSourceHB.isPlaying)
+        {
+            audioSourceHB.Play();
+        }
+        if (!audioSource.isPlaying){
 		audioSource.Play ();
-		}
+        }
 	}
 
     IEnumerator UpdateWaveForm()
@@ -103,7 +113,19 @@ public class AudioManager : MonoBehaviour {
         while (true)
         {
 			if(audioSource.isPlaying){
-				textureCursor.SetPixels(blank, 0);
+                float healthPointratio = GameModel.HerosInGame[0].HealthPoint / GameModel.HerosInGame[0].MaxHealthPoint;
+                audioSource.volume = healthPointratio;
+                audioSourceHB.volume = 1 - healthPointratio;
+                if(healthPointratio < 0.33)
+                {
+                    audioSourceHB.pitch = 1.2;
+                }
+                else
+                {
+                    audioSourceHB.pitch = 1;
+                }
+                
+                textureCursor.SetPixels(blank, 0);
 	            for (i = 1; i < height; i++) //sizeWaveform
 	            {
 					for (j = pas * (currentCount-1); j <= (pas * currentCount)+10; j++) //sizeWaveform
