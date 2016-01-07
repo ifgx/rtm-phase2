@@ -489,13 +489,24 @@ public class HandController : MonoBehaviour
 			//detect the regen mvt
 			Frame frame = GetFrame();
 			HandList handsInFrame = frame.Hands;
-			
-			foreach (Hand hand in handsInFrame) {				
+
+			//if two hands, are they close enough together?
+			Hand leftHand = null;
+			Hand rightHand = null;
+
+			foreach (Hand hand in handsInFrame) 
+			{				
 				//if we are going through the attack hand
 				if (hand.IsValid && (handSide == HandSide.RIGHT_HAND ? hand.IsRight : hand.IsLeft)) 
 				{
+					//fills fist the left hand, we don't care if its really a left or right hand, we just want the distance)
+					if (leftHand == null)
+						leftHand = hand;
+					else
+						rightHand = hand;
 				}
 			}
+
 
 		}
 	}
