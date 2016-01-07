@@ -71,6 +71,9 @@ public class GameController : MonoBehaviour {
 	private GameObject leapCanvasPrefab;
 	private GameObject leapCanvas;
 
+	private GameObject kmManagerPrefab;
+	private GameObject kmManager;
+
 	private GameObject musicCanvasPrefab;
 	private GameObject musicCanvas;
 	private AudioManager audioManager;
@@ -143,6 +146,8 @@ public class GameController : MonoBehaviour {
 		leapCanvasPrefab = Resources.Load("prefabs/leapmotion/LeapCanvas") as GameObject;
 
 		musicCanvasPrefab = Resources.Load("prefabs/sound/MusicCanvas") as GameObject;
+
+		kmManagerPrefab = Resources.Load ("prefabs/keyboard/KMManager") as GameObject;
 
 		//Debug.Log (" END Awake GameController");
 
@@ -389,6 +394,11 @@ public class GameController : MonoBehaviour {
 
 			//instancier clavier
 			GameObject camR = GameObject.Find ("CameraR");
+
+			kmManager = Instantiate (kmManagerPrefab);
+
+			KMManager keyboardManager = kmManager.GetComponent<KMManager> ();
+			keyboardManager.setCamera (camR.GetComponent<Camera> ());
 
 			camR.transform.parent = GameModel.HerosInGame [1].transform;
 			camR.transform.position = new Vector3 (GameModel.HerosInGame [1].transform.position.x, 2.18f, 0);

@@ -28,6 +28,7 @@ public class KMManager : MonoBehaviour {
 
 	public void setCamera(Camera camera) {
 		this.cam = camera;
+
 	}
 
 
@@ -62,9 +63,12 @@ public class KMManager : MonoBehaviour {
 //		rightHand.transform.position = pos;
 
 		if (cam == null)
-			cam = Camera.main;
+			cam = cam;
 
 		screenBoundX = cam.pixelWidth / screenBoundRatioFactor;
+
+		leftHand.transform.parent = cam.transform;
+		rightHand.transform.parent = cam.transform;
 	}
 	
 
@@ -131,7 +135,7 @@ public class KMManager : MonoBehaviour {
 		
 		Vector3 v3 = Input.mousePosition;
 		v3.z = 7;
-		v3 = Camera.main.ScreenToWorldPoint (v3);
+		v3 = cam.ScreenToWorldPoint (v3);
 		v3.z = rightHand.transform.position.z;
 		
 		rightHand.transform.position = v3;
@@ -189,7 +193,7 @@ public class KMManager : MonoBehaviour {
 
 		Vector3 v3 = Input.mousePosition;
 		v3.z = 7;
-		v3 = Camera.main.ScreenToWorldPoint (v3);
+		v3 = cam.ScreenToWorldPoint (v3);
 		v3.z = rightHand.transform.position.z;
 		
 		rightHand.transform.position = v3;
@@ -205,7 +209,7 @@ public class KMManager : MonoBehaviour {
 			
 		}else if (!Input.GetKey(KeyCode.Space) && vortex != null) {
 
-			vortex.transform.parent = transform.parent; //attach to camera
+			vortex.transform.parent = cam.transform; //attach to camera
 			//vortex.transform.localPosition = new Vector3(0f, 0.3f, 1.5f);
 			
 			vortex.GetComponent<VortexController>().isDropped();
