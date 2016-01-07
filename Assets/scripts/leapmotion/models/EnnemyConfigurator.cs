@@ -31,8 +31,8 @@ public class EnnemyConfigurator : MonoBehaviour {
 	public static float cannonAttackRange = 27.0f;
 	public static float cannonDistanceToDisappear = 2.0f;
 
-	public static float cannonProjectileSpeed = -35.0f;
-	public static float cannonProjectileHeight = 1.5f;
+	//public static float cannonProjectileSpeed = -35.0f;
+	//public static float cannonProjectileHeight = 1.5f;
 	public static float cannonRotationSpeed = 10.0f;
 	public static float cannonMinAttackRange = 10.0f;
 	//public static Blocking cannonBlocking = Blocking.FREE;
