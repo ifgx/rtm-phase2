@@ -44,6 +44,7 @@ public class GameController : MonoBehaviour {
 	private GameObject hud;
 	private GameObject deathHud;
 	private HudMaster hudMaster;
+	private HudMaster hudMaster2 = null;
 
 	private GameObject basicLancer;
 	private GameObject fireLancer;
@@ -338,6 +339,7 @@ public class GameController : MonoBehaviour {
 
 			//Génération du HUD
 			hudMaster = Instantiate (hud).GetComponent<HudMaster>();
+			hudMaster.setHero (GameModel.HerosInGame [0]);
 			hudMaster.setRenderCamera (Camera.allCameras [0]);
 	}
 
@@ -409,7 +411,13 @@ public class GameController : MonoBehaviour {
 			Camera.main.enabled = false;
 
 			//Génération du HUD
-			hudMaster = Instantiate (hud).GetComponent<HudMaster>();
+			hudMaster = Instantiate (hud).GetComponent<HudMaster> ();
+			hudMaster.setHero (GameModel.HerosInGame [0]);
+			hudMaster.setRenderCamera (camL.GetComponent<Camera> ());
+
+			hudMaster2 = Instantiate (hud).GetComponent<HudMaster> ();
+			hudMaster2.setHero (GameModel.HerosInGame [1]);
+			hudMaster2.setRenderCamera (camR.GetComponent<Camera> ());
 	}
 	
 	/**
@@ -463,6 +471,19 @@ public class GameController : MonoBehaviour {
 		hudMaster.setLevel (HudMaster.HudType.Life, currentHealthPercent);
 		hudMaster.setLevel (HudMaster.HudType.Special, currentPowerPercent);
 		hudMaster.updateXP (hero.XpQuantity/hero.XpQuantityNextLevel*100.0f, (int)hero.Level + 1);
+
+		if (hudMaster2 != null) {
+			hero = GameModel.HerosInGame [1];
+			
+			//update hud state
+			currentHealthPercent = 100.0f*hero.HealthPoint/hero.MaxHealthPoint;
+			currentPowerPercent = 100.0f*hero.PowerQuantity/hero.MaxPowerQuantity;
+			//Debug.Log("Life: " + currentHealthPercent);
+			
+			hudMaster.setLevel (HudMaster.HudType.Life, currentHealthPercent);
+			hudMaster.setLevel (HudMaster.HudType.Special, currentPowerPercent);
+			hudMaster.updateXP (hero.XpQuantity/hero.XpQuantityNextLevel*100.0f, (int)hero.Level + 1);
+		}
 
 		//Debug.Log (GameModel.NPCsInGame.Count);
 		if (GameModel.NPCsInGame.Count == 0) {

@@ -26,7 +26,13 @@ public class HudMaster : MonoBehaviour {
 	private float timerShield = 0.0f;
 	private float maxTimerShield = 0.5f;
 
+	private Hero hero;
+
 	//private float groundOnCam;
+
+	public void setHero(Hero hero) {
+		this.hero = hero;
+	}
 
     // Use this for initialization
     /**
@@ -36,9 +42,9 @@ public class HudMaster : MonoBehaviour {
        // hudLife = GameObject.Find("hud_life");
        // hudSpecial = GameObject.Find("hud_special");
 		Color32 newColor;
-		if (GameModel.HerosInGame [0].GetType ().ToString () == "Warrior") {
+		if (hero.GetType ().ToString () == "Warrior") {
 			newColor = new Color32(43, 170, 11, 184);
-		} else if (GameModel.HerosInGame [0].GetType ().ToString () == "Wizard") {
+		} else if (hero.GetType ().ToString () == "Wizard") {
 			newColor = new Color32 (25, 1, 202, 184);
 		} else {
 			newColor = new Color32 (20, 20, 20, 184);
