@@ -1,0 +1,59 @@
+{"tuto":
+	[ 
+		{
+			"name":"Lancer",
+			"type":"BasicLancer",
+			"title":"Lancers",
+			"desc":"Lancers are enemies who charge you on sight, spear ahead in order to pierce you before disappearing.",
+			"attack":"Melee attack"
+		},{
+			"name":"Dragonet",
+			"type":"BasicDragonet",
+			"title":"Dragonnets",
+			"desc":"Dragonets are identified small flying objects who tends to stay in front of you. This way you can not see the other ennemies. They inflict you damages with their fire-breath until you kill them. Moreover, they will regularly switch to another position, trying to get around your defense.",
+			"attack":"Range attack"
+		},{
+			"name":"Cannon",
+			"type":"Cannon",
+			"title":"Cannons",
+			"desc":"They are non moving enemies firing cannonball towards you. These projectiles have a parabolic trajectory, hitting you at different places on your body.",
+			"attack":"Range attack"
+		},{
+			"name":"Assassin",
+			"type":"Assassin",
+			"title":"Assassins",
+			"desc":"They peacefully walk around till they are away from your field of view. Then, if you do not have killed them, they will stab you which inflicts you a huge amount of damages.",
+			"attack":"Melee attack"
+		},{
+			"name":"Wall",
+			"type":"Wall",
+			"title":"Walls",
+			"desc":"They do not attack you as they can not move. However, they protect a canon. You have to destroy the wall in order to fight back the canon.",
+			"attack":"No attack"
+		},{
+			"name":"firstAttack",
+			"type":"weaponWarrior",
+			"title":"Warrior's attack",
+			"desc":"You are a warrior so you have a sword, a beautiful one. Move your right hand as you were wielding a sword, trying to cut your enemies. Do not try to do a thrusting attack as your hands may not be detected anymore by the Leap Motion, or you could hit your screen.",
+			"attack":"Range attack"
+		},{
+			"name":"firstDefence",
+			"type":"weaponWarrior",
+			"title":"Warrior's defence",
+			"desc":"The warrior has got a shield. It follows you left hand movements, so you just need to move your left hand right or left and up or down to place the shield on the path of your enemies’ attacks.",
+			"attack":"Range attack"
+		},{
+			"name":"Fire",
+			"type":"FireDragonet",
+			"Title":"Fire ennemies",
+			"desc":"A rédiger !!!!",
+			"attack":""
+		},{
+			"name":"Ice",
+			"type":"IceDragonet",
+			"Title":"Ice ennemies",
+			"desc":"A rédiger !!!!",
+			"attack":""
+		}
+	]
+}
