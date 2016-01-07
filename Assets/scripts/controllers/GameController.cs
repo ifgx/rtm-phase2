@@ -326,6 +326,8 @@ public class GameController : MonoBehaviour {
 
 			Camera.main.transform.parent = heroGameObject.transform;
 			Camera.main.transform.position = new Vector3 (0, 2.18f, 0);
+			GameObject MainCamera = GameObject.Find("Main Camera");
+			hero.HeroCamera = MainCamera;
 			//Camera.main.transform.Translate(new Vector3(0, 2.18f, 0));
 
 
@@ -382,7 +384,7 @@ public class GameController : MonoBehaviour {
 			camL.transform.position = new Vector3 (GameModel.HerosInGame [0].transform.position.x, 2.18f, 0);
 			camL.GetComponent<Camera> ().enabled = true;
 			//Camera.main.transform.Translate(new Vector3(0, 2.18f, 0));
-
+			GameModel.HerosInGame[0].HeroCamera = camL;
 
 
 			//instancier clavier
@@ -391,6 +393,7 @@ public class GameController : MonoBehaviour {
 			camR.transform.parent = GameModel.HerosInGame [1].transform;
 			camR.transform.position = new Vector3 (GameModel.HerosInGame [1].transform.position.x, 2.18f, 0);
 			camR.GetComponent<Camera> ().enabled = true;
+			GameModel.HerosInGame [1].HeroCamera = camR;
 
 			Camera.main.enabled = false;
 
