@@ -198,7 +198,7 @@ public class KMManager : MonoBehaviour {
 		
 		rightHand.transform.position = v3;
 
-
+		
 
 
 		if (Input.GetKey(KeyCode.Space) && vortex == null) {

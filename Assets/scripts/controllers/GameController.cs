@@ -338,6 +338,7 @@ public class GameController : MonoBehaviour {
 
 			//Génération du HUD
 			hudMaster = Instantiate (hud).GetComponent<HudMaster>();
+			hudMaster.setRenderCamera (Camera.allCameras [0]);
 	}
 
 	void initMulti() {

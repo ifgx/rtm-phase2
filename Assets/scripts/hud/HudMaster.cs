@@ -131,6 +131,11 @@ public class HudMaster : MonoBehaviour {
 		
 		}
 	}
+
+	public void setRenderCamera(Camera cam) {
+		Canvas can = GetComponent<Canvas> ();
+		can.worldCamera = cam;
+	}
 	
 	/**
 	 * Sets shield position to the screen in function of a world position
