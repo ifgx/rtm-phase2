@@ -32,7 +32,7 @@ public class HeroMenuController : MonoBehaviour {
 
 		buttonWarrior = GameObject.Find("Warrior").GetComponent<Button>();
 		buttonWizard = GameObject.Find("Wizard").GetComponent<Button>();
-		//buttonMonk = GameObject.Find("Monk").GetComponent<Button>();
+		buttonMonk = GameObject.Find("Monk").GetComponent<Button>();
 
 		buttonSlot1 = GameObject.Find("Slot1").GetComponent<Button>();
 		buttonSlot2 = GameObject.Find("Slot2").GetComponent<Button>();
@@ -48,15 +48,6 @@ public class HeroMenuController : MonoBehaviour {
 		wizard = false;
 		monk = false;
 
-		/*if(GameModel.Saves.Count == 0) {
-			buttonSlot1.interactable
-		} else if(GameModel.Saves.Count == 1) {
-			
-		} else if(GameModel.Saves.Count == 0) {
-			
-		} else {
-
-		}*/
 		slot1 = false;
 		slot2 = false;
 		slot3 = false;
@@ -78,9 +69,9 @@ public class HeroMenuController : MonoBehaviour {
 		
 		cb.normalColor = Color.white;
 		buttonWizard.colors = cb;
-		//buttonMonk.colors = cb;
+		buttonMonk.colors = cb;
 		wizard = false;
-		//monk = false;
+		monk = false;
 
 	}
 
@@ -91,12 +82,12 @@ public class HeroMenuController : MonoBehaviour {
 
 		cb.normalColor = Color.white;
 		buttonWarrior.colors = cb;
-		//buttonMonk.colors = cb;
+		buttonMonk.colors = cb;
 		warrior = false;
-		//monk = false;
+		monk = false;
 	}
 
-	/*public void Monk() {
+	public void Monk() {
 		cb.normalColor = new Color32(163, 124, 124, 255);
 		buttonMonk.colors = cb;
 		monk = true;
@@ -107,7 +98,7 @@ public class HeroMenuController : MonoBehaviour {
 		warrior = false;
 		wizard = false;
 
-	}*/
+	}
 
 	public void Slot1() {
 		cb.normalColor = new Color32(163, 124, 124, 255);
