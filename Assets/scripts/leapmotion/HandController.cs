@@ -507,6 +507,12 @@ public class HandController : MonoBehaviour
 				}
 			}
 
+			//two valid hands avail
+			if (leftHand != null && rightHand != null)
+			{
+				float distance = leftHand.PalmPosition.x - rightHand.PalmPosition.x;
+			}
+
 
 		}
 	}
