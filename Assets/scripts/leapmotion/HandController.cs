@@ -486,6 +486,8 @@ public class HandController : MonoBehaviour
 			}
 		}
 		else if (heroClass == "Monk") {
+
+		
 			//detect the regen mvt
 			Frame frame = GetFrame();
 			HandList handsInFrame = frame.Hands;
@@ -497,7 +499,7 @@ public class HandController : MonoBehaviour
 			foreach (Hand hand in handsInFrame) 
 			{				
 				//if we are going through the attack hand
-				if (hand.IsValid && (handSide == HandSide.RIGHT_HAND ? hand.IsRight : hand.IsLeft)) 
+				if (hand.IsValid ) 
 				{
 					//fills fist the left hand, we don't care if its really a left or right hand, we just want the distance)
 					if (leftHand == null)
@@ -507,10 +509,21 @@ public class HandController : MonoBehaviour
 				}
 			}
 
-			//two valid hands avail
+			//two valid hands avail, start the regen mod
 			if (leftHand != null && rightHand != null)
 			{
-				float distance = leftHand.PalmPosition.x - rightHand.PalmPosition.x;
+				float distance = Mathf.Abs(leftHand.PalmPosition.x - rightHand.PalmPosition.x);
+				if (distance <= 100)
+				{
+					Debug.Log("Regen");
+					((Monk) hero).prayerMode = true;
+				}
+				else
+				{
+					Debug.Log ("distance: "+distance);
+					((Monk) hero).prayerMode = false;
+
+				}
 			}
 
 
