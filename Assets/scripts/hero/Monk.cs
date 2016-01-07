@@ -22,6 +22,8 @@ public class Monk : Hero {
 	
 	// Update is called once per frame
 	void Update () {
+		base.Update();
+
 		if(prayerMode)
 		{
 			Prayer();

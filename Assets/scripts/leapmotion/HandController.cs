@@ -242,7 +242,7 @@ public class HandController : MonoBehaviour
 		}
 	
 		//We attach the hero to transmit damages
-		if (heroClass == "Warrior") {
+		if (heroClass == "Warrior" || heroClass == "Monk") {
 			if (hand_model.GetComponentInChildren<HeroLinkWeapon>() != null) {
 				hand_model.GetComponentInChildren<HeroLinkWeapon>().Hero = hero;
 			}
@@ -484,6 +484,19 @@ public class HandController : MonoBehaviour
 					}
 				}
 			}
+		}
+		else if (heroClass == "Monk") {
+			//detect the regen mvt
+			Frame frame = GetFrame();
+			HandList handsInFrame = frame.Hands;
+			
+			foreach (Hand hand in handsInFrame) {				
+				//if we are going through the attack hand
+				if (hand.IsValid && (handSide == HandSide.RIGHT_HAND ? hand.IsRight : hand.IsLeft)) 
+				{
+				}
+			}
+
 		}
 	}
 
