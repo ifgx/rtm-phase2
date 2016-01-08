@@ -20,9 +20,6 @@ public class HeroMenuController : MonoBehaviour {
 	Button buttonSlot2;
 	Button buttonSlot3;
 	bool slot1, slot2, slot3;
-	Button buttonTutoYes;
-	Button buttonTutoNo;
-	bool tuto;
 	int save;
 	ColorBlock cb;
 	GameObject menu;
@@ -60,11 +57,6 @@ public class HeroMenuController : MonoBehaviour {
 		slot1 = true; // default save slot
 		slot2 = false;
 		slot3 = false;
-
-		buttonTutoYes = GameObject.Find ("Yes").GetComponent<Button> ();
-		buttonTutoNo = GameObject.Find ("No").GetComponent<Button> ();
-		buttonTutoYes.colors = cb;
-		tuto = true;
 		
 		menu = GameObject.Find("Menu");
 		menu.SetActive(true);
@@ -175,26 +167,6 @@ public class HeroMenuController : MonoBehaviour {
 		save = 2;
 	}
 	
-	public void TutoYes(){
-		cb.normalColor = new Color32(163, 124, 124, 255);
-		buttonTutoYes.colors = cb;
-		
-		cb.normalColor = Color.white;
-		buttonTutoNo.colors = cb;
-
-		tuto = true;
-	}
-	
-	public void TutoNo(){
-		cb.normalColor = new Color32(163, 124, 124, 255);
-		buttonTutoNo.colors = cb;
-		
-		cb.normalColor = Color.white;
-		buttonTutoYes.colors = cb;
-
-		tuto = false;
-	}
-	
 	public void Play(){
 		menu.SetActive(false);
 		loading.SetActive(true);
@@ -204,7 +176,6 @@ public class HeroMenuController : MonoBehaviour {
 		if (wizard) GameModel.Hero = new Wizard();
 		
 		GameModel.resetSaveSlot(save);
-		GameModel.TutoOrNot (tuto);
 		GameModel.Hero.Name = userName;
 		Application.LoadLevel("GameScene");
 	}
