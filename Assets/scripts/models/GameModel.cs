@@ -39,6 +39,8 @@ public class GameModel {
 
 	private static int slot;
 
+	private static bool playWithLeap;
+
 
 	public static int Slot {
 		get {
@@ -264,6 +266,15 @@ public class GameModel {
 		}
 
 	}
+
+	public static bool PlayWithLeap {
+		get {
+			return playWithLeap;
+		}
+		set {
+			playWithLeap = value;
+		}
+	} 
 
 	
 }

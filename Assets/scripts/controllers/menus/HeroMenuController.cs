@@ -177,6 +177,7 @@ public class HeroMenuController : MonoBehaviour {
 		
 		GameModel.resetSaveSlot(save);
 		GameModel.Hero.Name = userName;
+		GameModel.PlayWithLeap = LM;
 		Application.LoadLevel("GameScene");
 	}
 	
