@@ -7,6 +7,8 @@ using System.Collections;
 **/
 public class Assassin : NPC {
 
+	bool firstAttack = true;
+
 	void Awake(){
 
 	}
@@ -50,7 +52,10 @@ public class Assassin : NPC {
 	**/
 	public override void Attack(Hero target)
 	{
-		target.LostHP(this.Damage);
-		target.PlayBloodAnimation();
+		if(firstAttack){
+			target.LostHP(this.Damage);
+			target.PlayBloodAnimation();	
+			firstAttack = false;
+		}
 	}
 }
