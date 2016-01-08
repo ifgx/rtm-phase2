@@ -23,7 +23,6 @@ public class Monk : Hero {
 	// Update is called once per frame
 	void Update () {
 		base.Update();
-		Debug.Log("A chaque update powerHealConsumption" + powerHealConsumption);
 		if(prayerMode)
 		{
 			Prayer();
@@ -52,13 +51,13 @@ public class Monk : Hero {
 		lastHeal = Time.time;
 		speedHeal = HeroConfigurator.monkSpeedHeal;
 		powerHealConsumption = HeroConfigurator.monkPowerHealConsumption;
-		Debug.Log("powerHealConsumption:"+powerHealConsumption);// ON A BIEN 50.0f
+		//Debug.Log("powerHealConsumption:"+powerHealConsumption);// ON A BIEN 50.0f
 		hpHealed = HeroConfigurator.monkHpHealed;
 	}
 
 	public void Prayer()
 	{
-		Debug.Log("powerHealConsumption debut prière:"+powerHealConsumption);
+		//Debug.Log("powerHealConsumption debut prière:"+powerHealConsumption);
 		if(PowerQuantity <= 0.0f)
 		{
 			prayerMode = false;
@@ -67,10 +66,10 @@ public class Monk : Hero {
 		{
 			if(lastHeal + speedHeal < Time.time)
 			{
-				Debug.Log("Power Before Praying:"+PowerQuantity);
-				Debug.Log("Consommation en cours de prière:"+powerHealConsumption);
+				//Debug.Log("Power Before Praying:"+PowerQuantity);
+				//Debug.Log("Consommation en cours de prière:"+powerHealConsumption);
 				PowerQuantity -= powerHealConsumption;
-				Debug.Log("Power After Praying:"+PowerQuantity);
+				//Debug.Log("Power After Praying:"+PowerQuantity);
 				if(HealthPoint < maxHp){
 					HealthPoint += hpHealed;
 				}

@@ -33,7 +33,7 @@ public class HeroConfigurator : MonoBehaviour {
 
 	public static float monkSpeedHeal = 1.0f;
 	public static float monkPowerHealConsumption = 50.0f;
-	public static float monkHpHealed = 1000.0f;
+	public static float monkHpHealed = 100.0f;
 
 	// WIZARD
 	public static string wizardAttackType = "Distance";
