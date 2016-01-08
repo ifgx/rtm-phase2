@@ -66,8 +66,9 @@ public class KMManager : MonoBehaviour {
 			cam = cam;
 
 		screenBoundX = cam.pixelWidth / screenBoundRatioFactor;
-
+		leftHand.transform.localScale = new Vector3 (2, 2, 2);
 		leftHand.transform.parent = cam.transform;
+		rightHand.transform.localScale = new Vector3 (2, 2, 2);
 		rightHand.transform.parent = cam.transform;
 	}
 	

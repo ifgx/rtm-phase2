@@ -14,7 +14,7 @@ public class Cannon : NPC {
 	HudMaster hudShield;
 
 	Vector3 target;
-	float projectileSpeed = EnnemyConfigurator.cannonProjectileSpeed;
+	float projectileSpeed = EnnemyConfigurator.cannonProjectileSpeed/2;
 	float projectileHeight = EnnemyConfigurator.cannonProjectileHeight;
 	float rotationSpeed = EnnemyConfigurator.cannonRotationSpeed;
 
