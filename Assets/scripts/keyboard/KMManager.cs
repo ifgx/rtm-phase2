@@ -20,7 +20,7 @@ public class KMManager : MonoBehaviour {
 
 	string heroClass = "Wizard";
 
-	float movSpeed = 0.2f;
+	float movSpeed = 0.05f;
 
 	float screenBoundRatioFactor = 640;
 	float screenBoundX;
