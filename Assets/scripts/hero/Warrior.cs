@@ -27,7 +27,19 @@ public class Warrior : Hero {
 	* @version 1.0
 	**/
 	public Warrior()
-		:base(5.0f, 0.0f,100.0f,"epee",1000.0f, 2.0f, 2.0f, 1000.0f, 10.0f, 3.0f, "cac", "anonymous"){
+		:base(
+			HeroConfigurator.warriorRange,
+			HeroConfigurator.warriorXpQuantity,
+			HeroConfigurator.warriorBlockingPercent,
+			"epee",
+			HeroConfigurator.warriorPowerQuantity,
+			HeroConfigurator.warriorHpRefresh,
+			HeroConfigurator.warriorPowerRefresh,
+			HeroConfigurator.warriorHp,
+			HeroConfigurator.warriorDamage,
+			HeroConfigurator.warriorMovementSpeed,
+			"cac", 
+			"anonymous"){
 		PowerQuantity = 0;
 	}
 

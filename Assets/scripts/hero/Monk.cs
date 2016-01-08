@@ -17,7 +17,7 @@ public class Monk : Hero {
 	
 	// Use this for initialization
 	void Start () {
-		gameObject.GetComponent<Renderer>().material.color = Color.yellow;
+		//gameObject.GetComponent<Renderer>().material.color = Color.yellow;
 	}
 	
 	// Update is called once per frame
@@ -35,7 +35,19 @@ public class Monk : Hero {
 	* @version 1.0
 	**/
 	public Monk()
-		:base(5.0f, 0.0f,50.0f,"armeHast",1000.0f, 1.0f, 1.0f, 800.0f, 15.0f, 3.0f, "semiDistance", "anonymous"){
+		:base(
+			HeroConfigurator.monkRange,
+			HeroConfigurator.monkXpQuantity,
+			HeroConfigurator.monkBlockingPercent,
+			"armeHast",
+			HeroConfigurator.monkPowerQuantity,
+			HeroConfigurator.monkHpRefresh,
+			HeroConfigurator.monkPowerRefresh,
+			HeroConfigurator.monkHp,
+			HeroConfigurator.monkDamage,
+			HeroConfigurator.monkMovementSpeed,
+			"semiDistance", 
+			"anonymous"){
 		prayerMode = false;
 		lastHeal = Time.time;
 		speedHeal = HeroConfigurator.monkSpeedHeal;
@@ -53,8 +65,13 @@ public class Monk : Hero {
 		{
 			if(lastHeal + speedHeal < Time.time)
 			{
+				Debug.Log("Power Before Praying:"+PowerQuantity);
+				Debug.Log("PowerHeal to consume:"+powerHealConsumption);
 				PowerQuantity -= powerHealConsumption;
-				HealthPoint += hpHealed;
+				Debug.Log("Power After Praying:"+PowerQuantity);
+				if(HealthPoint < maxHp){
+					HealthPoint += hpHealed;
+				}
 				lastHeal = Time.time;
 			}
 		}

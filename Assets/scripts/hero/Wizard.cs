@@ -33,8 +33,19 @@ public class Wizard : Hero {
 	* @version 1.0
 	**/
 	public Wizard()
-		:base(5.0f, 0.0f,100.0f,"baton",1000.0f, 10.0f, 10.0f, 1100.0f, 8.0f, 3.0f, "distance", "anonymous"){
-		
+		:base(
+			HeroConfigurator.wizardRange,
+			HeroConfigurator.wizardXpQuantity,
+			HeroConfigurator.wizardBlockingPercent,
+			"baton",
+			HeroConfigurator.wizardPowerQuantity,
+			HeroConfigurator.wizardHpRefresh,
+			HeroConfigurator.wizardPowerRefresh,
+			HeroConfigurator.wizardHp,
+			HeroConfigurator.wizardDamage,
+			HeroConfigurator.wizardMovementSpeed,
+			"distance", 
+			"anonymous"){
 	}
 	
 	/**
