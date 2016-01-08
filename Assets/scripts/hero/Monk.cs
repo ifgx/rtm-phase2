@@ -23,7 +23,7 @@ public class Monk : Hero {
 	// Update is called once per frame
 	void Update () {
 		base.Update();
-
+		Debug.Log("A chaque update powerHealConsumption" + powerHealConsumption);
 		if(prayerMode)
 		{
 			Prayer();
