@@ -25,14 +25,14 @@ public class EnnemyConfigurator : MonoBehaviour {
 	public static float cannonMovementSpeed = 0.0f;
 	public static float cannonAttackSpeed = 2.0f;
 	public static float cannonXpGain = 0.0f;
-	public static float cannonHp = 60.0f;
+	public static float cannonHp = 30.0f;
 	public static float cannonDamage = 75.0f;
 	public static float cannonAggroDistance = 30.0f;
 	public static float cannonAttackRange = 27.0f;
 	public static float cannonDistanceToDisappear = 2.0f;
 
-	public static float cannonProjectileSpeed = -35.0f;
-	public static float cannonProjectileHeight = 1.5f;
+	//public static float cannonProjectileSpeed = -35.0f;
+	//public static float cannonProjectileHeight = 1.5f;
 	public static float cannonRotationSpeed = 10.0f;
 	public static float cannonMinAttackRange = 10.0f;
 	//public static Blocking cannonBlocking = Blocking.FREE;
