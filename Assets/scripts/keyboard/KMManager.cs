@@ -18,7 +18,9 @@ public class KMManager : MonoBehaviour {
 
 	int swordMov = 0;
 
-	string heroClass = "Wizard";
+	float mouseSpeed = 100f;
+
+	string heroClass = "Warrior";
 
 	float movSpeed = 0.05f;
 
@@ -135,11 +137,17 @@ public class KMManager : MonoBehaviour {
 		}
 		
 		Vector3 v3 = Input.mousePosition;
-		v3.z = 7;
+		v3.z = 2;
 		v3 = cam.ScreenToWorldPoint (v3);
+		//Debug.Log (v3.x);
+		//v3.x = v3.x * 0.001f;
+		//Debug.Log (v3.x);
+
 		v3.z = rightHand.transform.position.z;
 		
 		rightHand.transform.position = v3;
+
+		//Debug.Log (rightHand.transform.position);
 		
 		
 		
@@ -162,13 +170,13 @@ public class KMManager : MonoBehaviour {
 
 	private void WizardUpdate() {
 		Debug.Log (leftHand.transform.position);
-		Debug.Log (cam.pixelWidth + " -- " + cam.pixelHeight);
+		//Debug.Log (cam.pixelWidth + " -- " + cam.pixelHeight);
 		if (Input.GetKey (KeyCode.Z)) {
 			leftHand.transform.Translate(new Vector3(0, movSpeed, 0));
 		} else if (Input.GetKey (KeyCode.S)) {
 			leftHand.transform.Translate(new Vector3(0, -movSpeed, 0));
 		}
-		Debug.Log (leftHand.transform.position.x + " | " + screenBoundX);
+		//Debug.Log (leftHand.transform.position.x + " | " + screenBoundX);
 		if (Input.GetKey (KeyCode.Q) && leftHand.transform.position.x > -screenBoundX) {
 			leftHand.transform.Translate(new Vector3(0, 0, movSpeed));
 		} else if (Input.GetKey (KeyCode.D) && leftHand.transform.position.x < screenBoundX) {
@@ -193,7 +201,7 @@ public class KMManager : MonoBehaviour {
 		}
 
 		Vector3 v3 = Input.mousePosition;
-		v3.z = 7;
+		v3.z = 2;
 		v3 = cam.ScreenToWorldPoint (v3);
 		v3.z = rightHand.transform.position.z;
 		
