@@ -70,8 +70,12 @@ public class Monk : Hero {
 				//Debug.Log("Consommation en cours de prière:"+powerHealConsumption);
 				PowerQuantity -= powerHealConsumption;
 				//Debug.Log("Power After Praying:"+PowerQuantity);
-				if(HealthPoint < maxHp){
+				if(HealthPoint + hpHealed < maxHp){
 					HealthPoint += hpHealed;
+				}
+				else
+				{
+					HealthPoint = maxHp;
 				}
 				lastHeal = Time.time;
 			}
