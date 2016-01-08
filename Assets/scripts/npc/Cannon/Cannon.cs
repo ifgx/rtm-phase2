@@ -14,8 +14,9 @@ public class Cannon : NPC {
 	HudMaster hudShield;
 
 	Vector3 target;
-	float projectileSpeed = EnnemyConfigurator.cannonProjectileSpeed/2;
-	float projectileHeight = EnnemyConfigurator.cannonProjectileHeight;
+
+	float projectileSpeed = -35.0f/2;
+	float projectileHeight = 1.5f;
 	float rotationSpeed = EnnemyConfigurator.cannonRotationSpeed;
 
 	AudioSource audio;
@@ -95,7 +96,7 @@ public class Cannon : NPC {
 				Rigidbody rb = projectile.GetComponent<Rigidbody>();
 				nextAttackCoords = vectorToTarget - Physics.gravity * timeToShoot * timeToShoot;
 				nextAttackCoords.z += 3.0f;
-				rb.velocity = transform.TransformDirection(0,1,-projectileSpeed);
+				rb.velocity = transform.TransformDirection(0,1.25f*distHero,-projectileSpeed);
 				
 				//Debug.Log("next:"+nextAttackCoords);
 				//hudShield.ShieldActivated = true;
