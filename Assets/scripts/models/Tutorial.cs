@@ -9,11 +9,15 @@ public class Tutorial {
 	private string imagePath;
 	private bool played;
 	private string name;
+	private string attack;
+	private string title;
 
-	public Tutorial(string text, string imagePath, string name) {
+	public Tutorial(string name, string imagePath, string title, string text, string attack) {
 		this.text = text;
 		this.imagePath = imagePath;
 		this.name = name;
+		this.attack = attack;
+		this.title = title;
 	}
 
 	public string Text {
@@ -23,6 +27,16 @@ public class Tutorial {
 
 		set {
 			this.text = value;
+		}
+	}
+
+	public string Title {
+		get {
+			return this.title;
+		}
+		
+		set {
+			this.title = value;
 		}
 	}
 
@@ -46,7 +60,25 @@ public class Tutorial {
 		}
 	}
 
+	public string Attack {
+		get {
+			return this.attack;
+		}
+		
+		set {
+			this.attack = value;
+		}
+	}
 
+	public string Name {
+		get {
+			return this.name;
+		}
+		
+		set {
+			this.name = value;
+		}
+	}
 
 	public bool requestTrigger(){
 		if (name == "onPop") {

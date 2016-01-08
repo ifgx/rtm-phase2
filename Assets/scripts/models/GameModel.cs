@@ -205,16 +205,16 @@ public class GameModel {
 		score = 0;
 
 		TutorialManagerController.tutorials = new List<Tutorial> ();
-		TutorialManagerController.tutorials.Add(new Tutorial("Texte du tuto du POP", "weaponWarrior", "onPop"));
+		/*TutorialManagerController.tutorials.Add(new Tutorial("Texte du tuto du POP", "weaponWarrior", "onPop"));
 		TutorialManagerController.tutorials.Add(new Tutorial("Texte du tuto de l'ATTAQUE", "weaponWarrior", "firstAttack"));
 		TutorialManagerController.tutorials.Add(new Tutorial("Texte du tuto de la DEFENSE", "ShieldWarrior", "firstDefence"));
-		TutorialManagerController.tutorials.Add(new Tutorial("Texte du tuto pour un LANCIER", "BasicLancer", "Lancer"));
+		TutorialManagerController.tutorials.Add(new Tutorial("Lancer\ntype : melee attack\n\nLancers are enemies who charge you on sight, spear ahead in order to pierce you before disappearing.", "BasicLancer", "Lancer"));
 		TutorialManagerController.tutorials.Add(new Tutorial("Texte du tuto pour un DRAGONNET", "BasicDragonet", "Dragonet"));
 		TutorialManagerController.tutorials.Add(new Tutorial("Texte du tuto pour un ASSASSIN", "Assassin", "Assassin"));
 		TutorialManagerController.tutorials.Add(new Tutorial("Texte du tuto pour un CANON", "Cannon", "Cannon"));
 		TutorialManagerController.tutorials.Add(new Tutorial("Texte du tuto pour un MUR", "Wall", "Wall"));
 		TutorialManagerController.tutorials.Add(new Tutorial("Texte du tuto pour un MUR", "FireDragonet", "Fire"));
-		TutorialManagerController.tutorials.Add(new Tutorial("Texte du tuto pour un MUR", "IceLancer", "Ice"));
+		TutorialManagerController.tutorials.Add(new Tutorial("Texte du tuto pour un MUR", "IceLancer", "Ice"));*/
 	}
 
 	public static void resetDataBeforeLevel(){

@@ -12,8 +12,10 @@ using System.Collections;
   */ 
 public class TutorialUIManager : MonoBehaviour {
 
-	private Text text;
+	private Text title;
+	private Text attack;
 	private Image image;
+	private Text desc;
 
 
 	// Use this for initialization
@@ -21,17 +23,33 @@ public class TutorialUIManager : MonoBehaviour {
 	 * Initialization
 	 */
 	void Awake () {
-		text = transform.GetComponentInChildren<Text>();
-		Debug.Log ("text : " + text);
+		title = GameObject.Find("Title").GetComponent<Text>();
+		attack = GameObject.Find("Attack").GetComponent<Text>();
+		desc = GameObject.Find("Description").GetComponent<Text>();
+		Debug.Log ("text : " + title);
 		image = transform.GetComponentsInChildren<Image>()[1];
 	}
 
 
 	/**
-	 * Set the text of the tutorial
+	 * Set the title of the tutorial
 	 */
-	public void setText(string newText){
-		text.text = newText;
+	public void setTitle(string newText){
+		title.text = newText;
+	}
+
+	/**
+	 * Set the attack of the tutorial
+	 */
+	public void setAttack(string newText){
+		attack.text = newText;
+	}
+
+	/**
+	 * Set the description of the tutorial
+	 */
+	public void setDescription(string newText){
+		desc.text = newText;
 	}
 
 	/**
