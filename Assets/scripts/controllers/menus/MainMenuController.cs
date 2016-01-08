@@ -15,12 +15,20 @@ public class MainMenuController : MonoBehaviour {
 		Application.LoadLevel ("Hero_menu");
 	}
 
+	public void Tutorial() {
+		Application.LoadLevel ("Hero_menu");
+	}
+
 	public void Custom() {
 		Application.LoadLevel ("Custom_menu");
 	}
 
 	public void Load() {
 		Application.LoadLevel ("Load_menu");
+	}
+
+	public void MultiPlayer() {
+		Application.LoadLevel ("MultiPlayer_Menu");
 	}
 
 	public void HighScore() {
