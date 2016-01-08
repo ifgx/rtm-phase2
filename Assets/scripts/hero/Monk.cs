@@ -9,11 +9,11 @@ public class Monk : Hero {
 	
 	float specialCapacityCooldown = 30.0f;
 	float specialCapacityTimer = 0.0f;
-	public bool prayerMode;
-	public float lastHeal;
-	public float speedHeal;
-	public float powerHealConsumption;
-	public float hpHealed;
+	bool prayerMode;
+	float lastHeal;
+	float speedHeal;
+	float powerHealConsumption;
+	float hpHealed;
 	
 	// Use this for initialization
 	void Start () {
@@ -116,6 +116,15 @@ public class Monk : Hero {
 		{
 			specialCapacity = true;
 			LastCapacityUsed = Time.time;
+		}
+	}
+
+	public bool PrayerMode{
+		get{
+			return prayerMode;
+		}
+		set{
+			prayerMode = value;
 		}
 	}
 	
