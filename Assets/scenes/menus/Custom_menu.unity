@@ -114,12 +114,12 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 666124566}
-  m_Father: {fileID: 1292790700}
-  m_RootOrder: 5
+  m_Father: {fileID: 1326357148}
+  m_RootOrder: 1
   m_AnchorMin: {x: .5, y: .5}
   m_AnchorMax: {x: .5, y: .5}
-  m_AnchoredPosition: {x: 0, y: -91}
-  m_SizeDelta: {x: 160, y: 30}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 90, y: 40}
   m_Pivot: {x: .5, y: .5}
 --- !u!114 &148084929
 MonoBehaviour:
@@ -268,7 +268,7 @@ RectTransform:
   - {fileID: 996463035}
   - {fileID: 1339928142}
   m_Father: {fileID: 1292790700}
-  m_RootOrder: 8
+  m_RootOrder: 6
   m_AnchorMin: {x: .5, y: .5}
   m_AnchorMax: {x: .5, y: .5}
   m_AnchoredPosition: {x: 0, y: -15.1999998}
@@ -431,7 +431,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &609616625
 RectTransform:
   m_ObjectHideFlags: 0
@@ -443,12 +443,12 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 820133049}
-  m_Father: {fileID: 1292790700}
-  m_RootOrder: 4
+  m_Father: {fileID: 1326357148}
+  m_RootOrder: 2
   m_AnchorMin: {x: .5, y: .5}
   m_AnchorMax: {x: .5, y: .5}
-  m_AnchoredPosition: {x: 0, y: -127}
-  m_SizeDelta: {x: 160, y: 30}
+  m_AnchoredPosition: {x: 102, y: 0}
+  m_SizeDelta: {x: 90, y: 40}
   m_Pivot: {x: .5, y: .5}
 --- !u!114 &609616626
 MonoBehaviour:
@@ -484,7 +484,7 @@ MonoBehaviour:
     m_HighlightedTrigger: Highlighted
     m_PressedTrigger: Pressed
     m_DisabledTrigger: Disabled
-  m_Interactable: 0
+  m_Interactable: 1
   m_TargetGraphic: {fileID: 609616627}
   m_OnClick:
     m_PersistentCalls:
@@ -1123,7 +1123,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1292790700}
-  m_RootOrder: 9
+  m_RootOrder: 7
   m_AnchorMin: {x: .5, y: .5}
   m_AnchorMax: {x: .5, y: .5}
   m_AnchoredPosition: {x: 0, y: -15.1999969}
@@ -1330,9 +1330,7 @@ RectTransform:
   - {fileID: 361093529}
   - {fileID: 1251579221}
   - {fileID: 179322411}
-  - {fileID: 1746016248}
-  - {fileID: 609616625}
-  - {fileID: 148084928}
+  - {fileID: 1326357148}
   - {fileID: 1451225041}
   - {fileID: 1376390531}
   - {fileID: 187125791}
@@ -1398,6 +1396,36 @@ Canvas:
   m_OverridePixelPerfect: 0
   m_SortingLayerID: 0
   m_SortingOrder: 0
+--- !u!1 &1326357147
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 1326357148}
+  m_Layer: 0
+  m_Name: Class
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1326357148
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1326357147}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: -66.6999969, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 1746016248}
+  - {fileID: 148084928}
+  - {fileID: 609616625}
+  m_Father: {fileID: 1292790700}
+  m_RootOrder: 3
 --- !u!1 &1339928141
 GameObject:
   m_ObjectHideFlags: 0
@@ -1621,7 +1649,7 @@ RectTransform:
   m_Children:
   - {fileID: 657664001}
   m_Father: {fileID: 1292790700}
-  m_RootOrder: 7
+  m_RootOrder: 5
   m_AnchorMin: {x: .5, y: .5}
   m_AnchorMax: {x: .5, y: .5}
   m_AnchoredPosition: {x: 114.5, y: -153}
@@ -1742,7 +1770,7 @@ RectTransform:
   m_Children:
   - {fileID: 2064912451}
   m_Father: {fileID: 1292790700}
-  m_RootOrder: 6
+  m_RootOrder: 4
   m_AnchorMin: {x: .5, y: .5}
   m_AnchorMax: {x: .5, y: .5}
   m_AnchoredPosition: {x: -120, y: -153}
@@ -2018,12 +2046,12 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 618680060}
-  m_Father: {fileID: 1292790700}
-  m_RootOrder: 3
+  m_Father: {fileID: 1326357148}
+  m_RootOrder: 0
   m_AnchorMin: {x: .5, y: .5}
   m_AnchorMax: {x: .5, y: .5}
-  m_AnchoredPosition: {x: 0, y: -50}
-  m_SizeDelta: {x: 160, y: 30}
+  m_AnchoredPosition: {x: -102, y: 0}
+  m_SizeDelta: {x: 90, y: 40}
   m_Pivot: {x: .5, y: .5}
 --- !u!114 &1746016249
 MonoBehaviour:

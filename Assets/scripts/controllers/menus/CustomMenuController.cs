@@ -14,10 +14,10 @@ public class CustomMenuController : MonoBehaviour {
 	Button buttonSong;
 	Button buttonWarrior;
 	Button buttonWizard;
-	//Button buttonMonk;
-
+	Button buttonMonk;
+	
 	Text songText;
-
+	
 	GameObject browserMenu, canvas;
 	LaunchFileBrowser launchBrowser;
 	
@@ -29,23 +29,22 @@ public class CustomMenuController : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		inputName = GameObject.Find("InputName").GetComponent<InputField>();
-
+		
 		buttonSong = GameObject.Find("Song").GetComponentInChildren<Button>();
 		buttonPlay = GameObject.Find("Play").GetComponent<Button>();
 		buttonWarrior = GameObject.Find("Warrior").GetComponent<Button>();
 		buttonWizard = GameObject.Find("Wizard").GetComponent<Button>();
-		//buttonMonk = GameObject.Find("Monk").GetComponent<Button>();
-
+		buttonMonk = GameObject.Find("Monk").GetComponent<Button>();
+		
 		songText = GameObject.Find ("PathSong").GetComponent<Text>();
-
+		
 		canvas = GameObject.Find("Canvas");
-
+		
 		browserMenu = GameObject.Find("Browser");
 		launchBrowser = (LaunchFileBrowser) GameObject.Find ("Browser").GetComponent(typeof(LaunchFileBrowser));
 		browserMenu.SetActive(false);
-
+		
 		buttonPlay.interactable = false;
-		//buttonMonk.interactable = false;
 		
 		cb = buttonWarrior.colors;
 		
@@ -55,18 +54,18 @@ public class CustomMenuController : MonoBehaviour {
 		warrior = false;
 		wizard = false;
 		monk = false;
-
+		
 		browser = false;
 	}
 	
 	// Update is called once per frame
 	void Update () {
 		userName = inputName.text;
-
+		
 		if(((warrior|wizard|monk) == true) & userName != "" & songText.text != "Empty"){
 			buttonPlay.interactable = true;
 		} else buttonPlay.interactable = false;
-
+		
 		if(launchBrowser.Select){
 			customSong = launchBrowser.Output;
 			tmp = customSong.Split('\\');
@@ -75,7 +74,7 @@ public class CustomMenuController : MonoBehaviour {
 			canvas.SetActive(true);
 			launchBrowser.Select = false;
 		}
-
+		
 		if(launchBrowser.Cancel){
 			//songText.text = "Empty";
 			browserMenu.SetActive(false);
@@ -92,9 +91,9 @@ public class CustomMenuController : MonoBehaviour {
 		
 		cb.normalColor = Color.white;
 		buttonWizard.colors = cb;
-		//buttonMonk.colors = cb;
+		buttonMonk.colors = cb;
 		wizard = false;
-		//monk = false;
+		monk = false;
 		
 	}
 	
@@ -105,12 +104,12 @@ public class CustomMenuController : MonoBehaviour {
 		
 		cb.normalColor = Color.white;
 		buttonWarrior.colors = cb;
-		//buttonMonk.colors = cb;
+		buttonMonk.colors = cb;
 		warrior = false;
-		//monk = false;
+		monk = false;
 	}
 	
-	/*public void Monk() {
+	public void Monk() {
 		cb.normalColor = new Color32(163, 124, 124, 255);
 		buttonMonk.colors = cb;
 		monk = true;
@@ -121,7 +120,7 @@ public class CustomMenuController : MonoBehaviour {
 		warrior = false;
 		wizard = false;
 		
-	}*/
+	}
 	
 	public void Play(){
 		if (warrior) GameModel.Hero = new Warrior();
@@ -130,7 +129,7 @@ public class CustomMenuController : MonoBehaviour {
 		GameModel.Hero.Name = userName;
 		Application.LoadLevel("GameScene");
 	}
-
+	
 	public void Browser(){
 		browserMenu.SetActive(true);
 		canvas.SetActive(false);
