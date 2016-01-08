@@ -21,6 +21,8 @@ EditorBuildSettings:
     path: Assets/scenes/menus/Load_Menu.unity
   - enabled: 1
     path: Assets/scenes/game/NextLevelScene.unity
+  - enabled: 1
+    path: Assets/scenes/menus/MultiPlayer_Menu.unity
   - enabled: 0
     path: Assets/scenes/menus/Main_menu.unity
   - enabled: 0
