@@ -215,7 +215,14 @@ public abstract class Unit : MonoBehaviour {
 	**/
 	public float LostHP(float hpLost){
 		//Debug.LogWarning ("LOST HP : " + this.GetType().ToString() + " -- " + hpLost);
-		hp = hp - hpLost;
+		if(hp - hpLost > 0)
+		{
+			hp = hp - hpLost;	
+		}
+		else
+		{
+			hp = 0;
+		}
 		return hp;
 	}
 
