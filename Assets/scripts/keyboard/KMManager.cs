@@ -145,12 +145,27 @@ public class KMManager : MonoBehaviour {
 			leftHand.transform.Translate(movSpeed*LEFT);
 		}
 
+		Vector3 lastPosition = rightHand.transform.position;
 		Vector3 v3 = Input.mousePosition;
-		v3.z = 2;
-		v3 = cam.ScreenToWorldPoint (v3);
-		v3.z = rightHand.transform.position.z;
+
+		//NOT A GOOD WAY TO DO MOUSE CLAMPING BUT AT LEAST IT WORKS
+
+
+			v3.z = 2;
+			v3 = cam.ScreenToWorldPoint (v3);
+		if (v3.x > 1) {
+			//Debug.Log (v3);
+			v3.z = lastPosition.z;
 		
-		rightHand.transform.position = v3;
+			rightHand.transform.position = v3;
+		}
+
+		/*if (!(rightHand.transform.localPosition.y < screenBoundY+screenBoundYcenter
+		    && rightHand.transform.localPosition.y > -screenBoundY+screenBoundYcenter
+		    && rightHand.transform.localPosition.x > -screenBoundX
+		    && rightHand.transform.localPosition.x < screenBoundX)) {
+			rightHand.transform.position = lastPosition;
+		}*/
 	}
 
 	private void WarriorUpdate(){

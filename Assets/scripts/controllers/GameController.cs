@@ -93,6 +93,8 @@ public class GameController : MonoBehaviour {
 
 	private float tempsMusique = 240f;
 
+	private float multiplayerHerosOffset = 1.7f;
+
 	private List<GameObject> npcList;
 
 	/**
@@ -240,7 +242,16 @@ public class GameController : MonoBehaviour {
 				go = invincibilityPotion;
 
 			if (go != null){
-				GameObject instance = Instantiate(go, new Vector3(item.PositionInX, go.transform.localScale.y/2, vitesseHeros*item.PositionInSeconds), Quaternion.identity) as GameObject;
+
+				float posX;
+				if (!GameModel.MultiplayerModeOn){
+					posX = item.PositionInX;
+				}else {
+					//if (item.PositionInX == 0) item.PositionInX = Mathf.Sign(Random.Range(-1,1))*Random.Range(0.1f,1);
+					//posX = Mathf.Sign(item.PositionInX)*Mathf.Log(Mathf.Abs(item.PositionInX))*1.8f;
+					posX = item.PositionInX;
+				}
+				GameObject instance = Instantiate(go, new Vector3(posX, go.transform.localScale.y/2, vitesseHeros*item.PositionInSeconds), Quaternion.identity) as GameObject;
 				NPC npc = instance.GetComponent<NPC>();
 				
 				if (npc != null)
@@ -360,7 +371,11 @@ public class GameController : MonoBehaviour {
 				else
 					heroGameObject = Instantiate (warrior);
 
-				heroGameObject.transform.Translate(new Vector3(-1.5f+i*3f,0,0));
+				heroGameObject.transform.Translate(new Vector3(-multiplayerHerosOffset+i*2*multiplayerHerosOffset,0,0));
+				BoxCollider collider = heroGameObject.GetComponent<BoxCollider>();
+				Vector3 v3 = collider.size;
+				v3.x = 2*multiplayerHerosOffset;
+				collider.size = v3;
 				//Debug.Log (heroGameObject);
 				GameModel.HerosInGame.Add (heroGameObject.GetComponent<Hero> ());
 				GameModel.HerosInGame [i].XpQuantity = modelHero.XpQuantity;
