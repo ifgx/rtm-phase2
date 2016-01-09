@@ -27,6 +27,11 @@ public class KMManager : MonoBehaviour {
 	float screenBoundRatioFactor = 640;
 	float screenBoundX;
 
+	Vector3 UP;
+	Vector3 DOWN;
+	Vector3 LEFT;
+	Vector3 RIGHT;
+
 
 	public void setCamera(Camera camera) {
 		this.cam = camera;
@@ -42,9 +47,20 @@ public class KMManager : MonoBehaviour {
 		if (heroClass == "Warrior") {
 			leftHandGO = Resources.Load ("prefabs/leapmotion/Warrior_RH_left") as GameObject;
 			rightHandGO = Resources.Load ("prefabs/leapmotion/Warrior_RH_right") as GameObject;
+
+			UP = new Vector3 (0, 1, 0);
+			DOWN = new Vector3 (0, -1, 0);
+			RIGHT = new Vector3(-1, 0, 0);
+			LEFT = new Vector3(1, 0, 0);
+
 		} else if (heroClass == "Wizard"){
 			leftHandGO = Resources.Load ("prefabs/leapmotion/Wizard_RH_left") as GameObject;
 			rightHandGO = Resources.Load ("prefabs/leapmotion/Wizard_RH_right") as GameObject;
+
+			UP = new Vector3 (0, 1, 0);
+			DOWN = new Vector3 (0, -1, 0);
+			RIGHT = new Vector3(0, 0, 1);
+			LEFT = new Vector3(0, 0, -1);
 
 		}
 
@@ -78,27 +94,41 @@ public class KMManager : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 
+		updatePosition ();
+
 		if (heroClass == "Warrior") {
 			WarriorUpdate ();
 		} else if (heroClass == "Wizard") {
 			WizardUpdate ();
 		}
 
+
+
+	}
+
+	private void updatePosition() {
+		if (Input.GetKey (KeyCode.Z)) {
+			leftHand.transform.Translate(movSpeed*UP);
+		} else if (Input.GetKey (KeyCode.S)) {
+			leftHand.transform.Translate(movSpeed*DOWN);
+		}
+		//Debug.Log (leftHand.transform.position.x + " | " + screenBoundX);
+		if (Input.GetKey (KeyCode.Q) && leftHand.transform.position.x > -screenBoundX) {
+			leftHand.transform.Translate(movSpeed*RIGHT);
+		} else if (Input.GetKey (KeyCode.D) && leftHand.transform.position.x < screenBoundX) {
+			leftHand.transform.Translate(movSpeed*LEFT);
+		}
+
+		Vector3 v3 = Input.mousePosition;
+		v3.z = 2;
+		v3 = cam.ScreenToWorldPoint (v3);
+		v3.z = rightHand.transform.position.z;
+		
+		rightHand.transform.position = v3;
 	}
 
 	private void WarriorUpdate(){
-		if (Input.GetKey (KeyCode.Z)) {
-			leftHand.transform.Translate(new Vector3(0, movSpeed, 0));
-		} else if (Input.GetKey (KeyCode.S)) {
-			leftHand.transform.Translate(new Vector3(0, -movSpeed, 0));
-		}
-		
-		if (Input.GetKey (KeyCode.Q)) {
-			leftHand.transform.Translate(new Vector3(-movSpeed, 0, 0));
-		} else if (Input.GetKey (KeyCode.D)) {
-			leftHand.transform.Translate(new Vector3(movSpeed, 0, 0));
-			
-		}
+
 		
 		if (Input.GetMouseButton (0) && swordMov == 0) {
 			Debug.Log("mouse button down");
@@ -135,21 +165,8 @@ public class KMManager : MonoBehaviour {
 				swordMov = 0;
 			}
 		}
-		
-		Vector3 v3 = Input.mousePosition;
-		v3.z = 2;
-		v3 = cam.ScreenToWorldPoint (v3);
-		//Debug.Log (v3.x);
-		//v3.x = v3.x * 0.001f;
-		//Debug.Log (v3.x);
 
-		v3.z = rightHand.transform.position.z;
-		
-		rightHand.transform.position = v3;
-
-		//Debug.Log (rightHand.transform.position);
-		
-		
+			
 		
 		if (Input.GetKey (KeyCode.Space)) {
 			if (shieldMovTime < 0.25f){
@@ -171,18 +188,7 @@ public class KMManager : MonoBehaviour {
 	private void WizardUpdate() {
 		Debug.Log (leftHand.transform.position);
 		//Debug.Log (cam.pixelWidth + " -- " + cam.pixelHeight);
-		if (Input.GetKey (KeyCode.Z)) {
-			leftHand.transform.Translate(new Vector3(0, movSpeed, 0));
-		} else if (Input.GetKey (KeyCode.S)) {
-			leftHand.transform.Translate(new Vector3(0, -movSpeed, 0));
-		}
-		//Debug.Log (leftHand.transform.position.x + " | " + screenBoundX);
-		if (Input.GetKey (KeyCode.Q) && leftHand.transform.position.x > -screenBoundX) {
-			leftHand.transform.Translate(new Vector3(0, 0, movSpeed));
-		} else if (Input.GetKey (KeyCode.D) && leftHand.transform.position.x < screenBoundX) {
-			leftHand.transform.Translate(new Vector3(0, 0, -movSpeed));
-			
-		}
+
 
 
 		if (Input.GetMouseButton (0) && fireball == null) {
@@ -200,12 +206,7 @@ public class KMManager : MonoBehaviour {
 			fireball.GetComponent<Rigidbody>().isKinematic = false;
 		}
 
-		Vector3 v3 = Input.mousePosition;
-		v3.z = 2;
-		v3 = cam.ScreenToWorldPoint (v3);
-		v3.z = rightHand.transform.position.z;
-		
-		rightHand.transform.position = v3;
+
 
 		
 
