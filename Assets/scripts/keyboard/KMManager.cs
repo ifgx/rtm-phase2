@@ -17,6 +17,8 @@ public class KMManager : MonoBehaviour {
 	float shieldMovTime = 0;
 
 	int swordMov = 0;
+	float swordRotateSpeed = 360;
+	float swordTranslateSpeed = 10;
 
 	float mouseSpeed = 100f;
 
@@ -138,32 +140,34 @@ public class KMManager : MonoBehaviour {
 		
 		if (swordMov == 1) {
 			
-			Debug.Log("sword moving forward");
+
 			//Debug.Log("1 - " + rightHand.transform.position);
-			rightHand.transform.Translate(new Vector3(-0.4f,0,0));
-			rightHand.transform.Rotate(new Vector3(0,4f,0));
+			rightHand.transform.Translate(new Vector3(-swordTranslateSpeed,0,-swordTranslateSpeed)*Time.deltaTime);
+			rightHand.transform.Rotate(new Vector3(0,swordRotateSpeed,0)*Time.deltaTime);
 			//Debug.Log("2 - " + rightHand.transform.position);
 			
 			swordMovTime += Time.deltaTime;
 			
 			if (swordMovTime >= 0.25) {
-				swordMovTime = 0;
+				//swordMovTime = 0;
 				swordMov = 2;
 			}
+			Debug.Log(swordMovTime+" -- sword moving forward");
 		}else if (swordMov == 2) {
-			Debug.Log("sword moving forward");
+
 			//Debug.Log("1 - " + rightHand.transform.position);
-			rightHand.transform.Rotate(new Vector3(0,-4f,0));
-			rightHand.transform.Translate(new Vector3(0.4f,0,0));
+			rightHand.transform.Rotate(new Vector3(0,-swordRotateSpeed,0)*Time.deltaTime);
+			rightHand.transform.Translate(new Vector3(swordTranslateSpeed,0,swordTranslateSpeed)*Time.deltaTime);
 			
 			//Debug.Log("2 - " + rightHand.transform.position);
 			
-			swordMovTime += Time.deltaTime;
+			swordMovTime -= Time.deltaTime;
 			
-			if (swordMovTime >= 0.25) {
-				swordMovTime = 0;
+			if (swordMovTime <= 0) {
+				//swordMovTime = 0;
 				swordMov = 0;
 			}
+			Debug.Log(swordMovTime+" -- sword moving backward");
 		}
 
 			
