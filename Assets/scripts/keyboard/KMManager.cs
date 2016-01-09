@@ -215,7 +215,7 @@ public class KMManager : MonoBehaviour {
 
 
 
-		if (Input.GetMouseButton (0) && fireball == null) {
+		if (Input.GetMouseButton (0) && fireball == null && hero.PowerQuantity > HeroConfigurator.wizardAttackCost) {
 			//Debug.Log ("mouse button down");
 
 			fireball = Instantiate (fireballGO);
@@ -223,11 +223,13 @@ public class KMManager : MonoBehaviour {
 			
 			fireball.transform.parent = rightHand.transform.FindChild ("HandContainer").transform;
 			fireball.transform.localPosition = new Vector3 (0f, 0.05f, 0f);
-		} else if (!Input.GetMouseButton (0) && fireball != null){
+		} else if (!Input.GetMouseButton (0) && fireball != null && fireball.transform.parent != null){
 		
 			fireball.transform.parent = null;
 			fireball.GetComponentInChildren<CapsuleCollider>().enabled = true;
 			fireball.GetComponent<Rigidbody>().isKinematic = false;
+
+			hero.PowerQuantity -= HeroConfigurator.wizardAttackCost;
 		}
 
 
@@ -235,13 +237,13 @@ public class KMManager : MonoBehaviour {
 		
 
 
-		if (Input.GetKey(KeyCode.Space) && vortex == null) {
+		if (Input.GetKey(KeyCode.Space) && vortex == null && hero.PowerQuantity > HeroConfigurator.wizardDefenseCost) {
 			vortex = Instantiate(vortexGO);
 			
 			vortex.transform.parent = leftHand.transform.FindChild("HandContainer").transform;
 			vortex.transform.localPosition = new Vector3(0f, 0f, 0f);
 			
-		}else if (!Input.GetKey(KeyCode.Space) && vortex != null) {
+		}else if (!Input.GetKey(KeyCode.Space) && vortex != null && vortex.transform.parent != cam.transform) {
 
 			vortex.transform.parent = cam.transform; //attach to camera
 			//vortex.transform.localPosition = new Vector3(0f, 0.3f, 1.5f);
@@ -251,6 +253,8 @@ public class KMManager : MonoBehaviour {
 			vortex.GetComponentInChildren<CapsuleCollider>().enabled = true;
 			//it is dropped so the size is bigger
 			vortex.GetComponent<ParticleSystem>().startSize = 0.8f;
+
+			hero.PowerQuantity -= HeroConfigurator.wizardDefenseCost;
 		}
 	}
 }
