@@ -4,7 +4,8 @@ using UnityEngine.UI;
 
 [RequireComponent(typeof(AudioSource))]
 
-public class AudioManager : MonoBehaviour {
+public class AudioManager : MonoBehaviour, AudioProcessor.AudioCallbacks
+{
     public int width;
     public int height;
     public Color backgroundColor = new Color(0,0,0,0);
@@ -20,6 +21,7 @@ public class AudioManager : MonoBehaviour {
     AudioSource audioSource;
     AudioSource audioSourceHB;
     AudioClip clip;
+    Light sceneLight;
     public GameObject image;
     private RawImage img;
 
@@ -44,7 +46,8 @@ public class AudioManager : MonoBehaviour {
             audioSourceHB.volume = 0;
             audioSourceHB.Play();
 
-            audioSource = GetComponent<AudioSource>();
+            //audioSource = GetComponent<AudioSource>();
+            audioSource = GameObject.Find("Main Camera").GetComponent<AudioSource>();
             samples = new float[size];
 
             //clip = Resources.Load ("Musics/" + musicName, typeof(AudioClip)) as AudioClip;
@@ -62,6 +65,11 @@ public class AudioManager : MonoBehaviour {
             
             audioSource.clip = clip;
 
+            sceneLight = FindObjectOfType<Light>();
+            AudioProcessor processor = FindObjectOfType<AudioProcessor>();
+            processor.init();
+            processor.start = true;
+            processor.addAudioCallback(this);
             // create the texture and assign to the guiTexture:
             img = (RawImage) image.GetComponent<RawImage>();
 			cursorImg = (RawImage) cursor.GetComponent<RawImage>();
@@ -89,7 +97,25 @@ public class AudioManager : MonoBehaviour {
 			StartCoroutine (UpdateWaveForm ());
 		}
 	}
-	public void Pause(){
+    public void onOnbeatDetected()
+    {
+        //Debug.Log("Beat!!!");
+        Color col = new Color(Random.Range(0.0f, 1.0f), Random.Range(0.0f, 1.0f), Random.Range(0.0f, 1.0f), 1.0f);
+        sceneLight.color = col;
+    }
+    public void onSpectrum(float[] spectrum)
+    {
+        //The spectrum is logarithmically averaged
+        //to 12 bands
+
+        for (int i = 0; i < spectrum.Length; ++i)
+        {
+            Vector3 start = new Vector3(i, 0, 0);
+            Vector3 end = new Vector3(i, spectrum[i], 0);
+            Debug.DrawLine(start, end);
+        }
+    }
+    public void Pause(){
 		audioSource.Pause ();
         audioSourceHB.Pause();
     }
@@ -114,11 +140,11 @@ public class AudioManager : MonoBehaviour {
         {
 			if(audioSource.isPlaying){
                 float healthPointratio = GameModel.HerosInGame[0].HealthPoint / GameModel.HerosInGame[0].MaxHealthPoint;
-                audioSource.volume = healthPointratio;
+                audioSource.volume = healthPointratio / 2;
                 audioSourceHB.volume = 1 - healthPointratio;
-                if(healthPointratio < 0.33)
+                if(healthPointratio < 0.4f)
                 {
-                    audioSourceHB.pitch = 1.2;
+                    audioSourceHB.pitch = 1.2f;
                 }
                 else
                 {
