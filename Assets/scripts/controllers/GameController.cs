@@ -265,9 +265,13 @@ public class GameController : MonoBehaviour {
 			if (go != null){
 				GameObject instance = Instantiate(go, new Vector3(item.PositionInX, go.transform.localScale.y/2, vitesseHeros*item.PositionInSeconds), Quaternion.identity) as GameObject;
 				NPC npc = instance.GetComponent<NPC>();
+				Potion potion = instance.GetComponent<Potion>();
 				
 				if (npc != null)
 					GameModel.NPCsInGame.Add(npc);
+				if(potion != null) {
+					GameModel.PotionsInGame.Add(potion);
+				}
 				//GameModel.NPCsInGame[GameModel.NPCsInGame.Count-1].transform.Rotate(0, 180, 0);
 			}
 		}

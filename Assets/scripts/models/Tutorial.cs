@@ -4,6 +4,7 @@ using System.Collections;
 public class Tutorial {
 
 	private float distTrigger = 20.0f;
+	private float distPotion = 5.0f;
 
 	private string text;
 	private string imagePath;
@@ -246,15 +247,33 @@ public class Tutorial {
 			}
 			return false;
 
-		} else if (name == "Potion" && !GameModel.ListTutoriel.Contains("Potion")) {
+		} else if (name == "LifePotion" && !GameModel.ListTutoriel.Contains("LifePotion")) {
 
-			NPC npc = GameModel.getNearestNPC ();
-			if(npc != null && npc.GetType().ToString().Contains("Potion") && npc.GetPosition().z-GameModel.HerosInGame[0].GetPosition().z < distTrigger){
-				GameModel.ListTutoriel.Add("Potion");
+			Potion p = GameModel.getNearestPotion();
+			if(p != null && p.GetType().ToString().Contains("LifePotion") && p.GetPosition().z-GameModel.HerosInGame[0].GetPosition().z < distPotion){
+				GameModel.ListTutoriel.Add("LifePotion");
 				return true;
 			}
 			return false;
 		
+		} else if (name == "PowerPotion" && !GameModel.ListTutoriel.Contains("PowerPotion")) {
+
+			Potion p = GameModel.getNearestPotion();
+			if(p != null && p.GetType().ToString().Contains("PowerPotion") && p.GetPosition().z-GameModel.HerosInGame[0].GetPosition().z < distPotion){
+				GameModel.ListTutoriel.Add("PowerPotion");
+				return true;
+			}
+			return false;
+
+		} else if (name == "InvincibilityPotion" && !GameModel.ListTutoriel.Contains("InvincibilityPotion")) {
+
+			Potion p = GameModel.getNearestPotion();
+			if(p != null && p.GetType().ToString().Contains("InvincibilityPotion") && p.GetPosition().z-GameModel.HerosInGame[0].GetPosition().z < distPotion){
+				GameModel.ListTutoriel.Add("InvincibilityPotion");
+				return true;
+			}
+			return false;
+
 		} else if (name == "Fire" && !GameModel.ListTutoriel.Contains("Fire")) {
 
 			NPC npc = GameModel.getNearestNPC ();

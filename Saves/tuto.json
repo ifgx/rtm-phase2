@@ -33,20 +33,32 @@
 		},{
 			"name":"Fire",
 			"type":"FireDragonet",
-			"Title":"Fire ennemies",
+			"title":"Fire ennemies",
 			"desc":"These enemies are stronger than their basic version. They inflict more damages on you so be careful when you fight them.",
 			"attack":"-"
 		},{
 			"name":"Ice",
 			"type":"IceDragonet",
-			"Title":"Ice ennemies",
+			"title":"Ice ennemies",
 			"desc":"They are the stronger of your enemies. Their attacks are both faster and more powerful than their fire version.",
 			"attack":""
 		},{
-			"name":"Potion",
-			"type":"LifePotion",
-			"Title":"Potions",
-			"desc":"Life potions (red potion) restore a portion of your health. Power potion (blue potion) restore a part of your power gauge. Invincibility potion (yellow potion) makes you unattainable for a short period of time.",
+			"name":"LifePotion",
+			"type":"lifePotion",
+			"title":"Life's potion",
+			"desc":"Potions are here to help you in your quest. Life potions restore a portion of your health.",
+			"attack":"-"
+		},{
+			"name":"PowerPotion",
+			"type":"powerPotion",
+			"title":"Power's potion",
+			"desc":"Potions are here to help you in your quest. Power potions restore a part of your power gauge.",
+			"attack":"-"
+		},{
+			"name":"InvincibilityPotion",
+			"type":"invincibilityPotion",
+			"title":"Invincibility's potion",
+			"desc":"Potions are here to help you in your quest. Invincibility potions make you unattainable, god like, for a short period of time.",
 			"attack":"-"
 		},{
 			"name":"warriorAttackLeap",
@@ -70,7 +82,7 @@
 			"name":"wizardDefenceLeap",
 			"type":"shieldWizard",
 			"title":"Wizard's defence",
-			"desc":"To protect himself the wizard can use a mana generated shield that need to be set at desired location. Once placed it is active for 3 seconds and then disappear. However, during this time it is not possible to place another shield. In order to do so, you start by closing your left hand to load the shield. Then you can move it to reach the desired position and finally re-open your hand to place the shield there.",
+			"desc":"To protect himself the wizard can use a mana shield which he can place wherever he wants. This spell has a 3 seconds cooldown. To do so, start by closing your left hand to load the shield, move it where you need it and finally re-open your hand to place the shield there.",
 			"attack":"-"
 		},{
 			"name":"monkAttackLeap",
@@ -106,7 +118,7 @@
 			"name":"wizardDefenceKeyboard",
 			"type":"shieldWizard",
 			"title":"Wizard's defence",
-			"desc":"The Z, Q, S, D keys help you to place the defence hand where you need to cast your shield. Once at the right location, pushing the ‘space’ key start to load the spell. When released a shield of mana is placed at the current location and is active for 3 seconds. However, during this time it is not possible to place another shield.",
+			"desc":"The Z, Q, S, D keys are used to move the left hand which will cast the 3 seconds cooldown shield. To do so, push the ‘space’ key to start to load the spell. Once released a shield of mana is placed at the hand’s current location.",
 			"attack":"-"
 		},{
 			"name":"monkAttackKeyboard",
@@ -136,7 +148,7 @@
 			"name":"keyboard",
 			"type":"keyboard",
 			"title":"Keyboard + Mouse",
-			"desc":"While in game you can pause the game using the key ‘p’. From this menu you will be able to manage your game or to go back to the main menu. When it comes to controlling your character the mouse controls the right hand and the keyboard the left one. To attack use the left click. To defend yourself, the Z, Q, S, D keys allow you to place your shield at the desired location.",
+			"desc":"While in game you can pause the game using the key ‘p’. From this menu you will be able to manage your game or to go back to the main menu. ",
 			"attack":"-"
 		}
 	]
