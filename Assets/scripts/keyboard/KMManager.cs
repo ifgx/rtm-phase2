@@ -27,10 +27,15 @@ public class KMManager : MonoBehaviour {
 	Hero hero;
 	string heroClass;
 
-	float movSpeed = 0.05f;
-
-	float screenBoundRatioFactor = 640;
 	float screenBoundX;
+	float screenXFactor = 640;
+
+	float screenBoundY;
+	float screenYFactor = 640;
+	float screenBoundYcenter;
+
+	float movSpeed = 0.05f;
+	
 
 	Vector3 UP;
 	Vector3 DOWN;
@@ -52,6 +57,9 @@ public class KMManager : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 
+		if (cam == null)
+			cam = Camera.main;
+
 		GameObject leftHandGO = null;
 		GameObject rightHandGO = null;
 		if (heroClass == "Warrior") {
@@ -63,6 +71,10 @@ public class KMManager : MonoBehaviour {
 			RIGHT = new Vector3(-1, 0, 0);
 			LEFT = new Vector3(1, 0, 0);
 
+			screenBoundX = cam.pixelWidth / screenXFactor;
+			screenBoundY = cam.pixelHeight / screenYFactor;
+			screenBoundYcenter = -screenBoundY*1.3f;
+
 		} else if (heroClass == "Wizard"){
 			leftHandGO = Resources.Load ("prefabs/leapmotion/Wizard_RH_left") as GameObject;
 			rightHandGO = Resources.Load ("prefabs/leapmotion/Wizard_RH_right") as GameObject;
@@ -71,6 +83,10 @@ public class KMManager : MonoBehaviour {
 			DOWN = new Vector3 (0, -1, 0);
 			RIGHT = new Vector3(0, 0, 1);
 			LEFT = new Vector3(0, 0, -1);
+
+			screenBoundX = cam.pixelWidth / screenXFactor * 0.7f;
+			screenBoundY = cam.pixelHeight / screenYFactor * 0.7f;
+			screenBoundYcenter = screenBoundY*0.3f;
 
 		}
 
@@ -87,10 +103,13 @@ public class KMManager : MonoBehaviour {
 			}
 		}
 
-		if (cam == null)
-			cam = cam;
 
-		screenBoundX = cam.pixelWidth / screenBoundRatioFactor;
+
+
+		leftHand.transform.Translate (RIGHT * -cam.transform.position.x);
+
+
+
 		leftHand.transform.localScale = new Vector3 (2, 2, 2);
 		leftHand.transform.parent = cam.transform;
 		rightHand.transform.localScale = new Vector3 (2, 2, 2);
@@ -114,15 +133,15 @@ public class KMManager : MonoBehaviour {
 	}
 
 	private void updatePosition() {
-		if (Input.GetKey (KeyCode.Z)) {
+		if (Input.GetKey (KeyCode.Z) && leftHand.transform.localPosition.y < screenBoundY+screenBoundYcenter) {
 			leftHand.transform.Translate(movSpeed*UP);
-		} else if (Input.GetKey (KeyCode.S)) {
+		} else if (Input.GetKey (KeyCode.S) && leftHand.transform.localPosition.y > -screenBoundY+screenBoundYcenter) {
 			leftHand.transform.Translate(movSpeed*DOWN);
 		}
 		//Debug.Log (leftHand.transform.position.x + " | " + screenBoundX);
-		if (Input.GetKey (KeyCode.Q) && leftHand.transform.position.x > -screenBoundX) {
+		if (Input.GetKey (KeyCode.Q) && leftHand.transform.localPosition.x > -screenBoundX) {
 			leftHand.transform.Translate(movSpeed*RIGHT);
-		} else if (Input.GetKey (KeyCode.D) && leftHand.transform.position.x < screenBoundX) {
+		} else if (Input.GetKey (KeyCode.D) && leftHand.transform.localPosition.x < screenBoundX) {
 			leftHand.transform.Translate(movSpeed*LEFT);
 		}
 
@@ -138,7 +157,7 @@ public class KMManager : MonoBehaviour {
 
 		
 		if (Input.GetMouseButton (0) && swordMov == 0) {
-			Debug.Log("mouse button down");
+			//Debug.Log("mouse button down");
 			swordMov = 1;
 		}
 		
@@ -157,7 +176,7 @@ public class KMManager : MonoBehaviour {
 				//swordMovTime = 0;
 				swordMov = 2;
 			}
-			Debug.Log(swordMovTime+" -- sword moving forward");
+			//Debug.Log(swordMovTime+" -- sword moving forward");
 		}else if (swordMov == 2) {
 
 			//Debug.Log("1 - " + rightHand.transform.position);
@@ -172,7 +191,7 @@ public class KMManager : MonoBehaviour {
 				//swordMovTime = 0;
 				swordMov = 0;
 			}
-			Debug.Log(swordMovTime+" -- sword moving backward");
+			//Debug.Log(swordMovTime+" -- sword moving backward");
 		}
 
 			
@@ -197,7 +216,7 @@ public class KMManager : MonoBehaviour {
 
 
 		if (Input.GetMouseButton (0) && fireball == null) {
-			Debug.Log ("mouse button down");
+			//Debug.Log ("mouse button down");
 
 			fireball = Instantiate (fireballGO);
 			fireball.GetComponentInChildren<HeroLinkWeapon> ().Hero = new Wizard ();
