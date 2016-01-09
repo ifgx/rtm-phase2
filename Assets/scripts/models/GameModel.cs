@@ -198,6 +198,8 @@ public class GameModel {
 
 		herosInGame = new List<Hero> ();
 
+		heros = new List<Hero> ();
+
 
 		//create saves
 		saves = SaveParser.parseLevelFile ();

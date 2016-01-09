@@ -20,9 +20,12 @@ public class KMManager : MonoBehaviour {
 	float swordRotateSpeed = 360;
 	float swordTranslateSpeed = 10;
 
+	float shieldTranslateSpeed = 5;
+
 	float mouseSpeed = 100f;
 
-	string heroClass = "Warrior";
+	Hero hero;
+	string heroClass;
 
 	float movSpeed = 0.05f;
 
@@ -39,6 +42,11 @@ public class KMManager : MonoBehaviour {
 		this.cam = camera;
 
 	}
+
+	public void setHero(Hero hero) {
+		this.hero = hero;
+		heroClass = hero.GetType ().ToString ();
+	} 
 
 
 	// Use this for initialization
@@ -73,14 +81,11 @@ public class KMManager : MonoBehaviour {
 		leftHand = Instantiate (leftHandGO);
 		rightHand = Instantiate (rightHandGO);
 
-//		Quaternion rot = rightHand.transform.rotation;
-//		//rot.x = 90;
-//		//rot.SetLookRotation (transform.forward);
-//		rightHand.transform.rotation = rot;
-//
-//		Vector3 pos = rightHand.transform.position;
-//		//pos.z = 7;
-//		rightHand.transform.position = pos;
+		if (heroClass == "Warrior") {
+			if (rightHand.GetComponentInChildren<HeroLinkWeapon>() != null) {
+				rightHand.GetComponentInChildren<HeroLinkWeapon>().Hero = hero;
+			}
+		}
 
 		if (cam == null)
 			cam = cam;
@@ -174,17 +179,13 @@ public class KMManager : MonoBehaviour {
 		
 		if (Input.GetKey (KeyCode.Space)) {
 			if (shieldMovTime < 0.25f){
-				leftHand.transform.Translate(new Vector3(0,0,0.1f));
+				leftHand.transform.Translate(new Vector3(0,0,shieldTranslateSpeed)*Time.deltaTime);
 				shieldMovTime += Time.deltaTime;
-			}else{
-				shieldMovTime = 0.25f;
 			}
 		} else {
 			if (shieldMovTime > 0) {
-				leftHand.transform.Translate(new Vector3(0,0,-0.1f));
+				leftHand.transform.Translate(new Vector3(0,0,-shieldTranslateSpeed)*Time.deltaTime);
 				shieldMovTime -= Time.deltaTime;
-			}else{
-				shieldMovTime = 0;
 			}
 		}
 	}

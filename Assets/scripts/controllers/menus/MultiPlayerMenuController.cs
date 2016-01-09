@@ -149,12 +149,27 @@ public class MultiPlayerMenuController : MonoBehaviour {
 	public void Play(){
 		menu.SetActive(false);
 		loading.SetActive(true);
-		
-		if (warriorPlayer1) GameModel.Hero = new Warrior();
-		if (monkPlayer1) GameModel.Hero = new Monk();
-		if (wizardPlayer1) GameModel.Hero = new Wizard();
 
-		GameModel.Hero.Name = userNamePlayer1;
+		Hero hero1 = null;
+		if (warriorPlayer1) hero1 = new Warrior();
+		if (monkPlayer1) hero1 = new Monk();
+		if (wizardPlayer1) hero1 = new Wizard();
+
+		hero1.Name = userNamePlayer1;
+
+		GameModel.Heros.Add (hero1);
+
+
+		Hero hero2 = null;
+		if (warriorPlayer2) hero2 = new Warrior();
+		if (monkPlayer2) hero2 = new Monk();
+		if (wizardPlayer2) hero2 = new Wizard();
+		
+		hero2.Name = userNamePlayer2;
+		
+		GameModel.Heros.Add (hero2);
+
+
 		Application.LoadLevel("GameScene");
 	}
 	

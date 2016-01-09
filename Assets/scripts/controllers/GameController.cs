@@ -401,6 +401,7 @@ public class GameController : MonoBehaviour {
 			kmManager = Instantiate (kmManagerPrefab);
 
 			KMManager keyboardManager = kmManager.GetComponent<KMManager> ();
+			keyboardManager.setHero (GameModel.HerosInGame [1]);
 			keyboardManager.setCamera (camR.GetComponent<Camera> ());
 
 			camR.transform.parent = GameModel.HerosInGame [1].transform;
@@ -480,9 +481,9 @@ public class GameController : MonoBehaviour {
 			currentPowerPercent = 100.0f*hero.PowerQuantity/hero.MaxPowerQuantity;
 			//Debug.Log("Life: " + currentHealthPercent);
 			
-			hudMaster.setLevel (HudMaster.HudType.Life, currentHealthPercent);
-			hudMaster.setLevel (HudMaster.HudType.Special, currentPowerPercent);
-			hudMaster.updateXP (hero.XpQuantity/hero.XpQuantityNextLevel*100.0f, (int)hero.Level + 1);
+			hudMaster2.setLevel (HudMaster.HudType.Life, currentHealthPercent);
+			hudMaster2.setLevel (HudMaster.HudType.Special, currentPowerPercent);
+			hudMaster2.updateXP (hero.XpQuantity/hero.XpQuantityNextLevel*100.0f, (int)hero.Level + 1);
 		}
 
 		//Debug.Log (GameModel.NPCsInGame.Count);

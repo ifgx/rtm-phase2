@@ -8,6 +8,7 @@ public class CrashTestMain : MonoBehaviour {
 		GameObject kmManagerPrefab = Resources.Load ("prefabs/keyboard/KMManager") as GameObject;
 		KMManager manager = Instantiate (kmManagerPrefab).GetComponent<KMManager>();
 
+		manager.setHero (new Wizard ());
 		manager.setCamera (Camera.allCameras [0]);
 	}
 	
