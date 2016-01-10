@@ -242,7 +242,7 @@ public class HandController : MonoBehaviour
 		}
 	
 		//We attach the hero to transmit damages
-		if (heroClass == "Warrior") {
+		if (heroClass == "Warrior" || heroClass == "Monk") {
 			if (hand_model.GetComponentInChildren<HeroLinkWeapon>() != null) {
 				hand_model.GetComponentInChildren<HeroLinkWeapon>().Hero = hero;
 			}
@@ -484,6 +484,49 @@ public class HandController : MonoBehaviour
 					}
 				}
 			}
+		}
+		else if (heroClass == "Monk") {
+
+		
+			//detect the regen mvt
+			Frame frame = GetFrame();
+			HandList handsInFrame = frame.Hands;
+
+			//if two hands, are they close enough together?
+			Hand leftHand = null;
+			Hand rightHand = null;
+
+			foreach (Hand hand in handsInFrame) 
+			{				
+				//if we are going through the attack hand
+				if (hand.IsValid ) 
+				{
+					//fills fist the left hand, we don't care if its really a left or right hand, we just want the distance)
+					if (leftHand == null)
+						leftHand = hand;
+					else
+						rightHand = hand;
+				}
+			}
+
+			//two valid hands avail, start the regen mod
+			if (leftHand != null && rightHand != null)
+			{
+				float distance = Mathf.Abs(leftHand.PalmPosition.x - rightHand.PalmPosition.x);
+				if (distance <= 100)
+				{
+					//Debug.Log("Regen");
+					((Monk) hero).PrayerMode = true;
+				}
+				else
+				{
+					//Debug.Log ("distance: "+distance);
+					((Monk) hero).PrayerMode = false;
+
+				}
+			}
+
+
 		}
 	}
 

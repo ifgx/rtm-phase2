@@ -343,12 +343,7 @@ public class LeapControl : MonoBehaviour {
 			
 			leapDebugLabel.text = frameString;
 		}
-		
-		
 
-		
-		
-	
 		
 		movementLabel.text = actionState.ToString() + " ( "+ nAction.ToString()+" )";*/
 	}

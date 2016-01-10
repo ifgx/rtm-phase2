@@ -9,19 +9,20 @@ public class Monk : Hero {
 	
 	float specialCapacityCooldown = 30.0f;
 	float specialCapacityTimer = 0.0f;
-	public bool prayerMode;
-	public float lastHeal;
-	public float speedHeal;
-	public float powerHealConsumption;
-	public float hpHealed;
+	bool prayerMode;
+	float lastHeal;
+	float speedHeal;
+	float powerHealConsumption;
+	float hpHealed;
 	
 	// Use this for initialization
 	void Start () {
-		gameObject.GetComponent<Renderer>().material.color = Color.yellow;
+		//gameObject.GetComponent<Renderer>().material.color = Color.yellow;
 	}
 	
 	// Update is called once per frame
 	void Update () {
+		base.Update();
 		if(prayerMode)
 		{
 			Prayer();
@@ -33,16 +34,30 @@ public class Monk : Hero {
 	* @version 1.0
 	**/
 	public Monk()
-		:base(5.0f, 0.0f,50.0f,"armeHast",1000.0f, 1.0f, 1.0f, 800.0f, 15.0f, 3.0f, "semiDistance", "anonymous"){
+		:base(
+			HeroConfigurator.monkRange,
+			HeroConfigurator.monkXpQuantity,
+			HeroConfigurator.monkBlockingPercent,
+			"armeHast",
+			HeroConfigurator.monkPowerQuantity,
+			HeroConfigurator.monkHpRefresh,
+			HeroConfigurator.monkPowerRefresh,
+			HeroConfigurator.monkHp,
+			HeroConfigurator.monkDamage,
+			HeroConfigurator.monkMovementSpeed,
+			"semiDistance", 
+			"anonymous"){
 		prayerMode = false;
 		lastHeal = Time.time;
 		speedHeal = HeroConfigurator.monkSpeedHeal;
 		powerHealConsumption = HeroConfigurator.monkPowerHealConsumption;
+		//Debug.Log("powerHealConsumption:"+powerHealConsumption);// ON A BIEN 50.0f
 		hpHealed = HeroConfigurator.monkHpHealed;
 	}
 
 	public void Prayer()
 	{
+		//Debug.Log("powerHealConsumption debut prière:"+powerHealConsumption);
 		if(PowerQuantity <= 0.0f)
 		{
 			prayerMode = false;
@@ -51,8 +66,17 @@ public class Monk : Hero {
 		{
 			if(lastHeal + speedHeal < Time.time)
 			{
+				//Debug.Log("Power Before Praying:"+PowerQuantity);
+				//Debug.Log("Consommation en cours de prière:"+powerHealConsumption);
 				PowerQuantity -= powerHealConsumption;
-				HealthPoint += hpHealed;
+				//Debug.Log("Power After Praying:"+PowerQuantity);
+				if(HealthPoint + hpHealed < maxHp){
+					HealthPoint += hpHealed;
+				}
+				else
+				{
+					HealthPoint = maxHp;
+				}
 				lastHeal = Time.time;
 			}
 		}
@@ -95,6 +119,15 @@ public class Monk : Hero {
 		{
 			specialCapacity = true;
 			LastCapacityUsed = Time.time;
+		}
+	}
+
+	public bool PrayerMode{
+		get{
+			return prayerMode;
+		}
+		set{
+			prayerMode = value;
 		}
 	}
 	
