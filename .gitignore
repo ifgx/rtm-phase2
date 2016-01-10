@@ -19,3 +19,8 @@
 
 # Unity3D Generated File On Crash Reports
 sysinfo.txt
+
+#ADD BV
+ProjectSettings/ProjectSettings.asset
+ProjectSettings/QualitySettings.asset
+ProjectSettings/ProjectVersion.txt
