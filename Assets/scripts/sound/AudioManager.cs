@@ -4,7 +4,8 @@ using UnityEngine.UI;
 
 [RequireComponent(typeof(AudioSource))]
 
-public class AudioManager : MonoBehaviour {
+public class AudioManager : MonoBehaviour, AudioProcessor.AudioCallbacks
+{
     public int width;
     public int height;
     public Color backgroundColor = new Color(0,0,0,0);
@@ -18,7 +19,9 @@ public class AudioManager : MonoBehaviour {
 	Texture2D textureCursor;
     float[] samples;
     AudioSource audioSource;
+    AudioSource audioSourceHB;
     AudioClip clip;
+    Light sceneLight;
     public GameObject image;
     private RawImage img;
 
@@ -26,6 +29,7 @@ public class AudioManager : MonoBehaviour {
 	private RawImage cursorImg;
 
 	private string musicName;
+    GameObject[] allLights;
 
     // Use this for initialization
     void Start () {
@@ -38,27 +42,37 @@ public class AudioManager : MonoBehaviour {
 
 	public void Init(){
 		if (musicName != null) {
+            audioSourceHB = gameObject.AddComponent<AudioSource>();
+            audioSourceHB.clip = Resources.Load("Musics/Hearbeat") as AudioClip;
+            audioSourceHB.volume = 0;
+            audioSourceHB.Play();
 
-			audioSource = GetComponent<AudioSource>();
-			samples = new float[size];
+            //audioSource = GetComponent<AudioSource>();
+            audioSource = GameObject.Find("Main Camera").GetComponent<AudioSource>();
+            samples = new float[size];
 
-
-
-			//clip = Resources.Load ("Musics/" + musicName, typeof(AudioClip)) as AudioClip;
-			//USING WWW to load the audioclip in root/Musics
-			string path = "file://" + Application.dataPath + "/../Musics/" + musicName + ".wav";
+            //clip = Resources.Load ("Musics/" + musicName, typeof(AudioClip)) as AudioClip;
+            //USING WWW to load the audioclip in root/Musics
+            
+            string path = "file://" + Application.dataPath + "/../Musics/"+musicName+".wav";
 			//Debug.Log ("music : " + path);
 			WWW www = new WWW(path);
-			while (!www.isDone) {
+            while (!www.isDone) {
 				//Debug.Log ("loading music ...");
 			}
 
-			clip = www.GetAudioClip(false);
 
-			audioSource.clip = clip;
+            clip = www.GetAudioClip(false);
+            
+            audioSource.clip = clip;
 
-			// create the texture and assign to the guiTexture:
-			img = (RawImage) image.GetComponent<RawImage>();
+            sceneLight = FindObjectOfType<Light>();
+            AudioProcessor processor = FindObjectOfType<AudioProcessor>();
+            processor.init();
+            processor.start = true;
+            processor.addAudioCallback(this);
+            // create the texture and assign to the guiTexture:
+            img = (RawImage) image.GetComponent<RawImage>();
 			cursorImg = (RawImage) cursor.GetComponent<RawImage>();
 
 			width = (int) GetComponent<RectTransform>().rect.width;
@@ -81,16 +95,65 @@ public class AudioManager : MonoBehaviour {
 			textureCursor.Apply();
 			// refresh the display each 100mS
 			GetWaveForm ();
+            createMusicalLights();
 			StartCoroutine (UpdateWaveForm ());
 		}
 	}
-	public void Pause(){
+    public void createMusicalLights() {
+        Color[] colors;
+        Vector3 positionxyz;
+        Color Rcolor;
+        GameObject lightC;
+        allLights = new GameObject[50];
+
+        for (int i = 0; i < 50; i++)
+        {
+            lightC = new GameObject("musicallights");
+            Light lightComp = lightC.AddComponent<Light>();
+            lightComp.color = new Color(Random.Range(0.0f, 1.0f), Random.Range(0.0f, 1.0f), Random.Range(0.0f, 1.0f), 1.0f);
+            lightComp.transform.position = new Vector3(Random.Range(-30.0f, 30.0f), 5, Random.Range(0.0f, 400.0f));
+            lightComp.intensity = 8;
+            allLights[i] = lightC;
+        }
+
+    }
+
+    public void onOnbeatDetected()
+    {
+        //Debug.Log("Beat!!!");
+        Color col;
+        foreach (GameObject i in allLights)
+        {
+            col = new Color(Random.Range(0.0f, 1.0f), Random.Range(0.0f, 1.0f), Random.Range(0.0f, 1.0f), 1.0f);
+            i.GetComponent<Light>().color = col;
+        }
+        //Color col = new Color(Random.Range(0.0f, 1.0f), Random.Range(0.0f, 1.0f), Random.Range(0.0f, 1.0f), 1.0f);
+        //sceneLight.color = col;
+    }
+    public void onSpectrum(float[] spectrum)
+    {
+        //The spectrum is logarithmically averaged
+        //to 12 bands
+
+        for (int i = 0; i < spectrum.Length; ++i)
+        {
+            Vector3 start = new Vector3(i, 0, 0);
+            Vector3 end = new Vector3(i, spectrum[i], 0);
+            Debug.DrawLine(start, end);
+        }
+    }
+    public void Pause(){
 		audioSource.Pause ();
-	}
+        audioSourceHB.Pause();
+    }
 	public void Play(){
-		if(!audioSource.isPlaying){
+        if (!audioSourceHB.isPlaying)
+        {
+            audioSourceHB.Play();
+        }
+        if (!audioSource.isPlaying){
 		audioSource.Play ();
-		}
+        }
 	}
 
     IEnumerator UpdateWaveForm()
@@ -103,7 +166,19 @@ public class AudioManager : MonoBehaviour {
         while (true)
         {
 			if(audioSource.isPlaying){
-				textureCursor.SetPixels(blank, 0);
+                float healthPointratio = GameModel.HerosInGame[0].HealthPoint / GameModel.HerosInGame[0].MaxHealthPoint;
+                audioSource.volume = healthPointratio / 2;
+                audioSourceHB.volume = 1 - healthPointratio;
+                if(healthPointratio < 0.4f)
+                {
+                    audioSourceHB.pitch = 1.2f;
+                }
+                else
+                {
+                    audioSourceHB.pitch = 1;
+                }
+                
+                textureCursor.SetPixels(blank, 0);
 	            for (i = 1; i < height; i++) //sizeWaveform
 	            {
 					for (j = pas * (currentCount-1); j <= (pas * currentCount)+10; j++) //sizeWaveform
