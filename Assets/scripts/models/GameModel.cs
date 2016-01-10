@@ -17,6 +17,8 @@ public class GameModel {
 	 */
 	private static Hero hero;
 
+	private static List<Hero> heros;
+
 	private static List<Hero> herosInGame;
 
 	private static List<NPC> npcsInGame;
@@ -41,7 +43,12 @@ public class GameModel {
 
 	private static int slot;
 
+<<<<<<< HEAD
 	private static List<string> listTutoriel; // permet de prendre en compte les tuto déja passé
+=======
+	private static bool playWithLeap;
+
+>>>>>>> 50c54657360f84649330f21598ffb0eee31e83ce
 
 	public static int Slot {
 		get {
@@ -70,6 +77,16 @@ public class GameModel {
 
 		set {
 			hero = value;
+		}
+	}
+
+	public static List<Hero> Heros {
+		get {
+			return heros;
+		}
+		
+		set {
+			heros = value;
 		}
 	}
 
@@ -209,7 +226,14 @@ public class GameModel {
 
 		ActualLevelId = 0;
 
+		heros = new List<Hero> ();
+		heros.Add (new Warrior ());
+		heros.Add (new Wizard ());
+
 		herosInGame = new List<Hero> ();
+
+		heros = new List<Hero> ();
+
 
 		//create saves
 		saves = SaveParser.parseLevelFile ();
@@ -264,6 +288,17 @@ public class GameModel {
 		}
 	}
 
+<<<<<<< HEAD
+=======
+	public static bool MultiplayerModeOn {
+		get {
+			//return (heros.Count == 2);
+			return true;
+		}
+
+	}
+
+>>>>>>> 50c54657360f84649330f21598ffb0eee31e83ce
 	public static bool PlayWithLeap {
 		get {
 			return playWithLeap;
@@ -271,7 +306,11 @@ public class GameModel {
 		set {
 			playWithLeap = value;
 		}
+<<<<<<< HEAD
 	}
+=======
+	} 
+>>>>>>> 50c54657360f84649330f21598ffb0eee31e83ce
 
 	
 }

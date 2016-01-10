@@ -44,6 +44,7 @@ public class GameController : MonoBehaviour {
 	private GameObject hud;
 	private GameObject deathHud;
 	private HudMaster hudMaster;
+	private HudMaster hudMaster2 = null;
 
 	private GameObject basicLancer;
 	private GameObject fireLancer;
@@ -71,6 +72,9 @@ public class GameController : MonoBehaviour {
 	private GameObject leapCanvasPrefab;
 	private GameObject leapCanvas;
 
+	private GameObject kmManagerPrefab;
+	private GameObject kmManager;
+
 	private GameObject musicCanvasPrefab;
 	private GameObject musicCanvas;
 	private AudioManager audioManager;
@@ -88,6 +92,8 @@ public class GameController : MonoBehaviour {
 
 
 	private float tempsMusique = 240f;
+
+	private float multiplayerHerosOffset = 1.7f;
 
 	private List<GameObject> npcList;
 
@@ -144,6 +150,8 @@ public class GameController : MonoBehaviour {
 
 		musicCanvasPrefab = Resources.Load("prefabs/sound/MusicCanvas") as GameObject;
 
+		kmManagerPrefab = Resources.Load ("prefabs/keyboard/KMManager") as GameObject;
+
 		//Debug.Log (" END Awake GameController");
 
 	}
@@ -174,43 +182,14 @@ public class GameController : MonoBehaviour {
 
 		//génération du héros
 
-		//instanciate a hero using the class contained in the model
-		Hero modelHero = GameModel.Hero;
-		string heroClass = modelHero.GetType ().ToString ();
+		
+		if (GameModel.MultiplayerModeOn) {
+			initMulti ();
+		} else {
+			initMono ();
+		}
 
-		if (heroClass == "Warrior")
-			heroGameObject = Instantiate (warrior);
-		else if (heroClass == "Monk")
-			heroGameObject = Instantiate (monk);
-		else if (heroClass == "Wizard")
-			heroGameObject = Instantiate (wizard);
-		else
-			heroGameObject = Instantiate (warrior);
-			
-		//Debug.Log (heroGameObject);
-		GameModel.HerosInGame.Add (heroGameObject.GetComponent<Hero> ());
-		hero = GameModel.HerosInGame [0];
 		float vitesseHeros = hero.MovementSpeed;
-		hero.XpQuantity = modelHero.XpQuantity;
-
-		//LEAP
-		leapInstance = Instantiate (leapPrefab);
-		//Debug.Log ("leapInstance : " + leapInstance);
-		//the leap motion scene is child of camera so it follow the translation
-		leapInstance.transform.parent = Camera.allCameras[0].transform;
-		leapInstance.transform.position = new Vector3 (0f, 2.5f, 1.6f);
-		//sets the "hand parent" field so the arms also are child of camera and don't flicker
-		leapControl = leapInstance.GetComponent<HandController> ();
-		leapControl.setModel(handSide, hero);
-		leapControl.setGameController(this);
-
-		leapControl.handParent = Camera.allCameras[0].transform;
-		
-		leapCanvas = Instantiate(leapCanvasPrefab);
-
-		
-
-
 
 
 		//Génération de terrain
@@ -263,7 +242,16 @@ public class GameController : MonoBehaviour {
 				go = invincibilityPotion;
 
 			if (go != null){
-				GameObject instance = Instantiate(go, new Vector3(item.PositionInX, go.transform.localScale.y/2, vitesseHeros*item.PositionInSeconds), Quaternion.identity) as GameObject;
+
+				float posX;
+				if (!GameModel.MultiplayerModeOn){
+					posX = item.PositionInX;
+				}else {
+					//if (item.PositionInX == 0) item.PositionInX = Mathf.Sign(Random.Range(-1,1))*Random.Range(0.1f,1);
+					//posX = Mathf.Sign(item.PositionInX)*Mathf.Log(Mathf.Abs(item.PositionInX))*1.8f;
+					posX = item.PositionInX;
+				}
+				GameObject instance = Instantiate(go, new Vector3(posX, go.transform.localScale.y/2, vitesseHeros*item.PositionInSeconds), Quaternion.identity) as GameObject;
 				NPC npc = instance.GetComponent<NPC>();
 				Potion potion = instance.GetComponent<Potion>();
 				
@@ -276,15 +264,12 @@ public class GameController : MonoBehaviour {
 			}
 		}
 
-		//Génération du HUD
-		hudMaster = Instantiate (hud).GetComponent<HudMaster>();
+		
 		//Debug.Log ("hudMaster : " + hudMaster);
 		state = GameState.PLAY;
 
 
-		Camera.main.transform.parent = heroGameObject.transform;
-		Camera.main.transform.position = new Vector3 (0, 2.18f, 0);
-		//Camera.main.transform.Translate(new Vector3(0, 2.18f, 0));
+		
 
 
 		pausedMenu = GameObject.Find("Canvas");
@@ -320,6 +305,139 @@ public class GameController : MonoBehaviour {
 		 	Instantiate (tutoGO);
 		}
 		
+	}
+
+	void initMono() {
+			//instanciate a hero using the class contained in the model
+			Hero modelHero = GameModel.Hero;
+			string heroClass = modelHero.GetType ().ToString ();
+			
+			if (heroClass == "Warrior")
+				heroGameObject = Instantiate (warrior);
+			else if (heroClass == "Monk")
+				heroGameObject = Instantiate (monk);
+			else if (heroClass == "Wizard")
+				heroGameObject = Instantiate (wizard);
+			else
+				heroGameObject = Instantiate (warrior);
+
+			//Debug.Log (heroGameObject);
+			GameModel.HerosInGame.Add (heroGameObject.GetComponent<Hero> ());
+			hero = GameModel.HerosInGame [0];
+
+			hero.XpQuantity = modelHero.XpQuantity;
+
+
+			//LEAP
+			leapInstance = Instantiate (leapPrefab);
+			//Debug.Log ("leapInstance : " + leapInstance);
+			//the leap motion scene is child of camera so it follow the translation
+			leapInstance.transform.parent = Camera.allCameras[0].transform;
+			leapInstance.transform.position = new Vector3 (0f, 2.5f, 1.6f);
+			//sets the "hand parent" field so the arms also are child of camera and don't flicker
+			leapControl = leapInstance.GetComponent<HandController> ();
+			leapControl.setModel(handSide, hero);
+			leapControl.setGameController(this);
+			
+			leapControl.handParent = Camera.allCameras[0].transform;
+			
+			leapCanvas = Instantiate(leapCanvasPrefab);
+
+
+
+			Camera.main.transform.parent = heroGameObject.transform;
+			Camera.main.transform.position = new Vector3 (0, 2.18f, 0);
+			GameObject MainCamera = GameObject.Find("Main Camera");
+			hero.HeroCamera = MainCamera;
+			//Camera.main.transform.Translate(new Vector3(0, 2.18f, 0));
+
+
+			//Génération du HUD
+			hudMaster = Instantiate (hud).GetComponent<HudMaster>();
+			hudMaster.setHero (GameModel.HerosInGame [0]);
+			hudMaster.setRenderCamera (Camera.allCameras [0]);
+	}
+
+	void initMulti() {
+
+			int i = 0;
+			foreach (Hero modelHero in GameModel.Heros) {
+				//instanciate a hero using the class contained in the model
+
+				string heroClass = modelHero.GetType ().ToString ();
+				
+				if (heroClass == "Warrior")
+					heroGameObject = Instantiate (warrior);
+				else if (heroClass == "Monk")
+					heroGameObject = Instantiate (monk);
+				else if (heroClass == "Wizard")
+					heroGameObject = Instantiate (wizard);
+				else
+					heroGameObject = Instantiate (warrior);
+
+				heroGameObject.transform.Translate(new Vector3(-multiplayerHerosOffset+i*2*multiplayerHerosOffset,0,0));
+				BoxCollider collider = heroGameObject.GetComponent<BoxCollider>();
+				Vector3 v3 = collider.size;
+				v3.x = 2*multiplayerHerosOffset;
+				collider.size = v3;
+				//Debug.Log (heroGameObject);
+				GameModel.HerosInGame.Add (heroGameObject.GetComponent<Hero> ());
+				GameModel.HerosInGame [i].XpQuantity = modelHero.XpQuantity;
+
+				i++;
+			}
+
+			hero = GameModel.HerosInGame [0];
+
+			GameObject camL = GameObject.Find ("CameraL");
+			//LEAP
+			leapInstance = Instantiate (leapPrefab);
+			//Debug.Log ("leapInstance : " + leapInstance);
+			//the leap motion scene is child of camera so it follow the translation
+			leapInstance.transform.parent = camL.transform;
+			leapInstance.transform.position = new Vector3 (0f, 2.5f, 1.6f);
+			//sets the "hand parent" field so the arms also are child of camera and don't flicker
+			leapControl = leapInstance.GetComponent<HandController> ();
+			leapControl.setModel(handSide, GameModel.HerosInGame [0]);
+			leapControl.setGameController(this);
+			
+			leapControl.handParent = camL.transform;
+			
+			leapCanvas = Instantiate(leapCanvasPrefab);
+			
+			
+			
+			camL.transform.parent = GameModel.HerosInGame [0].transform;
+			camL.transform.position = new Vector3 (GameModel.HerosInGame [0].transform.position.x, 2.18f, 0);
+			camL.GetComponent<Camera> ().enabled = true;
+			//Camera.main.transform.Translate(new Vector3(0, 2.18f, 0));
+			GameModel.HerosInGame[0].HeroCamera = camL;
+
+
+			//instancier clavier
+			GameObject camR = GameObject.Find ("CameraR");
+
+			kmManager = Instantiate (kmManagerPrefab);
+
+			KMManager keyboardManager = kmManager.GetComponent<KMManager> ();
+			keyboardManager.setHero (GameModel.HerosInGame [1]);
+			keyboardManager.setCamera (camR.GetComponent<Camera> ());
+
+			camR.transform.parent = GameModel.HerosInGame [1].transform;
+			camR.transform.position = new Vector3 (GameModel.HerosInGame [1].transform.position.x, 2.18f, 0);
+			camR.GetComponent<Camera> ().enabled = true;
+			GameModel.HerosInGame [1].HeroCamera = camR;
+
+			Camera.main.enabled = false;
+
+			//Génération du HUD
+			hudMaster = Instantiate (hud).GetComponent<HudMaster> ();
+			hudMaster.setHero (GameModel.HerosInGame [0]);
+			hudMaster.setRenderCamera (camL.GetComponent<Camera> ());
+
+			hudMaster2 = Instantiate (hud).GetComponent<HudMaster> ();
+			hudMaster2.setHero (GameModel.HerosInGame [1]);
+			hudMaster2.setRenderCamera (camR.GetComponent<Camera> ());
 	}
 	
 	/**
@@ -373,6 +491,19 @@ public class GameController : MonoBehaviour {
 		hudMaster.setLevel (HudMaster.HudType.Life, currentHealthPercent);
 		hudMaster.setLevel (HudMaster.HudType.Special, currentPowerPercent);
 		hudMaster.updateXP (hero.XpQuantity/hero.XpQuantityNextLevel*100.0f, (int)hero.Level + 1);
+
+		if (hudMaster2 != null) {
+			hero = GameModel.HerosInGame [1];
+			
+			//update hud state
+			currentHealthPercent = 100.0f*hero.HealthPoint/hero.MaxHealthPoint;
+			currentPowerPercent = 100.0f*hero.PowerQuantity/hero.MaxPowerQuantity;
+			//Debug.Log("Life: " + currentHealthPercent);
+			
+			hudMaster2.setLevel (HudMaster.HudType.Life, currentHealthPercent);
+			hudMaster2.setLevel (HudMaster.HudType.Special, currentPowerPercent);
+			hudMaster2.updateXP (hero.XpQuantity/hero.XpQuantityNextLevel*100.0f, (int)hero.Level + 1);
+		}
 
 		//Debug.Log (GameModel.NPCsInGame.Count);
 		if (GameModel.NPCsInGame.Count == 0) {

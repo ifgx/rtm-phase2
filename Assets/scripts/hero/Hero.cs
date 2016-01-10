@@ -9,6 +9,7 @@ using System.Collections;
 public abstract class Hero : Unit {
 
 	protected float xpQuantity;
+	public GameObject camera;
 	protected float xpQuantityNextLevel;
 	protected float xpQuantityLastLevel;
 	protected float level;
@@ -574,6 +575,15 @@ public abstract class Hero : Unit {
 		}
 	}
 
+	public GameObject HeroCamera{
+		get{
+			return this.camera;
+		}
+		set{
+			camera = value;
+		}
+	}
+
 	/**
 	* {@inheritDoc}
 	**/
@@ -718,7 +728,7 @@ public abstract class Hero : Unit {
 	**/
 	public void PlayBloodAnimation(){
 		//Debug.Log ("BLOODY");
-		Animator anim = Camera.main.GetComponent<Animator>();
+		Animator anim = this.camera.GetComponent<Animator>();
 		anim.SetTrigger ("bloody");
 		anim.cullingMode = AnimatorCullingMode.AlwaysAnimate;
 	}

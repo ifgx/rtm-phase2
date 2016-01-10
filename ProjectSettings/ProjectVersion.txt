@@ -1,6 +1,13 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 m_EditorVersion: 5.2.0f3
 =======
 m_EditorVersion: 5.3.1f1
 >>>>>>> 7549ce1efdda0d723eb722ca631faab8c0e042de
+=======
+m_EditorVersion: 5.2.2f1
+=======
+m_EditorVersion: 5.3.1f1
+>>>>>>> origin/Menus
+>>>>>>> 50c54657360f84649330f21598ffb0eee31e83ce
 m_StandardAssetsVersion: 0
