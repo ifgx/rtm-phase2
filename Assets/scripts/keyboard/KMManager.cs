@@ -153,7 +153,7 @@ public class KMManager : MonoBehaviour {
 
 			v3.z = 2;
 			v3 = cam.ScreenToWorldPoint (v3);
-		if (v3.x > 1 || !GameModel.PlayWithLeap) {
+		if (v3.x > 1 || !GameModel.MultiplayerModeOn) {
 			//Debug.Log (v3);
 			v3.z = lastPosition.z;
 		
@@ -225,7 +225,7 @@ public class KMManager : MonoBehaviour {
 	}
 
 	private void WizardUpdate() {
-		Debug.Log (leftHand.transform.position);
+		//Debug.Log (leftHand.transform.position);
 		//Debug.Log (cam.pixelWidth + " -- " + cam.pixelHeight);
 
 

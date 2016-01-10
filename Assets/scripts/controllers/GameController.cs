@@ -608,7 +608,11 @@ public class GameController : MonoBehaviour {
 	 * Trigger the next level scene
 	 */
 	public void NextLevel(){
-		GameModel.ActualLevelId++;
+		//GameModel.ActualLevelId++;
+		bool nextLevelExists = GameModel.goToNextLevel();
+		if (GameModel.PlayWithTuto && !nextLevelExists) {
+			Application.LoadLevel ("Main_menu");
+		}
 		Application.LoadLevel ("NextLevelScene");
 	}
 

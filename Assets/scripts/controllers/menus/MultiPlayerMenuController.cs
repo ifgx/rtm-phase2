@@ -169,6 +169,9 @@ public class MultiPlayerMenuController : MonoBehaviour {
 		
 		GameModel.Heros.Add (hero2);
 
+		GameModel.PlayWithTuto = false;
+		GameModel.goToFirstLevel();
+
 
 		Application.LoadLevel("GameScene");
 	}

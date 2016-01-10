@@ -43,12 +43,10 @@ public class GameModel {
 
 	private static int slot;
 
-//<<<<<<< HEAD
+	private static bool playWithTuto;
+		
 	private static List<string> listTutoriel; // permet de prendre en compte les tuto déja passé
-//=======
-	//private static bool playWithLeap;
 
-//>>>>>>> 50c54657360f84649330f21598ffb0eee31e83ce
 
 	public static int Slot {
 		get {
@@ -153,6 +151,27 @@ public class GameModel {
 		}
 	}
 
+	public static bool goToFirstLevel() {
+		actualLevelId = -1;
+		return goToNextLevel();
+	}
+
+	public static bool goToNextLevel() {
+		if (actualLevelId+1 >= levels.Count) {
+			return false;
+		}else{
+			while (actualLevelId+1 < levels.Count) {
+				ActualLevelId ++;
+				Debug.Log("level : " + ActualLevel.Name);
+				if (ActualLevel.Tutorial == playWithTuto){
+					return true;
+				}
+			}
+			return false;
+		}
+
+	}
+
 	public static List<Level> Levels {
 		get {
 			return levels;
@@ -224,6 +243,10 @@ public class GameModel {
 		hero  = new Wizard();
 		levels = LevelParser.parseAllLevelFiles ("LvlList");
 
+		foreach (Level level in levels) {
+			Debug.Log(level.Tutorial);
+		}
+
 		ActualLevelId = 0;
 
 		heros = new List<Hero> ();
@@ -234,7 +257,7 @@ public class GameModel {
 
 		heros = new List<Hero> ();
 
-
+		playWithTuto=false;	
 		//create saves
 		saves = SaveParser.parseLevelFile ();
 
@@ -288,8 +311,7 @@ public class GameModel {
 		}
 	}
 
-//<<<<<<< HEAD
-//=======
+
 	public static bool MultiplayerModeOn {
 		get {
 			return (heros.Count == 2);
@@ -298,7 +320,7 @@ public class GameModel {
 
 	}
 
-//>>>>>>> 50c54657360f84649330f21598ffb0eee31e83ce
+
 	public static bool PlayWithLeap {
 		get {
 			return playWithLeap;
@@ -306,11 +328,17 @@ public class GameModel {
 		set {
 			playWithLeap = value;
 		}
-//<<<<<<< HEAD
 	}
-//=======
-	//} 
-//>>>>>>> 50c54657360f84649330f21598ffb0eee31e83ce
+
+	public static bool PlayWithTuto {
+		get {
+			return playWithTuto;
+		}
+		set {
+			playWithTuto = value;
+		}
+	}
+
 
 	
 }
