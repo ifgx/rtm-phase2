@@ -85,6 +85,14 @@ public class CustomMenuController : MonoBehaviour {
 			canvas.SetActive(true);
 			launchBrowser.Cancel = false;
 		}
+
+		//If leap is not connected
+		controllerLM = new Controller();
+		if(controllerLM != null && controllerLM.IsConnected){
+			LM = true;
+		} else {
+			LM = false;
+		}
 		
 	}
 	
@@ -131,6 +139,13 @@ public class CustomMenuController : MonoBehaviour {
 		if (monk) GameModel.Hero = new Monk();
 		if (wizard) GameModel.Hero = new Wizard();
 		GameModel.Hero.Name = userName;
+
+		//If leap is not connected
+		controllerLM = new Controller();
+
+		GameModel.PlayWithLeap = LM;
+		Debug.Log ("PLAYWITHLEAP : " + GameModel.PlayWithLeap);
+
 		Application.LoadLevel("GameScene");
 	}
 	
