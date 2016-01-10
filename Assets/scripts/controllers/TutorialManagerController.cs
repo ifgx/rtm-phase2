@@ -61,6 +61,7 @@ public class TutorialManagerController : MonoBehaviour {
 		tutoUIPrefab = Resources.Load("prefabs/hud/BasicTutorial") as GameObject;
 
 		tutorials = TutorialParser.parseTutorials();
+		Debug.Log(tutorials.Count);
 
 
 	}

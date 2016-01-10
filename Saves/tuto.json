@@ -10,50 +10,146 @@
 			"name":"Dragonet",
 			"type":"BasicDragonet",
 			"title":"Dragonnets",
-			"desc":"Dragonets are identified small flying objects who tends to stay in front of you. This way you can not see the other ennemies. They inflict you damages with their fire-breath until you kill them. Moreover, they will regularly switch to another position, trying to get around your defense.",
+			"desc":"Dragonets are identified small flying objects who tends to stay in front of you. This way you can not see the other ennemies. They inflict damages on you with their fire-breath until you kill them. Moreover, they will regularly switch to another position, trying to get around your defense.",
 			"attack":"Range attack"
 		},{
 			"name":"Cannon",
 			"type":"Cannon",
 			"title":"Cannons",
-			"desc":"They are non moving enemies firing cannonball towards you. These projectiles have a parabolic trajectory, hitting you at different places on your body.",
+			"desc":"They are non moving enemies firing cannonball towards you. These projectiles have a parabolic trajectory, hitting you at different places of your body.",
 			"attack":"Range attack"
 		},{
 			"name":"Assassin",
 			"type":"Assassin",
 			"title":"Assassins",
-			"desc":"They peacefully walk around till they are away from your field of view. Then, if you do not have killed them, they will stab you which inflicts you a huge amount of damages.",
+			"desc":"They peacefully walk around till they are away from your field of view. Then, if you do not have killed them, they will stab you which inflicts a huge amount of damages on you.",
 			"attack":"Melee attack"
 		},{
 			"name":"Wall",
 			"type":"Wall",
 			"title":"Walls",
 			"desc":"They do not attack you as they can not move. However, they protect a canon. You have to destroy the wall in order to fight back the canon.",
-			"attack":"No attack"
-		},{
-			"name":"firstAttack",
-			"type":"weaponWarrior",
-			"title":"Warrior's attack",
-			"desc":"You are a warrior so you have a sword, a beautiful one. Move your right hand as you were wielding a sword, trying to cut your enemies. Do not try to do a thrusting attack as your hands may not be detected anymore by the Leap Motion, or you could hit your screen.",
-			"attack":"Range attack"
-		},{
-			"name":"firstDefence",
-			"type":"weaponWarrior",
-			"title":"Warrior's defence",
-			"desc":"The warrior has got a shield. It follows you left hand movements, so you just need to move your left hand right or left and up or down to place the shield on the path of your enemies’ attacks.",
-			"attack":"Range attack"
+			"attack":"-"
 		},{
 			"name":"Fire",
 			"type":"FireDragonet",
-			"Title":"Fire ennemies",
-			"desc":"A rédiger !!!!",
-			"attack":""
+			"title":"Fire ennemies",
+			"desc":"These enemies are stronger than their basic version. They inflict more damages on you so be careful when you fight them.",
+			"attack":"-"
 		},{
 			"name":"Ice",
 			"type":"IceDragonet",
-			"Title":"Ice ennemies",
-			"desc":"A rédiger !!!!",
+			"title":"Ice ennemies",
+			"desc":"They are the stronger of your enemies. Their attacks are both faster and more powerful than their fire version.",
 			"attack":""
+		},{
+			"name":"LifePotion",
+			"type":"lifePotion",
+			"title":"Life's potion",
+			"desc":"Potions are here to help you in your quest. Life potions restore a portion of your health.",
+			"attack":"-"
+		},{
+			"name":"PowerPotion",
+			"type":"powerPotion",
+			"title":"Power's potion",
+			"desc":"Potions are here to help you in your quest. Power potions restore a part of your power gauge.",
+			"attack":"-"
+		},{
+			"name":"InvincibilityPotion",
+			"type":"invincibilityPotion",
+			"title":"Invincibility's potion",
+			"desc":"Potions are here to help you in your quest. Invincibility potions make you unattainable, god like, for a short period of time.",
+			"attack":"-"
+		},{
+			"name":"warriorAttackLeap",
+			"type":"weaponWarrior",
+			"title":"Warrior's attack",
+			"desc":"You are a warrior so you have a sword, a beautiful one. Move your right hand as you were wielding a sword, trying to cut your enemies. Do not try to do a thrusting attack as your hands may not be detected anymore by the Leap Motion, or you could hit your screen.",
+			"attack":"-"
+		},{
+			"name":"warriorDefenceLeap",
+			"type":"shieldWarrior",
+			"title":"Warrior's defence",
+			"desc":"The warrior has got a shield. It follows you left hand movements, so you just need to move your left hand right or left and up or down to place the shield on the path of your enemies’ attacks.",
+			"attack":"-"
+		},{
+			"name":"wizardAttackLeap",
+			"type":"weaponWizard",
+			"title":"Wizard's attack",
+			"desc":"The wizard can cast fire balls. To do so, you have to proceed in two steps. Start by closing your right fist, palm down. Then open it to free the fireball.",
+			"attack":"-"
+		},{
+			"name":"wizardDefenceLeap",
+			"type":"shieldWizard",
+			"title":"Wizard's defence",
+			"desc":"To protect himself the wizard can use a mana shield which he can place wherever he wants. This spell has a 3 seconds cooldown. To do so, start by closing your left hand to load the shield, move it where you need it and finally re-open your hand to place the shield there.",
+			"attack":"-"
+		},{
+			"name":"monkAttackLeap",
+			"type":"weaponMonk",
+			"title":"Monk's attack",
+			"desc":"With your staff you can hit multiple enemies with only one attack. Move your right hand as you were holding a staff trying to sweep your enemies off.",
+			"attack":"-"
+		},{
+			"name":"monkDefenceLeap",
+			"type":"shieldMonk",
+			"title":"Monk's defence",
+			"desc":"The monk can not protect himself but is able to meditate. This allows him to rapidly regain health, thanks to his mana. This is done by bringing your hand closer than usual, side by side.",
+			"attack":"-"
+		},{
+			"name":"warriorAttackKeyboard",
+			"type":"weaponWarrior",
+			"title":"Warrior's attack",
+			"desc":"Use the mouse to bring your sword next to the enemy. Then left click will let you swing your sword so you can kill it.",
+			"attack":"-"
+		},{
+			"name":"warriorDefenceKeyboard",
+			"type":"shieldWarrior",
+			"title":"Warrior's defence",
+			"desc":"The Z, Q, S, D keys make your shield move where you need it to ward. It automatically blocks the enemy attack if well placed. You can also press ‘space’ to push it forward and it will come back to its normal place when the key is released.",
+			"attack":"-"
+		},{
+			"name":"wizardAttackKeyboard",
+			"type":"weaponWizard",
+			"title":"Wizard's attack",
+			"desc":"Move the mouse to place it where you need to cast a fireball. Pushing the left click will load the spell. When releasing the button, the fireball will be cast straight forward.",
+			"attack":"-"
+		},{
+			"name":"wizardDefenceKeyboard",
+			"type":"shieldWizard",
+			"title":"Wizard's defence",
+			"desc":"The Z, Q, S, D keys are used to move the left hand which will cast the 3 seconds cooldown shield. To do so, push the ‘space’ key to start to load the spell. Once released a shield of mana is placed at the hand’s current location.",
+			"attack":"-"
+		},{
+			"name":"monkAttackKeyboard",
+			"type":"weaponMonk",
+			"title":"Monk's attack",
+			"desc":"Use your mouse to move your staff. When near one or more enemies press left click to hit them all with your staff.",
+			"attack":"-"
+		},{
+			"name":"monkDefenceKeyboard",
+			"type":"shieldMonk",
+			"title":"Monk's defence",
+			"desc":"As a monk you can not defend yourself. However, you are able to meditate in order to regain health, using mana. To do so, use your mouse and the Z, Q, S, D to bring closer both hands, side by side.",
+			"attack":"-"
+		},{
+			"name":"onPop",
+			"type":"princesse",
+			"title":"First time playing the game",
+			"desc":"In Rush The Music you are a hero trying to reach the castle where the princess Khimaira is imprisoned. However, your path is ambushed by numerous enemies and hazards. Will you manage to survive and reach the tower ?",
+			"attack":"-"
+		},{
+			"name":"leapMotion",
+			"type":"leap",
+			"title":"Leap Motion",
+			"desc":"The Leap Motion allows you to control the game using your hands. To do so you need to place your hands, palm down, around 15cm above the device. Space your hands about 20 cm to be sure the Leap Motion controller differentiate them. Also avoid going behind the leap, towards your screen.",
+			"attack":"-"
+		},{
+			"name":"keyboard",
+			"type":"keyboard",
+			"title":"Keyboard + Mouse",
+			"desc":"While in game you can pause the game using the key ‘p’. From this menu you will be able to manage your game or to go back to the main menu. ",
+			"attack":"-"
 		}
 	]
 }

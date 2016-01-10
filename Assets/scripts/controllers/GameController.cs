@@ -265,9 +265,13 @@ public class GameController : MonoBehaviour {
 			if (go != null){
 				GameObject instance = Instantiate(go, new Vector3(item.PositionInX, go.transform.localScale.y/2, vitesseHeros*item.PositionInSeconds), Quaternion.identity) as GameObject;
 				NPC npc = instance.GetComponent<NPC>();
+				Potion potion = instance.GetComponent<Potion>();
 				
 				if (npc != null)
 					GameModel.NPCsInGame.Add(npc);
+				if(potion != null) {
+					GameModel.PotionsInGame.Add(potion);
+				}
 				//GameModel.NPCsInGame[GameModel.NPCsInGame.Count-1].transform.Rotate(0, 180, 0);
 			}
 		}
@@ -290,16 +294,16 @@ public class GameController : MonoBehaviour {
 		Time.timeScale = 1.0f;
 
 		musicCanvas = Instantiate (musicCanvasPrefab);
-		audioManager = musicCanvas.GetComponent<AudioManager> ();
+		//audioManager = musicCanvas.GetComponent<AudioManager> ();
 		
-		audioManager.SetMusicName (level.MusicPath);
-		audioManager.Init ();
+		//audioManager.SetMusicName (level.MusicPath);
+		//audioManager.Init ();
 
 		//If leap is not connected, Pause game and show warning message
 		if ( !leapControl.IsConnected())
 		{
 			//pause()
-			audioManager.Pause();
+			//audioManager.Pause();
 			Time.timeScale = 0.0f;
 			
 			GameObject detectedCanvas = GameObject.Find("DetectedLeapCanvas");
@@ -386,7 +390,7 @@ public class GameController : MonoBehaviour {
 			state = GameState.DEAD;
 		}
 
-		audioManager.Play();
+		//audioManager.Play();
 
 		if (Input.GetKeyDown(KeyCode.R)){
 			Restart();
@@ -401,7 +405,7 @@ public class GameController : MonoBehaviour {
 	 * Function called when the game is paused
 	 */
 	public void Pause(){
-		audioManager.Pause();
+		//audioManager.Pause();
 		Time.timeScale = 0.0f;
 		pausedMenu.SetActive(true);
 		leapControl.setPointerMode(true);

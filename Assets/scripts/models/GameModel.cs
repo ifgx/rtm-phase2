@@ -21,6 +21,8 @@ public class GameModel {
 
 	private static List<NPC> npcsInGame;
 
+	private static List<Potion> potionsInGame;
+
 	private static Level actualLevel;
 
 	private static List<Level> levels;
@@ -31,11 +33,15 @@ public class GameModel {
 
 	private static bool customLevel;
 
+	private static bool playWithLeap;
+
 	private static List<HighScore> highScores;
 
 	private static int score;
 
 	private static int slot;
+
+	private static List<string> listTutoriel; // permet de prendre en compte les tuto déja passé
 
 	public static int Slot {
 		get {
@@ -77,6 +83,16 @@ public class GameModel {
 		}
 	}
 
+	public static List<string> ListTutoriel {
+		get {
+			return listTutoriel;
+		}
+
+		set {
+			listTutoriel = value;
+		}
+	}
+
 	public static List<NPC> NPCsInGame {
 		get {
 			return npcsInGame;
@@ -84,6 +100,16 @@ public class GameModel {
 		
 		set {
 			npcsInGame = value;
+		}
+	}
+
+	public static List<Potion> PotionsInGame {
+		get {
+			return potionsInGame;
+		}
+
+		set {
+			potionsInGame = value;
 		}
 	}
 
@@ -110,7 +136,6 @@ public class GameModel {
 		}
 	}
 
-
 	public static List<Level> Levels {
 		get {
 			return levels;
@@ -133,7 +158,6 @@ public class GameModel {
 		}
 		return res;
 	}
-	
 
 	public static List<Save> Saves {
 		get {
@@ -154,7 +178,18 @@ public class GameModel {
 			highScores = value;
 		}
 	}
-	
+
+	public static Potion getNearestPotion(){
+		Potion res = null;
+
+		foreach (Potion p in potionsInGame) {
+			
+			if (res == null || p.GetPosition().z < res.GetPosition().z) res = p;
+		}
+
+		return res;
+	}
+
 	public static NPC getNearestNPC(){
 		NPC res = null;
 
@@ -172,10 +207,7 @@ public class GameModel {
 		hero  = new Wizard();
 		levels = LevelParser.parseAllLevelFiles ("LvlList");
 
-		//Debug.Log (levels.Count + " levels parsed");
-
 		ActualLevelId = 0;
-		//Debug.Log (actualLevel.Name + " is the actual level");
 
 		herosInGame = new List<Hero> ();
 
@@ -186,21 +218,15 @@ public class GameModel {
 
 		score = 0;
 
+		playWithLeap = false; // POUR TESTS AVEC LE TUTORIEL
+
 		TutorialManagerController.tutorials = new List<Tutorial> ();
-		/*TutorialManagerController.tutorials.Add(new Tutorial("Texte du tuto du POP", "weaponWarrior", "onPop"));
-		TutorialManagerController.tutorials.Add(new Tutorial("Texte du tuto de l'ATTAQUE", "weaponWarrior", "firstAttack"));
-		TutorialManagerController.tutorials.Add(new Tutorial("Texte du tuto de la DEFENSE", "ShieldWarrior", "firstDefence"));
-		TutorialManagerController.tutorials.Add(new Tutorial("Lancer\ntype : melee attack\n\nLancers are enemies who charge you on sight, spear ahead in order to pierce you before disappearing.", "BasicLancer", "Lancer"));
-		TutorialManagerController.tutorials.Add(new Tutorial("Texte du tuto pour un DRAGONNET", "BasicDragonet", "Dragonet"));
-		TutorialManagerController.tutorials.Add(new Tutorial("Texte du tuto pour un ASSASSIN", "Assassin", "Assassin"));
-		TutorialManagerController.tutorials.Add(new Tutorial("Texte du tuto pour un CANON", "Cannon", "Cannon"));
-		TutorialManagerController.tutorials.Add(new Tutorial("Texte du tuto pour un MUR", "Wall", "Wall"));
-		TutorialManagerController.tutorials.Add(new Tutorial("Texte du tuto pour un MUR", "FireDragonet", "Fire"));
-		TutorialManagerController.tutorials.Add(new Tutorial("Texte du tuto pour un MUR", "IceLancer", "Ice"));*/
+		listTutoriel = new List<string>();
 	}
 
 	public static void resetDataBeforeLevel(){
 		npcsInGame = new List<NPC> ();
+		potionsInGame = new List<Potion>();
 	}
 
 	public static void loadSave(int saveNum){
@@ -214,8 +240,7 @@ public class GameModel {
 	public static void initSandbox() {
 		herosInGame = new List<Hero> ();
 		npcsInGame = new List<NPC> ();
-
-		//herosInGame.Add( new 
+		potionsInGame = new List<Potion>();
 	}
 	
 	public static void resetSaveSlot(int slot){
@@ -236,6 +261,15 @@ public class GameModel {
 		}
 		set {
 			customLevel = value;
+		}
+	}
+
+	public static bool PlayWithLeap {
+		get {
+			return playWithLeap;
+		}
+		set {
+			playWithLeap = value;
 		}
 	}
 
