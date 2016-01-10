@@ -63,23 +63,7 @@ public class HudMaster : MonoBehaviour {
 	/**
 	 * Update is called once per frame
 	 */
-	void Update () {
-	    if (shieldActivated) {
 
-			if (timerShield >= maxTimerShield) {
-				hudShield.SetActive(!hudShield.activeSelf);
-				timerShield = 0.0f;
-			}
-
-
-
-			timerShield += Time.deltaTime;
-		}
-
-		if (Input.GetKeyDown(KeyCode.S)) {
-			ShieldActivated = !ShieldActivated;
-		}
-	}
 
 	/**
 	 * Update life or power bar to a certain value

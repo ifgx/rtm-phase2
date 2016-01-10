@@ -279,16 +279,16 @@ public class GameController : MonoBehaviour {
 		Time.timeScale = 1.0f;
 
 		musicCanvas = Instantiate (musicCanvasPrefab);
-		//audioManager = musicCanvas.GetComponent<AudioManager> ();
+		audioManager = musicCanvas.GetComponent<AudioManager> ();
 		
-		//audioManager.SetMusicName (level.MusicPath);
-		//audioManager.Init ();
+		audioManager.SetMusicName (level.MusicPath);
+		audioManager.Init ();
 
 		//If leap is not connected, Pause game and show warning message
-		if ( !leapControl.IsConnected())
+		if (GameModel.PlayWithLeap && !leapControl.IsConnected())
 		{
 			//pause()
-			//audioManager.Pause();
+			audioManager.Pause();
 			Time.timeScale = 0.0f;
 			
 			GameObject detectedCanvas = GameObject.Find("DetectedLeapCanvas");
@@ -327,22 +327,29 @@ public class GameController : MonoBehaviour {
 
 			hero.XpQuantity = modelHero.XpQuantity;
 
-
-			//LEAP
-			leapInstance = Instantiate (leapPrefab);
-			//Debug.Log ("leapInstance : " + leapInstance);
-			//the leap motion scene is child of camera so it follow the translation
-			leapInstance.transform.parent = Camera.allCameras[0].transform;
-			leapInstance.transform.position = new Vector3 (0f, 2.5f, 1.6f);
-			//sets the "hand parent" field so the arms also are child of camera and don't flicker
-			leapControl = leapInstance.GetComponent<HandController> ();
-			leapControl.setModel(handSide, hero);
-			leapControl.setGameController(this);
+			if (GameModel.PlayWithLeap) {
+				//LEAP
+				leapInstance = Instantiate (leapPrefab);
+				//Debug.Log ("leapInstance : " + leapInstance);
+				//the leap motion scene is child of camera so it follow the translation
+				leapInstance.transform.parent = Camera.allCameras[0].transform;
+				leapInstance.transform.position = new Vector3 (0f, 2.5f, 1.6f);
+				//sets the "hand parent" field so the arms also are child of camera and don't flicker
+				leapControl = leapInstance.GetComponent<HandController> ();
+				leapControl.setModel(handSide, hero);
+				leapControl.setGameController(this);
+				
+				leapControl.handParent = Camera.allCameras[0].transform;
+				
+				leapCanvas = Instantiate(leapCanvasPrefab);
+			}else{
 			
-			leapControl.handParent = Camera.allCameras[0].transform;
-			
-			leapCanvas = Instantiate(leapCanvasPrefab);
-
+				kmManager = Instantiate (kmManagerPrefab);
+				
+				KMManager keyboardManager = kmManager.GetComponent<KMManager> ();
+				keyboardManager.setHero (GameModel.HerosInGame [0]);
+				keyboardManager.setCamera (Camera.main);
+			}
 
 
 			Camera.main.transform.parent = heroGameObject.transform;
@@ -521,7 +528,7 @@ public class GameController : MonoBehaviour {
 			state = GameState.DEAD;
 		}
 
-		//audioManager.Play();
+		audioManager.Play();
 
 		if (Input.GetKeyDown(KeyCode.R)){
 			Restart();
@@ -536,7 +543,7 @@ public class GameController : MonoBehaviour {
 	 * Function called when the game is paused
 	 */
 	public void Pause(){
-		//audioManager.Pause();
+		audioManager.Pause();
 		Time.timeScale = 0.0f;
 		pausedMenu.SetActive(true);
 		leapControl.setPointerMode(true);

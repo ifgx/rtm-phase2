@@ -153,7 +153,7 @@ public class KMManager : MonoBehaviour {
 
 			v3.z = 2;
 			v3 = cam.ScreenToWorldPoint (v3);
-		if (v3.x > 1) {
+		if (v3.x > 1 || !GameModel.PlayWithLeap) {
 			//Debug.Log (v3);
 			v3.z = lastPosition.z;
 		
