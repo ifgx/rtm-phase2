@@ -43,12 +43,12 @@ public class GameModel {
 
 	private static int slot;
 
-<<<<<<< HEAD
+//<<<<<<< HEAD
 	private static List<string> listTutoriel; // permet de prendre en compte les tuto déja passé
-=======
-	private static bool playWithLeap;
+//=======
+	//private static bool playWithLeap;
 
->>>>>>> 50c54657360f84649330f21598ffb0eee31e83ce
+//>>>>>>> 50c54657360f84649330f21598ffb0eee31e83ce
 
 	public static int Slot {
 		get {
@@ -288,8 +288,8 @@ public class GameModel {
 		}
 	}
 
-<<<<<<< HEAD
-=======
+//<<<<<<< HEAD
+//=======
 	public static bool MultiplayerModeOn {
 		get {
 			//return (heros.Count == 2);
@@ -298,7 +298,7 @@ public class GameModel {
 
 	}
 
->>>>>>> 50c54657360f84649330f21598ffb0eee31e83ce
+//>>>>>>> 50c54657360f84649330f21598ffb0eee31e83ce
 	public static bool PlayWithLeap {
 		get {
 			return playWithLeap;
@@ -306,11 +306,11 @@ public class GameModel {
 		set {
 			playWithLeap = value;
 		}
-<<<<<<< HEAD
+//<<<<<<< HEAD
 	}
-=======
-	} 
->>>>>>> 50c54657360f84649330f21598ffb0eee31e83ce
+//=======
+	//} 
+//>>>>>>> 50c54657360f84649330f21598ffb0eee31e83ce
 
 	
 }
