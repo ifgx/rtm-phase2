@@ -1,9 +1,13 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 using System.Collections;
+using Leap;
 
 public class CustomMenuController : MonoBehaviour {
-	
+
+	Controller controllerLM;
+	bool LM;
+
 	string userName;
 	string customSong;
 	string[] tmp;

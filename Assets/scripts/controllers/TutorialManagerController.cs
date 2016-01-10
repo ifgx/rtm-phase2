@@ -28,7 +28,7 @@ public class TutorialManagerController : MonoBehaviour {
 	/**
 	 * the time scale on FREEZE mode
 	 */
-	private float freezeTimeScale = 0.1f;
+	private float freezeTimeScale = 0;
 
 	/**
 	 * Max timers
@@ -81,14 +81,20 @@ public class TutorialManagerController : MonoBehaviour {
 	 * The update method when we are on FREEZE mode
 	 */
 	private void freeze(){
-		timerFreeze += Time.deltaTime;
-		//Debug.Log (timerFreeze);
-		if (timerFreeze >= maxTimerFreeze) {
-			Destroy(tutoUIInstance);
+//		timerFreeze += Time.deltaTime;
+//		//Debug.Log (timerFreeze);
+//		if (timerFreeze >= maxTimerFreeze) {
+//			Destroy(tutoUIInstance);
+//
+//			state = TutorialState.NORMAL;
+//			Time.timeScale = 1.0f;
+//			timerFreeze = 0.0f;
+//		}
 
+		if (Input.GetKey(KeyCode.Space) || Input.GetMouseButton (0)) {
+			Destroy(tutoUIInstance);
 			state = TutorialState.NORMAL;
 			Time.timeScale = 1.0f;
-			timerFreeze = 0.0f;
 		}
 	}
 
