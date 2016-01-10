@@ -178,6 +178,21 @@ public class HeroMenuController : MonoBehaviour {
 		GameModel.resetSaveSlot(save);
 		GameModel.Hero.Name = userName;
 		GameModel.PlayWithLeap = LM;
+		//GameModel.PlayWithTuto = false;
+		Application.LoadLevel("GameScene");
+	}
+
+	public void Tutorial(){
+		menu.SetActive(false);
+		loading.SetActive(true);
+
+		if (warrior) GameModel.Hero = new Warrior();
+		if (monk) GameModel.Hero = new Monk();
+		if (wizard) GameModel.Hero = new Wizard();
+
+		GameModel.Hero.Name = userName;
+		GameModel.PlayWithLeap = LM;
+		//GameModel.PlayWithTuto = true;
 		Application.LoadLevel("GameScene");
 	}
 	
