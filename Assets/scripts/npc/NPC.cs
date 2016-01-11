@@ -449,9 +449,9 @@ public abstract class NPC : Unit {
 		
 		if(hit.gameObject.tag == "hero_weapon")
 		{
+			heros = GameModel.HerosInGame;
 			Hero hero = hit.GetComponent<HeroLinkWeapon>().Hero;
 			hero.PreAttack();
-			
 			LostHP(hero.Damage);
 			
 			Vector3 imageScale = lifeImageNPC.rectTransform.localScale;
@@ -461,13 +461,17 @@ public abstract class NPC : Unit {
 			if(IsDead())
 			{
 				hero.HasKilled(XpGain);
-				hero.RunBlocked = false;
+				foreach(hero in heros)
+				{
+					hero.RunBlocked = false;	
+				}
 				Die();
 			}
 			hero.PostAttack();
 		}
 		else if(hit.gameObject.tag == "hero_projectile")
 		{
+			heros = GameModel.HerosInGame;
 			Hero hero = hit.GetComponent<HeroLinkWeapon>().Hero;
 			hero.PreAttack();
 			LostHP(hero.Damage);
@@ -479,7 +483,10 @@ public abstract class NPC : Unit {
 			if(IsDead())
 			{
 				hero.HasKilled(XpGain);
-				hero.RunBlocked = false;
+				foreach(hero in heros)
+				{
+					hero.RunBlocked = false;	
+				}
 				Die();
 			}
 			
