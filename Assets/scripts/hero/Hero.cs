@@ -683,26 +683,21 @@ public abstract class Hero : Unit {
 	**/
 	void OnTriggerEnter(Collider hit)
 	{
-		Debug.LogWarning("COLLISION HERO "+hit);
-		if(hit.gameObject.tag == "ennemy_weapon")
+		//Debug.LogWarning("COLLISION HERO "+hit);
+		if(hit.gameObject.tag == "ennemy_weapon" || hit.gameObject.tag == "ennemy_projectile")
 		{
 			NPC ennemy = hit.GetComponentInParent<NPC>();
 			if (!Defending && !isInvicible){
 				LostHP(ennemy.Damage);
-				if (!Defending){
-					PlayBloodAnimation();
-				}
-			}
-		}
-		else if(hit.gameObject.tag == "ennemy_projectile")
-		{
-			NPC ennemy = hit.GetComponentInParent<NPC>();
-			LostHP(ennemy.Damage);
-			if (!Defending){
 				PlayBloodAnimation();
+				/*if (!Defending){
+					PlayBloodAnimation();
+				}*/
 			}
-			Destroy(hit.gameObject);
-			//Debug.LogWarning("COLLISION HERO -> destroy "+hit);
+			if(hit.gameObject.tag == "ennemy_projectile")
+			{
+				Destroy(hit.gameObject);	
+			}
 		}
 		else if(hit.gameObject.tag == "trigger_aggro")
 		{

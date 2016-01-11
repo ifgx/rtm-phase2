@@ -447,7 +447,7 @@ public abstract class NPC : Unit {
 	void OnTriggerEnter(Collider hit)
 	{
 		
-		if(hit.gameObject.tag == "hero_weapon")
+		if(hit.gameObject.tag == "hero_weapon" || hit.gameObject.tag == "hero_projectile")
 		{
 			heros = GameModel.HerosInGame;
 			Hero hero = hit.GetComponent<HeroLinkWeapon>().Hero;
@@ -467,31 +467,11 @@ public abstract class NPC : Unit {
 				}
 				Die();
 			}
-			hero.PostAttack();
-		}
-		else if(hit.gameObject.tag == "hero_projectile")
-		{
-			heros = GameModel.HerosInGame;
-			Hero hero = hit.GetComponent<HeroLinkWeapon>().Hero;
-			hero.PreAttack();
-			LostHP(hero.Damage);
-			
-			Vector3 imageScale = lifeImageNPC.rectTransform.localScale;
-			imageScale.Set(hp / maxHp, 1, 0);
-			lifeImageNPC.rectTransform.localScale = imageScale;
-			
-			if(IsDead())
+			if(hit.gameObject.tag == "hero_projectile")
 			{
-				hero.HasKilled(XpGain);
-				foreach(hero in heros)
-				{
-					hero.RunBlocked = false;	
-				}
-				Die();
+				//fireball collides with an ennemy. Destruct it !
+				Destroy(hit.gameObject);
 			}
-			
-			//fireball collides with an ennemy. Destruct it !
-			Destroy(hit.gameObject);
 			hero.PostAttack();
 		}
 	}
