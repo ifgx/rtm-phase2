@@ -41,7 +41,7 @@ public class HeroConfigurator : MonoBehaviour {
 	public static float wizardBlockingPercent = 100.0f;
 	public static float wizardPowerQuantity = 1000.0f;
 	public static float wizardHpRefresh = 10.0f;
-	public static float wizardPowerRefresh = 200.0f;
+	public static float wizardPowerRefresh = 10.0f;
 	public static float wizardHp = 1100.0f;
 	public static float wizardDamage = 15.0f;
 	public static float wizardMovementSpeed = 3.0f;
