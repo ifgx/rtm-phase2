@@ -483,9 +483,9 @@ public abstract class NPC : Unit {
 			if(IsDead())
 			{
 				hero.HasKilled(XpGain);
-				foreach(hero in heros)
+				foreach(Hero hero_list in heros)
 				{
-					hero.RunBlocked = false;	
+					hero_list.RunBlocked = false;	
 				}
 				Die();
 			}
