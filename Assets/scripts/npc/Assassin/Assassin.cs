@@ -53,6 +53,7 @@ public class Assassin : NPC {
 	public override void Attack(Hero target)
 	{
 		if(firstAttack){
+			firstAttack = false;
 			target.LostHP(this.Damage);
 			target.PlayBloodAnimation();	
 			firstAttack = false;
