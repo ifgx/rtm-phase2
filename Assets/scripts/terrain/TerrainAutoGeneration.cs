@@ -11,17 +11,22 @@ public class TerrainAutoGeneration : MonoBehaviour {
 	private float middleTerrainZ;
 	private float terrainLength;
 	private float terrainPosZ;
+	private Terrain terrain;
+
+	private GameObject lightPrefab;
 
 	// Use this for initialization
 	/**
 	 * Initialization
 	 */
 	void Start () {
-		Terrain terrain = this.gameObject.GetComponent<Terrain>();
+		terrain = this.gameObject.GetComponent<Terrain>();
 		terrainPosZ = terrain.transform.position.z;
 		terrainLength = terrain.terrainData.size [2];
 		middleTerrainZ = terrainPosZ + terrainLength/2.0f;
 		//Debug.Log (middleTerrainZ);
+		lightPrefab = Resources.Load ("prefabs/environment/MusicalLight") as GameObject;
+		createMusicalLights ();
 	}
 	
 	
@@ -41,6 +46,17 @@ public class TerrainAutoGeneration : MonoBehaviour {
 			}
 		}else if (hero.GetPosition().z > terrainPosZ + terrainLength){
 			Destroy(this.gameObject);
+		}
+	}
+
+	void createMusicalLights (){
+		float randomX,randomZ;
+		Vector3 randomPos;
+		for(int i=0; i<50; i++){
+			randomX = Random.Range(-30.0f, 30.0f);
+			randomZ = Random.Range(terrainPosZ, terrainPosZ + terrainLength);
+			randomPos = new Vector3(randomX,0,randomZ);
+			Instantiate (lightPrefab, new Vector3(randomX, terrain.SampleHeight(randomPos)+8, randomZ), Quaternion.identity);
 		}
 	}
 }
