@@ -90,6 +90,7 @@ public class AudioProcessor : MonoBehaviour
     {
         start = false;
         callbacks = new List<AudioCallbacks>();
+		Debug.Log ("callbacks : " + callbacks);
 
         initArrays();
 
@@ -334,6 +335,9 @@ public class AudioProcessor : MonoBehaviour
 
     public void addAudioCallback(AudioCallbacks callback)
     {
+		Debug.Log(callback);
+		Debug.Log(this.callbacks);
+
         this.callbacks.Add(callback);
         //Debug.Log(callback);
     }
@@ -416,6 +420,7 @@ public class AudioProcessor : MonoBehaviour
             return sum / del_length;
         }
     }
+	
 }
 
 

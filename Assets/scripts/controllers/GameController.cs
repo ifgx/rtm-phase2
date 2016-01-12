@@ -283,6 +283,10 @@ public class GameController : MonoBehaviour {
 		
 		audioManager.SetMusicName (level.MusicPath);
 		audioManager.Init ();
+		
+		GameObject MushGO = Resources.Load("prefabs/environment/DiscoMushroom1") as GameObject;
+		Instantiate (MushGO);
+		
 
 		//If leap is not connected, Pause game and show warning message
 		if (GameModel.PlayWithLeap && !leapControl.IsConnected())
