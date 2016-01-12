@@ -29,7 +29,6 @@ public class AudioManager : MonoBehaviour, AudioProcessor.AudioCallbacks
 	private RawImage cursorImg;
 
 	private string musicName;
-    GameObject[] allLights;
 
     // Use this for initialization
     void Start () {

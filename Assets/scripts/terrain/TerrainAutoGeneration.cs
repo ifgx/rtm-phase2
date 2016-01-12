@@ -14,6 +14,7 @@ public class TerrainAutoGeneration : MonoBehaviour {
 	private Terrain terrain;
 
 	private GameObject lightPrefab;
+	private GameObject[] allLights;
 
 	// Use this for initialization
 	/**
@@ -52,11 +53,12 @@ public class TerrainAutoGeneration : MonoBehaviour {
 	void createMusicalLights (){
 		float randomX,randomZ;
 		Vector3 randomPos;
+		allLights = new GameObject[50];
 		for(int i=0; i<50; i++){
 			randomX = Random.Range(-30.0f, 30.0f);
 			randomZ = Random.Range(terrainPosZ, terrainPosZ + terrainLength);
 			randomPos = new Vector3(randomX,0,randomZ);
-			Instantiate (lightPrefab, new Vector3(randomX, terrain.SampleHeight(randomPos)+8, randomZ), Quaternion.identity);
+			allLights[i] = Instantiate (lightPrefab, new Vector3(randomX, terrain.SampleHeight(randomPos)+8, randomZ), Quaternion.identity) as GameObject;
 		}
 	}
 }
