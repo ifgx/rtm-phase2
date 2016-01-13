@@ -775,4 +775,14 @@ public abstract class Hero : Unit {
 	{
 		
 	}
+
+	/**
+	 * @author Baptiste Valthier
+	 * Instantiate the HUD prefab object to the camera
+	 **/
+	public void attachHudPrefab(GameObject hudPrefab)
+	{
+		GameObject myHudPrefab = Instantiate(hudPrefab, new Vector3(0, 0, 14), Quaternion.identity) as GameObject;
+		myHudPrefab.transform.parent = this.transform;
+	}
 }
