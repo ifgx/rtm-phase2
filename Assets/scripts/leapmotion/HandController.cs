@@ -525,6 +525,10 @@ public class HandController : MonoBehaviour
 
 				}
 			}
+			else
+			{
+				((Monk) hero).PrayerMode = false;
+			}
 
 
 		}
