@@ -18,5 +18,6 @@ public class PowerPotion : Potion {
 	 */
 	protected override void triggerEffect(Hero hero) {
 		hero.PowerQuantity += gain;
+		hero.attachHudPrefab(Resources.Load("prefabs/hud/PowerPotionEffect") as GameObject);
 	}
 }

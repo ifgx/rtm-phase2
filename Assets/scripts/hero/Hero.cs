@@ -782,7 +782,7 @@ public abstract class Hero : Unit {
 	 **/
 	public void attachHudPrefab(GameObject hudPrefab)
 	{
-		GameObject myHudPrefab = Instantiate(hudPrefab, new Vector3(0, 0, 14), Quaternion.identity) as GameObject;
+		GameObject myHudPrefab = Instantiate(hudPrefab, new Vector3(this.GetPosition().x, 0, this.GetPosition().z -0.6f), Quaternion.identity) as GameObject;
 		myHudPrefab.transform.parent = this.transform;
 	}
 }

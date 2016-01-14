@@ -9,7 +9,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 444244}
   m_Layer: 0
-  m_Name: LifePotionEffect
+  m_Name: PowerPotionEffect
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2209,7 +2209,7 @@ ParticleSystemRenderer:
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_Materials:
-  - {fileID: 2100000, guid: d824004777ab9a74bb72d8e44a7dbc30, type: 2}
+  - {fileID: 2100000, guid: 634662bc863fb9d4898854ecde82dc38, type: 2}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
   m_UseLightProbes: 1

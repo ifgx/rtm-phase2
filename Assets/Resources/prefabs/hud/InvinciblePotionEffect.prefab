@@ -9,7 +9,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 444244}
   m_Layer: 0
-  m_Name: LifePotionEffect
+  m_Name: InvinciblePotionEffect
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -93,7 +93,7 @@ ParticleSystem:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 176034}
-  lengthInSec: 1
+  lengthInSec: 7
   startDelay: 0
   speed: 1
   randomSeed: 0
@@ -329,7 +329,7 @@ ParticleSystem:
         m_PreInfinity: 2
         m_PostInfinity: 2
       minMaxState: 0
-    gravityModifier: -5
+    gravityModifier: 0
     inheritVelocity: 0
     maxNumParticles: 1000
   ShapeModule:
@@ -1116,7 +1116,7 @@ ParticleSystem:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 192926}
-  lengthInSec: 1
+  lengthInSec: 7
   startDelay: 0
   speed: 1
   randomSeed: 0
@@ -2209,7 +2209,7 @@ ParticleSystemRenderer:
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_Materials:
-  - {fileID: 2100000, guid: d824004777ab9a74bb72d8e44a7dbc30, type: 2}
+  - {fileID: 2100000, guid: dd38ac057f314644a9320741a6ea11fb, type: 2}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
   m_UseLightProbes: 1
