@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 using System.Collections;
+using Leap;
 
 public class MultiPlayerMenuController : MonoBehaviour {
 
@@ -19,6 +20,10 @@ public class MultiPlayerMenuController : MonoBehaviour {
 	bool warriorPlayer2, wizardPlayer2, monkPlayer2;
 
 	Button buttonPlay;
+	RectTransform buttonPlayRectTransf;
+	Controller controllerLM;
+	bool LM;
+
 	ColorBlock cb;
 	GameObject menu;
 	GameObject loading;
@@ -53,6 +58,7 @@ public class MultiPlayerMenuController : MonoBehaviour {
 		monkPlayer2 = false;
 
 		buttonPlay = GameObject.Find("Play").GetComponent<Button>();
+		buttonPlayRectTransf = GameObject.Find("Play").GetComponent<RectTransform>();
 		buttonPlay.interactable = false;
 		
 		menu = GameObject.Find("Menu");
@@ -64,14 +70,26 @@ public class MultiPlayerMenuController : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		
+
+		controllerLM = new Controller();
+		if(!controllerLM.IsConnected){
+			LM = false;
+			buttonPlayRectTransf.sizeDelta = new Vector2(200,30);
+			buttonPlay.GetComponentInChildren<Text>().text = "Play (LM not detected)";
+		} else {
+			LM = true;
+			buttonPlayRectTransf.sizeDelta = new Vector2(70,30);
+			buttonPlay.GetComponentInChildren<Text>().text = "Play";
+		}
+
 		userNamePlayer1 = inputNamePlayer1.text;
 		userNamePlayer2 = inputNamePlayer2.text;
 		
-		if((((warriorPlayer1||wizardPlayer1||monkPlayer1) == true) && userNamePlayer1 != "")
+		if(LM && (((warriorPlayer1||wizardPlayer1||monkPlayer1) == true) && userNamePlayer1 != "")
 			&& (((warriorPlayer2||wizardPlayer2||monkPlayer2) == true) && userNamePlayer2 != "")){
 			buttonPlay.interactable = true;
 		} else buttonPlay.interactable = false;
+
 	}
 
 	public void WarriorPlayer1(){
