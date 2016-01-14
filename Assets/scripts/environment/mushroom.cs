@@ -5,12 +5,14 @@ public class mushroom : MonoBehaviour, AudioProcessor.AudioCallbacks {
 
 	private AudioProcessor processor;
 	private bool initialized = false;
+	Animator animator;
 
-	private int danceMove = 0;
+	private int danceMove = Random.Range (0, 3);
 	// Use this for initialization
 	void Start () {
 		processor = FindObjectOfType<AudioProcessor>();
 		//processor.init ();
+		animator = GetComponent<Animator> ();
 	}
 	
 	// Update is called once per frame
@@ -18,10 +20,11 @@ public class mushroom : MonoBehaviour, AudioProcessor.AudioCallbacks {
 		if (processor.start) {
 			if (!initialized){
 				init();
-			}else{
-				dance();
 			}
 		}
+		if (GameModel.HerosInGame [0].GetPosition ().z > transform.position.z)
+			Destroy (this.gameObject);
+			//De
 
 	}
 
@@ -30,29 +33,23 @@ public class mushroom : MonoBehaviour, AudioProcessor.AudioCallbacks {
 		processor.addAudioCallback (this);
 		initialized = true;
 	}
-	
-	private void dance() {
-		switch (danceMove) {
-			case 0:
-				transform.localScale = new Vector3(1,1,1);
-				break;
-			case 1:
-				transform.localScale = new Vector3(2,2,2);
-				break;
-			default:
-				break;
-		}
-	}
+
 
 	public void onOnbeatDetected()
 	{
 		Debug.LogWarning("Beat!!!");
-		danceMove = (danceMove + 1) % 2;
+		danceMove = (danceMove + 1) % 3;
+		if (danceMove == 2)
+			animator.SetTrigger ("dance_trigger");
 
 	}
 
 	public void onSpectrum(float[] spectrum)
 	{
 
+	}
+
+	void OnDestroy() {
+		processor.removeAudioCallback (this);
 	}
 }
