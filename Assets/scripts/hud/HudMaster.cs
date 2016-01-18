@@ -83,9 +83,13 @@ public class HudMaster : MonoBehaviour {
             hudTarget = hudSpecial;
         }
 
+
+		Debug.Log("hudtarget : "+hudTarget+" amount:"+_levelPercent/100);
         if (hudTarget != null)
         {
-            hudTarget.transform.localScale = new Vector3(1, _levelPercent/100, 1);
+            //hudTarget.transform.localScale = new Vector3(1, _levelPercent/100, 1);
+			hudTarget.GetComponent<Image>().fillAmount =  _levelPercent/100;
+			//Debug.Log("hudtarget : "+hudTarget+" amount:"+_levelPercent/100);
         }
     }
 

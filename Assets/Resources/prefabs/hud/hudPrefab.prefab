@@ -223,8 +223,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cb66c838ca1b8b748bd2b75b334a1300, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hudLife: {fileID: 180270}
-  hudSpecial: {fileID: 199702}
+  hudLife: {fileID: 104226, guid: a130291d62988b943a1bb94a86ddb6b8, type: 2}
+  hudSpecial: {fileID: 121810, guid: 292c4df900b0d754790b9a21957c1347, type: 2}
   hudXPBar: {fileID: 195130}
   hudXPText: {fileID: 198264}
   hudShield: {fileID: 147496}
@@ -546,6 +546,14 @@ Prefab:
       propertyPath: m_PlaneDistance
       value: .5
       objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: hudLife
+      value: 
+      objectReference: {fileID: 104226, guid: a130291d62988b943a1bb94a86ddb6b8, type: 2}
+    - target: {fileID: 0}
+      propertyPath: hudSpecial
+      value: 
+      objectReference: {fileID: 121810, guid: 292c4df900b0d754790b9a21957c1347, type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 160292}
