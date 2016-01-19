@@ -311,11 +311,20 @@ public class GameModel {
 		}
 	}
 
-
+	/**
+	 * Return true if heros count is 2
+	 * or false if heros is null
+	 */
 	public static bool MultiplayerModeOn {
 		get {
-			return (heros.Count == 2);
-			//return true;
+			if (heros == null)
+			{ 
+				return false;
+			}
+			else
+			{
+				return (heros.Count == 2);
+			}
 		}
 
 	}

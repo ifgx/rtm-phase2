@@ -90,13 +90,14 @@ public class AudioManager : MonoBehaviour, AudioProcessor.AudioCallbacks
 			{
 				blank[i] = backgroundColor;
 			}
-
-			textureCursor.SetPixels(blank, 0);
-			textureCursor.Apply();
+			
+			//IGNORED (BV) useless soundwave
+			//textureCursor.SetPixels(blank, 0);
+			//textureCursor.Apply();
 			// refresh the display each 100mS
-			GetWaveForm ();
+			//GetWaveForm ();
             createMusicalLights();
-			StartCoroutine (UpdateWaveForm ());
+			//StartCoroutine (UpdateWaveForm ());
 		}
 	}
     public void createMusicalLights() {

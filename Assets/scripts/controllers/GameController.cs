@@ -183,13 +183,17 @@ public class GameController : MonoBehaviour {
 		//gÃ©nÃ©ration du hÃ©ros
 
 		
+		
 		if (GameModel.MultiplayerModeOn) {
 			initMulti ();
-		} else {
+		} else
+		{
 			initMono ();
+			
 		}
-
+		
 		float vitesseHeros = hero.MovementSpeed;
+		
 
 
 		//GÃ©nÃ©ration de terrain
@@ -266,10 +270,12 @@ public class GameController : MonoBehaviour {
 
 		
 		//Debug.Log ("hudMaster : " + hudMaster);
-		state = GameState.PLAY;
-
-		//hide cursor on game
-		//Cursor.visible = false;
+		
+		/*if (state == null)
+		{
+			//if state has not manually been set to pause, then its play*/
+			state = GameState.PLAY;
+		//}
 
 
 		pausedMenu = GameObject.Find("PauseCanvas");
@@ -306,7 +312,8 @@ public class GameController : MonoBehaviour {
 		
 	}
 
-	void initMono() {
+	void initMono() 
+	{
 			//instanciate a hero using the class contained in the model
 			Hero modelHero = GameModel.Hero;
 			string heroClass = modelHero.GetType ().ToString ();
@@ -470,8 +477,10 @@ public class GameController : MonoBehaviour {
 
 			break;
 		default:
-				Cursor.visible = false;
-			play ();
+			
+			//disable by BV to allow gamelaunching via unity editor
+			//Cursor.visible = false;
+			//play ();
 
 			break;
 		}
@@ -550,10 +559,7 @@ public class GameController : MonoBehaviour {
 	public void Pause(){
 		audioManager.Pause();
 		Time.timeScale = 0.0f;
-		pausedMenu.SetActive(true);
-		//TODO BV
-			//leapControl.setPointerMode(true);
-		
+		pausedMenu.SetActive(true);	
 
 	}
 
@@ -641,7 +647,7 @@ public class GameController : MonoBehaviour {
 		paused = false;
 		state = GameState.PLAY;
 		Time.timeScale = 1.0f;
-		leapControl.setPointerMode(false);
+		//leapControl.setPointerMode(false);
 	}
 	
 }

@@ -11,6 +11,10 @@ using System.Collections;
  */
 public class MainMenuController : MonoBehaviour {
 
+	void Start() {
+		Cursor.visible = true;
+	}
+	
 	public void Play() {
 		Application.LoadLevel ("Hero_menu");
 	}
