@@ -174,13 +174,13 @@ public class GameController : MonoBehaviour {
 		//Debug.Log ("START Start GameController");
 
 
-		//recupération des options
+		//recupÃ©ration des options
 		handSide = HandSide.RIGHT_HAND;
 
 		//lire fichier niveau
 		//LevelParser parser = new LevelParser (FILE_PATH);
 
-		//génération du héros
+		//gÃ©nÃ©ration du hÃ©ros
 
 		
 		if (GameModel.MultiplayerModeOn) {
@@ -192,7 +192,7 @@ public class GameController : MonoBehaviour {
 		float vitesseHeros = hero.MovementSpeed;
 
 
-		//Génération de terrain
+		//GÃ©nÃ©ration de terrain
 		float longueurTerrain = vitesseHeros * tempsMusique;
 
 		/*ter = Instantiate( terrain, new Vector3(0,0,0), Quaternion.identity) as GameObject;
@@ -205,7 +205,7 @@ public class GameController : MonoBehaviour {
 
 
 
-		//génération des ennemis
+		//gÃ©nÃ©ration des ennemis
 		npcList = new List<GameObject> ();
 		//Debug.Log (npcList);
 
@@ -268,11 +268,11 @@ public class GameController : MonoBehaviour {
 		//Debug.Log ("hudMaster : " + hudMaster);
 		state = GameState.PLAY;
 
+		//hide cursor on game
+		//Cursor.visible = false;
 
-		
 
-
-		pausedMenu = GameObject.Find("Canvas");
+		pausedMenu = GameObject.Find("PauseCanvas");
 		pausedMenu.SetActive(false);
 		paused = false;
 
@@ -290,7 +290,6 @@ public class GameController : MonoBehaviour {
 			//pause()
 			audioManager.Pause();
 			Time.timeScale = 0.0f;
-			
 			GameObject detectedCanvas = GameObject.Find("DetectedLeapCanvas");
 			detectedCanvas.GetComponent<Canvas>().enabled = true;
 		}
@@ -359,7 +358,7 @@ public class GameController : MonoBehaviour {
 			//Camera.main.transform.Translate(new Vector3(0, 2.18f, 0));
 
 
-			//Génération du HUD
+			//GÃ©nÃ©ration du HUD
 			hudMaster = Instantiate (hud).GetComponent<HudMaster>();
 			hudMaster.setHero (GameModel.HerosInGame [0]);
 			hudMaster.setRenderCamera (Camera.allCameras [0]);
@@ -437,7 +436,7 @@ public class GameController : MonoBehaviour {
 
 			Camera.main.enabled = false;
 
-			//Génération du HUD
+			//GÃ©nÃ©ration du HUD
 			hudMaster = Instantiate (hud).GetComponent<HudMaster> ();
 			hudMaster.setHero (GameModel.HerosInGame [0]);
 			hudMaster.setRenderCamera (camL.GetComponent<Camera> ());
@@ -455,19 +454,25 @@ public class GameController : MonoBehaviour {
 
 		switch (state) {
 		case GameState.PLAY:
+				Cursor.visible = false;
 			play ();
 			break;
 		case GameState.PAUSE:
 			if(!paused){
 				Pause();
+				Cursor.visible = true;
 				paused = true;
 			}
 			break;
 		case GameState.DEAD:
+				Cursor.visible = true;
 			dead ();
+
 			break;
 		default:
+				Cursor.visible = false;
 			play ();
+
 			break;
 		}
 	}
@@ -479,9 +484,9 @@ public class GameController : MonoBehaviour {
 	 * Updates the HUDs
 	 */
 	void play(){
-		//Gestion héros
+		//Gestion hÃ©ros
 		/*if (!bloque) {
-			//faire avancer Héros
+			//faire avancer HÃ©ros
 			//hero.Run(Time.deltaTime);
 			GameModel.HerosInGame[0].Run(Time.deltaTime);
 			//Camera.main.transform.position = new Vector3(0, 2.18f, hero.GetPosition().z);
@@ -546,7 +551,10 @@ public class GameController : MonoBehaviour {
 		audioManager.Pause();
 		Time.timeScale = 0.0f;
 		pausedMenu.SetActive(true);
-		leapControl.setPointerMode(true);
+		//TODO BV
+			//leapControl.setPointerMode(true);
+		
+
 	}
 
 	/**
@@ -603,6 +611,14 @@ public class GameController : MonoBehaviour {
 	public void ReturnToMainMenu() {
 		Application.LoadLevel ("LoadingScene");
 	}
+
+	/**
+	 * Instant exit game (normal unity termination)
+	 */
+		public void ExitGame() {
+			Application.Quit();
+		}
+
 
 	/**
 	 * Trigger the next level scene
