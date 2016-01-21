@@ -217,6 +217,7 @@ public class SandboxController : MonoBehaviour {
 		else if (heroClass == "Monk") heroGameObject = Instantiate (monk);
 		else heroGameObject = Instantiate (warrior);
 		hero = heroGameObject.GetComponent<Hero> ();
+		hero.HeroCamera = Camera.main.gameObject;
 		GameModel.HerosInGame.Add (hero);
 		//string heroClass = hero.GetType ().ToString ();
 		//LEAP
