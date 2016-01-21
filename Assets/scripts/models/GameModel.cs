@@ -314,7 +314,7 @@ public class GameModel {
 
 	public static bool MultiplayerModeOn {
 		get {
-			return (heros.Count == 2);
+			return (heros != null && heros.Count == 2);
 			//return true;
 		}
 
