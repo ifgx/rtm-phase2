@@ -12,7 +12,9 @@ using System.Collections;
 public class MainMenuController : MonoBehaviour {
 
 	public void Play() {
-		Application.LoadLevel ("Hero_menu");
+		MenuController.Animator.SetTrigger("mainToClass");
+		//Debug.Log("Menu single player");
+		//Application.LoadLevel ("Hero_menu");
 	}
 
 	public void Tutorial() {
@@ -20,19 +22,24 @@ public class MainMenuController : MonoBehaviour {
 	}
 
 	public void Custom() {
-		Application.LoadLevel ("Custom_menu");
+		
+		//Application.LoadLevel ("Custom_menu");
 	}
 
 	public void Load() {
-		Application.LoadLevel ("Load_menu");
+		MenuController.Animator.SetTrigger("mainToLoad");
+		//Application.LoadLevel ("Load_menu");
 	}
 
 	public void MultiPlayer() {
-		Application.LoadLevel ("MultiPlayer_Menu");
+		MenuController.Animator.SetTrigger("mainToMulti");
+		//Application.LoadLevel ("MultiPlayer_Menu");
 	}
 
 	public void HighScore() {
-		Application.LoadLevel("HighScore_menu");
+		MenuController.Animator.SetTrigger("mainToHighScore");
+		//Application.LoadLevel("HighScore_menu");
+
 	}
 
 	public void Exit() {
