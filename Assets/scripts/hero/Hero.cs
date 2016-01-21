@@ -455,9 +455,9 @@ public abstract class Hero : Unit {
 
 	/**
 	* FR:
-	* Permet de soigner une unité
+	* Permet de recharger l'énergie d'un héro
 	* EN:
-	* Heal the Unit
+	* Give energy to a hero
 	* @return 
 	* FR:
 	*	Retourne un float

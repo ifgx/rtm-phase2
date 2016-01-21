@@ -239,7 +239,7 @@ public abstract class Unit : MonoBehaviour {
 	* @version 1.0
 	**/
 	public float Heal(float hpHeal){
-		if(hp + hpLost < maxHp)
+		if(hp + hpHeal < maxHp)
 		{
 			hp += hpHeal;	
 		}
