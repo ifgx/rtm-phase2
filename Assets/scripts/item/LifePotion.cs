@@ -18,7 +18,7 @@ public class LifePotion : Potion {
 	 * Do the effet of the potion on the hero
 	 */
 	protected override void triggerEffect(Hero hero) {
-		hero.HealthPoint += gain;
+		hero.Heal(gain);
 	}
 
 
