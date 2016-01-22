@@ -29,7 +29,6 @@ public class AudioManager : MonoBehaviour, AudioProcessor.AudioCallbacks
 	private RawImage cursorImg;
 
 	private string musicName;
-    GameObject[] allLights;
 
     // Use this for initialization
     void Start () {
@@ -95,41 +94,21 @@ public class AudioManager : MonoBehaviour, AudioProcessor.AudioCallbacks
 			//textureCursor.SetPixels(blank, 0);
 			//textureCursor.Apply();
 			// refresh the display each 100mS
+<<<<<<< HEAD
 			//GetWaveForm ();
             createMusicalLights();
 			//StartCoroutine (UpdateWaveForm ());
+=======
+			GetWaveForm ();
+			StartCoroutine (UpdateWaveForm ());
+>>>>>>> d53d56bbe75e7a133ad8316093b2a9f697f25645
 		}
 	}
-    public void createMusicalLights() {
-        Color[] colors;
-        Vector3 positionxyz;
-        Color Rcolor;
-        GameObject lightC;
-        allLights = new GameObject[50];
-
-        for (int i = 0; i < 50; i++)
-        {
-            lightC = new GameObject("musicallights");
-            Light lightComp = lightC.AddComponent<Light>();
-            lightComp.color = new Color(Random.Range(0.0f, 1.0f), Random.Range(0.0f, 1.0f), Random.Range(0.0f, 1.0f), 1.0f);
-            lightComp.transform.position = new Vector3(Random.Range(-30.0f, 30.0f), 5, Random.Range(0.0f, 400.0f));
-            lightComp.intensity = 8;
-            allLights[i] = lightC;
-        }
-
-    }
 
     public void onOnbeatDetected()
     {
         //Debug.Log("Beat!!!");
-        Color col;
-        foreach (GameObject i in allLights)
-        {
-            col = new Color(Random.Range(0.0f, 1.0f), Random.Range(0.0f, 1.0f), Random.Range(0.0f, 1.0f), 1.0f);
-            i.GetComponent<Light>().color = col;
-        }
-        //Color col = new Color(Random.Range(0.0f, 1.0f), Random.Range(0.0f, 1.0f), Random.Range(0.0f, 1.0f), 1.0f);
-        //sceneLight.color = col;
+        
     }
     public void onSpectrum(float[] spectrum)
     {
