@@ -39,7 +39,9 @@ public class GameController : MonoBehaviour {
 	/**
 	 * Prefabs used in the game
 	 */
-	private GameObject terrain;
+	private GameObject terrain1;
+	private GameObject terrain2;
+	private GameObject terrain3;
 
 	private GameObject hud;
 	private GameObject deathHud;
@@ -120,8 +122,10 @@ public class GameController : MonoBehaviour {
 	void Awake(){
 		//Debug.Log ("START Awake GameController");
 
-		terrain = Resources.Load ("prefabs/Terrain") as GameObject;
-		
+		terrain1 = Resources.Load ("prefabs/Terrain1") as GameObject;
+		terrain2 = Resources.Load ("prefabs/Terrain2") as GameObject;
+		terrain3 = Resources.Load ("prefabs/Terrain3") as GameObject;
+
 		hud = Resources.Load ("prefabs/hud/hudPrefab") as GameObject;
 		deathHud = Resources.Load("prefabs/hud/DeathHud") as GameObject;
 		
@@ -199,7 +203,23 @@ public class GameController : MonoBehaviour {
 		ter.transform.Rotate (0, -90, 0);
 		ter.transform.localScale = new Vector3 (longueurTerrain, 1, 1);
 		*/
-		ter = Instantiate (terrain, new Vector3 (-100, -2, 0), Quaternion.identity) as Terrain;
+		//Debug.Log("LEVEL NAME :"+GameModel.ActualLevel.Map+"|");
+		switch(GameModel.ActualLevel.Map){
+			case "terrain1":
+				ter = Instantiate (terrain1, new Vector3 (-100, -2, 0), Quaternion.identity) as Terrain;
+				break;
+			case "terrain2":
+				Debug.Log("LEVEL NAME :"+GameModel.ActualLevel.Map+"|");
+				ter = Instantiate (terrain2, new Vector3 (-100, -2, 0), Quaternion.identity) as Terrain;
+				break;
+			case "terrain3":
+				ter = Instantiate (terrain3, new Vector3 (-100, -2, 0), Quaternion.identity) as Terrain;
+				break;
+			default:
+				//ter = Instantiate (terrain1, new Vector3 (-100, -2, 0), Quaternion.identity) as Terrain;
+				break;
+			}
+		
 		//ter.terrainData.size = new Vector3 (1.0f, 1.0f, 1.0f);
 		//ter.terrainData.size = new Vector3 (200, 200, 1);
 
