@@ -779,10 +779,32 @@ public abstract class Hero : Unit {
 	/**
 	 * @author Baptiste Valthier
 	 * Instantiate the HUD prefab object to the camera
+	 * hudPrefab : gameObject of loaded resource
+	 * timeToLive : time in seconds before destructing the object. Negative values mean infinite time (no destruction).
+	 * loopMode : is the animation looping or not? (default is not)
+	 * @return : the instanciated object. (for exemple if you need to manually destroy it later on)
 	 **/
-	public void attachHudPrefab(GameObject hudPrefab)
+	public GameObject attachHudPrefab(GameObject hudPrefab, int timeToLive = -1, bool loopMode = false)
 	{
 		GameObject myHudPrefab = Instantiate(hudPrefab, new Vector3(this.GetPosition().x, 0, this.GetPosition().z -0.6f), Quaternion.identity) as GameObject;
 		myHudPrefab.transform.parent = this.transform;
+
+		if (loopMode)
+		{
+			ParticleSystem[] particleSystems = myHudPrefab.GetComponentsInChildren<ParticleSystem>();
+			
+			foreach( ParticleSystem ps in particleSystems)
+			{
+				ps.loop = true;
+				Debug.Log ("foreach of "+ps);
+			}
+		}
+
+		if (timeToLive > 0)
+		{
+			Destroy(myHudPrefab, timeToLive);
+		}
+
+		return myHudPrefab;
 	}
 }

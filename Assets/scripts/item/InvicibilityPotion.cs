@@ -18,6 +18,6 @@ public class InvicibilityPotion : Potion {
 	 */
 	protected override void triggerEffect(Hero hero) {
 		hero.makeInvicible (7.0f);
-		hero.attachHudPrefab(Resources.Load("prefabs/hud/InvinciblePotionEffect") as GameObject);
+		hero.attachHudPrefab(Resources.Load("prefabs/hud/InvinciblePotionEffect") as GameObject, 7);
 	}
 }

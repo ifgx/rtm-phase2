@@ -316,7 +316,7 @@ public class GameController : MonoBehaviour {
 	{
 			//instanciate a hero using the class contained in the model
 			Hero modelHero = GameModel.Hero;
-			string heroClass = modelHero.GetType ().ToString ();
+			string heroClass = modelHero.GetType().ToString ();
 			
 			if (heroClass == "Warrior")
 				heroGameObject = Instantiate (warrior);
