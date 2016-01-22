@@ -26,8 +26,8 @@ public abstract class Hero : Unit {
 	protected float lastCapacityUsed;
 	public bool runBlocked;
 	protected float lastRegenPower = 0.0f;
-	public bool isInvicible = false;
-	protected float invicibleTime = 0.0f;
+	public bool isInvincible = false;
+	protected float invincibleTime = 0.0f;
 
 
 	// Use this for initialization
@@ -47,11 +47,11 @@ public abstract class Hero : Unit {
 			Run(Time.deltaTime);
 		}
 
-		if(isInvicible)
+		if(isInvincible)
 		{
-			if(invicibleTime < Time.time)
+			if(invincibleTime < Time.time)
 			{
-				isInvicible = false;
+				unmakeInvincible();
 			}
 		}
 	}
@@ -540,6 +540,10 @@ public abstract class Hero : Unit {
 		}
 
 		base.LostHP(damageToLost);
+		if(damageToLost > 0)
+		{
+			PlayBloodAnimation();
+		}
 	}
 
 	/**
@@ -729,23 +733,19 @@ public abstract class Hero : Unit {
 		if(hit.gameObject.tag == "ennemy_weapon")
 		{
 			NPC ennemy = hit.GetComponentInParent<NPC>();
-			if (!Defending && !isInvicible){
+			if(!isInvincible)
+			{
+				Debug.LogWarning("BOOOM");
 				LostHP(ennemy.Damage);
-				PlayBloodAnimation();
-				/*if (!Defending){
-					PlayBloodAnimation();
-				}*/
 			}
 		}
 		else if(hit.gameObject.tag == "ennemy_projectile")
 		{
 			NPC ennemy = hit.GetComponentInParent<NPC>();
-			if (!Defending && !isInvicible){
+			if(!isInvincible)
+			{
+				Debug.LogWarning("BOOOM");
 				LostHP(ennemy.Damage);
-				PlayBloodAnimation();
-				/*if (!Defending){
-					PlayBloodAnimation();
-				}*/
 			}
 			Destroy(hit.gameObject);	
 		}
@@ -786,10 +786,15 @@ public abstract class Hero : Unit {
 	* @return Return void
 	* @version 1.0
 	**/
-	public void makeInvicible(float time)
+	public void makeInvincible(float time)
 	{
-		invicibleTime = Time.time + time;
-		isInvicible = true;
+		invincibleTime = Time.time + time;
+		isInvincible = true;
+	}
+
+	public void unmakeInvincible()
+	{
+		isInvincible = false;
 	}
 
 	/**

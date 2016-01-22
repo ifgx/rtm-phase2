@@ -56,9 +56,9 @@ public class EnnemyConfigurator : MonoBehaviour {
 	public static string fireDragonetAttackType = "CaC";
 	public static float fireDragonetMovementSpeed = 5.0f;
 	public static float fireDragonetAttackSpeed = 2.0f;
-	public static float fireDragonetXpGain = 500.0f;
+	public static float fireDragonetXpGain = 2000.0f;
 	public static float fireDragonetHp = 30.0f;
-	public static float fireDragonetDamage = 40.0f;
+	public static float fireDragonetDamage = 10.0f;
 	public static float fireDragonetAggroDistance = 30.0f;
 	public static float fireDragonetAttackRange = 2.5f;
 	public static float fireDragonetDistanceToDisappear = 2.0f;

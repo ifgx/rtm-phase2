@@ -129,20 +129,18 @@ public class Warrior : Hero {
 	**/
 	public override void SpecialCapacitySpell()
 	{
-		if(LastCapacityUsed + specialCapacityCooldown < Time.time) // Si le cooldown est passé
+
+		if(specialCapacity && LastCapacityUsed + specialCapacityTimer < Time.time)
 		{
-			if(LastCapacityUsed + specialCapacityTimer < Time.time ) // Si le temps timer est passé on met a off
-			{
-				specialCapacity = false;
-			}
-			else													// Sinon on est en cours de spéCapacity
-			{
-				if(!specialCapacity)								// Si la capacité n'est pas encore déclenché on l'enclenché et la time
-				{
-					specialCapacity = true;
-					LastCapacityUsed = Time.time;
-				}
-			}			
+			specialCapacity = false;
+			unmakeInvincible();
+		}
+
+		if(!specialCapacity && LastCapacityUsed + specialCapacityCooldown < Time.time) // Si le cooldown est passé
+		{
+			specialCapacity = true;
+			makeInvincible(specialCapacityTimer);
+			LastCapacityUsed = Time.time;		
 		}
 	}
 
