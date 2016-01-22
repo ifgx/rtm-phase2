@@ -200,6 +200,25 @@ public abstract class Hero : Unit {
 
 	/**
 	* FR:
+	* Getter/Setter de xpQuantityToDisplay
+	* EN:
+	* Getter/Setter of xpQuantityToDisplay
+	* @return 
+	* FR:
+	*	Retourne un float pour le getter et void pour le setter
+	* EN:
+	*	Return an float for the getter and void for the setter
+	* @version 1.0
+	**/
+	public float XpQuantityToDisplay (){
+			float xpQuantityToDisplay;
+			xpQuantityToDisplay = XpQuantity-XpQuantityLastLevel;
+			xpQuantityToDisplay /= xpQuantityNextLevel;
+			return xpQuantityToDisplay;
+	}
+
+	/**
+	* FR:
 	* Getter/Setter de xpQuantityNextLevel
 	* EN:
 	* Getter/Setter of xpQuantityNextLevel
@@ -536,36 +555,44 @@ public abstract class Hero : Unit {
 		if(level < 1)
 		{
 			level = 1;
+			
 		}
 		if(xpQuantity > xpQuantityNextLevel)
 		{
+			Debug.Log("Display:"+XpQuantityToDisplay());
 			while(xpQuantity > xpQuantityNextLevel)
 			{
 				xpQuantityNextLevel = levelUp();
 			}
 			
 			adaptStatAccordingToLevel();
-			//xpQuantity = 0;
 		}
-
-		/*if(xpQuantity < xpQuantityLastLevel)
-		{
-			if(level > 1)
-			{
-				level -= 1;
-				xpQuantityNextLevel = 100 * Mathf.Pow(2,level-1);
-			}
-			else
-			{
-				xpQuantityLastLevel = 0;
-			}
-		}*/
 	}
 
 	public float levelUp()
 	{
 		level += 1;
+		xpQuantityLastLevel = xpQuantityNextLevel;
+		if(xpQuantity < xpQuantityLastLevel)
+		{
+			xpQuantity = xpQuantityLastLevel;
+		}
 		xpQuantityNextLevel = 100 * Mathf.Pow(2,level);
+		return xpQuantityNextLevel;
+	}
+
+	public float levelDown()
+	{
+		if(level -1 > 1)
+		{
+			level -= 1;
+			xpQuantityNextLevel = xpQuantityLastLevel;
+			xpQuantityLastLevel = 100 * Mathf.Pow(2,level-1);
+			if(xpQuantity > xpQuantityLastLevel)
+			{
+				xpQuantity = xpQuantityLastLevel+1;
+			}
+		}
 		return xpQuantityNextLevel;
 	}
 
