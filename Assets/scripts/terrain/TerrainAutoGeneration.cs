@@ -13,8 +13,11 @@ public class TerrainAutoGeneration : MonoBehaviour {
 	private float terrainPosZ;
 	private Terrain terrain;
 
-	private GameObject lightPrefab,particlePrefab;
+	private GameObject lightPrefab;
+	private GameObject mushroomPrefab1;
+	private GameObject mushroomPrefab2;
 	private GameObject[] allLights;
+	private GameObject[] allMushrooms;
 	private GameObject[] allParticles;
 
 	// Use this for initialization
@@ -28,8 +31,12 @@ public class TerrainAutoGeneration : MonoBehaviour {
 		middleTerrainZ = terrainPosZ + terrainLength/2.0f;
 		//Debug.Log (middleTerrainZ);
 		lightPrefab = Resources.Load ("prefabs/environment/MusicalLight") as GameObject;
+
+		mushroomPrefab1 = Resources.Load ("prefabs/environment/DiscoMushroom1") as GameObject;
+		mushroomPrefab2 = Resources.Load ("prefabs/environment/DiscoMushroom3") as GameObject;
 		particlePrefab = Resources.Load ("prefabs/environment/MusicalParticle") as GameObject;
 		createMusicalLights ();
+		createMushrooms ();	
 		createParticleLights ();
 	}
 	
@@ -77,4 +84,23 @@ public class TerrainAutoGeneration : MonoBehaviour {
 		}
 	}
 
+	void createMushrooms () {
+		float randomX,randomZ;
+		Vector3 randomPos;
+		float sign;
+		allMushrooms = new GameObject[50];
+		for(int i=0; i<50; i++){
+			sign = Random.Range(-1.0f,1.0f);
+			randomX = Mathf.Sign(sign)*Random.Range(5.0f, 30.0f);
+			randomZ = Random.Range(terrainPosZ, terrainPosZ + terrainLength);
+			randomPos = new Vector3(randomX,0,randomZ);
+
+			if (Random.Range(0,2) == 0) {
+				allMushrooms[i] = Instantiate (mushroomPrefab1) as GameObject;
+			}else{
+				allMushrooms[i] = Instantiate (mushroomPrefab2) as GameObject;
+			}
+			allMushrooms[i].transform.position = new Vector3(randomX, terrain.SampleHeight(randomPos)-2.3f, randomZ);
+		}
+	}
 }
