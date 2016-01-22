@@ -498,11 +498,14 @@ public class HandController : MonoBehaviour
 			Hand leftHand = null;
 			Hand rightHand = null;
 
+			int nbHandValid = 0;
+
 			foreach (Hand hand in handsInFrame) 
 			{				
 				//if we are going through the attack hand
 				if (hand.IsValid ) 
 				{
+					nbHandValid++;
 					//fills fist the left hand, we don't care if its really a left or right hand, we just want the distance)
 					if (leftHand == null)
 						leftHand = hand;
@@ -537,7 +540,10 @@ public class HandController : MonoBehaviour
 				}
 			}
 
-
+			if(nbHandValid < 2)
+			{
+				((Monk) hero).PrayerMode = false;
+			}
 		}
 	}
 
