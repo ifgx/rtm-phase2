@@ -122,7 +122,8 @@ public class SandboxController : MonoBehaviour {
 		
 		Camera.main.transform.parent = heroGameObject.transform;
 		Camera.main.transform.position = new Vector3 (0, 2.18f, 0);
-
+		GameObject MainCamera = GameObject.Find("Main Camera");
+		hero.HeroCamera = MainCamera;
 
 	}
 	
