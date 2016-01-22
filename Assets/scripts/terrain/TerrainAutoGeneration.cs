@@ -13,8 +13,9 @@ public class TerrainAutoGeneration : MonoBehaviour {
 	private float terrainPosZ;
 	private Terrain terrain;
 
-	private GameObject lightPrefab;
+	private GameObject lightPrefab,particlePrefab;
 	private GameObject[] allLights;
+	private GameObject[] allParticles;
 
 	// Use this for initialization
 	/**
@@ -27,7 +28,9 @@ public class TerrainAutoGeneration : MonoBehaviour {
 		middleTerrainZ = terrainPosZ + terrainLength/2.0f;
 		//Debug.Log (middleTerrainZ);
 		lightPrefab = Resources.Load ("prefabs/environment/MusicalLight") as GameObject;
+		particlePrefab = Resources.Load ("prefabs/environment/MusicalParticle") as GameObject;
 		createMusicalLights ();
+		createParticleLights ();
 	}
 	
 	
@@ -61,4 +64,17 @@ public class TerrainAutoGeneration : MonoBehaviour {
 			allLights[i] = Instantiate (lightPrefab, new Vector3(randomX, terrain.SampleHeight(randomPos)+8, randomZ), Quaternion.identity) as GameObject;
 		}
 	}
+	void createParticleLights (){
+		float randomX,randomZ,sign;
+		Vector3 randomPos;
+		allParticles = new GameObject[20];
+		for(int i=0; i<20; i++){
+			sign = Random.Range(-1.0f, 1.0f);
+			randomX = Random.Range(Mathf.Sign(sign) * 3.0f, Mathf.Sign(sign) * 30.0f);
+			randomZ = Random.Range(terrainPosZ, terrainPosZ + terrainLength);
+			randomPos = new Vector3(randomX,0,randomZ);
+			allParticles[i] = Instantiate (particlePrefab, new Vector3(randomX, terrain.SampleHeight(randomPos), randomZ), Quaternion.identity) as GameObject;
+		}
+	}
+
 }
