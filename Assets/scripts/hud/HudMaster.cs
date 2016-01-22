@@ -41,16 +41,31 @@ public class HudMaster : MonoBehaviour {
     void Start () {
        // hudLife = GameObject.Find("hud_life");
        // hudSpecial = GameObject.Find("hud_special");
-		Color32 newColor;
-		if (hero.GetType ().ToString () == "Warrior") {
-			newColor = new Color32(43, 170, 11, 184);
-		} else if (hero.GetType ().ToString () == "Wizard") {
-			newColor = new Color32 (25, 1, 202, 184);
-		} else {
-			newColor = new Color32 (20, 20, 20, 184);
+
+		string heroClass = hero.GetType().ToString();
+
+		/*if (heroClass == "Wizard" || heroClass == "Monk") 
+		{
+
+		} 
+		else 
+		{
+			Sprite spr = Resources.Load ("prefabs/hud/LifePotionEffect");
+			
+			hudSpecial.GetComponent<Image>().sprite = spr;
+		}*/
+
+		if (heroClass == "Warrior")
+		{
+			//warrior uses rage not mana, so get the right orb
+			Sprite spr = Resources.Load<Sprite>("sprite/orb_fill_right_green");
+
+			Debug.Log ("spr="+spr);
+			
+			hudSpecial.GetComponent<Image>().overrideSprite = spr;
 		}
 
-		hudSpecial.GetComponent<Image> ().color = (Color) newColor;
+
 
 		shieldActivated = false;
 
