@@ -5,14 +5,21 @@ using System.Collections.Generic;
 
 public class LoadMenuController : MonoBehaviour {
 
+	public GameObject go;
+
 	Button buttonPlay;
 	Button buttonSlot1;
 	Button buttonSlot2;
 	Button buttonSlot3;
 
-	List<Button> buttons;
+	Image imageSlot1;
+	Image imageSlot2;
+	Image imageSlot3;
 
-	ColorBlock cb;
+	Sprite spriteNormal;
+	Sprite spriteSelect;
+
+	List<Button> buttons;
 
 	int save;
 
@@ -21,13 +28,18 @@ public class LoadMenuController : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 
-		buttonPlay = GameObject.Find("Play").GetComponent<Button>();
+		buttonPlay = go.transform.Find("Canvas/Panel/Play").GetComponent<Button>();
 
-		buttonSlot1 = GameObject.Find("ButtonSlot1").GetComponent<Button>();
-		buttonSlot2 = GameObject.Find("ButtonSlot2").GetComponent<Button>();
-		buttonSlot3 = GameObject.Find("ButtonSlot3").GetComponent<Button>();
+		buttonSlot1 = go.transform.Find("Canvas/Panel/ButtonSlot1").GetComponent<Button>();
+		buttonSlot2 = go.transform.Find("Canvas/Panel/ButtonSlot2").GetComponent<Button>();
+		buttonSlot3 = go.transform.Find("Canvas/Panel/ButtonSlot3").GetComponent<Button>();
 
-		cb = buttonSlot1.colors;
+		imageSlot1 = go.transform.Find("Canvas/Panel/ButtonSlot1").GetComponent<Image>();
+		imageSlot2 = go.transform.Find("Canvas/Panel/ButtonSlot2").GetComponent<Image>();
+		imageSlot3 = go.transform.Find("Canvas/Panel/ButtonSlot3").GetComponent<Image>();
+
+		spriteNormal = Resources.Load <Sprite> ("prefabs/menus/button_sq_normal");
+		spriteSelect = Resources.Load <Sprite> ("prefabs/menus/button_square_highlight");
 
 		buttonPlay.interactable = false;
 		buttonSlot1.interactable = false;
@@ -50,6 +62,8 @@ public class LoadMenuController : MonoBehaviour {
 	void Update () {
 		if ((slot1 | slot2 | slot3) == true) {
 			buttonPlay.interactable = true;
+		} else {
+			buttonPlay.interactable = false;
 		}
 	}
 
@@ -67,28 +81,25 @@ public class LoadMenuController : MonoBehaviour {
 		}
 	}
 
-	public void Slot1 () {
-		cb.normalColor = new Color32(163, 124, 124, 255);
-		buttonSlot1.colors = cb;
+	public void Slot1() {
+
+		imageSlot1.sprite = spriteSelect;
 		slot1 = true;
-		
-		cb.normalColor = Color.white;
-		buttonSlot2.colors = cb;
-		buttonSlot3.colors = cb;
+
+		imageSlot2.sprite = spriteNormal;
+		imageSlot3.sprite = spriteNormal;
 		slot2 = false;
 		slot3 = false;
 
 		save = 0;
 	}
 
-	public void Slot2 () {
-		cb.normalColor = new Color32(163, 124, 124, 255);
-		buttonSlot2.colors = cb;
+	public void Slot2() {
+		imageSlot2.sprite = spriteSelect;
 		slot2 = true;
-		
-		cb.normalColor = Color.white;
-		buttonSlot1.colors = cb;
-		buttonSlot3.colors = cb;
+
+		imageSlot1.sprite = spriteNormal;
+		imageSlot3.sprite = spriteNormal;
 		slot1 = false;
 		slot3 = false;
 
@@ -96,13 +107,11 @@ public class LoadMenuController : MonoBehaviour {
 	}
 
 	public void Slot3() {
-		cb.normalColor = new Color32(163, 124, 124, 255);
-		buttonSlot3.colors = cb;
+		imageSlot3.sprite = spriteSelect;
 		slot3 = true;
-		
-		cb.normalColor = Color.white;
-		buttonSlot1.colors = cb;
-		buttonSlot2.colors = cb;
+
+		imageSlot1.sprite = spriteNormal;
+		imageSlot2.sprite = spriteNormal;
 		slot1 = false;
 		slot2 = false;
 
@@ -115,7 +124,7 @@ public class LoadMenuController : MonoBehaviour {
 	}
 
 	public void Return() {
-		Application.LoadLevel ("Main_menu");
+		MenuController.Animator.SetTrigger("loadToMain");
 	}
 
 }
