@@ -14,6 +14,7 @@ public class TerrainAutoGeneration : MonoBehaviour {
 	private Terrain terrain;
 
 	private GameObject lightPrefab;
+	private GameObject particlePrefab;
 	private GameObject mushroomPrefab1;
 	private GameObject mushroomPrefab2;
 	private GameObject[] allLights;

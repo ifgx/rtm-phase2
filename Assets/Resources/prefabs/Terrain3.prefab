@@ -8,11 +8,11 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 427016}
-  - 218: {fileID: 21892980}
   - 154: {fileID: 15491158}
   - 114: {fileID: 11404062}
+  - 218: {fileID: 21841528}
   m_Layer: 0
-  m_Name: Terrain
+  m_Name: Terrain3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -49,9 +49,9 @@ TerrainCollider:
   m_GameObject: {fileID: 137954}
   m_Material: {fileID: 0}
   m_Enabled: 0
-  m_TerrainData: {fileID: 15600000, guid: 28e3ceca081a5c341a00aba32a3219b5, type: 2}
+  m_TerrainData: {fileID: 15600000, guid: 6d638361b5292b742981a6aba6666a00, type: 2}
   m_EnableTreeColliders: 0
---- !u!218 &21892980
+--- !u!218 &21841528
 Terrain:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -59,7 +59,7 @@ Terrain:
   m_GameObject: {fileID: 137954}
   m_Enabled: 1
   serializedVersion: 3
-  m_TerrainData: {fileID: 15600000, guid: 28e3ceca081a5c341a00aba32a3219b5, type: 2}
+  m_TerrainData: {fileID: 15600000, guid: 6d638361b5292b742981a6aba6666a00, type: 2}
   m_TreeDistance: 2000
   m_TreeBillboardDistance: 50
   m_TreeCrossFadeLength: 5
@@ -80,7 +80,7 @@ Terrain:
   m_LegacyShininess: .078125
   m_MaterialTemplate: {fileID: 0}
   m_BakeLightProbesForTrees: 1
-  m_ScaleInLightmap: .0511999987
+  m_ScaleInLightmap: 1
   m_LightmapParameters: {fileID: 15203, guid: 0000000000000000f000000000000000, type: 0}
 --- !u!1001 &100100000
 Prefab:
@@ -92,7 +92,7 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: m_TerrainData
       value: 
-      objectReference: {fileID: 15600000, guid: 28e3ceca081a5c341a00aba32a3219b5,
+      objectReference: {fileID: 15600000, guid: 6d638361b5292b742981a6aba6666a00,
         type: 2}
     - target: {fileID: 0}
       propertyPath: m_LocalPosition.y
