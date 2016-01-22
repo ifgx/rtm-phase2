@@ -533,14 +533,22 @@ public abstract class Hero : Unit {
 	**/
 	public void checkLevel()
 	{
+		if(level < 1)
+		{
+			level = 1;
+		}
 		if(xpQuantity > xpQuantityNextLevel)
 		{
-			level += 1;
-			xpQuantityNextLevel = 100 * Mathf.Pow(2,level);
-			xpQuantityLastLevel = 100 * Mathf.Pow(2,level-1);
+			while(xpQuantity > xpQuantityNextLevel)
+			{
+				xpQuantityNextLevel = levelUp();
+			}
+			
+			adaptStatAccordingToLevel();
+			//xpQuantity = 0;
 		}
 
-		if(xpQuantity < xpQuantityLastLevel)
+		/*if(xpQuantity < xpQuantityLastLevel)
 		{
 			if(level > 1)
 			{
@@ -551,7 +559,14 @@ public abstract class Hero : Unit {
 			{
 				xpQuantityLastLevel = 0;
 			}
-		}
+		}*/
+	}
+
+	public float levelUp()
+	{
+		level += 1;
+		xpQuantityNextLevel = 100 * Mathf.Pow(2,level);
+		return xpQuantityNextLevel;
 	}
 
 	/**

@@ -48,26 +48,37 @@ public class Warrior : Hero {
 	**/
 	public override void adaptStatAccordingToLevel()
 	{
-		if(level > 6)
+		Debug.Log("Level:"+level);
+		if(level > 5)
 		{
+			Debug.Log("LVL UP. OLD Unlock:"+SpecialCapacityUnlocked);
 			SpecialCapacityUnlocked = true;
 			LastCapacityUsed = Time.time;
-		}
-		else if(level > 5)
-		{
-			HpRefresh +=1;
+			Debug.Log("LVL UP. NEW Unlock:"+SpecialCapacityUnlocked);
 		}
 		else if(level > 4)
 		{
+			Debug.Log("LVL UP. OLD HP Refresh:"+HpRefresh);
 			HpRefresh +=1;
+			Debug.Log("LVL UP. NEW HP Refresh:"+HpRefresh);
 		}
 		else if(level > 3)
 		{
-			Damage *= 1.1f;
+			Debug.Log("LVL UP. OLD HP Refresh:"+HpRefresh);
+			HpRefresh +=1;
+			Debug.Log("LVL UP. NEW HP Refresh:"+HpRefresh);
 		}
 		else if(level > 2)
 		{
+			Debug.Log("LVL UP. OLD DAMAGE:"+Damage);
+			Damage *= 1.1f;
+			Debug.Log("LVL UP. NEW DAMAGE:"+Damage);
+		}
+		else if(level > 1)
+		{
+			Debug.Log("LVL UP. OLD MAXHEALTH:"+MaxHealthPoint);
 			MaxHealthPoint *= 1.1f;
+			Debug.Log("LVL UP. NEW MAXHEALTH:"+MaxHealthPoint);
 		}
 	}
 
