@@ -61,7 +61,7 @@ public class Monk : Hero {
 		if(PowerQuantity <= 0.0f)
 		{
 			Debug.Log("prayerMode = false beacause powerquantity empty");
-			prayerMode = false;
+			PrayerMode = false;
 		}
 		else
 		{

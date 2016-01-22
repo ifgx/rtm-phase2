@@ -515,7 +515,7 @@ public class HandController : MonoBehaviour
 			if (leftHand != null && rightHand != null)
 			{
 				float distance = Mathf.Abs(leftHand.PalmPosition.x - rightHand.PalmPosition.x);
-				if (distance <= 100 && (((Monk) hero).PrayerMode == false))
+				if (distance <= 100 && (((Monk) hero).PrayerMode == false) && ((Monk) hero).PowerQuantity >= 0)
 				{
 					//Debug.Log("Regen");
 					((Monk) hero).PrayerMode = true;

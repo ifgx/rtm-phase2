@@ -117,6 +117,7 @@ public class SandboxController : MonoBehaviour {
 
 		//Génération du HUD
 		hudMaster = Instantiate (hud).GetComponent<HudMaster>();
+		hudMaster.setHero(hero);
 
 		
 		Camera.main.transform.parent = heroGameObject.transform;

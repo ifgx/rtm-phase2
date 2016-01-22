@@ -20,6 +20,7 @@ public class HudMaster : MonoBehaviour {
 	public GameObject hudXPBar;
 	public GameObject hudXPText;
 	public GameObject hudShield;
+	public GameObject hudClassText;
 
 	private bool shieldActivated;
 
@@ -39,28 +40,14 @@ public class HudMaster : MonoBehaviour {
      * Initialization
      */
     void Start () {
-       // hudLife = GameObject.Find("hud_life");
-       // hudSpecial = GameObject.Find("hud_special");
+
 
 		string heroClass = hero.GetType().ToString();
-
-		/*if (heroClass == "Wizard" || heroClass == "Monk") 
-		{
-
-		} 
-		else 
-		{
-			Sprite spr = Resources.Load ("prefabs/hud/LifePotionEffect");
-			
-			hudSpecial.GetComponent<Image>().sprite = spr;
-		}*/
 
 		if (heroClass == "Warrior")
 		{
 			//warrior uses rage not mana, so get the right orb
 			Sprite spr = Resources.Load<Sprite>("sprite/orb_fill_right_green");
-
-			Debug.Log ("spr="+spr);
 			
 			hudSpecial.GetComponent<Image>().overrideSprite = spr;
 		}
@@ -103,7 +90,7 @@ public class HudMaster : MonoBehaviour {
         if (hudTarget != null)
         {
             //hudTarget.transform.localScale = new Vector3(1, _levelPercent/100, 1);
-			hudTarget.GetComponent<Image>().fillAmount =  _levelPercent/100;
+			hudTarget.GetComponent<Image>().fillAmount =  _levelPercent/100f;
 			//Debug.Log("hudtarget : "+hudTarget+" amount:"+_levelPercent/100);
         }
     }
@@ -114,13 +101,12 @@ public class HudMaster : MonoBehaviour {
      * @param int level The level number
      */
 	public void updateXP(float xpPercent, int level) {
-
-		hudXPBar.transform.localScale = new Vector3 (xpPercent / 100.0f, 1.0f, 1.0f);
-
-		//GameObject levelDigit = hudXP.transform.FindChild ("levelText").gameObject;
+		
 		hudXPText.GetComponentInChildren<Text>().text = level.ToString();
+		hudClassText.GetComponentInChildren<Text>().text = hero.GetType().ToString() + " rank ";
 
-
+		hudXPBar.GetComponent<Image>().fillAmount =  xpPercent / 100.0f;
+		
 	}
 
 	/**
