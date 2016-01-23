@@ -460,7 +460,9 @@ public abstract class NPC : Unit {
 			
 			if(IsDead())
 			{
+				//Debug.LogError("MORT:"+hero.Name);
 				hero.HasKilled(XpGain);
+				//Debug.LogError("XPQUANTITY:"+hero.XpQuantity);
 				foreach(Hero hero_list in heros)
 				{
 					hero_list.RunBlocked = false;	
@@ -482,7 +484,9 @@ public abstract class NPC : Unit {
 			
 			if(IsDead())
 			{
+				//Debug.LogError("MORT:"+hero.Name);
 				hero.HasKilled(XpGain);
+				//Debug.LogError("XPQUANTITY:"+hero.XpQuantity);
 				foreach(Hero hero_list in heros)
 				{
 					hero_list.RunBlocked = false;	
@@ -491,6 +495,7 @@ public abstract class NPC : Unit {
 			}
 			//fireball collides with an ennemy. Destruct it !
 			Destroy(hit.gameObject);
+			Debug.LogError("SUPER HEROOOOOOOOO XP:"+hero.XpQuantity);
 			hero.PostAttack();
 		}
 	}

@@ -46,7 +46,7 @@ public class Monk : Hero {
 			HeroConfigurator.monkDamage,
 			HeroConfigurator.monkMovementSpeed,
 			"semiDistance", 
-			"anonymous"){
+			"Labbe Pierre"){
 		prayerMode = false;
 		lastHeal = Time.time;
 		speedHeal = HeroConfigurator.monkSpeedHeal;

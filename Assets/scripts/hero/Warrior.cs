@@ -39,7 +39,7 @@ public class Warrior : Hero {
 			HeroConfigurator.warriorDamage,
 			HeroConfigurator.warriorMovementSpeed,
 			"cac", 
-			"anonymous"){
+			"Aragorn"){
 		PowerQuantity = 0;
 	}
 

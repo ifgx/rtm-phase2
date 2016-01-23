@@ -37,7 +37,6 @@ public abstract class Hero : Unit {
 	
 	// Update is called once per frame
 	protected void Update () {
-		Debug.LogError("CHECKLEVEL");
 		checkLevel();
 		//adaptStatAccordingToLevel();
 		if(specialCapacityUnlocked)
@@ -184,7 +183,9 @@ public abstract class Hero : Unit {
 	* @version 1.0
 	**/
 	public void GiveXP(float XP) {
+		Debug.LogError("XP:"+XpQuantity+" XP TO GIVE:"+XP);
 		XpQuantity += XP;
+		Debug.LogError("NEW XP:"+XpQuantity);
 	}
 
 	/**

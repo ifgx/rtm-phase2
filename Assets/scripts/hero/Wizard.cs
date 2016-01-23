@@ -19,7 +19,7 @@ public class Wizard : Hero {
 	// Update is called once per frame
 	void Update () {
 		base.Update();
-		Debug.Log("UPDATE");
+		Debug.LogError("MY XP:"+XpQuantity);
 		if(PowerQuantity < MaxPowerQuantity)
 		{
 			if(base.lastRegenPower + 1 < Time.time)
@@ -46,7 +46,7 @@ public class Wizard : Hero {
 			HeroConfigurator.wizardDamage,
 			HeroConfigurator.wizardMovementSpeed,
 			"distance", 
-			"anonymous"){
+			"Gandalf"){
 	}
 	
 	/**
