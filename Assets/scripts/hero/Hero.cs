@@ -183,9 +183,7 @@ public abstract class Hero : Unit {
 	* @version 1.0
 	**/
 	public void GiveXP(float XP) {
-		Debug.LogError("XP:"+XpQuantity+" XP TO GIVE:"+XP);
 		XpQuantity += XP;
-		Debug.LogError("NEW XP:"+XpQuantity);
 	}
 
 	/**
@@ -565,13 +563,10 @@ public abstract class Hero : Unit {
 		}
 		if(xpQuantity > xpQuantityNextLevel)
 		{
-			Debug.Log("Display:"+XpQuantityToDisplay());
 			while(xpQuantity > xpQuantityNextLevel)
 			{
 				xpQuantityNextLevel = levelUp();
 			}
-			
-			adaptStatAccordingToLevel();
 		}
 	}
 
@@ -584,6 +579,7 @@ public abstract class Hero : Unit {
 			xpQuantity = xpQuantityLastLevel;
 		}
 		xpQuantityNextLevel = 100 * Mathf.Pow(2,level);
+		adaptStatAccordingToLevel();
 		return xpQuantityNextLevel;
 	}
 

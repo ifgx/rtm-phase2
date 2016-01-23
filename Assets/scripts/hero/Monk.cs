@@ -87,24 +87,24 @@ public class Monk : Hero {
 	**/
 	public override void adaptStatAccordingToLevel()
 	{
-		if(level > 6)
+		if(level > 5)
 		{
 			SpecialCapacityUnlocked = true;
 			LastCapacityUsed = Time.time;
 		}
-		else if(level > 5)
+		else if(level > 4)
 		{
 			HpRefresh +=1;
 		}
-		else if(level > 4)
+		else if(level > 3)
 		{
 			Damage *= 1.1f;
 		}
-		else if(level > 3)
+		else if(level > 2)
 		{
 			MaxHealthPoint *= 1.1f;
 		}
-		else if(level > 2)
+		else if(level > 1)
 		{
 			MaxHealthPoint *= 1.1f;
 		}

@@ -495,7 +495,7 @@ public abstract class NPC : Unit {
 			}
 			//fireball collides with an ennemy. Destruct it !
 			Destroy(hit.gameObject);
-			Debug.LogError("SUPER HEROOOOOOOOO XP:"+hero.XpQuantity);
+			//Debug.LogError("SUPER HEROOOOOOOOO XP:"+hero.XpQuantity);
 			hero.PostAttack();
 		}
 	}
