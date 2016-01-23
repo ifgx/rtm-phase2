@@ -7,7 +7,7 @@ using System.Collections;
 **/
 public class Monk : Hero {
 	
-	float specialCapacityCooldown = 30.0f;
+	float specialCapacityCooldown = 5.0f;
 	float specialCapacityTimer = 0.0f;
 	bool prayerMode;
 	float lastHeal;
@@ -117,9 +117,9 @@ public class Monk : Hero {
 	{
 		if(LastCapacityUsed + specialCapacityCooldown < Time.time) // Si le cooldown est passé
 		{
-			specialCapacity = true;
+			regenPlayers();
 			LastCapacityUsed = Time.time;
-		}
+		}	/// REND 5 PV TOUTE LES 5 SECONDES
 	}
 
 	public bool PrayerMode{
@@ -130,7 +130,14 @@ public class Monk : Hero {
 			prayerMode = value;
 		}
 	}
+
+	public void regenPlayers()
+	{
+		int hpHealed = 15;
+		foreach(Hero hero_ in GameModel.HerosInGame){
+			hero_.Heal(hpHealed);
+		}
+	}
 	
 }
-
 
