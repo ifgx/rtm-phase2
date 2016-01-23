@@ -19,6 +19,7 @@ public class Wizard : Hero {
 	// Update is called once per frame
 	void Update () {
 		base.Update();
+		Debug.Log("UPDATE");
 		if(PowerQuantity < MaxPowerQuantity)
 		{
 			if(base.lastRegenPower + 1 < Time.time)
@@ -64,25 +65,27 @@ public class Wizard : Hero {
 	**/
 	public override void adaptStatAccordingToLevel()
 	{
-		if(level > 6)
+		if(level > 5)
 		{
+			Debug.LogWarning("LVL UP 2");
 			SpecialCapacityUnlocked = true;
 			LastCapacityUsed = Time.time;
 		}
-		else if(level > 5)
-		{
-			Damage *= 1.1f;
-		}
 		else if(level > 4)
 		{
-			MaxHealthPoint *= 1.1f;
+			Damage *= 1.1f;
 		}
 		else if(level > 3)
 		{
-			Damage *= 1.1f;
+			MaxHealthPoint *= 1.1f;
 		}
 		else if(level > 2)
 		{
+			Damage *= 1.1f;
+		}
+		else if(level > 1)
+		{
+			Debug.LogWarning("LVL UP");
 			Damage *= 1.1f;
 		}
 	}

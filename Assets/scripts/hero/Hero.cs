@@ -37,6 +37,7 @@ public abstract class Hero : Unit {
 	
 	// Update is called once per frame
 	protected void Update () {
+		Debug.LogError("CHECKLEVEL");
 		checkLevel();
 		//adaptStatAccordingToLevel();
 		if(specialCapacityUnlocked)
