@@ -474,6 +474,30 @@ public abstract class Hero : Unit {
 
 	/**
 	* FR:
+	* Permet de recharger l'énergie d'un héro
+	* EN:
+	* Give energy to a hero
+	* @return 
+	* FR:
+	*	Retourne un float
+	* EN:
+	*	Return an float
+	* @version 1.0
+	**/
+	public float Energize(float energy){
+		if(powerQuantity + energy < maxPowerQuantity)
+		{
+			powerQuantity += energy;	
+		}
+		else
+		{
+			powerQuantity = maxPowerQuantity;
+		}
+		return powerQuantity;
+	}
+
+	/**
+	* FR:
 	* Getter/Setter de hpRefresh
 	* EN:
 	* Getter/Setter of hpRefresh
