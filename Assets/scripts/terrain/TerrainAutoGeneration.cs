@@ -52,8 +52,24 @@ public class TerrainAutoGeneration : MonoBehaviour {
 
 			if (hero.GetPosition().z > middleTerrainZ) {
 
-				//Debug.Log ("#### MIDDLE #### " + middleTerrainZ);
-				Instantiate(Resources.Load("prefabs/Terrain") as GameObject, new Vector3 (-100, -2, terrainPosZ + terrainLength), Quaternion.identity);
+                //Debug.Log ("#### MIDDLE #### " + middleTerrainZ);
+                string terrainToLoad = "";
+                switch (GameModel.ActualLevel.Map)
+                {
+                    case "terrain1":
+                        terrainToLoad = "terrain1";
+                        break;
+                    case "terrain2":
+                        terrainToLoad = "terrain2";
+                        break;
+                    case "terrain3":
+                        terrainToLoad = "terrain3";
+                        break;
+                    default:
+                        terrainToLoad = "terrain1";
+                        break;
+                }
+                Instantiate(Resources.Load("prefabs/"+terrainToLoad) as GameObject, new Vector3 (-100, -2, terrainPosZ + terrainLength), Quaternion.identity);
 				terrainCreated = true;
 			}
 		}else if (hero.GetPosition().z > terrainPosZ + terrainLength){

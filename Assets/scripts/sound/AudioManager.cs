@@ -95,8 +95,8 @@ public class AudioManager : MonoBehaviour, AudioProcessor.AudioCallbacks
 			//textureCursor.Apply();
 			// refresh the display each 100mS
 
-			GetWaveForm ();
-			StartCoroutine (UpdateWaveForm ());
+			//GetWaveForm ();
+			//StartCoroutine (UpdateWaveForm ());
 		}
 	}
 
