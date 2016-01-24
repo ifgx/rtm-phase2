@@ -174,10 +174,12 @@ public class HeroMenuController : MonoBehaviour {
 		if (warrior) GameModel.Hero = new Warrior();
 		if (monk) GameModel.Hero = new Monk();
 		if (wizard) GameModel.Hero = new Wizard();
+
+		//Debug.LogError("HERO INIT:"+GameModel.Hero.XpQuantity);
 		
-		GameModel.resetSaveSlot(save);
 		GameModel.Hero.Name = userName;
 		GameModel.PlayWithLeap = LM;
+		GameModel.resetSaveSlot(save);
 		GameModel.PlayWithTuto = false;
 		GameModel.goToFirstLevel();
 		Application.LoadLevel("GameScene");

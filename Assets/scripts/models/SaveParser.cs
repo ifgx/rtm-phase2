@@ -50,7 +50,7 @@ public class SaveParser {
 		
 		saves = parseLevelFile();
 
-		Save save = new Save(hero, levelId, score);
+		//Save save = new Save(hero, levelId, score);
 
 		saves[slot].Hero = hero;
 		saves[slot].LevelId = levelId;
@@ -112,7 +112,7 @@ public class SaveParser {
 			
 			slotsJson.Add (slot);
 
-			Debug.Log(i);
+			//Debug.Log(i);
 			i++;
 		}
 		
