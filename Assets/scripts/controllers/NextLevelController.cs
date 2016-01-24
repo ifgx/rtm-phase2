@@ -38,7 +38,6 @@ public class NextLevelController : MonoBehaviour {
 		time += Time.deltaTime;
 		if (time > max) {
 			GameModel.Score ++;
-			SaveParser.addSave(GameModel.Slot, GameModel.Hero, GameModel.Score, GameModel.ActualLevelId);
 			Application.LoadLevel("GameScene");
 		}
 	}

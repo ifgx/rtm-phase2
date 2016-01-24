@@ -21,6 +21,8 @@ public class GameModel {
 
 	private static List<Hero> herosInGame;
 
+	private static List<Hero> herosSaved;
+
 	private static List<NPC> npcsInGame;
 
 	private static List<Potion> potionsInGame;
@@ -95,6 +97,16 @@ public class GameModel {
 		
 		set {
 			herosInGame = value;
+		}
+	}
+
+	public static List<Hero> HerosSaved {
+		get {
+			return herosSaved;
+		}
+		
+		set {
+			herosSaved = value;
 		}
 	}
 
@@ -240,7 +252,6 @@ public class GameModel {
 	 * Initialisation of the game model
 	 */
 	public static void Init(){
-		hero  = new Wizard();
 		levels = LevelParser.parseAllLevelFiles ("LvlList");
 
 		foreach (Level level in levels) {
@@ -277,8 +288,9 @@ public class GameModel {
 	}
 
 	public static void loadSave(int saveNum){
-
+		saves = SaveParser.parseLevelFile ();
 		Save save = saves [saveNum];
+		Debug.LogError("To Load:"+save.Hero.Name+" ,XP:"+save.Hero.XpQuantity);
 		hero = save.Hero;
 		score = save.Score;
 		ActualLevelId = save.LevelId;
@@ -292,13 +304,16 @@ public class GameModel {
 	
 	public static void resetSaveSlot(int slot){
 		Slot = slot;
+		Debug.LogError("ON RESET:"+Hero.XpQuantity);
 		if (saves.Count < 3) {
 			saves.Add (new Save (Hero, ActualLevelId, Score));
+			SaveParser.addSave(slot, Hero, Score, ActualLevelId);			
 		} else {
 			Save save = saves [slot];
 			save.Hero = Hero;
 			save.LevelId = ActualLevelId;
 			save.Score = Score;
+			SaveParser.addSave(slot, Hero, Score, ActualLevelId);			
 		}
 	}
 

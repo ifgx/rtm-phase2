@@ -166,7 +166,7 @@ public class GameController : MonoBehaviour {
 		//GameModel.Init();
 		GameModel.resetDataBeforeLevel ();
 
-
+		GameModel.loadSave(GameModel.Slot);
 		level = GameModel.ActualLevel;
 
 		//Debug.Log (level.Name);
@@ -609,6 +609,12 @@ public class GameController : MonoBehaviour {
 	 */
 	public void NextLevel(){
 		//GameModel.ActualLevelId++;
+		if(GameModel.HerosInGame.Count < 2)
+		{
+			Debug.LogError("To save:"+GameModel.HerosInGame[0].Name+" ,XP:"+GameModel.HerosInGame[0].XpQuantity);
+			//Debug.LogError("SAVE:"+GameModel.HerosInGame[0].XpQuantity);
+			SaveParser.addSave(GameModel.Slot, GameModel.HerosInGame[0], GameModel.Score, GameModel.ActualLevelId);			
+		}
 		bool nextLevelExists = GameModel.goToNextLevel();
 		if (GameModel.PlayWithTuto && !nextLevelExists) {
 			Application.LoadLevel ("Main_menu");
