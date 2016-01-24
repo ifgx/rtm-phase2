@@ -17,11 +17,9 @@ public class InvicibilityPotion : Potion {
 	 * Do the effet of the potion on the hero
 	 */
 	protected override void triggerEffect(Hero hero) {
-<<<<<<< HEAD
-		hero.makeInvicible (7.0f);
-		hero.attachHudPrefab(Resources.Load("prefabs/hud/InvinciblePotionEffect") as GameObject, 7);
-=======
+
 		hero.makeInvincible (7.0f);
->>>>>>> d6db3829d7dfcd08c650bc927c99220b5432a6c6
+		hero.attachHudPrefab(Resources.Load("prefabs/hud/InvinciblePotionEffect") as GameObject, 7);
+
 	}
 }
