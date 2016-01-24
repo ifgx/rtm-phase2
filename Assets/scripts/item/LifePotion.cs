@@ -18,8 +18,12 @@ public class LifePotion : Potion {
 	 * Do the effet of the potion on the hero
 	 */
 	protected override void triggerEffect(Hero hero) {
+<<<<<<< HEAD
 		hero.HealthPoint += gain;
 		hero.attachHudPrefab(Resources.Load("prefabs/hud/LifePotionEffect") as GameObject, 1);
+=======
+		hero.Heal(gain);
+>>>>>>> d6db3829d7dfcd08c650bc927c99220b5432a6c6
 	}
 
 

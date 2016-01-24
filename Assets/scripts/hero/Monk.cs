@@ -7,7 +7,7 @@ using System.Collections;
 **/
 public class Monk : Hero {
 	
-	float specialCapacityCooldown = 30.0f;
+	float specialCapacityCooldown = 5.0f;
 	float specialCapacityTimer = 0.0f;
 	bool prayerMode;
 	float lastHeal;
@@ -46,7 +46,7 @@ public class Monk : Hero {
 			HeroConfigurator.monkDamage,
 			HeroConfigurator.monkMovementSpeed,
 			"semiDistance", 
-			"anonymous"){
+			"Labbe Pierre"){
 		prayerMode = false;
 		lastHeal = Time.time;
 		speedHeal = HeroConfigurator.monkSpeedHeal;
@@ -88,24 +88,24 @@ public class Monk : Hero {
 	**/
 	public override void adaptStatAccordingToLevel()
 	{
-		if(level > 6)
+		if(level > 5)
 		{
 			SpecialCapacityUnlocked = true;
 			LastCapacityUsed = Time.time;
 		}
-		else if(level > 5)
+		else if(level > 4)
 		{
 			HpRefresh +=1;
 		}
-		else if(level > 4)
+		else if(level > 3)
 		{
 			Damage *= 1.1f;
 		}
-		else if(level > 3)
+		else if(level > 2)
 		{
 			MaxHealthPoint *= 1.1f;
 		}
-		else if(level > 2)
+		else if(level > 1)
 		{
 			MaxHealthPoint *= 1.1f;
 		}
@@ -118,9 +118,9 @@ public class Monk : Hero {
 	{
 		if(LastCapacityUsed + specialCapacityCooldown < Time.time) // Si le cooldown est passé
 		{
-			specialCapacity = true;
+			regenPlayers();
 			LastCapacityUsed = Time.time;
-		}
+		}	/// REND 5 PV TOUTE LES 5 SECONDES
 	}
 
 	public bool PrayerMode{
@@ -132,7 +132,14 @@ public class Monk : Hero {
 			prayerMode = value;
 		}
 	}
+
+	public void regenPlayers()
+	{
+		int hpHealed = 15;
+		foreach(Hero hero_ in GameModel.HerosInGame){
+			hero_.Heal(hpHealed);
+		}
+	}
 	
 }
-
 

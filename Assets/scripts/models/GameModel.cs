@@ -317,6 +317,7 @@ public class GameModel {
 	 */
 	public static bool MultiplayerModeOn {
 		get {
+<<<<<<< HEAD
 			if (heros == null)
 			{ 
 				return false;
@@ -325,6 +326,10 @@ public class GameModel {
 			{
 				return (heros.Count == 2);
 			}
+=======
+			return (heros != null && heros.Count == 2);
+			//return true;
+>>>>>>> d6db3829d7dfcd08c650bc927c99220b5432a6c6
 		}
 
 	}

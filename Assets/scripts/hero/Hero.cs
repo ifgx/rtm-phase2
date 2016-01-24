@@ -26,8 +26,8 @@ public abstract class Hero : Unit {
 	protected float lastCapacityUsed;
 	public bool runBlocked;
 	protected float lastRegenPower = 0.0f;
-	public bool isInvicible = false;
-	protected float invicibleTime = 0.0f;
+	public bool isInvincible = false;
+	protected float invincibleTime = 0.0f;
 
 
 	// Use this for initialization
@@ -47,11 +47,11 @@ public abstract class Hero : Unit {
 			Run(Time.deltaTime);
 		}
 
-		if(isInvicible)
+		if(isInvincible)
 		{
-			if(invicibleTime < Time.time)
+			if(invincibleTime < Time.time)
 			{
-				isInvicible = false;
+				unmakeInvincible();
 			}
 		}
 	}
@@ -196,6 +196,25 @@ public abstract class Hero : Unit {
 	public virtual void HasKilled(float XP)
 	{
 		GiveXP(XP);
+	}
+
+	/**
+	* FR:
+	* Getter/Setter de xpQuantityToDisplay
+	* EN:
+	* Getter/Setter of xpQuantityToDisplay
+	* @return 
+	* FR:
+	*	Retourne un float pour le getter et void pour le setter
+	* EN:
+	*	Return an float for the getter and void for the setter
+	* @version 1.0
+	**/
+	public float XpQuantityToDisplay (){
+			float xpQuantityToDisplay;
+			xpQuantityToDisplay = XpQuantity-XpQuantityLastLevel;
+			xpQuantityToDisplay /= xpQuantityNextLevel;
+			return xpQuantityToDisplay;
 	}
 
 	/**
@@ -455,6 +474,30 @@ public abstract class Hero : Unit {
 
 	/**
 	* FR:
+	* Permet de recharger l'énergie d'un héro
+	* EN:
+	* Give energy to a hero
+	* @return 
+	* FR:
+	*	Retourne un float
+	* EN:
+	*	Return an float
+	* @version 1.0
+	**/
+	public float Energize(float energy){
+		if(powerQuantity + energy < maxPowerQuantity)
+		{
+			powerQuantity += energy;	
+		}
+		else
+		{
+			powerQuantity = maxPowerQuantity;
+		}
+		return powerQuantity;
+	}
+
+	/**
+	* FR:
 	* Getter/Setter de hpRefresh
 	* EN:
 	* Getter/Setter of hpRefresh
@@ -521,6 +564,10 @@ public abstract class Hero : Unit {
 		}
 
 		base.LostHP(damageToLost);
+		if(damageToLost > 0)
+		{
+			PlayBloodAnimation();
+		}
 	}
 
 	/**
@@ -533,25 +580,46 @@ public abstract class Hero : Unit {
 	**/
 	public void checkLevel()
 	{
+		if(level < 1)
+		{
+			level = 1;
+			
+		}
 		if(xpQuantity > xpQuantityNextLevel)
 		{
-			level += 1;
-			xpQuantityNextLevel = 100 * Mathf.Pow(2,level);
-			xpQuantityLastLevel = 100 * Mathf.Pow(2,level-1);
+			while(xpQuantity > xpQuantityNextLevel)
+			{
+				xpQuantityNextLevel = levelUp();
+			}
 		}
+	}
 
+	public float levelUp()
+	{
+		level += 1;
+		xpQuantityLastLevel = xpQuantityNextLevel;
 		if(xpQuantity < xpQuantityLastLevel)
 		{
-			if(level > 1)
+			xpQuantity = xpQuantityLastLevel;
+		}
+		xpQuantityNextLevel = 100 * Mathf.Pow(2,level);
+		adaptStatAccordingToLevel();
+		return xpQuantityNextLevel;
+	}
+
+	public float levelDown()
+	{
+		if(level -1 > 1)
+		{
+			level -= 1;
+			xpQuantityNextLevel = xpQuantityLastLevel;
+			xpQuantityLastLevel = 100 * Mathf.Pow(2,level-1);
+			if(xpQuantity > xpQuantityLastLevel)
 			{
-				level -= 1;
-				xpQuantityNextLevel = 100 * Mathf.Pow(2,level-1);
-			}
-			else
-			{
-				xpQuantityLastLevel = 0;
+				xpQuantity = xpQuantityLastLevel+1;
 			}
 		}
+		return xpQuantityNextLevel;
 	}
 
 	/**
@@ -687,23 +755,19 @@ public abstract class Hero : Unit {
 		if(hit.gameObject.tag == "ennemy_weapon")
 		{
 			NPC ennemy = hit.GetComponentInParent<NPC>();
-			if (!Defending && !isInvicible){
+			if(!isInvincible)
+			{
+				Debug.LogWarning("BOOOM");
 				LostHP(ennemy.Damage);
-				PlayBloodAnimation();
-				/*if (!Defending){
-					PlayBloodAnimation();
-				}*/
 			}
 		}
 		else if(hit.gameObject.tag == "ennemy_projectile")
 		{
 			NPC ennemy = hit.GetComponentInParent<NPC>();
-			if (!Defending && !isInvicible){
+			if(!isInvincible)
+			{
+				Debug.LogWarning("BOOOM");
 				LostHP(ennemy.Damage);
-				PlayBloodAnimation();
-				/*if (!Defending){
-					PlayBloodAnimation();
-				}*/
 			}
 			Destroy(hit.gameObject);	
 		}
@@ -744,10 +808,15 @@ public abstract class Hero : Unit {
 	* @return Return void
 	* @version 1.0
 	**/
-	public void makeInvicible(float time)
+	public void makeInvincible(float time)
 	{
-		invicibleTime = Time.time + time;
-		isInvicible = true;
+		invincibleTime = Time.time + time;
+		isInvincible = true;
+	}
+
+	public void unmakeInvincible()
+	{
+		isInvincible = false;
 	}
 
 	/**
