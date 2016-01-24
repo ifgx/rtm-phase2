@@ -174,7 +174,7 @@ public class GameModel {
 		}else{
 			while (actualLevelId+1 < levels.Count) {
 				ActualLevelId ++;
-				Debug.Log("level : " + ActualLevel.Name);
+				//Debug.Log("level : " + ActualLevel.Name);
 				if (ActualLevel.Tutorial == playWithTuto){
 					return true;
 				}
@@ -255,7 +255,7 @@ public class GameModel {
 		levels = LevelParser.parseAllLevelFiles ("LvlList");
 
 		foreach (Level level in levels) {
-			Debug.Log(level.Tutorial);
+			//Debug.Log(level.Tutorial);
 		}
 
 		ActualLevelId = 0;
@@ -290,7 +290,7 @@ public class GameModel {
 	public static void loadSave(int saveNum){
 		saves = SaveParser.parseLevelFile ();
 		Save save = saves [saveNum];
-		Debug.LogError("To Load:"+save.Hero.Name+" ,XP:"+save.Hero.XpQuantity);
+		//Debug.LogError("To Load:"+save.Hero.Name+" ,XP:"+save.Hero.XpQuantity);
 		hero = save.Hero;
 		score = save.Score;
 		ActualLevelId = save.LevelId;
@@ -304,7 +304,7 @@ public class GameModel {
 	
 	public static void resetSaveSlot(int slot){
 		Slot = slot;
-		Debug.LogError("ON RESET:"+Hero.XpQuantity);
+		//Debug.LogError("ON RESET:"+Hero.XpQuantity);
 		if (saves.Count < 3) {
 			saves.Add (new Save (Hero, ActualLevelId, Score));
 			SaveParser.addSave(slot, Hero, Score, ActualLevelId);			
