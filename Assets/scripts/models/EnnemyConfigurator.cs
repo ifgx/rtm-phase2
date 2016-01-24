@@ -23,7 +23,7 @@ public class EnnemyConfigurator : MonoBehaviour {
 	public static string cannonName = "Cannon" ;
 	public static string cannonAttackType = "Distance";
 	public static float cannonMovementSpeed = 0.0f;
-	public static float cannonAttackSpeed = é;àf;
+	public static float cannonAttackSpeed = 2.0f;
 	public static float cannonXpGain = 0.0f;
 	public static float cannonHp = 30.0f;
 	public static float cannonDamage = 75.0f;
