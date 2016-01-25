@@ -9,9 +9,14 @@ public class AudioManager : MonoBehaviour, AudioProcessor.AudioCallbacks
     public static float songAmplitude = 0.1f;
     AudioSource audioSource;
     AudioSource audioSourceHB;
+    AudioSource noiseSource;
     AudioClip clip;
+    AudioClip heroCoup;
+    AudioClip fireball;
+    AudioClip heroShield;
+    AudioClip heroSword;
 
-	private string musicName;
+    private string musicName;
 
     // Use this for initialization
     void Start () {
@@ -23,7 +28,12 @@ public class AudioManager : MonoBehaviour, AudioProcessor.AudioCallbacks
 	}
 
 	public void Init(){
-		if (musicName != null) {
+        noiseSource = gameObject.AddComponent<AudioSource>();
+        heroCoup = Resources.Load("sounds/aie") as AudioClip;
+        heroShield = Resources.Load("sounds/aie") as AudioClip;
+        heroSword = Resources.Load("sounds/epee") as AudioClip;
+        fireball = Resources.Load("sounds/fireball") as AudioClip;
+        if (musicName != null) {
             audioSourceHB = gameObject.AddComponent<AudioSource>();
             audioSourceHB.clip = Resources.Load("Musics/Hearbeat") as AudioClip;
             audioSourceHB.volume = 0;
@@ -52,7 +62,26 @@ public class AudioManager : MonoBehaviour, AudioProcessor.AudioCallbacks
 			StartCoroutine (UpdateWaveForm ());
 		}
 	}
-
+    public void playHeroHurtSound()
+    {
+        noiseSource.volume = 0.6f;
+        noiseSource.PlayOneShot(heroCoup);
+    }
+    public void playFireballSound()
+    {
+        noiseSource.volume = 1.0f;
+        noiseSource.PlayOneShot(fireball);
+    }
+    public void playHeroShieldSound()
+    {
+        noiseSource.volume = 0.6f;
+        noiseSource.PlayOneShot(heroShield);
+    }
+    public void playHeroSwordSound()
+    {
+        noiseSource.volume = 1.0f;
+        noiseSource.PlayOneShot(heroSword);
+    }
     public void onOnbeatDetected()
     {
 

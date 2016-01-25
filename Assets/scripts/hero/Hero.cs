@@ -28,12 +28,12 @@ public abstract class Hero : Unit {
 	protected float lastRegenPower = 0.0f;
 	public bool isInvincible = false;
 	protected float invincibleTime = 0.0f;
+    protected AudioManager audioManager;
 
+    // Use this for initialization
+    void Start () {
 
-	// Use this for initialization
-	void Start () {
-	
-	}
+    }
 	
 	// Update is called once per frame
 	protected void Update () {
@@ -147,7 +147,8 @@ public abstract class Hero : Unit {
 		specialCapacity = false;
 		runBlocked = false;
 		defending = false;
-	}
+        
+    }
 
 	/**
 	* FR:
@@ -566,7 +567,9 @@ public abstract class Hero : Unit {
 		base.LostHP(damageToLost);
 		if(damageToLost > 0)
 		{
-			PlayBloodAnimation();
+            audioManager = GameObject.Find("Main Camera").GetComponent<AudioManager>();
+            audioManager.playHeroHurtSound();
+            PlayBloodAnimation();
 		}
 	}
 
@@ -758,7 +761,8 @@ public abstract class Hero : Unit {
 			if(!isInvincible)
 			{
 				Debug.LogWarning("BOOOM");
-				LostHP(ennemy.Damage);
+                
+                LostHP(ennemy.Damage);
 			}
 		}
 		else if(hit.gameObject.tag == "ennemy_projectile")

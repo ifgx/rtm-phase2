@@ -47,8 +47,10 @@ public abstract class NPC : Unit {
 	protected GameObject triggerAttack;
 	protected Vector3 nextAttackCoords;
 
+    protected AudioManager audioManager;
 
-	Image lifeImageNPC;
+
+    Image lifeImageNPC;
 
 	AudioSource audio;
 	protected bool audioInit = false;
@@ -453,8 +455,11 @@ public abstract class NPC : Unit {
 			Hero hero = hit.GetComponent<HeroLinkWeapon>().Hero;
 			hero.PreAttack();
 			LostHP(hero.Damage);
-			
-			Vector3 imageScale = lifeImageNPC.rectTransform.localScale;
+            
+            audioManager = GameObject.Find("Main Camera").GetComponent<AudioManager>();
+            audioManager.playHeroSwordSound();
+
+            Vector3 imageScale = lifeImageNPC.rectTransform.localScale;
 			imageScale.Set(hp / maxHp, 1, 0);
 			lifeImageNPC.rectTransform.localScale = imageScale;
 			
@@ -477,8 +482,11 @@ public abstract class NPC : Unit {
 			Hero hero = hit.GetComponent<HeroLinkWeapon>().Hero;
 			hero.PreAttack();
 			LostHP(hero.Damage);
-			
-			Vector3 imageScale = lifeImageNPC.rectTransform.localScale;
+            
+            audioManager = GameObject.Find("Main Camera").GetComponent<AudioManager>();
+            audioManager.playFireballSound();
+
+            Vector3 imageScale = lifeImageNPC.rectTransform.localScale;
 			imageScale.Set(hp / maxHp, 1, 0);
 			lifeImageNPC.rectTransform.localScale = imageScale;
 			
