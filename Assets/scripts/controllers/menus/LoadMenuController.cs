@@ -30,13 +30,13 @@ public class LoadMenuController : MonoBehaviour {
 
 		buttonPlay = go.transform.Find("Canvas/Panel/Play").GetComponent<Button>();
 
-		buttonSlot1 = go.transform.Find("Canvas/Panel/ButtonSlot1").GetComponent<Button>();
-		buttonSlot2 = go.transform.Find("Canvas/Panel/ButtonSlot2").GetComponent<Button>();
-		buttonSlot3 = go.transform.Find("Canvas/Panel/ButtonSlot3").GetComponent<Button>();
+		buttonSlot1 = go.transform.Find("Canvas/Panel/Slot1/ButtonSlot1").GetComponent<Button>();
+		buttonSlot2 = go.transform.Find("Canvas/Panel/Slot2/ButtonSlot2").GetComponent<Button>();
+		buttonSlot3 = go.transform.Find("Canvas/Panel/Slot3/ButtonSlot3").GetComponent<Button>();
 
-		imageSlot1 = go.transform.Find("Canvas/Panel/ButtonSlot1").GetComponent<Image>();
-		imageSlot2 = go.transform.Find("Canvas/Panel/ButtonSlot2").GetComponent<Image>();
-		imageSlot3 = go.transform.Find("Canvas/Panel/ButtonSlot3").GetComponent<Image>();
+		imageSlot1 = go.transform.Find("Canvas/Panel/Slot1/ButtonSlot1").GetComponent<Image>();
+		imageSlot2 = go.transform.Find("Canvas/Panel/Slot2/ButtonSlot2").GetComponent<Image>();
+		imageSlot3 = go.transform.Find("Canvas/Panel/Slot3/ButtonSlot3").GetComponent<Image>();
 
 		spriteNormal = Resources.Load <Sprite> ("prefabs/menus/button_sq_normal");
 		spriteSelect = Resources.Load <Sprite> ("prefabs/menus/button_square_highlight");

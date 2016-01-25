@@ -13,9 +13,6 @@ public class HighScoreMenuController : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 
-		/*************************** Pour TEST ************************************/
-		GameModel.Init ();
-
 		panelRect = go.transform.Find("Canvas/Panel/PanelText").GetComponent<RectTransform>();
 
 		checkHighScore ();

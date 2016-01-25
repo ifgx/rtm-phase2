@@ -17,12 +17,8 @@ public class MainMenuController : MonoBehaviour {
 		//Application.LoadLevel ("Hero_menu");
 	}
 
-	public void Tutorial() {
-		Application.LoadLevel ("Hero_menu");
-	}
-
-	public void Custom() {
-		
+	public void Credit() {
+		MenuController.Animator.SetTrigger("mainToCredit");
 		//Application.LoadLevel ("Custom_menu");
 	}
 
