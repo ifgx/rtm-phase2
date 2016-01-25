@@ -310,8 +310,9 @@ public class KMManager : MonoBehaviour {
 		Debug.Log (staffMov);
 		if (staffMov == 1) {
 
-			rightHand.transform.Translate(new Vector3(-staffTranslateSpeedX1,0,-staffTranslateSpeedX2)*Time.deltaTime);
-			//.transform.Rotate (new Vector3(0,-staffRotateSpeed1,0)*Time.deltaTime);
+			rightHand.transform.Rotate (new Vector3(0,-staffRotateSpeed1,0)*Time.deltaTime, Space.World);
+			rightHand.transform.Translate(new Vector3(-staffTranslateSpeedX1,0,staffTranslateSpeedX2)*Time.deltaTime, Space.World);
+
 			staffMovTime += Time.deltaTime;
 			if (staffMovTime > 0.3f){
 				staffMovTime = 0;
@@ -319,8 +320,9 @@ public class KMManager : MonoBehaviour {
 			}
 		} else if (staffMov == 2) {
 
-			rightHand.transform.Translate(new Vector3(0,0,staffTranslateSpeedX3)*Time.deltaTime);
-			//rightHand.transform.Rotate(new Vector3(0,staffRotateSpeed1*2f,0)*Time.deltaTime);
+			rightHand.transform.Rotate(new Vector3(0,staffRotateSpeed1*3f,0)*Time.deltaTime, Space.World);
+			rightHand.transform.Translate(new Vector3(staffTranslateSpeedX3,0,0)*Time.deltaTime, Space.World);
+
 
 			staffMovTime += Time.deltaTime;
 			if (staffMovTime > 0.2f){
@@ -329,15 +331,16 @@ public class KMManager : MonoBehaviour {
 			}
 		} else if (staffMov == 3) {
 
-			rightHand.transform.Translate(new Vector3(staffTranslateSpeedX1,0,-staffTranslateSpeedX2)*Time.deltaTime);
-			//rightHand.transform.Rotate (new Vector3(0,staffRotateSpeed1,0)*Time.deltaTime);
+			rightHand.transform.Rotate (new Vector3(0,-staffRotateSpeed1,0)*Time.deltaTime, Space.World);
+			rightHand.transform.Translate(new Vector3(-staffTranslateSpeedX1,0,-staffTranslateSpeedX2)*Time.deltaTime, Space.World);
+
 			staffMovTime += Time.deltaTime;
 			if (staffMovTime > 0.3f){
 				staffMovTime = 0;
 				staffMov = 0;
-				//Vector3 v3 = rightHand.transform.eulerAngles;
-				//v3 = new Vector3(0,90,0);
-				//rightHand.transform.eulerAngles = v3;
+				Vector3 v3 = rightHand.transform.eulerAngles;
+				v3 = new Vector3(0,90,0);
+				rightHand.transform.eulerAngles = v3;
 			}
 		}
 	}
