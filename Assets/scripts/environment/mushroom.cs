@@ -37,7 +37,7 @@ public class mushroom : MonoBehaviour, AudioProcessor.AudioCallbacks {
 
 	public void onOnbeatDetected()
 	{
-		Debug.LogWarning("Beat!!!");
+		//Debug.LogWarning("Beat!!!");
 		danceMove = (danceMove + 1) % 3;
 		if (danceMove == 2)
 			animator.SetTrigger ("dance_trigger");
