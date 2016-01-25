@@ -77,8 +77,6 @@ public class GameController : MonoBehaviour {
 	private GameObject kmManagerPrefab;
 	private GameObject kmManager;
 
-	private GameObject musicCanvasPrefab;
-	private GameObject musicCanvas;
 	private AudioManager audioManager;
 	
 	private Hero hero;
@@ -151,8 +149,6 @@ public class GameController : MonoBehaviour {
 			
 		leapPrefab = Resources.Load("prefabs/leapmotion/LeapMotionScene") as GameObject;
 		leapCanvasPrefab = Resources.Load("prefabs/leapmotion/LeapCanvas") as GameObject;
-
-		musicCanvasPrefab = Resources.Load("prefabs/sound/MusicCanvas") as GameObject;
 
 		kmManagerPrefab = Resources.Load ("prefabs/keyboard/KMManager") as GameObject;
 
@@ -304,10 +300,9 @@ public class GameController : MonoBehaviour {
 
 		Time.timeScale = 1.0f;
 
-		musicCanvas = Instantiate (musicCanvasPrefab);
-		audioManager = musicCanvas.GetComponent<AudioManager> ();
-		
-		audioManager.SetMusicName (level.MusicPath);
+        audioManager = GameObject.Find("Main Camera").GetComponent<AudioManager>();
+
+            audioManager.SetMusicName (level.MusicPath);
 		audioManager.Init ();
 		
 		GameObject MushGO = Resources.Load("prefabs/environment/DiscoMushroom1") as GameObject;
