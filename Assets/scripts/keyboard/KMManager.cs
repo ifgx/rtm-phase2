@@ -20,7 +20,8 @@ public class KMManager : MonoBehaviour {
 	int swordMov = 0;
 	float swordRotateSpeed = 360;
 	float swordTranslateSpeed = 10;
-
+	float swordTranslateSpeed2 = 5;
+	
 	int staffMov = 0;
 	float staffRotateSpeed1 = 150;
 	float staffRotateSpeed2 = 200;
@@ -28,7 +29,7 @@ public class KMManager : MonoBehaviour {
 	float staffTranslateSpeedZ = 20;
 	float staffTranslateSpeedX2 = 10;
 	float staffTranslateSpeedX3 = 30;
-
+	
 	
 	float shieldTranslateSpeed = 5;
 	
@@ -170,22 +171,22 @@ public class KMManager : MonoBehaviour {
 		} else if (Input.GetKey (KeyCode.D) && leftHand.transform.localPosition.x < screenBoundX) {
 			leftHand.transform.Translate(movSpeed*LEFT);
 		}
-
-
-
+		
+		
+		
 		if (swordMov == 0 && staffMov == 0) {
 			Vector3 lastPosition = rightHand.transform.position;
 			Vector3 v3 = Input.mousePosition;
-		
+			
 			//NOT A GOOD WAY TO DO MOUSE CLAMPING BUT AT LEAST IT WORKS
-		
-		
+			
+			
 			v3.z = 2;
 			v3 = cam.ScreenToWorldPoint (v3);
 			if (v3.x > 1 || !GameModel.MultiplayerModeOn) {
 				//Debug.Log (v3);
 				v3.z = lastPosition.z;
-			
+				
 				rightHand.transform.position = v3;
 			}
 		}
@@ -206,8 +207,8 @@ public class KMManager : MonoBehaviour {
 			
 			
 			//Debug.Log("1 - " + rightHand.transform.position);
-			rightHand.transform.Translate(new Vector3(-swordTranslateSpeed,0,-swordTranslateSpeed)*Time.deltaTime);
-			rightHand.transform.Rotate(new Vector3(0,swordRotateSpeed,0)*Time.deltaTime);
+			rightHand.transform.Translate(new Vector3(0,-swordTranslateSpeed2,swordTranslateSpeed)*Time.deltaTime, Space.World);
+			rightHand.transform.Rotate(new Vector3(swordRotateSpeed,0,0)*Time.deltaTime, Space.World);
 			//Debug.Log("2 - " + rightHand.transform.position);
 			
 			swordMovTime += Time.deltaTime;
@@ -220,8 +221,8 @@ public class KMManager : MonoBehaviour {
 		}else if (swordMov == 2) {
 			
 			//Debug.Log("1 - " + rightHand.transform.position);
-			rightHand.transform.Rotate(new Vector3(0,-swordRotateSpeed,0)*Time.deltaTime);
-			rightHand.transform.Translate(new Vector3(swordTranslateSpeed,0,swordTranslateSpeed)*Time.deltaTime);
+			rightHand.transform.Rotate(new Vector3(-swordRotateSpeed,0,0)*Time.deltaTime, Space.World);
+			rightHand.transform.Translate(new Vector3(0,swordTranslateSpeed2,-swordTranslateSpeed)*Time.deltaTime, Space.World);
 			
 			//Debug.Log("2 - " + rightHand.transform.position);
 			
