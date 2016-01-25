@@ -84,7 +84,7 @@ public class GameController : MonoBehaviour {
 	private Terrain ter;
 
 	private GameState state;
-	private bool paused;
+	private bool pauseFlag = false;
 	private GameObject pausedMenu;
 
 	private HandSide handSide;
@@ -113,6 +113,7 @@ public class GameController : MonoBehaviour {
 	private bool bloque = false;
 
 	private bool deathDone = false;
+
 
 	/**
 	 * During the awakening : we load all the prefabs
@@ -296,7 +297,6 @@ public class GameController : MonoBehaviour {
 
 		pausedMenu = GameObject.Find("PauseCanvas");
 		pausedMenu.SetActive(false);
-		paused = false;
 
 		Time.timeScale = 1.0f;
 
@@ -328,6 +328,8 @@ public class GameController : MonoBehaviour {
 			GameObject tutoGO = Resources.Load("prefabs/controllers/TutorialManager") as GameObject;
 		 	Instantiate (tutoGO);
 		}
+
+		Cursor.visible = false;
 		
 	}
 
@@ -480,20 +482,13 @@ public class GameController : MonoBehaviour {
 
 		switch (state) {
 		case GameState.PLAY:
-				Cursor.visible = false;
 			play ();
 			break;
 		case GameState.PAUSE:
-			if(!paused){
-				Pause();
-				Cursor.visible = true;
-				paused = true;
-			}
+			pause();
 			break;
 		case GameState.DEAD:
-				Cursor.visible = true;
 			dead ();
-
 			break;
 		default:
 			
@@ -563,23 +558,41 @@ public class GameController : MonoBehaviour {
 
 		audioManager.Play();
 
-		if (Input.GetKeyDown(KeyCode.R)){
+		/*if (Input.GetKeyDown(KeyCode.R)){
 			Restart();
-		}else if (Input.GetKey(KeyCode.Escape)){
-			Quit ();
-		} else if (Input.GetKeyDown(KeyCode.P)){
+		}else */
+			if (!Input.GetKey (KeyCode.Escape) && !Input.GetKey (KeyCode.P)) {
+				pauseFlag = false;
+			}
+
+			if (!pauseFlag && (Input.GetKey(KeyCode.Escape) || Input.GetKeyDown(KeyCode.P))){
 			state = GameState.PAUSE;
+			
+			audioManager.Pause();
+			Time.timeScale = 0.0f;
+			pausedMenu.SetActive(true);
+			Cursor.visible = true;
+
+			pauseFlag = true;
 		}
 	}
 
 	/**
 	 * Function called when the game is paused
 	 */
-	public void Pause(){
-		audioManager.Pause();
-		Time.timeScale = 0.0f;
-		pausedMenu.SetActive(true);	
+	public void pause(){
+		if (!Input.GetKey (KeyCode.Escape) && !Input.GetKey (KeyCode.P)) {
+			pauseFlag = false;
+		}
 
+		if (!pauseFlag && (Input.GetKey(KeyCode.Escape) || Input.GetKeyDown(KeyCode.P))){
+			state = GameState.PLAY;
+			Time.timeScale = 1.0f;
+			pausedMenu.SetActive(false);
+			Cursor.visible = false;
+			
+			pauseFlag = true;
+		}
 	}
 
 	/**
@@ -590,29 +603,14 @@ public class GameController : MonoBehaviour {
 			Instantiate (deathHud);
 			HighScoreParser.addHighScore(GameModel.Hero.Name, GameModel.Score);
 			deathDone = true;
+			Cursor.visible = true;
 		}
 		if (Input.GetKeyDown(KeyCode.R)){
 			ReturnToMainMenu();
 		}
 	}
 
-	/**
-	 * Function called when an ennemy hurts the hero
-	 */
-	void NPCAttacksHero(){
-	}
 
-	/**
-	 * Function called when the hero blocks an annemy attack
-	 */
-	void HeroBlocks(){
-	}
-
-	/**
-	 * Function called when the hero hurts an ennemy
-	 */
-	void HeroAttacksNPC(){
-	}
 
 	/**
 	 * Restarts the level
@@ -669,7 +667,6 @@ public class GameController : MonoBehaviour {
 	 */
 	public void Resume(){
 		pausedMenu.SetActive(false);
-		paused = false;
 		state = GameState.PLAY;
 		Time.timeScale = 1.0f;
 		//leapControl.setPointerMode(false);
