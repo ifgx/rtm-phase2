@@ -54,7 +54,7 @@ public class SandboxController : MonoBehaviour {
 	 * Load all resources
 	 */
 	void Awake(){
-		terrain = Resources.Load ("prefabs/Terrain") as GameObject;
+		terrain = Resources.Load ("prefabs/Terrain1") as GameObject;
 		
 		hud = Resources.Load ("prefabs/hud/hudPrefab") as GameObject;
 		deathHud = Resources.Load("prefabs/hud/DeathHud") as GameObject;
