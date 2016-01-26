@@ -5,63 +5,53 @@ using Leap;
 
 public class HeroMenuController : MonoBehaviour {
 
-	Controller controllerLM;
-	bool LM;
-	string userName;
+	public GameObject go;
+
+	private static string userName;
 	InputField inputName;
-	Text device;
-	GameObject deviceInfo;
-	Button buttonPlay;
-	Button buttonWarrior;
-	Button buttonWizard;
-	Button buttonMonk;
-	bool warrior, wizard, monk;
+
+	Sprite spriteNormal;
+	Sprite spriteSelect;
+
+	UnityEngine.UI.Image imageSlot1;
+	UnityEngine.UI.Image imageSlot2;
+	UnityEngine.UI.Image imageSlot3;
+
 	Button buttonSlot1;
 	Button buttonSlot2;
 	Button buttonSlot3;
 	bool slot1, slot2, slot3;
-	int save;
-	ColorBlock cb;
-	GameObject menu;
-	GameObject loading;
+
+	private static int save;
+
+	//GameObject loading;
 
 	// Use this for initialization
 	void Start () {
 
-		inputName = GameObject.Find("InputName").GetComponent<InputField>();
+		inputName = go.transform.Find("CampaignGO/CampaignCanvas/Name/InputName").GetComponent<InputField>();
 		inputName.text = "Player 1"; // default name
 		userName = "";
 
-		device = GameObject.Find("LabelDevice").GetComponent<Text>();
-		deviceInfo = GameObject.Find("LabelDeviceInfo");
-		deviceInfo.SetActive(false);
+		buttonSlot1 = go.transform.Find("CampaignGO/CampaignCanvas/SaveSlots/Slot1").GetComponent<Button>();
+		buttonSlot2 = go.transform.Find("CampaignGO/CampaignCanvas/SaveSlots/Slot2").GetComponent<Button>();
+		buttonSlot3 = go.transform.Find("CampaignGO/CampaignCanvas/SaveSlots/Slot3").GetComponent<Button>();
 
-		buttonPlay = GameObject.Find("Play").GetComponent<Button>();
-		buttonPlay.interactable = false;
+		imageSlot1 = go.transform.Find("CampaignGO/CampaignCanvas/SaveSlots/Slot1").GetComponent<UnityEngine.UI.Image>();
+		imageSlot2 = go.transform.Find("CampaignGO/CampaignCanvas/SaveSlots/Slot2").GetComponent<UnityEngine.UI.Image>();
+		imageSlot3 = go.transform.Find("CampaignGO/CampaignCanvas/SaveSlots/Slot3").GetComponent<UnityEngine.UI.Image>();
 
-		buttonWarrior = GameObject.Find("Warrior").GetComponent<Button>();
-		buttonWizard = GameObject.Find("Wizard").GetComponent<Button>();
-		buttonMonk = GameObject.Find("Monk").GetComponent<Button>();
-		cb = buttonWarrior.colors;
-		cb.normalColor = new Color32(163, 124, 124, 255);
-		buttonWarrior.colors = cb;
-		warrior = true; // default class
-		wizard = false;
-		monk = false;
+		spriteNormal = Resources.Load <Sprite> ("prefabs/menus/button_sq_normal");
+		spriteSelect = Resources.Load <Sprite> ("prefabs/menus/button_square_highlight");
 
-		buttonSlot1 = GameObject.Find("Slot1").GetComponent<Button>();
-		buttonSlot2 = GameObject.Find("Slot2").GetComponent<Button>();
-		buttonSlot3 = GameObject.Find("Slot3").GetComponent<Button>();
-		cb.normalColor = new Color32(163, 124, 124, 255);
-		buttonSlot1.colors = cb;
+		imageSlot1.sprite = spriteSelect;
 		slot1 = true; // default save slot
 		slot2 = false;
 		slot3 = false;
+		save = 0;
 		
-		menu = GameObject.Find("Menu");
-		menu.SetActive(true);
-		loading = GameObject.Find("Loading");
-		loading.SetActive(false);
+		/*loading = GameObject.Find("Loading");
+		loading.SetActive(false);*/
 		
 	}
 	
@@ -69,70 +59,16 @@ public class HeroMenuController : MonoBehaviour {
 	void Update () {
 		
 		userName = inputName.text;
-		
-		if(((warrior||wizard||monk) == true) && ((slot1||slot2||slot3) == true) && userName != ""){
-			buttonPlay.interactable = true;
-		} else buttonPlay.interactable = false;
-		
-		//If leap is not connected
-		controllerLM = new Controller();
-		if(controllerLM != null && controllerLM.IsConnected){
-			device.text = "Leap Motion";
-			deviceInfo.SetActive(false);
-			LM = true;
-		} else {
-			device.text = "Keyboard + Mouse";
-			deviceInfo.SetActive(true);
-			LM = false;
-		}
+
 	}
-	
-	public void Warrior(){
-		cb.normalColor = new Color32(163, 124, 124, 255);
-		buttonWarrior.colors = cb;
-		warrior = true;
-		
-		cb.normalColor = Color.white;
-		buttonWizard.colors = cb;
-		buttonMonk.colors = cb;
-		wizard = false;
-		monk = false;
-		
-	}
-	
-	public void Wizard() {
-		cb.normalColor = new Color32(163, 124, 124, 255);
-		buttonWizard.colors = cb;
-		wizard = true;
-		
-		cb.normalColor = Color.white;
-		buttonWarrior.colors = cb;
-		buttonMonk.colors = cb;
-		warrior = false;
-		monk = false;
-	}
-	
-	public void Monk() {
-		cb.normalColor = new Color32(163, 124, 124, 255);
-		buttonMonk.colors = cb;
-		monk = true;
-		
-		cb.normalColor = Color.white;
-		buttonWarrior.colors = cb;
-		buttonWizard.colors = cb;
-		warrior = false;
-		wizard = false;
-		
-	}
-	
+
 	public void Slot1() {
-		cb.normalColor = new Color32(163, 124, 124, 255);
-		buttonSlot1.colors = cb;
+
+		imageSlot1.sprite = spriteSelect;
 		slot1 = true;
 		
-		cb.normalColor = Color.white;
-		buttonSlot2.colors = cb;
-		buttonSlot3.colors = cb;
+		imageSlot2.sprite = spriteNormal;
+		imageSlot3.sprite = spriteNormal;
 		slot2 = false;
 		slot3 = false;
 		
@@ -140,13 +76,11 @@ public class HeroMenuController : MonoBehaviour {
 	}
 	
 	public void Slot2() {
-		cb.normalColor = new Color32(163, 124, 124, 255);
-		buttonSlot2.colors = cb;
+		imageSlot2.sprite = spriteSelect;
 		slot2 = true;
 		
-		cb.normalColor = Color.white;
-		buttonSlot1.colors = cb;
-		buttonSlot3.colors = cb;
+		imageSlot1.sprite = spriteNormal;
+		imageSlot3.sprite = spriteNormal;
 		slot1 = false;
 		slot3 = false;
 		
@@ -154,18 +88,17 @@ public class HeroMenuController : MonoBehaviour {
 	}
 	
 	public void Slot3() {
-		cb.normalColor = new Color32(163, 124, 124, 255);
-		buttonSlot3.colors = cb;
+		imageSlot3.sprite = spriteSelect;
 		slot3 = true;
 		
-		cb.normalColor = Color.white;
-		buttonSlot1.colors = cb;
-		buttonSlot2.colors = cb;
+		imageSlot1.sprite = spriteNormal;
+		imageSlot2.sprite = spriteNormal;
 		slot1 = false;
 		slot2 = false;
 		
 		save = 2;
 	}
+<<<<<<< HEAD
 	
 	public void Play(){
 		menu.SetActive(false);
@@ -188,19 +121,26 @@ public class HeroMenuController : MonoBehaviour {
 	public void Tutorial(){
 		menu.SetActive(false);
 		loading.SetActive(true);
+=======
+>>>>>>> 2cac1a97d5849c9bc9b578ae6ee735bb7482aae6
 
-		if (warrior) GameModel.Hero = new Warrior();
-		if (monk) GameModel.Hero = new Monk();
-		if (wizard) GameModel.Hero = new Wizard();
+	public static string Name {
+		get {
+			return userName;
+		}
 
-		GameModel.Hero.Name = userName;
-		GameModel.PlayWithLeap = LM;
-		GameModel.PlayWithTuto = true;
-		GameModel.goToFirstLevel();
-		Application.LoadLevel("GameScene");
+		set {
+			userName = value;
+		}
 	}
-	
-	public void Return() {
-		Application.LoadLevel("Main_menu");
+
+	public static int Save {
+		get {
+			return save;
+		}
+
+		set {
+			save = value;
+		}
 	}
 }
