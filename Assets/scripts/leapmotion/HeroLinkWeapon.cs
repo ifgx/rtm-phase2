@@ -14,4 +14,9 @@ public class HeroLinkWeapon : MonoBehaviour {
 		}
 	}
 
+	public void Update() {
+		Debug.Log("HeroLinkWeapon : hero="+hero.GetType().ToString());
+		Debug.Log("HeroLinkWeapon : hero="+hero.Name);
+	}
+
 }

@@ -260,7 +260,8 @@ public class KMManager : MonoBehaviour {
 			//Debug.Log ("mouse button down");
 			
 			fireball = Instantiate (fireballGO);
-			fireball.GetComponentInChildren<HeroLinkWeapon> ().Hero = new Wizard ();
+			//fireball.transform.SetParent(hero);
+			fireball.GetComponentInChildren<HeroLinkWeapon> ().Hero = hero;//new Wizard ();
 			
 			fireball.transform.parent = rightHand.transform.FindChild ("HandContainer").transform;
 			fireball.transform.localPosition = new Vector3 (0f, 0.05f, 0f);

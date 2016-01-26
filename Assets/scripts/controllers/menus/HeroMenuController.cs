@@ -98,7 +98,7 @@ public class HeroMenuController : MonoBehaviour {
 		
 		save = 2;
 	}
-<<<<<<< HEAD
+/*<<<<<<< HEAD
 	
 	public void Play(){
 		menu.SetActive(false);
@@ -122,7 +122,7 @@ public class HeroMenuController : MonoBehaviour {
 		menu.SetActive(false);
 		loading.SetActive(true);
 =======
->>>>>>> 2cac1a97d5849c9bc9b578ae6ee735bb7482aae6
+>>>>>>> 2cac1a97d5849c9bc9b578ae6ee735bb7482aae6*/
 
 	public static string Name {
 		get {

@@ -9,29 +9,7 @@ EditorBuildSettings:
     path: Assets/scenes/game/LoadingScene.unity
   - enabled: 1
     path: Assets/scenes/menus/Main_menu.unity
-  - enabled: 0
-    path: Assets/scenes/menus/Main_menu_old.unity
-  - enabled: 0
-    path: Assets/scenes/menus/Hero_menu.unity
-  - enabled: 0
-    path: Assets/scenes/menus/Custom_menu.unity
-  - enabled: 0
-    path: Assets/scenes/menus/HighScore_menu.unity
   - enabled: 1
     path: Assets/scenes/game/GameScene.unity
-  - enabled: 0
-    path: Assets/scenes/menus/Load_Menu.unity
   - enabled: 1
     path: Assets/scenes/game/NextLevelScene.unity
-  - enabled: 0
-    path: Assets/scenes/menus/MultiPlayer_Menu.unity
-<<<<<<< HEAD
-  - enabled: 1
-    path: Assets/scenes/menus/Main_menu.unity
-  - enabled: 1
-=======
-  - enabled: 0
-    path: Assets/scenes/menus/Main_menu_old.unity
-  - enabled: 0
->>>>>>> 2cac1a97d5849c9bc9b578ae6ee735bb7482aae6
-    path: Assets/scenes/sandbox/SandboxScene.unity
