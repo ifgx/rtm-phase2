@@ -19,6 +19,6 @@ public class LoadingController : MonoBehaviour {
 	 */
 	void Start () {
 		GameModel.Init ();
-		Application.LoadLevel ("main_menu");
+		Application.LoadLevel ("Main_menu");
 	}
 }
