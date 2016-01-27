@@ -23,6 +23,7 @@ public class SingleMenuController : MonoBehaviour {
 	UnityEngine.UI.Image imageCustom;
 	UnityEngine.UI.Image imageTutorial;
 
+
 	Sprite spriteNormal;
 	Sprite spriteSelect;
 
@@ -110,9 +111,12 @@ public class SingleMenuController : MonoBehaviour {
 	}
 
 	public void Campaign(){
+
+		//buttonCampaign.
 		imageCampaign.sprite = spriteSelect;
 		imageCustom.sprite = spriteNormal;
 		imageTutorial.sprite = spriteNormal;
+
 
 		campaign = true;
 		custom = false;

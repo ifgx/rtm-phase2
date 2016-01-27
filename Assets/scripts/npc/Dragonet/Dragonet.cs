@@ -45,7 +45,7 @@ public abstract class Dragonet : NPC {
 	{
 		Attack(target);
 		FollowPlayer(target);
-		if(SuccessiveBlocked >= 3)
+		if(SuccessiveBlocked >= 1) //increase to let the player free from strain
 		{
 			MoveToAttack();
 			SuccessiveBlocked = 0;

@@ -707,11 +707,11 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 471932, guid: 8d0138137ba52a64399ef5b5b1bee0c9, type: 2}
       propertyPath: m_LocalPosition.x
-      value: 32.913452
+      value: 32.9134521
       objectReference: {fileID: 0}
     - target: {fileID: 471932, guid: 8d0138137ba52a64399ef5b5b1bee0c9, type: 2}
       propertyPath: m_LocalPosition.y
-      value: 5.97
+      value: 5.96999979
       objectReference: {fileID: 0}
     - target: {fileID: 471932, guid: 8d0138137ba52a64399ef5b5b1bee0c9, type: 2}
       propertyPath: m_LocalPosition.z
@@ -751,7 +751,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 22490160, guid: 8d0138137ba52a64399ef5b5b1bee0c9, type: 2}
       propertyPath: m_SizeDelta.x
-      value: 438.7
+      value: 438.700012
       objectReference: {fileID: 0}
     - target: {fileID: 11467084, guid: 8d0138137ba52a64399ef5b5b1bee0c9, type: 2}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Mode
