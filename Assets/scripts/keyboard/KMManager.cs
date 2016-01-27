@@ -97,7 +97,7 @@ public class KMManager : MonoBehaviour {
 			
 			screenBoundX = cam.pixelWidth / screenXFactor * 0.7f;
 			screenBoundY = cam.pixelHeight / screenYFactor * 0.7f;
-			screenBoundYcenter = screenBoundY * 0.3f;
+			screenBoundYcenter = screenBoundY * 0.75f;
 			
 			fireballGO = Resources.Load ("prefabs/leapmotion/Fireball") as GameObject;
 			
