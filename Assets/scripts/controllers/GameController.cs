@@ -637,6 +637,7 @@ public class GameController : MonoBehaviour {
 	 * Return to the main menu scene
 	 */
 	public void ReturnToMainMenu() {
+		Time.timeScale = 1.0f;
 		Application.LoadLevel ("LoadingScene");
 	}
 
