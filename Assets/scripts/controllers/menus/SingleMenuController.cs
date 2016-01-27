@@ -81,6 +81,7 @@ public class SingleMenuController : MonoBehaviour {
 			LM = false;
 		}
 
+<<<<<<< HEAD
 		if((campaign && (HeroMenuController.BSlot1 || HeroMenuController.BSlot2 || HeroMenuController.BSlot3) && HeroMenuController.Name != "") ||
 			(custom && CustomMenuController.Song != "Empty") ||
 			tutorial){
@@ -88,6 +89,9 @@ public class SingleMenuController : MonoBehaviour {
 		} else {
 			buttonPlay.interactable = false;
 		}
+=======
+		//Debug.Log("Browser is on : "+CustomMenuController.LauncherBrowser);
+>>>>>>> 0c9c951f9bde06c5f0e9a8405704ef088a71f1aa
 
 		if(CustomMenuController.LauncherBrowser) {
 			buttonCampaign.interactable = false;
