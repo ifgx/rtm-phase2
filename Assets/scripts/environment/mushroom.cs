@@ -17,9 +17,11 @@ public class mushroom : MonoBehaviour, AudioProcessor.AudioCallbacks {
 	
 	// Update is called once per frame
 	void Update () {
-		if (processor.start) {
-			if (!initialized){
-				init();
+		if (processor != null) {
+			if (processor.start) {
+				if (!initialized) {
+					init ();
+				}
 			}
 		}
 		if (GameModel.HerosInGame [0].GetPosition ().z > transform.position.z)
@@ -50,6 +52,8 @@ public class mushroom : MonoBehaviour, AudioProcessor.AudioCallbacks {
 	}
 
 	void OnDestroy() {
-		processor.removeAudioCallback (this);
+		if (processor != null) {
+			processor.removeAudioCallback (this);
+		}
 	}
 }

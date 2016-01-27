@@ -18,11 +18,15 @@ public class MusicalLight : MonoBehaviour, AudioProcessor.AudioCallbacks {
 	}
 	// Update is called once per frame
 	void Update () {
-		if (processor.start) {
-			if(!initialized){
-				init();
+		if (processor != null) {
+			if (processor.start) {
+				if (!initialized) {
+					init ();
+				}
 			}
 		}
+		if (GameModel.HerosInGame [0].GetPosition ().z > transform.position.z)
+			Destroy (this.gameObject);
 	}
 
 	public void onOnbeatDetected()
@@ -32,5 +36,11 @@ public class MusicalLight : MonoBehaviour, AudioProcessor.AudioCallbacks {
 	}
 	public void onSpectrum(float[] spectrum)
 	{
+	}
+
+	void OnDestroy() {
+		if (processor != null) {
+			processor.removeAudioCallback (this);
+		}
 	}
 }
