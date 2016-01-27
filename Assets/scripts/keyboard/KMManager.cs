@@ -171,7 +171,7 @@ public class KMManager : MonoBehaviour {
 		} else if (Input.GetKey (KeyCode.D) && leftHand.transform.localPosition.x < screenBoundX) {
 			leftHand.transform.Translate(movSpeed*LEFT*Time.deltaTime);
 		}
-<<<<<<< HEAD
+/*<<<<<<< HEAD
 		
 		
 		
@@ -182,7 +182,7 @@ public class KMManager : MonoBehaviour {
 			//NOT A GOOD WAY TO DO MOUSE CLAMPING BUT AT LEAST IT WORKS
 			
 			
-=======
+=======*/
 
 
 
@@ -192,7 +192,7 @@ public class KMManager : MonoBehaviour {
 		
 		
 		
->>>>>>> f17bbd7f6cedb82988adc926022f4a48dfb1afca
+//>>>>>>> f17bbd7f6cedb82988adc926022f4a48dfb1afca
 			v3.z = 2;
 			v3 = cam.ScreenToWorldPoint (v3);
 			if (v3.x > 1 || !GameModel.MultiplayerModeOn) {
