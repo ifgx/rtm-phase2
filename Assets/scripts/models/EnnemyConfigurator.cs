@@ -82,7 +82,7 @@ public class EnnemyConfigurator : MonoBehaviour {
 	public static string basicLancerAttackType = "CaC";
 	public static float basicLancerMovementSpeed = 5.0f;
 	public static float basicLancerAttackSpeed = 20.0f;
-	public static float basicLancerXpGain = 5.0f;
+	public static float basicLancerXpGain = 500.0f;
 	public static float basicLancerHp = 30.0f;
 	public static float basicLancerDamage = 40.0f;
 	public static float basicLancerAggroDistance = 30.0f;
