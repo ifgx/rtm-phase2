@@ -554,7 +554,7 @@ public class GameController : MonoBehaviour {
 			
 			hudMaster2.setLevel (HudMaster.HudType.Life, currentHealthPercent);
 			hudMaster2.setLevel (HudMaster.HudType.Special, currentPowerPercent);
-			hudMaster2.updateXP (hero.XpQuantity/hero.XpQuantityNextLevel*100.0f, (int)hero.Level + 1);
+			hudMaster2.updateXP (hero.XpQuantity/hero.XpQuantityNextLevel*100.0f, (int)hero.Level);
 		}
 
 		//Debug.Log (GameModel.NPCsInGame.Count);
@@ -566,7 +566,7 @@ public class GameController : MonoBehaviour {
 			}
 		}
 
-		if(currentHealthPercent <= 0)
+			if(GameModel.HerosInGame[0].HealthPoint <= 0 || (GameModel.MultiplayerModeOn && GameModel.HerosInGame[1].HealthPoint <= 0))
 		{
 			Time.timeScale = 0;
 			//Debug.Log("you are dead");
