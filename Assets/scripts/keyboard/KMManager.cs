@@ -45,7 +45,7 @@ public class KMManager : MonoBehaviour {
 	float screenYFactor = 640;
 	float screenBoundYcenter;
 	
-	float movSpeed = 0.05f;
+	float movSpeed = 4f;
 	
 	
 	Vector3 UP;
@@ -161,16 +161,17 @@ public class KMManager : MonoBehaviour {
 	
 	private void updatePosition() {
 		if (Input.GetKey (KeyCode.Z) && leftHand.transform.localPosition.y < screenBoundY+screenBoundYcenter) {
-			leftHand.transform.Translate(movSpeed*UP);
+			leftHand.transform.Translate(movSpeed*UP*Time.deltaTime);
 		} else if (Input.GetKey (KeyCode.S) && leftHand.transform.localPosition.y > -screenBoundY+screenBoundYcenter) {
-			leftHand.transform.Translate(movSpeed*DOWN);
+			leftHand.transform.Translate(movSpeed*DOWN*Time.deltaTime);
 		}
 		//Debug.Log (leftHand.transform.position.x + " | " + screenBoundX);
 		if (Input.GetKey (KeyCode.Q) && leftHand.transform.localPosition.x > -screenBoundX) {
-			leftHand.transform.Translate(movSpeed*RIGHT);
+			leftHand.transform.Translate(movSpeed*RIGHT*Time.deltaTime);
 		} else if (Input.GetKey (KeyCode.D) && leftHand.transform.localPosition.x < screenBoundX) {
-			leftHand.transform.Translate(movSpeed*LEFT);
+			leftHand.transform.Translate(movSpeed*LEFT*Time.deltaTime);
 		}
+<<<<<<< HEAD
 		
 		
 		
@@ -181,6 +182,17 @@ public class KMManager : MonoBehaviour {
 			//NOT A GOOD WAY TO DO MOUSE CLAMPING BUT AT LEAST IT WORKS
 			
 			
+=======
+
+
+
+		if (swordMov == 0 && staffMov == 0 && Time.timeScale > 0) {
+			Vector3 lastPosition = rightHand.transform.position;
+			Vector3 v3 = Input.mousePosition;
+		
+		
+		
+>>>>>>> f17bbd7f6cedb82988adc926022f4a48dfb1afca
 			v3.z = 2;
 			v3 = cam.ScreenToWorldPoint (v3);
 			if (v3.x > 1 || !GameModel.MultiplayerModeOn) {
@@ -197,7 +209,7 @@ public class KMManager : MonoBehaviour {
 	private void WarriorUpdate(){
 		
 		
-		if (Input.GetMouseButton (0) && swordMov == 0) {
+		if (Input.GetMouseButton (0) && swordMov == 0 && Time.timeScale > 0) {
 			//Debug.Log("mouse button down");
 			swordMov = 1;
 		}
@@ -256,7 +268,7 @@ public class KMManager : MonoBehaviour {
 		
 		
 		
-		if (Input.GetMouseButton (0) && fireball == null && hero.PowerQuantity > HeroConfigurator.wizardAttackCost) {
+		if (Input.GetMouseButton (0) && fireball == null && hero.PowerQuantity > HeroConfigurator.wizardAttackCost && Time.timeScale > 0) {
 			//Debug.Log ("mouse button down");
 			
 			fireball = Instantiate (fireballGO);
@@ -305,7 +317,7 @@ public class KMManager : MonoBehaviour {
 		((Monk)hero).PrayerMode = Input.GetKey (KeyCode.Space);
 
 
-		if (Input.GetMouseButton (0) && staffMov == 0) {
+		if (Input.GetMouseButton (0) && staffMov == 0 && Time.timeScale > 0) {
 			//Debug.Log("mouse button down");
 			staffMov = 1;
 		}

@@ -1,1 +1,5 @@
+<<<<<<< HEAD
 {"slots":[ {"name":"Aragorn", "score":"0", "class":"Warrior", "xp":"0"}, {"name":"Player 1", "score":"1", "class":"Wizard", "xp":"0"} ]}
+=======
+{"slots":[ {"name":"Player 1", "score":"0", "class":"Monk", "xp":"0"}, {"name":"Player 1", "score":"1", "class":"Wizard", "xp":"0"} ]}
+>>>>>>> f17bbd7f6cedb82988adc926022f4a48dfb1afca
