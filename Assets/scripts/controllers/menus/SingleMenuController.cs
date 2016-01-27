@@ -81,7 +81,7 @@ public class SingleMenuController : MonoBehaviour {
 			LM = false;
 		}
 
-		Debug.Log("Browser is on : "+CustomMenuController.LauncherBrowser);
+		//Debug.Log("Browser is on : "+CustomMenuController.LauncherBrowser);
 
 		if(CustomMenuController.LauncherBrowser) {
 			buttonCampaign.interactable = false;

@@ -22,15 +22,10 @@ public class HudMaster : MonoBehaviour {
 	public GameObject hudShield;
 	public GameObject hudClassText;
 
-	private bool shieldActivated;
-
-	private float timerShield = 0.0f;
-	private float maxTimerShield = 0.5f;
 
 	private Hero hero;
 
-	//private float groundOnCam;
-
+	
 	public void setHero(Hero hero) {
 		this.hero = hero;
 	}
@@ -51,20 +46,7 @@ public class HudMaster : MonoBehaviour {
 			
 			hudSpecial.GetComponent<Image>().overrideSprite = spr;
 		}
-
-
-
-		shieldActivated = false;
-
-
-		//groundOnCam = Camera.main.WorldToViewportPoint(new Vector3 (0.0f, 0.0f, GameModel.HerosInGame[0].GetPosition().z + 3.0f)).y*this.gameObject.GetComponent<RectTransform>().sizeDelta.y;
-
-    }
-	
-	
-	/**
-	 * Update is called once per frame
-	 */
+    }	
 
 
 	/**
@@ -91,7 +73,7 @@ public class HudMaster : MonoBehaviour {
         {
             //hudTarget.transform.localScale = new Vector3(1, _levelPercent/100, 1);
 			hudTarget.GetComponent<Image>().fillAmount =  _levelPercent/100f;
-			//Debug.Log("hudtarget : "+hudTarget+" amount:"+_levelPercent/100);
+			Debug.Log("hudtarget : "+hudTarget+" amount:"+_levelPercent/100+" (level percent= "+_levelPercent+")");
         }
     }
 
@@ -108,66 +90,9 @@ public class HudMaster : MonoBehaviour {
 		hudXPBar.GetComponent<Image>().fillAmount =  xpPercent / 100.0f;
 		
 	}
-
-	/**
-	 * Getter Setter for the little shield to activate
-	 */
-	public bool ShieldActivated {
-		get {
-			return this.shieldActivated;
-		}
-		set {
-			Vector3 vec = new Vector3(Random.Range(-2.0F, 2.0F), 1.50f, GameModel.HerosInGame[0].GetPosition().z + 3.0f);
-			Debug.Log("random : " + vec );
-			WorldToShieldPosition( vec );
-			this.shieldActivated = value;
-			hudShield.SetActive(value);
-			timerShield = 0.0f;
-		
-		}
-	}
-
 	public void setRenderCamera(Camera cam) {
 		Canvas can = GetComponent<Canvas> ();
 		can.worldCamera = cam;
-	}
-	
-	/**
-	 * Sets shield position to the screen in function of a world position
-	 * @param Vector3 worldPosition
-	 */
-	public void WorldToShieldPosition (Vector3 worldPosition) {
-		//hudShield.transform. position = Camera.main.WorldToScreenPoint (worldPosition);
-		//Debug.Log ("screen : " + hudShield.transform.position);
-		//Vector3 pos = hudShield.transform.position;
-		//pos.y = 0.0f;
-
-
-//		//this is the ui element
-//		RectTransform UI_Element = hudShield.GetComponent<RectTransform>();
-//		
-//		//first you need the RectTransform component of your canvas
-//		RectTransform CanvasRect=this.gameObject.GetComponent<RectTransform>();
-//		
-//		//then you calculate the position of the UI element
-//		//0,0 for the canvas is at the center of the screen, whereas WorldToViewPortPoint treats the lower left corner as 0,0. Because of this, you need to subtract the height / width of the canvas * 0.5 to get the correct position.
-//		
-//		Vector2 ViewportPosition=Camera.main.WorldToViewportPoint(worldPosition);
-//		Vector2 WorldObject_ScreenPosition=new Vector2(
-//			(ViewportPosition.x*CanvasRect.sizeDelta.x),
-//			(ViewportPosition.y*CanvasRect.sizeDelta.y + groundOnCam));
-//		 ////-(CanvasRect.sizeDelta.x*0.5f))
-//		 /// //-(CanvasRect.sizeDelta.y*0.5f)));
-//		//now you can set the position of the ui element
-//		Debug.Log (WorldObject_ScreenPosition);
-//		UI_Element.anchoredPosition=WorldObject_ScreenPosition;
-
-
-		Debug.Log (RectTransformUtility.WorldToScreenPoint (Camera.main, worldPosition));
-		Vector2 pos = hudShield.GetComponent<RectTransform> ().anchoredPosition;
-		pos = RectTransformUtility.WorldToScreenPoint (Camera.main, worldPosition);
-		//pos.y -= -2f;
-		hudShield.GetComponent<RectTransform> ().anchoredPosition = pos;
 	}
 
 

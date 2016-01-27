@@ -760,7 +760,7 @@ public abstract class Hero : Unit {
 			NPC ennemy = hit.GetComponentInParent<NPC>();
 			if(!isInvincible)
 			{
-				Debug.LogWarning("BOOOM");
+				//Debug.LogWarning("BOOOM");
                 
                 LostHP(ennemy.Damage);
 			}
@@ -770,7 +770,7 @@ public abstract class Hero : Unit {
 			NPC ennemy = hit.GetComponentInParent<NPC>();
 			if(!isInvincible)
 			{
-				Debug.LogWarning("BOOOM");
+				//Debug.LogWarning("BOOOM");
 				LostHP(ennemy.Damage);
 			}
 			Destroy(hit.gameObject);	
