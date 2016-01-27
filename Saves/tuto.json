@@ -10,7 +10,7 @@
 			"name":"Dragonet",
 			"type":"BasicDragonet",
 			"title":"Dragonnets",
-			"desc":"Dragonets are identified small flying objects who tends to stay in front of you. This way you can not see the other ennemies. They inflict damages on you with their fire-breath until you kill them. Moreover, they will regularly switch to another position, trying to get around your defense.",
+			"desc":"Dragonets inflict damages on you with their fire-breath until you kill them. Moreover, they will regularly switch to another position, trying to get around your defense.",
 			"attack":"Range attack"
 		},{
 			"name":"Cannon",
@@ -28,17 +28,17 @@
 			"name":"Wall",
 			"type":"Wall",
 			"title":"Walls",
-			"desc":"They do not attack you as they can not move. However, they protect a canon. You have to destroy the wall in order to fight back the canon.",
+			"desc":"They do not attack you and can not move. However, they protect a canon. You have to destroy the wall in order to fight back the canon.",
 			"attack":"-"
 		},{
 			"name":"Fire",
-			"type":"FireDragonet",
+			"type":"fire",
 			"title":"Fire ennemies",
 			"desc":"These enemies are stronger than their basic version. They inflict more damages on you so be careful when you fight them.",
 			"attack":"-"
 		},{
 			"name":"Ice",
-			"type":"IceDragonet",
+			"type":"ice",
 			"title":"Ice ennemies",
 			"desc":"They are the stronger of your enemies. Their attacks are both faster and more powerful than their fire version.",
 			"attack":""
@@ -64,13 +64,13 @@
 			"name":"warriorAttackLeap",
 			"type":"weaponWarrior",
 			"title":"Warrior's attack",
-			"desc":"You are a warrior so you have a sword, a beautiful one. Move your right hand as you were wielding a sword, trying to cut your enemies. Do not try to do a thrusting attack as your hands may not be detected anymore by the Leap Motion, or you could hit your screen.",
+			"desc":"The warrior has a sword. Move your right hand as you were wielding a sword, trying to cut your enemies. Do not try to do a thrusting attack as your hands may not be detected anymore by the Leap Motion.",
 			"attack":"-"
 		},{
 			"name":"warriorDefenceLeap",
 			"type":"shieldWarrior",
 			"title":"Warrior's defence",
-			"desc":"The warrior has got a shield. It follows you left hand movements, so you just need to move your left hand right or left and up or down to place the shield on the path of your enemies’ attacks.",
+			"desc":"The warrior has a shield. It follows your left hand movements, so you just need to move it on the point of impact of your enemies’ attacks to be protected.",
 			"attack":"-"
 		},{
 			"name":"wizardAttackLeap",
@@ -82,7 +82,7 @@
 			"name":"wizardDefenceLeap",
 			"type":"shieldWizard",
 			"title":"Wizard's defence",
-			"desc":"To protect himself the wizard can use a mana shield which he can place wherever he wants. This spell has a 3 seconds cooldown. To do so, start by closing your left hand to load the shield, move it where you need it and finally re-open your hand to place the shield there.",
+			"desc":"The wizard has a mana shield which can be placed wherever he wants. This spell has a 3 seconds cooldown. To do so, start by closing your left hand to load the shield and finally re-open your hand to place the shield where you need it.",
 			"attack":"-"
 		},{
 			"name":"monkAttackLeap",
@@ -94,7 +94,7 @@
 			"name":"monkDefenceLeap",
 			"type":"shieldMonk",
 			"title":"Monk's defence",
-			"desc":"The monk can not protect himself but is able to meditate. This allows him to rapidly regain health, thanks to his mana. This is done by bringing your hand closer than usual, side by side.",
+			"desc":"The monk can’t protect himself but is able to heal himself, using his concentration. This is done by bringing your hands side by side.",
 			"attack":"-"
 		},{
 			"name":"warriorAttackKeyboard",
@@ -106,7 +106,7 @@
 			"name":"warriorDefenceKeyboard",
 			"type":"shieldWarrior",
 			"title":"Warrior's defence",
-			"desc":"The Z, Q, S, D keys make your shield move where you need it to ward. It automatically blocks the enemy attack if well placed. You can also press ‘space’ to push it forward and it will come back to its normal place when the key is released.",
+			"desc":"Use the mouse to move your sword next to the enemy. Left click will let you swing your sword so you can kill it.",
 			"attack":"-"
 		},{
 			"name":"wizardAttackKeyboard",
@@ -130,7 +130,7 @@
 			"name":"monkDefenceKeyboard",
 			"type":"shieldMonk",
 			"title":"Monk's defence",
-			"desc":"As a monk you can not defend yourself. However, you are able to meditate in order to regain health, using mana. To do so, use your mouse and the Z, Q, S, D to bring closer both hands, side by side.",
+			"desc":"As a monk you can’t defend yourself but you can medidate to heal yourself. To do so, use your mouse and the Z, Q, S, D to bring both hands side by side.",
 			"attack":"-"
 		},{
 			"name":"onPop",
@@ -139,16 +139,22 @@
 			"desc":"In Rush The Music you are a hero trying to reach the castle where the princess Khimaira is imprisoned. However, your path is ambushed by numerous enemies and hazards. Will you manage to survive and reach the tower ?",
 			"attack":"-"
 		},{
-			"name":"leapMotion",
+			"name":"Leap",
 			"type":"leap",
 			"title":"Leap Motion",
 			"desc":"The Leap Motion allows you to control the game using your hands. To do so you need to place your hands, palm down, around 15cm above the device. Space your hands about 20 cm to be sure the Leap Motion controller differentiate them. Also avoid going behind the leap, towards your screen.",
 			"attack":"-"
 		},{
-			"name":"keyboard",
+			"name":"Keyboard",
 			"type":"keyboard",
 			"title":"Keyboard + Mouse",
-			"desc":"While in game you can pause the game using the key ‘p’. From this menu you will be able to manage your game or to go back to the main menu. ",
+			"desc":"While in game you can pause the game using the key ‘p’. From this menu you will be able to manage your game or to go back to the main menu.",
+			"attack":"-"
+		},{
+			"name":"experience",
+			"type":"experience",
+			"title":"Experience",
+			"desc":"When killing a ennemy you’ll earn some experience. You can see your progress in the gauge at the bottom of your screen. When you level up, your hero become tougher and gain some health and power.",
 			"attack":"-"
 		}
 	]
