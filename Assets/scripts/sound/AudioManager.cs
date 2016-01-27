@@ -84,7 +84,7 @@ public class AudioManager : MonoBehaviour, AudioProcessor.AudioCallbacks
     }
     public void playHeroShieldSound()
     {
-        noiseSource.volume = 0.5f;
+        noiseSource.volume = 0.6f;
         noiseSource.PlayOneShot(heroShield);
     }
     public void playHeroSwordSound()
@@ -109,6 +109,12 @@ public class AudioManager : MonoBehaviour, AudioProcessor.AudioCallbacks
             noiseSource.PlayOneShot(heal);
         }
     }
+
+	public void stopHealSound()
+	{
+			noiseSource.Stop();
+	}
+
     public void onOnbeatDetected()
     {
 
@@ -128,6 +134,7 @@ public class AudioManager : MonoBehaviour, AudioProcessor.AudioCallbacks
     public void Pause(){
 		audioSource.Pause ();
         audioSourceHB.Pause();
+		noiseSource.Pause();
     }
 	public void Play(){
         if (!audioSourceHB.isPlaying)

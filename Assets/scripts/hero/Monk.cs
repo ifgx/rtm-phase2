@@ -126,6 +126,9 @@ public class Monk : Hero {
 		}	/// REND 5 PV TOUTE LES 5 SECONDES
 	}
 
+	/**
+	 * if setting to false, stop the sound
+	 **/
 	public bool PrayerMode{
 		get{
 			return prayerMode;
@@ -133,6 +136,12 @@ public class Monk : Hero {
 		set{
 			//Debug.Log ("Setter PrayerMode="+value);
 			prayerMode = value;
+
+			if (prayerMode == false)
+			{
+				audioManager.stopHealSound();
+			}
+
 		}
 	}
 
