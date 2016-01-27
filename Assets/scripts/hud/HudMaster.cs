@@ -65,6 +65,11 @@ public class HudMaster : MonoBehaviour {
         if (_hudType == HudType.Life)
         {
             hudTarget = hudLife;
+			//to enable animation when low hp
+			//1+invertedPercent because its relative to life stack
+			if (hudLife != null)
+				hudLife.GetComponent<Animator>().SetFloat("life_level", 2-(_levelPercent/100f));
+
         }
         else if (_hudType == HudType.Special)
         {
@@ -78,6 +83,8 @@ public class HudMaster : MonoBehaviour {
             //hudTarget.transform.localScale = new Vector3(1, _levelPercent/100, 1);
 			hudTarget.GetComponent<Image>().fillAmount =  _levelPercent/100f;
 			//Debug.Log("hudtarget : "+hudTarget+" amount:"+_levelPercent/100+" (level percent= "+_levelPercent+")");
+
+
         }
     }
 
