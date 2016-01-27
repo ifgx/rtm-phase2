@@ -50,10 +50,12 @@ public class SandboxController : MonoBehaviour {
 	
 	private HandSide handSide;
 
-	/**
+    private AudioManager audioManager;
+
+    /**
 	 * Load all resources
 	 */
-	void Awake(){
+    void Awake(){
 		terrain = Resources.Load ("prefabs/Terrain1") as GameObject;
 		
 		hud = Resources.Load ("prefabs/hud/hudPrefab") as GameObject;
@@ -89,8 +91,11 @@ public class SandboxController : MonoBehaviour {
 
 		createHero ("Warrior");
 
-		//If leap is not connected, Pause game and show warning message
-		if ( !leapControl.IsConnected())
+        audioManager = GameObject.Find("Main Camera").GetComponent<AudioManager>();
+        audioManager.Init();
+
+        //If leap is not connected, Pause game and show warning message
+        if ( !leapControl.IsConnected())
 		{
 			//pause()
 			Time.timeScale = 0.0f;

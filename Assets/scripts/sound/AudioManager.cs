@@ -16,6 +16,8 @@ public class AudioManager : MonoBehaviour, AudioProcessor.AudioCallbacks
     AudioClip heroShield;
     AudioClip heroSword;
 	AudioClip heroWood1,heroWood2;
+    AudioClip potion;
+    AudioClip heal;
 
     private string musicName;
 
@@ -31,17 +33,20 @@ public class AudioManager : MonoBehaviour, AudioProcessor.AudioCallbacks
 	public void Init(){
         noiseSource = gameObject.AddComponent<AudioSource>();
         heroCoup = Resources.Load("sounds/aie") as AudioClip;
-        heroShield = Resources.Load("sounds/aie") as AudioClip;
+        //heroShield = Resources.Load("sounds/aie") as AudioClip;
         heroSword = Resources.Load("sounds/epee") as AudioClip;
         fireball = Resources.Load("sounds/fireball") as AudioClip;
 		heroWood1 = Resources.Load("sounds/coupBaton") as AudioClip;
 		heroWood2 = Resources.Load("sounds/impactbaton") as AudioClip;
+        potion = Resources.Load("sounds/potion") as AudioClip;
+        heal = Resources.Load("sounds/priere") as AudioClip;
+
         if (musicName != null) {
+
             audioSourceHB = gameObject.AddComponent<AudioSource>();
             audioSourceHB.clip = Resources.Load("Musics/Hearbeat") as AudioClip;
             audioSourceHB.volume = 0;
             audioSourceHB.Play();
-
             //audioSource = GetComponent<AudioSource>();
             audioSource = GameObject.Find("Main Camera").GetComponent<AudioSource>();
             
@@ -57,10 +62,12 @@ public class AudioManager : MonoBehaviour, AudioProcessor.AudioCallbacks
             audioSource.clip = clip;
             
             AudioProcessor processor = FindObjectOfType<AudioProcessor>();
-            processor.init();
-            processor.start = true;
-            processor.addAudioCallback(this);
-
+            if (processor != null)
+            {
+                processor.init();
+                processor.start = true;
+                processor.addAudioCallback(this);
+            }
 			
 			StartCoroutine (UpdateWaveForm ());
 		}
@@ -86,11 +93,22 @@ public class AudioManager : MonoBehaviour, AudioProcessor.AudioCallbacks
         noiseSource.PlayOneShot(heroSword);
     }
 	public void playHeroWoodWeaponSound(){
-		noiseSource.volume = 1.0f;
-		//noiseSource.PlayOneShot(heroWood1);
-
+		noiseSource.volume = 0.6f;
 		noiseSource.PlayOneShot(heroWood2);
 	}
+    public void playPotionSound()
+    {
+        noiseSource.volume = 1.0f;
+        noiseSource.PlayOneShot(potion);
+    }
+    public void playHealSound()
+    {
+        if (!noiseSource.isPlaying)
+        {
+            noiseSource.volume = 0.6f;
+            noiseSource.PlayOneShot(heal);
+        }
+    }
     public void onOnbeatDetected()
     {
 

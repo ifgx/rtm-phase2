@@ -70,9 +70,12 @@ public class Monk : Hero {
 				//Debug.Log("Power Before Praying:"+PowerQuantity);
 				//Debug.Log("Consommation en cours de prière:"+powerHealConsumption);
 				PowerQuantity -= powerHealConsumption;
-				//Debug.Log("Power After Praying:"+PowerQuantity);
-				if(HealthPoint + hpHealed < maxHp){
-					HealthPoint += hpHealed;
+                //Debug.Log("Power After Praying:"+PowerQuantity);
+                audioManager = GameObject.Find("Main Camera").GetComponent<AudioManager>();
+                audioManager.playHealSound();
+                if (HealthPoint + hpHealed < maxHp){
+                    
+                    HealthPoint += hpHealed;
 				}
 				else
 				{
