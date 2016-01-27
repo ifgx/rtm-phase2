@@ -24,16 +24,16 @@ public class HeroConfigurator : MonoBehaviour {
 	public static float monkXpQuantity = 0.0f;
 	public static float monkBlockingPercent = 50.0f;
 	public static float monkPowerQuantity = 1000.0f;
-	public static float monkHpRefresh = 40.0f;
-	public static float monkPowerRefresh = 200.0f;
+	public static float monkHpRefresh = 20.0f;
+	public static float monkPowerRefresh = 100.0f;
 	public static float monkHp = 1100.0f;
 	public static float monkDamage = 8.0f;
 	public static float monkMovementSpeed = 3.0f;
 	public static float monkRange = 5.0f;
 
 	public static float monkSpeedHeal = 1.0f;
-	public static float monkPowerHealConsumption = 50.0f;
-	public static float monkHpHealed = 100.0f;
+	public static float monkPowerHealConsumption = 70.0f;
+	public static float monkHpHealed = 60.0f;
 
 	// WIZARD
 	public static string wizardAttackType = "Distance";

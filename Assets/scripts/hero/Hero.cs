@@ -26,14 +26,14 @@ public abstract class Hero : Unit {
 	protected float lastCapacityUsed;
 	public bool runBlocked;
 	protected float lastRegenPower = 0.0f;
-	public bool isInvicible = false;
-	protected float invicibleTime = 0.0f;
+	public bool isInvincible = false;
+	protected float invincibleTime = 0.0f;
+    protected AudioManager audioManager;
 
+    // Use this for initialization
+    void Start () {
 
-	// Use this for initialization
-	void Start () {
-	
-	}
+    }
 	
 	// Update is called once per frame
 	protected void Update () {
@@ -47,11 +47,11 @@ public abstract class Hero : Unit {
 			Run(Time.deltaTime);
 		}
 
-		if(isInvicible)
+		if(isInvincible)
 		{
-			if(invicibleTime < Time.time)
+			if(invincibleTime < Time.time)
 			{
-				isInvicible = false;
+				unmakeInvincible();
 			}
 		}
 	}
@@ -147,7 +147,8 @@ public abstract class Hero : Unit {
 		specialCapacity = false;
 		runBlocked = false;
 		defending = false;
-	}
+        
+    }
 
 	/**
 	* FR:
@@ -196,6 +197,25 @@ public abstract class Hero : Unit {
 	public virtual void HasKilled(float XP)
 	{
 		GiveXP(XP);
+	}
+
+	/**
+	* FR:
+	* Getter/Setter de xpQuantityToDisplay
+	* EN:
+	* Getter/Setter of xpQuantityToDisplay
+	* @return 
+	* FR:
+	*	Retourne un float pour le getter et void pour le setter
+	* EN:
+	*	Return an float for the getter and void for the setter
+	* @version 1.0
+	**/
+	public float XpQuantityToDisplay (){
+			float xpQuantityToDisplay;
+			xpQuantityToDisplay = XpQuantity-XpQuantityLastLevel;
+			xpQuantityToDisplay /= xpQuantityNextLevel;
+			return xpQuantityToDisplay;
 	}
 
 	/**
@@ -455,6 +475,30 @@ public abstract class Hero : Unit {
 
 	/**
 	* FR:
+	* Permet de recharger l'énergie d'un héro
+	* EN:
+	* Give energy to a hero
+	* @return 
+	* FR:
+	*	Retourne un float
+	* EN:
+	*	Return an float
+	* @version 1.0
+	**/
+	public float Energize(float energy){
+		if(powerQuantity + energy < maxPowerQuantity)
+		{
+			powerQuantity += energy;	
+		}
+		else
+		{
+			powerQuantity = maxPowerQuantity;
+		}
+		return powerQuantity;
+	}
+
+	/**
+	* FR:
 	* Getter/Setter de hpRefresh
 	* EN:
 	* Getter/Setter of hpRefresh
@@ -521,6 +565,12 @@ public abstract class Hero : Unit {
 		}
 
 		base.LostHP(damageToLost);
+		if(damageToLost > 0)
+		{
+            audioManager = GameObject.Find("Main Camera").GetComponent<AudioManager>();
+            audioManager.playHeroHurtSound();
+            PlayBloodAnimation();
+		}
 	}
 
 	/**
@@ -533,25 +583,46 @@ public abstract class Hero : Unit {
 	**/
 	public void checkLevel()
 	{
+		if(level < 1)
+		{
+			level = 1;
+			
+		}
 		if(xpQuantity > xpQuantityNextLevel)
 		{
-			level += 1;
-			xpQuantityNextLevel = 100 * Mathf.Pow(2,level);
-			xpQuantityLastLevel = 100 * Mathf.Pow(2,level-1);
+			while(xpQuantity > xpQuantityNextLevel)
+			{
+				xpQuantityNextLevel = levelUp();
+			}
 		}
+	}
 
+	public float levelUp()
+	{
+		level += 1;
+		xpQuantityLastLevel = xpQuantityNextLevel;
 		if(xpQuantity < xpQuantityLastLevel)
 		{
-			if(level > 1)
+			xpQuantity = xpQuantityLastLevel;
+		}
+		xpQuantityNextLevel = 100 * Mathf.Pow(2,level);
+		adaptStatAccordingToLevel();
+		return xpQuantityNextLevel;
+	}
+
+	public float levelDown()
+	{
+		if(level -1 > 1)
+		{
+			level -= 1;
+			xpQuantityNextLevel = xpQuantityLastLevel;
+			xpQuantityLastLevel = 100 * Mathf.Pow(2,level-1);
+			if(xpQuantity > xpQuantityLastLevel)
 			{
-				level -= 1;
-				xpQuantityNextLevel = 100 * Mathf.Pow(2,level-1);
-			}
-			else
-			{
-				xpQuantityLastLevel = 0;
+				xpQuantity = xpQuantityLastLevel+1;
 			}
 		}
+		return xpQuantityNextLevel;
 	}
 
 	/**
@@ -687,23 +758,20 @@ public abstract class Hero : Unit {
 		if(hit.gameObject.tag == "ennemy_weapon")
 		{
 			NPC ennemy = hit.GetComponentInParent<NPC>();
-			if (!Defending && !isInvicible){
-				LostHP(ennemy.Damage);
-				PlayBloodAnimation();
-				/*if (!Defending){
-					PlayBloodAnimation();
-				}*/
+			if(!isInvincible)
+			{
+				//Debug.LogWarning("BOOOM");
+                
+                LostHP(ennemy.Damage);
 			}
 		}
 		else if(hit.gameObject.tag == "ennemy_projectile")
 		{
 			NPC ennemy = hit.GetComponentInParent<NPC>();
-			if (!Defending && !isInvicible){
+			if(!isInvincible)
+			{
+				//Debug.LogWarning("BOOOM");
 				LostHP(ennemy.Damage);
-				PlayBloodAnimation();
-				/*if (!Defending){
-					PlayBloodAnimation();
-				}*/
 			}
 			Destroy(hit.gameObject);	
 		}
@@ -744,10 +812,15 @@ public abstract class Hero : Unit {
 	* @return Return void
 	* @version 1.0
 	**/
-	public void makeInvicible(float time)
+	public void makeInvincible(float time)
 	{
-		invicibleTime = Time.time + time;
-		isInvicible = true;
+		invincibleTime = Time.time + time;
+		isInvincible = true;
+	}
+
+	public void unmakeInvincible()
+	{
+		isInvincible = false;
 	}
 
 	/**
@@ -774,5 +847,37 @@ public abstract class Hero : Unit {
 	public virtual void PostAttack()
 	{
 		
+	}
+
+	/**
+	 * @author Baptiste Valthier
+	 * Instantiate the HUD prefab object to the camera
+	 * hudPrefab : gameObject of loaded resource
+	 * timeToLive : time in seconds before destructing the object. Negative values mean infinite time (no destruction).
+	 * loopMode : is the animation looping or not? (default is not)
+	 * @return : the instanciated object. (for exemple if you need to manually destroy it later on)
+	 **/
+	public GameObject attachHudPrefab(GameObject hudPrefab, int timeToLive = -1, bool loopMode = false)
+	{
+		GameObject myHudPrefab = Instantiate(hudPrefab, new Vector3(this.GetPosition().x, 0, this.GetPosition().z -0.6f), Quaternion.identity) as GameObject;
+		myHudPrefab.transform.parent = this.transform;
+
+		if (loopMode)
+		{
+			ParticleSystem[] particleSystems = myHudPrefab.GetComponentsInChildren<ParticleSystem>();
+			
+			foreach( ParticleSystem ps in particleSystems)
+			{
+				ps.loop = true;
+				Debug.Log ("foreach of "+ps);
+			}
+		}
+
+		if (timeToLive > 0)
+		{
+			Destroy(myHudPrefab, timeToLive);
+		}
+
+		return myHudPrefab;
 	}
 }

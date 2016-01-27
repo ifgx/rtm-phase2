@@ -39,7 +39,7 @@ public class Warrior : Hero {
 			HeroConfigurator.warriorDamage,
 			HeroConfigurator.warriorMovementSpeed,
 			"cac", 
-			"anonymous"){
+			"Aragorn"){
 		PowerQuantity = 0;
 	}
 
@@ -48,14 +48,10 @@ public class Warrior : Hero {
 	**/
 	public override void adaptStatAccordingToLevel()
 	{
-		if(level > 6)
+		if(level > 5)
 		{
 			SpecialCapacityUnlocked = true;
 			LastCapacityUsed = Time.time;
-		}
-		else if(level > 5)
-		{
-			HpRefresh +=1;
 		}
 		else if(level > 4)
 		{
@@ -63,9 +59,13 @@ public class Warrior : Hero {
 		}
 		else if(level > 3)
 		{
-			Damage *= 1.1f;
+			HpRefresh +=1;
 		}
 		else if(level > 2)
+		{
+			Damage *= 1.1f;
+		}
+		else if(level > 1)
 		{
 			MaxHealthPoint *= 1.1f;
 		}
@@ -118,20 +118,18 @@ public class Warrior : Hero {
 	**/
 	public override void SpecialCapacitySpell()
 	{
-		if(LastCapacityUsed + specialCapacityCooldown < Time.time) // Si le cooldown est passé
+
+		if(specialCapacity && LastCapacityUsed + specialCapacityTimer < Time.time)
 		{
-			if(LastCapacityUsed + specialCapacityTimer < Time.time ) // Si le temps timer est passé on met a off
-			{
-				specialCapacity = false;
-			}
-			else													// Sinon on est en cours de spéCapacity
-			{
-				if(!specialCapacity)								// Si la capacité n'est pas encore déclenché on l'enclenché et la time
-				{
-					specialCapacity = true;
-					LastCapacityUsed = Time.time;
-				}
-			}			
+			specialCapacity = false;
+			unmakeInvincible();
+		}
+
+		if(!specialCapacity && LastCapacityUsed + specialCapacityCooldown < Time.time) // Si le cooldown est passé
+		{
+			specialCapacity = true;
+			makeInvincible(specialCapacityTimer);
+			LastCapacityUsed = Time.time;		
 		}
 	}
 

@@ -228,6 +228,30 @@ public abstract class Unit : MonoBehaviour {
 
 	/**
 	* FR:
+	* Permet de soigner une unité
+	* EN:
+	* Heal the Unit
+	* @return 
+	* FR:
+	*	Retourne un float
+	* EN:
+	*	Return an float
+	* @version 1.0
+	**/
+	public float Heal(float hpHeal){
+		if(hp + hpHeal < maxHp)
+		{
+			hp += hpHeal;	
+		}
+		else
+		{
+			hp = maxHp;
+		}
+		return hp;
+	}
+
+	/**
+	* FR:
 	* 	Permet de redéfinir la position d'une Unité
 	* EN:
 	* 	Set the position of a Unit

@@ -11,18 +11,18 @@ using System.Collections;
  */
 public class MainMenuController : MonoBehaviour {
 
+	void Start() {
+		Cursor.visible = true;
+	}
+	
 	public void Play() {
 		MenuController.Animator.SetTrigger("mainToClass");
 		//Debug.Log("Menu single player");
 		//Application.LoadLevel ("Hero_menu");
 	}
 
-	public void Tutorial() {
-		Application.LoadLevel ("Hero_menu");
-	}
-
-	public void Custom() {
-		
+	public void Credit() {
+		MenuController.Animator.SetTrigger("mainToCredit");
 		//Application.LoadLevel ("Custom_menu");
 	}
 

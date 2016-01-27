@@ -20,7 +20,7 @@ public class HeroMenuController : MonoBehaviour {
 	Button buttonSlot1;
 	Button buttonSlot2;
 	Button buttonSlot3;
-	bool slot1, slot2, slot3;
+	private static bool slot1, slot2, slot3;
 
 	private static int save;
 
@@ -116,6 +116,36 @@ public class HeroMenuController : MonoBehaviour {
 
 		set {
 			save = value;
+		}
+	}
+
+	public static bool BSlot1 {
+		get {
+			return slot1;
+		}
+
+		set {
+			slot1 = value;
+		}
+	}
+
+	public static bool BSlot2 {
+		get {
+			return slot2;
+		}
+
+		set {
+			slot2 = value;
+		}
+	}
+
+	public static bool BSlot3 {
+		get {
+			return slot3;
+		}
+
+		set {
+			slot3 = value;
 		}
 	}
 }

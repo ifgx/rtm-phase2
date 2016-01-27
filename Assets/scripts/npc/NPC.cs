@@ -47,8 +47,10 @@ public abstract class NPC : Unit {
 	protected GameObject triggerAttack;
 	protected Vector3 nextAttackCoords;
 
+    protected AudioManager audioManager;
 
-	Image lifeImageNPC;
+
+    Image lifeImageNPC;
 
 	AudioSource audio;
 	protected bool audioInit = false;
@@ -453,14 +455,22 @@ public abstract class NPC : Unit {
 			Hero hero = hit.GetComponent<HeroLinkWeapon>().Hero;
 			hero.PreAttack();
 			LostHP(hero.Damage);
-			
-			Vector3 imageScale = lifeImageNPC.rectTransform.localScale;
+            
+            audioManager = GameObject.Find("Main Camera").GetComponent<AudioManager>();
+            if(hero.GetType().ToString() == "Monk"){
+				audioManager.playHeroWoodWeaponSound();
+			}else{
+				audioManager.playHeroSwordSound();
+			}
+            Vector3 imageScale = lifeImageNPC.rectTransform.localScale;
 			imageScale.Set(hp / maxHp, 1, 0);
 			lifeImageNPC.rectTransform.localScale = imageScale;
 			
 			if(IsDead())
 			{
+				//Debug.LogError("MORT:"+hero.Name);
 				hero.HasKilled(XpGain);
+				//Debug.LogError("XPQUANTITY:"+hero.XpQuantity);
 				foreach(Hero hero_list in heros)
 				{
 					hero_list.RunBlocked = false;	
@@ -475,14 +485,19 @@ public abstract class NPC : Unit {
 			Hero hero = hit.GetComponent<HeroLinkWeapon>().Hero;
 			hero.PreAttack();
 			LostHP(hero.Damage);
-			
-			Vector3 imageScale = lifeImageNPC.rectTransform.localScale;
+            
+            audioManager = GameObject.Find("Main Camera").GetComponent<AudioManager>();
+            audioManager.playFireballSound();
+
+            Vector3 imageScale = lifeImageNPC.rectTransform.localScale;
 			imageScale.Set(hp / maxHp, 1, 0);
 			lifeImageNPC.rectTransform.localScale = imageScale;
 			
 			if(IsDead())
 			{
+				//Debug.LogError("MORT:"+hero.Name);
 				hero.HasKilled(XpGain);
+				//Debug.LogError("XPQUANTITY:"+hero.XpQuantity);
 				foreach(Hero hero_list in heros)
 				{
 					hero_list.RunBlocked = false;	
@@ -491,6 +506,7 @@ public abstract class NPC : Unit {
 			}
 			//fireball collides with an ennemy. Destruct it !
 			Destroy(hit.gameObject);
+			//Debug.LogError("SUPER HEROOOOOOOOO XP:"+hero.XpQuantity);
 			hero.PostAttack();
 		}
 	}

@@ -62,6 +62,8 @@ public class HandController : MonoBehaviour
 	private RawImage pointerImage;
 	private bool pointerMode = false;
 
+	private GameObject monkRegenPrefab = null;
+
 
 
 	/** If hands are in charge of Destroying themselves, make this false. */
@@ -496,11 +498,14 @@ public class HandController : MonoBehaviour
 			Hand leftHand = null;
 			Hand rightHand = null;
 
+			int nbHandValid = 0;
+
 			foreach (Hand hand in handsInFrame) 
 			{				
 				//if we are going through the attack hand
 				if (hand.IsValid ) 
 				{
+					nbHandValid++;
 					//fills fist the left hand, we don't care if its really a left or right hand, we just want the distance)
 					if (leftHand == null)
 						leftHand = hand;
@@ -513,20 +518,32 @@ public class HandController : MonoBehaviour
 			if (leftHand != null && rightHand != null)
 			{
 				float distance = Mathf.Abs(leftHand.PalmPosition.x - rightHand.PalmPosition.x);
-				if (distance <= 100)
+				if (distance <= 100 && (((Monk) hero).PrayerMode == false) && ((Monk) hero).PowerQuantity >= 0)
 				{
 					//Debug.Log("Regen");
 					((Monk) hero).PrayerMode = true;
+					GameObject lifeEffectPrefab = (Resources.Load("prefabs/hud/LifePotionEffect") as GameObject);
+
+
+					monkRegenPrefab = hero.attachHudPrefab(lifeEffectPrefab, -1, true);
 				}
-				else
+				else if (distance > 100)
 				{
-					//Debug.Log ("distance: "+distance);
+					//Debug.Log ("Handcontroller setting PayerMode to false. Distance = "distance+" | MonkParayer);
 					((Monk) hero).PrayerMode = false;
 
+					if (monkRegenPrefab != null)
+					{
+						Destroy(monkRegenPrefab);
+						monkRegenPrefab = null;
+					}
 				}
 			}
 
-
+			if(nbHandValid < 2)
+			{
+				((Monk) hero).PrayerMode = false;
+			}
 		}
 	}
 

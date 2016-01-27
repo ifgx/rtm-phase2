@@ -42,9 +42,10 @@ GameObject:
   - 4: {fileID: 454372}
   - 114: {fileID: 11456662}
   - 114: {fileID: 11435472}
+  - 65: {fileID: 6529520}
   m_Layer: 0
   m_Name: Cannon
-  m_TagString: Untagged
+  m_TagString: ennemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -337,7 +338,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 116408}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -15.0977488, y: -.753560722, z: 2.8475132}
+  m_LocalPosition: {x: 2.31149101, y: -.0255041122, z: 7.96699381}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 456126}
@@ -793,6 +794,18 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 176230}
   m_Mesh: {fileID: 4300000, guid: 37f884c2126bbea41b7210f7437f806a, type: 3}
+--- !u!65 &6529520
+BoxCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 116408}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1.25, y: 2.20000005, z: 5}
+  m_Center: {x: 0, y: .5, z: 0}
 --- !u!82 &8285916
 AudioSource:
   m_ObjectHideFlags: 1
@@ -1046,6 +1059,10 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: m_Volume
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_TagString
+      value: ennemy
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}

@@ -54,7 +54,7 @@ public class SandboxController : MonoBehaviour {
 	 * Load all resources
 	 */
 	void Awake(){
-		terrain = Resources.Load ("prefabs/Terrain") as GameObject;
+		terrain = Resources.Load ("prefabs/Terrain1") as GameObject;
 		
 		hud = Resources.Load ("prefabs/hud/hudPrefab") as GameObject;
 		deathHud = Resources.Load("prefabs/hud/DeathHud") as GameObject;
@@ -87,21 +87,7 @@ public class SandboxController : MonoBehaviour {
 
 		handSide = HandSide.RIGHT_HAND;
 
-		//GameObject heroGameObject = Instantiate (warrior);
-		GameObject heroGameObject = Instantiate (monk);
-		Hero hero = heroGameObject.GetComponent<Hero> ();
-		GameModel.HerosInGame.Add (hero);
-		string heroClass = hero.GetType ().ToString ();
-		//LEAP
-		leapInstance = Instantiate (leapPrefab);
-		//Debug.Log ("leapInstance : " + leapInstance);
-		//the leap motion scene is child of camera so it follow the translation
-		leapInstance.transform.parent = Camera.main.transform;
-		leapInstance.transform.position = new Vector3 (0f, 2.5f, 1.6f);
-		//sets the "hand parent" field so the arms also are child of camera and don't flicker
-		leapControl = leapInstance.GetComponent<HandController> ();
-		leapControl.setModel(handSide, hero);
-		leapControl.handParent = Camera.main.transform;
+		createHero ("Warrior");
 
 		//If leap is not connected, Pause game and show warning message
 		if ( !leapControl.IsConnected())
@@ -117,10 +103,18 @@ public class SandboxController : MonoBehaviour {
 
 		//Génération du HUD
 		hudMaster = Instantiate (hud).GetComponent<HudMaster>();
+/*<<<<<<< HEAD
+		hudMaster.setHero(hero);
 
 		
 		Camera.main.transform.parent = heroGameObject.transform;
 		Camera.main.transform.position = new Vector3 (0, 2.18f, 0);
+		GameObject MainCamera = GameObject.Find("Main Camera");
+		hero.HeroCamera = MainCamera;
+=======*/
+		hudMaster.setHero (hero);
+
+		
 
 
 	}
@@ -131,26 +125,28 @@ public class SandboxController : MonoBehaviour {
 	 */
 	void Update () {
 
-		Hero hero = GameModel.HerosInGame [0];
+		if (GameModel.HerosInGame.Count > 0) {
+			Hero hero = GameModel.HerosInGame [0];
 
-		//update hud state
-		//Debug.Log ("H///" + hero.MaxHealthPoint);
-		float currentHealthPercent = 100.0f*hero.HealthPoint/hero.MaxHealthPoint;
-		float currentPowerPercent = 100.0f*hero.PowerQuantity/hero.MaxPowerQuantity;
-		//Debug.Log("Life: " + currentHealthPercent);
+			//update hud state
+			//Debug.Log ("H///" + hero.MaxHealthPoint);
+			float currentHealthPercent = 100.0f * hero.HealthPoint / hero.MaxHealthPoint;
+			float currentPowerPercent = 100.0f * hero.PowerQuantity / hero.MaxPowerQuantity;
+			//Debug.Log("Life: " + currentHealthPercent);
 		
-		hudMaster.setLevel (HudMaster.HudType.Life, currentHealthPercent);
-		hudMaster.setLevel (HudMaster.HudType.Special, currentPowerPercent);
-		hudMaster.updateXP ((hero.XpQuantity-hero.XpQuantityLastLevel)/(hero.XpQuantityNextLevel-hero.XpQuantityLastLevel)*100.0f, (int)hero.Level + 1);
+			hudMaster.setLevel (HudMaster.HudType.Life, currentHealthPercent);
+			hudMaster.setLevel (HudMaster.HudType.Special, currentPowerPercent);
+			hudMaster.updateXP ((hero.XpQuantity - hero.XpQuantityLastLevel) / (hero.XpQuantityNextLevel - hero.XpQuantityLastLevel) * 100.0f, (int)hero.Level + 1);
 
-		if (Input.GetKeyDown (KeyCode.L)) {
-			GameModel.HerosInGame[0].XpQuantity += 100.0f;
-		}
+			if (Input.GetKeyDown (KeyCode.L)) {
+				GameModel.HerosInGame [0].XpQuantity += 100.0f;
+			}
 
-		if (Input.GetKeyDown (KeyCode.V)) {
-			//Debug.Log ("RETURN");
-			GameModel.HerosInGame[0].HealthPoint = GameModel.HerosInGame[0].MaxHealthPoint;
-			//Debug.Log (GameModel.HerosInGame[0].MaxHealthPoint);
+			if (Input.GetKeyDown (KeyCode.V)) {
+				//Debug.Log ("RETURN");
+				GameModel.HerosInGame [0].HealthPoint = GameModel.HerosInGame [0].MaxHealthPoint;
+				//Debug.Log (GameModel.HerosInGame[0].MaxHealthPoint);
+			}
 		}
 	}
 
@@ -215,5 +211,47 @@ public class SandboxController : MonoBehaviour {
 	public void Resume()
 	{
 		Time.timeScale = 1.0f;
+	}
+
+	public void popHero(string heroClass) {
+		deleteHero ();
+		createHero (heroClass);
+	}
+
+	public void createHero(string heroClass) {
+		//GameObject heroGameObject = Instantiate (warrior);
+		if (heroClass == "Warrior") heroGameObject = Instantiate (warrior);
+		else if (heroClass == "Wizard") heroGameObject = Instantiate (wizard);
+		else if (heroClass == "Monk") heroGameObject = Instantiate (monk);
+		else heroGameObject = Instantiate (warrior);
+		hero = heroGameObject.GetComponent<Hero> ();
+		hero.HeroCamera = Camera.main.gameObject;
+		GameModel.HerosInGame.Add (hero);
+		//string heroClass = hero.GetType ().ToString ();
+		//LEAP
+		leapInstance = Instantiate (leapPrefab);
+		//Debug.Log ("leapInstance : " + leapInstance);
+		//the leap motion scene is child of camera so it follow the translation
+		leapInstance.transform.parent = Camera.main.transform;
+		leapInstance.transform.position = new Vector3 (0f, 2.5f, 1.6f);
+		//sets the "hand parent" field so the arms also are child of camera and don't flicker
+		leapControl = leapInstance.GetComponent<HandController> ();
+		leapControl.setModel(handSide, hero);
+		leapControl.handParent = Camera.main.transform;
+
+		Camera.main.transform.parent = heroGameObject.transform;
+		Camera.main.transform.position = new Vector3 (0, 2.18f, 0);
+
+
+	}
+
+	public void deleteHero(){
+		Camera.main.transform.parent = null;
+
+		Destroy (leapInstance);
+		Destroy (heroGameObject);
+		GameModel.HerosInGame.Clear ();
+
+		Camera.main.transform.position = new Vector3 (0, 4, 0);
 	}
 }

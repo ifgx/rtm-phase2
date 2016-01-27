@@ -14,4 +14,8 @@ public class HeroLinkWeapon : MonoBehaviour {
 		}
 	}
 
+	public void Update() {
+
+	}
+
 }

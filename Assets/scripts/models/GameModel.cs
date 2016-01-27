@@ -21,6 +21,8 @@ public class GameModel {
 
 	private static List<Hero> herosInGame;
 
+	private static List<Hero> herosSaved;
+
 	private static List<NPC> npcsInGame;
 
 	private static List<Potion> potionsInGame;
@@ -98,6 +100,16 @@ public class GameModel {
 		}
 	}
 
+	public static List<Hero> HerosSaved {
+		get {
+			return herosSaved;
+		}
+		
+		set {
+			herosSaved = value;
+		}
+	}
+
 	public static List<string> ListTutoriel {
 		get {
 			return listTutoriel;
@@ -162,7 +174,7 @@ public class GameModel {
 		}else{
 			while (actualLevelId+1 < levels.Count) {
 				ActualLevelId ++;
-				Debug.Log("level : " + ActualLevel.Name);
+				//Debug.Log("level : " + ActualLevel.Name);
 				if (ActualLevel.Tutorial == playWithTuto){
 					return true;
 				}
@@ -240,11 +252,10 @@ public class GameModel {
 	 * Initialisation of the game model
 	 */
 	public static void Init(){
-		hero  = new Wizard();
 		levels = LevelParser.parseAllLevelFiles ("LvlList");
 
 		foreach (Level level in levels) {
-			Debug.Log(level.Tutorial);
+			//Debug.Log(level.Tutorial);
 		}
 
 		ActualLevelId = 0;
@@ -277,8 +288,9 @@ public class GameModel {
 	}
 
 	public static void loadSave(int saveNum){
-
+		saves = SaveParser.parseLevelFile ();
 		Save save = saves [saveNum];
+		//Debug.LogError("To Load:"+save.Hero.Name+" ,XP:"+save.Hero.XpQuantity);
 		hero = save.Hero;
 		score = save.Score;
 		ActualLevelId = save.LevelId;
@@ -292,13 +304,16 @@ public class GameModel {
 	
 	public static void resetSaveSlot(int slot){
 		Slot = slot;
+		//Debug.LogError("ON RESET:"+Hero.XpQuantity);
 		if (saves.Count < 3) {
 			saves.Add (new Save (Hero, ActualLevelId, Score));
+			SaveParser.addSave(slot, Hero, Score, ActualLevelId);			
 		} else {
 			Save save = saves [slot];
 			save.Hero = Hero;
 			save.LevelId = ActualLevelId;
 			save.Score = Score;
+			SaveParser.addSave(slot, Hero, Score, ActualLevelId);			
 		}
 	}
 
@@ -311,11 +326,22 @@ public class GameModel {
 		}
 	}
 
-
+	/**
+	 * Return true if heros count is 2
+	 * or false if heros is null
+	 */
 	public static bool MultiplayerModeOn {
 		get {
-			return (heros.Count == 2);
-			//return true;
+
+			if (heros == null)
+			{ 
+				return false;
+			}
+			else
+			{
+				return (heros.Count == 2);
+			}
+
 		}
 
 	}

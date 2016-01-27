@@ -81,7 +81,17 @@ public class SingleMenuController : MonoBehaviour {
 			LM = false;
 		}
 
-		Debug.Log("Browser is on : "+CustomMenuController.LauncherBrowser);
+
+		if((campaign && (HeroMenuController.BSlot1 || HeroMenuController.BSlot2 || HeroMenuController.BSlot3) && HeroMenuController.Name != "") ||
+			(custom && CustomMenuController.Song != "Empty") ||
+			tutorial){
+			buttonPlay.interactable = true;
+		} else {
+			buttonPlay.interactable = false;
+		}
+
+		//Debug.Log("Browser is on : "+CustomMenuController.LauncherBrowser);
+
 
 		if(CustomMenuController.LauncherBrowser) {
 			buttonCampaign.interactable = false;
@@ -93,7 +103,6 @@ public class SingleMenuController : MonoBehaviour {
 			buttonCampaign.interactable = true;
 			buttonCustom.interactable = true;
 			buttonTutorial.interactable = true;
-			buttonPlay.interactable = true;
 			buttonReturn.interactable = true;
 		}
 	}

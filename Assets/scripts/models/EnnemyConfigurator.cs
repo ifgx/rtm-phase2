@@ -23,7 +23,7 @@ public class EnnemyConfigurator : MonoBehaviour {
 	public static string cannonName = "Cannon" ;
 	public static string cannonAttackType = "Distance";
 	public static float cannonMovementSpeed = 0.0f;
-	public static float cannonAttackSpeed = 2f;
+	public static float cannonAttackSpeed = 2.0f;
 	public static float cannonXpGain = 0.0f;
 	public static float cannonHp = 30.0f;
 	public static float cannonDamage = 75.0f;
@@ -56,9 +56,9 @@ public class EnnemyConfigurator : MonoBehaviour {
 	public static string fireDragonetAttackType = "CaC";
 	public static float fireDragonetMovementSpeed = 5.0f;
 	public static float fireDragonetAttackSpeed = 2.0f;
-	public static float fireDragonetXpGain = 5.0f;
+	public static float fireDragonetXpGain = 2000.0f;
 	public static float fireDragonetHp = 30.0f;
-	public static float fireDragonetDamage = 40.0f;
+	public static float fireDragonetDamage = 10.0f;
 	public static float fireDragonetAggroDistance = 30.0f;
 	public static float fireDragonetAttackRange = 2.5f;
 	public static float fireDragonetDistanceToDisappear = 2.0f;

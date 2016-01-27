@@ -39,7 +39,9 @@ public class GameController : MonoBehaviour {
 	/**
 	 * Prefabs used in the game
 	 */
-	private GameObject terrain;
+	private GameObject terrain1;
+	private GameObject terrain2;
+	private GameObject terrain3;
 
 	private GameObject hud;
 	private GameObject deathHud;
@@ -75,8 +77,6 @@ public class GameController : MonoBehaviour {
 	private GameObject kmManagerPrefab;
 	private GameObject kmManager;
 
-	private GameObject musicCanvasPrefab;
-	private GameObject musicCanvas;
 	private AudioManager audioManager;
 	
 	private Hero hero;
@@ -84,7 +84,7 @@ public class GameController : MonoBehaviour {
 	private Terrain ter;
 
 	private GameState state;
-	private bool paused;
+	private bool pauseFlag = false;
 	private GameObject pausedMenu;
 
 	private HandSide handSide;
@@ -114,14 +114,17 @@ public class GameController : MonoBehaviour {
 
 	private bool deathDone = false;
 
+
 	/**
 	 * During the awakening : we load all the prefabs
 	 */
 	void Awake(){
 		//Debug.Log ("START Awake GameController");
 
-		terrain = Resources.Load ("prefabs/Terrain") as GameObject;
-		
+		terrain1 = Resources.Load ("prefabs/Terrain1") as GameObject;
+		terrain2 = Resources.Load ("prefabs/Terrain2") as GameObject;
+		terrain3 = Resources.Load ("prefabs/Terrain3") as GameObject;
+
 		hud = Resources.Load ("prefabs/hud/hudPrefab") as GameObject;
 		deathHud = Resources.Load("prefabs/hud/DeathHud") as GameObject;
 		
@@ -148,8 +151,6 @@ public class GameController : MonoBehaviour {
 		leapPrefab = Resources.Load("prefabs/leapmotion/LeapMotionScene") as GameObject;
 		leapCanvasPrefab = Resources.Load("prefabs/leapmotion/LeapCanvas") as GameObject;
 
-		musicCanvasPrefab = Resources.Load("prefabs/sound/MusicCanvas") as GameObject;
-
 		kmManagerPrefab = Resources.Load ("prefabs/keyboard/KMManager") as GameObject;
 
 		//Debug.Log (" END Awake GameController");
@@ -166,7 +167,7 @@ public class GameController : MonoBehaviour {
 		//GameModel.Init();
 		GameModel.resetDataBeforeLevel ();
 
-
+		GameModel.loadSave(GameModel.Slot);
 		level = GameModel.ActualLevel;
 
 		//Debug.Log (level.Name);
@@ -174,38 +175,58 @@ public class GameController : MonoBehaviour {
 		//Debug.Log ("START Start GameController");
 
 
-		//recupération des options
+		//recupÃ©ration des options
 		handSide = HandSide.RIGHT_HAND;
 
 		//lire fichier niveau
 		//LevelParser parser = new LevelParser (FILE_PATH);
 
-		//génération du héros
+		//gÃ©nÃ©ration du hÃ©ros
 
+		
 		
 		if (GameModel.MultiplayerModeOn) {
 			initMulti ();
-		} else {
+		} else
+		{
 			initMono ();
+			
 		}
-
+		
 		float vitesseHeros = hero.MovementSpeed;
+		
 
 
-		//Génération de terrain
+		//GÃ©nÃ©ration de terrain
 		float longueurTerrain = vitesseHeros * tempsMusique;
 
 		/*ter = Instantiate( terrain, new Vector3(0,0,0), Quaternion.identity) as GameObject;
 		ter.transform.Rotate (0, -90, 0);
 		ter.transform.localScale = new Vector3 (longueurTerrain, 1, 1);
 		*/
-		ter = Instantiate (terrain, new Vector3 (-100, -2, 0), Quaternion.identity) as Terrain;
+		//Debug.Log("LEVEL NAME :"+GameModel.ActualLevel.Map+"|");
+		switch(GameModel.ActualLevel.Map){
+			case "terrain1":
+				ter = Instantiate (terrain1, new Vector3 (-100, -2, 0), Quaternion.identity) as Terrain;
+				break;
+			case "terrain2":
+				Debug.Log("LEVEL NAME :"+GameModel.ActualLevel.Map+"|");
+				ter = Instantiate (terrain2, new Vector3 (-100, -2, 0), Quaternion.identity) as Terrain;
+				break;
+			case "terrain3":
+				ter = Instantiate (terrain3, new Vector3 (-100, -2, 0), Quaternion.identity) as Terrain;
+				break;
+			default:
+				//ter = Instantiate (terrain1, new Vector3 (-100, -2, 0), Quaternion.identity) as Terrain;
+				break;
+			}
+		
 		//ter.terrainData.size = new Vector3 (1.0f, 1.0f, 1.0f);
 		//ter.terrainData.size = new Vector3 (200, 200, 1);
 
 
 
-		//génération des ennemis
+		//gÃ©nÃ©ration des ennemis
 		npcList = new List<GameObject> ();
 		//Debug.Log (npcList);
 
@@ -266,23 +287,27 @@ public class GameController : MonoBehaviour {
 
 		
 		//Debug.Log ("hudMaster : " + hudMaster);
-		state = GameState.PLAY;
-
-
 		
+		/*if (state == null)
+		{
+			//if state has not manually been set to pause, then its play*/
+			state = GameState.PLAY;
+		//}
 
 
-		pausedMenu = GameObject.Find("Canvas");
+		pausedMenu = GameObject.Find("PauseCanvas");
 		pausedMenu.SetActive(false);
-		paused = false;
 
 		Time.timeScale = 1.0f;
 
-		musicCanvas = Instantiate (musicCanvasPrefab);
-		audioManager = musicCanvas.GetComponent<AudioManager> ();
-		
-		audioManager.SetMusicName (level.MusicPath);
+        audioManager = GameObject.Find("Main Camera").GetComponent<AudioManager>();
+
+            audioManager.SetMusicName (level.MusicPath);
 		audioManager.Init ();
+		
+		GameObject MushGO = Resources.Load("prefabs/environment/DiscoMushroom1") as GameObject;
+		Instantiate (MushGO);
+		
 
 		//If leap is not connected, Pause game and show warning message
 		if (GameModel.PlayWithLeap && !leapControl.IsConnected())
@@ -290,7 +315,6 @@ public class GameController : MonoBehaviour {
 			//pause()
 			audioManager.Pause();
 			Time.timeScale = 0.0f;
-			
 			GameObject detectedCanvas = GameObject.Find("DetectedLeapCanvas");
 			detectedCanvas.GetComponent<Canvas>().enabled = true;
 		}
@@ -304,13 +328,16 @@ public class GameController : MonoBehaviour {
 			GameObject tutoGO = Resources.Load("prefabs/controllers/TutorialManager") as GameObject;
 		 	Instantiate (tutoGO);
 		}
+
+		Cursor.visible = false;
 		
 	}
 
-	void initMono() {
+	void initMono() 
+	{
 			//instanciate a hero using the class contained in the model
 			Hero modelHero = GameModel.Hero;
-			string heroClass = modelHero.GetType ().ToString ();
+			string heroClass = modelHero.GetType().ToString ();
 			
 			if (heroClass == "Warrior")
 				heroGameObject = Instantiate (warrior);
@@ -359,7 +386,7 @@ public class GameController : MonoBehaviour {
 			//Camera.main.transform.Translate(new Vector3(0, 2.18f, 0));
 
 
-			//Génération du HUD
+			//GÃ©nÃ©ration du HUD
 			hudMaster = Instantiate (hud).GetComponent<HudMaster>();
 			hudMaster.setHero (GameModel.HerosInGame [0]);
 			hudMaster.setRenderCamera (Camera.allCameras [0]);
@@ -437,7 +464,7 @@ public class GameController : MonoBehaviour {
 
 			Camera.main.enabled = false;
 
-			//Génération du HUD
+			//GÃ©nÃ©ration du HUD
 			hudMaster = Instantiate (hud).GetComponent<HudMaster> ();
 			hudMaster.setHero (GameModel.HerosInGame [0]);
 			hudMaster.setRenderCamera (camL.GetComponent<Camera> ());
@@ -458,16 +485,17 @@ public class GameController : MonoBehaviour {
 			play ();
 			break;
 		case GameState.PAUSE:
-			if(!paused){
-				Pause();
-				paused = true;
-			}
+			pause();
 			break;
 		case GameState.DEAD:
 			dead ();
 			break;
 		default:
-			play ();
+			
+			//disable by BV to allow gamelaunching via unity editor
+			//Cursor.visible = false;
+			//play ();
+
 			break;
 		}
 	}
@@ -479,9 +507,9 @@ public class GameController : MonoBehaviour {
 	 * Updates the HUDs
 	 */
 	void play(){
-		//Gestion héros
+		//Gestion hÃ©ros
 		/*if (!bloque) {
-			//faire avancer Héros
+			//faire avancer HÃ©ros
 			//hero.Run(Time.deltaTime);
 			GameModel.HerosInGame[0].Run(Time.deltaTime);
 			//Camera.main.transform.position = new Vector3(0, 2.18f, hero.GetPosition().z);
@@ -497,7 +525,7 @@ public class GameController : MonoBehaviour {
 		
 		hudMaster.setLevel (HudMaster.HudType.Life, currentHealthPercent);
 		hudMaster.setLevel (HudMaster.HudType.Special, currentPowerPercent);
-		hudMaster.updateXP (hero.XpQuantity/hero.XpQuantityNextLevel*100.0f, (int)hero.Level + 1);
+		hudMaster.updateXP (hero.XpQuantity/hero.XpQuantityNextLevel*100.0f, (int)hero.Level);
 
 		if (hudMaster2 != null) {
 			hero = GameModel.HerosInGame [1];
@@ -530,23 +558,41 @@ public class GameController : MonoBehaviour {
 
 		audioManager.Play();
 
-		if (Input.GetKeyDown(KeyCode.R)){
+		/*if (Input.GetKeyDown(KeyCode.R)){
 			Restart();
-		}else if (Input.GetKey(KeyCode.Escape)){
-			Quit ();
-		} else if (Input.GetKeyDown(KeyCode.P)){
+		}else */
+			if (!Input.GetKey (KeyCode.Escape) && !Input.GetKey (KeyCode.P)) {
+				pauseFlag = false;
+			}
+
+			if (!pauseFlag && (Input.GetKey(KeyCode.Escape) || Input.GetKeyDown(KeyCode.P))){
 			state = GameState.PAUSE;
+			
+			audioManager.Pause();
+			Time.timeScale = 0.0f;
+			pausedMenu.SetActive(true);
+			Cursor.visible = true;
+
+			pauseFlag = true;
 		}
 	}
 
 	/**
 	 * Function called when the game is paused
 	 */
-	public void Pause(){
-		audioManager.Pause();
-		Time.timeScale = 0.0f;
-		pausedMenu.SetActive(true);
-		leapControl.setPointerMode(true);
+	public void pause(){
+		if (!Input.GetKey (KeyCode.Escape) && !Input.GetKey (KeyCode.P)) {
+			pauseFlag = false;
+		}
+
+		if (!pauseFlag && (Input.GetKey(KeyCode.Escape) || Input.GetKeyDown(KeyCode.P))){
+			state = GameState.PLAY;
+			Time.timeScale = 1.0f;
+			pausedMenu.SetActive(false);
+			Cursor.visible = false;
+			
+			pauseFlag = true;
+		}
 	}
 
 	/**
@@ -557,29 +603,14 @@ public class GameController : MonoBehaviour {
 			Instantiate (deathHud);
 			HighScoreParser.addHighScore(GameModel.Hero.Name, GameModel.Score);
 			deathDone = true;
+			Cursor.visible = true;
 		}
 		if (Input.GetKeyDown(KeyCode.R)){
 			ReturnToMainMenu();
 		}
 	}
 
-	/**
-	 * Function called when an ennemy hurts the hero
-	 */
-	void NPCAttacksHero(){
-	}
 
-	/**
-	 * Function called when the hero blocks an annemy attack
-	 */
-	void HeroBlocks(){
-	}
-
-	/**
-	 * Function called when the hero hurts an ennemy
-	 */
-	void HeroAttacksNPC(){
-	}
 
 	/**
 	 * Restarts the level
@@ -605,10 +636,24 @@ public class GameController : MonoBehaviour {
 	}
 
 	/**
+	 * Instant exit game (normal unity termination)
+	 */
+		public void ExitGame() {
+			Application.Quit();
+		}
+
+
+	/**
 	 * Trigger the next level scene
 	 */
 	public void NextLevel(){
 		//GameModel.ActualLevelId++;
+		if(GameModel.HerosInGame.Count < 2)
+		{
+			//Debug.LogError("To save:"+GameModel.HerosInGame[0].Name+" ,XP:"+GameModel.HerosInGame[0].XpQuantity);
+			//Debug.LogError("SAVE:"+GameModel.HerosInGame[0].XpQuantity);
+			SaveParser.addSave(GameModel.Slot, GameModel.HerosInGame[0], GameModel.Score, GameModel.ActualLevelId);			
+		}
 		bool nextLevelExists = GameModel.goToNextLevel();
 		if (GameModel.PlayWithTuto && !nextLevelExists) {
 			Application.LoadLevel ("Main_menu");
@@ -622,10 +667,9 @@ public class GameController : MonoBehaviour {
 	 */
 	public void Resume(){
 		pausedMenu.SetActive(false);
-		paused = false;
 		state = GameState.PLAY;
 		Time.timeScale = 1.0f;
-		leapControl.setPointerMode(false);
+		//leapControl.setPointerMode(false);
 	}
 	
 }

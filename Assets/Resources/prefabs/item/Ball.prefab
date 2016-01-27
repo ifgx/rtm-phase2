@@ -12,7 +12,7 @@ GameObject:
   - 135: {fileID: 13582874}
   - 23: {fileID: 2300782}
   - 54: {fileID: 5462882}
-  - 135: {fileID: 13558106}
+  - 114: {fileID: 11454772}
   m_Layer: 0
   m_Name: Ball
   m_TagString: ennemy_projectile
@@ -42,7 +42,7 @@ MeshRenderer:
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_Materials:
-  - {fileID: 2100000, guid: e018bf45ecf9c4f4abbf59e636571ecb, type: 2}
+  - {fileID: 2100000, guid: 10f41c01e21319844b0efb702a56313d, type: 2}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
   m_UseLightProbes: 1
@@ -78,18 +78,17 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!135 &13558106
-SphereCollider:
+--- !u!114 &11454772
+MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 137316}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
   m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: .5
-  m_Center: {x: 0, y: 0, z: 0}
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0d1e3517a47bd62499b5197dae2879b3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!135 &13582874
 SphereCollider:
   m_ObjectHideFlags: 1

@@ -1,1 +1,5 @@
-{"slots":[ {"name":"Player 1", "score":"1", "class":"Wizard", "xp":"0", "currentLevel":"level 3"}, {"name":"Player 1", "score":"1", "class":"Wizard", "xp":"0", "currentLevel":"level 1"} ]}
+<<<<<<< HEAD
+{"slots":[ {"name":"Gandalf", "score":"0", "class":"Wizard", "xp":"10"}, {"name":"Player 1", "score":"1", "class":"Wizard", "xp":"0"} ]}
+=======
+{"slots":[ {"name":"Aragorn", "score":"0", "class":"Warrior", "xp":"0"}, {"name":"Player 1", "score":"1", "class":"Wizard", "xp":"0"} ]}
+>>>>>>> 0c9c951f9bde06c5f0e9a8405704ef088a71f1aa
