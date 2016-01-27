@@ -655,6 +655,7 @@ public class GameController : MonoBehaviour {
 		//GameModel.ActualLevelId++;
 		if(GameModel.HerosInGame.Count < 2)
 		{
+			GameModel.Score += 1000;
 			//Debug.LogError("To save:"+GameModel.HerosInGame[0].Name+" ,XP:"+GameModel.HerosInGame[0].XpQuantity);
 			//Debug.LogError("SAVE:"+GameModel.HerosInGame[0].XpQuantity);
 			SaveParser.addSave(GameModel.Slot, GameModel.HerosInGame[0], GameModel.Score, GameModel.ActualLevelId);			

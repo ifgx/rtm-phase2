@@ -197,6 +197,7 @@ public abstract class Hero : Unit {
 	public virtual void HasKilled(float XP)
 	{
 		GiveXP(XP);
+		GameModel.Score += 100;
 	}
 
 	/**
