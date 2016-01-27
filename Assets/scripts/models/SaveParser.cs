@@ -100,8 +100,8 @@ public class SaveParser {
 				slot.Add ("class", heroClass);
 				JSONData heroXp = new JSONData (slotInList.Hero.XpQuantity);
 				slot.Add ("xp", heroXp);
-				//JSONData currentLevel = new JSONData (GameModel.Levels[slotInList.LevelId].Name);
-				//slot.Add ("currentLevel", currentLevel);
+				JSONData currentLevel = new JSONData (GameModel.Levels[slotInList.LevelId].Name);
+				slot.Add ("currentLevel", currentLevel);
 			} else {
 				slot.Add ("name", "");
 				slot.Add ("score", "");
