@@ -12,7 +12,7 @@ public class CustomMenuController : MonoBehaviour {
 
 	Button buttonSong;
 	
-	Text songText;
+	private static Text songText;
 	
 	GameObject browserMenu, canvas;
 	LaunchFileBrowser launchBrowser;
@@ -75,6 +75,16 @@ public class CustomMenuController : MonoBehaviour {
 
 		set {
 			browser = value;
+		}
+	}
+
+	public static string Song {
+		get {
+			return songText.text;
+		}
+
+		set {
+			songText.text = value;
 		}
 	}
 }

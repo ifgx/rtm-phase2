@@ -20,7 +20,7 @@ public class HeroMenuController : MonoBehaviour {
 	Button buttonSlot1;
 	Button buttonSlot2;
 	Button buttonSlot3;
-	bool slot1, slot2, slot3;
+	private static bool slot1, slot2, slot3;
 
 	private static int save;
 
@@ -98,31 +98,6 @@ public class HeroMenuController : MonoBehaviour {
 		
 		save = 2;
 	}
-/*<<<<<<< HEAD
-	
-	public void Play(){
-		menu.SetActive(false);
-		loading.SetActive(true);
-		
-		if (warrior) GameModel.Hero = new Warrior();
-		if (monk) GameModel.Hero = new Monk();
-		if (wizard) GameModel.Hero = new Wizard();
-
-		//Debug.LogError("HERO INIT:"+GameModel.Hero.XpQuantity);
-		
-		GameModel.Hero.Name = userName;
-		GameModel.PlayWithLeap = LM;
-		GameModel.resetSaveSlot(save);
-		GameModel.PlayWithTuto = false;
-		GameModel.goToFirstLevel();
-		Application.LoadLevel("GameScene");
-	}
-
-	public void Tutorial(){
-		menu.SetActive(false);
-		loading.SetActive(true);
-=======
->>>>>>> 2cac1a97d5849c9bc9b578ae6ee735bb7482aae6*/
 
 	public static string Name {
 		get {
@@ -141,6 +116,36 @@ public class HeroMenuController : MonoBehaviour {
 
 		set {
 			save = value;
+		}
+	}
+
+	public static bool BSlot1 {
+		get {
+			return slot1;
+		}
+
+		set {
+			slot1 = value;
+		}
+	}
+
+	public static bool BSlot2 {
+		get {
+			return slot2;
+		}
+
+		set {
+			slot2 = value;
+		}
+	}
+
+	public static bool BSlot3 {
+		get {
+			return slot3;
+		}
+
+		set {
+			slot3 = value;
 		}
 	}
 }
