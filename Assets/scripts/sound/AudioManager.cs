@@ -15,6 +15,7 @@ public class AudioManager : MonoBehaviour, AudioProcessor.AudioCallbacks
     AudioClip fireball;
     AudioClip heroShield;
     AudioClip heroSword;
+	AudioClip heroWood1,heroWood2;
 
     private string musicName;
 
@@ -33,6 +34,8 @@ public class AudioManager : MonoBehaviour, AudioProcessor.AudioCallbacks
         heroShield = Resources.Load("sounds/aie") as AudioClip;
         heroSword = Resources.Load("sounds/epee") as AudioClip;
         fireball = Resources.Load("sounds/fireball") as AudioClip;
+		heroWood1 = Resources.Load("sounds/coupBaton") as AudioClip;
+		heroWood2 = Resources.Load("sounds/impactbaton") as AudioClip;
         if (musicName != null) {
             audioSourceHB = gameObject.AddComponent<AudioSource>();
             audioSourceHB.clip = Resources.Load("Musics/Hearbeat") as AudioClip;
@@ -74,7 +77,7 @@ public class AudioManager : MonoBehaviour, AudioProcessor.AudioCallbacks
     }
     public void playHeroShieldSound()
     {
-        noiseSource.volume = 0.6f;
+        noiseSource.volume = 0.5f;
         noiseSource.PlayOneShot(heroShield);
     }
     public void playHeroSwordSound()
@@ -82,6 +85,12 @@ public class AudioManager : MonoBehaviour, AudioProcessor.AudioCallbacks
         noiseSource.volume = 1.0f;
         noiseSource.PlayOneShot(heroSword);
     }
+	public void playHeroWoodWeaponSound(){
+		noiseSource.volume = 1.0f;
+		//noiseSource.PlayOneShot(heroWood1);
+
+		noiseSource.PlayOneShot(heroWood2);
+	}
     public void onOnbeatDetected()
     {
 

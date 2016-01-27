@@ -457,8 +457,11 @@ public abstract class NPC : Unit {
 			LostHP(hero.Damage);
             
             audioManager = GameObject.Find("Main Camera").GetComponent<AudioManager>();
-            audioManager.playHeroSwordSound();
-
+            if(hero.GetType().ToString() == "Monk"){
+				audioManager.playHeroWoodWeaponSound();
+			}else{
+				audioManager.playHeroSwordSound();
+			}
             Vector3 imageScale = lifeImageNPC.rectTransform.localScale;
 			imageScale.Set(hp / maxHp, 1, 0);
 			lifeImageNPC.rectTransform.localScale = imageScale;
