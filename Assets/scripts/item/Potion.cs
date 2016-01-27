@@ -11,8 +11,9 @@ using System.Collections;
  */
 
 public abstract class Potion : MonoBehaviour {
+    private AudioManager audioManager;
 
-	public Potion(){
+    public Potion(){
 		
 	}
 
@@ -32,7 +33,9 @@ public abstract class Potion : MonoBehaviour {
 		if (other.gameObject.tag == "Player") {
 			Hero hero = other.gameObject.GetComponentInParent<Hero> ();
 			triggerEffect (hero);
-			GameModel.PotionsInGame.Remove (this);
+            audioManager = GameObject.Find("Main Camera").GetComponent<AudioManager>();
+            audioManager.playPotionSound();
+            GameModel.PotionsInGame.Remove (this);
 			Destroy(this.gameObject);
 		}
 	}
