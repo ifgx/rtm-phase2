@@ -653,7 +653,7 @@ public class GameController : MonoBehaviour {
 	 * Trigger the next level scene
 	 */
 	public void NextLevel(){
-		//GameModel.ActualLevelId++;
+		GameModel.ActualLevelId++;
 		if(GameModel.HerosInGame.Count < 2)
 		{
 			//Debug.LogError("To save:"+GameModel.HerosInGame[0].Name+" ,XP:"+GameModel.HerosInGame[0].XpQuantity);
