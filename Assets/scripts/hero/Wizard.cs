@@ -10,6 +10,7 @@ public class Wizard : Hero {
 	float specialCapacityCooldown = 30.0f;
 	float specialCapacityTimer = 5.0f;
 	float shieldSize = 0.0f;
+	public float fireBallDiameter = 0.6f;
 	
 	// Use this for initialization
 	void Start () {
@@ -19,7 +20,6 @@ public class Wizard : Hero {
 	// Update is called once per frame
 	void Update () {
 		base.Update();
-		Debug.LogError("MY XP:"+XpQuantity);
 		if(PowerQuantity < MaxPowerQuantity)
 		{
 			if(base.lastRegenPower + 1 < Time.time)
@@ -67,26 +67,54 @@ public class Wizard : Hero {
 	{
 		if(level > 5)
 		{
-			Debug.LogWarning("LVL UP 2");
+			//Debug.LogError("LVL UP 6");
 			SpecialCapacityUnlocked = true;
 			LastCapacityUsed = Time.time;
 		}
 		else if(level > 4)
 		{
+			//Debug.LogError("LVL 5");
+			fireBallDiameter *=2;
 			Damage *= 1.1f;
 		}
 		else if(level > 3)
 		{
+			//Debug.LogError("LVL 4");
 			MaxHealthPoint *= 1.1f;
 		}
 		else if(level > 2)
 		{
+			//Debug.LogError("LVL 3");
 			Damage *= 1.1f;
 		}
 		else if(level > 1)
 		{
-			Debug.LogWarning("LVL UP");
+			//Debug.LogError("LVL 2");
 			Damage *= 1.1f;
 		}
+	}
+
+	/**
+	* {@inheritDoc}
+	**/
+	public override void SpecialCapacitySpell()
+	{
+
+	}
+
+	/**
+	* {@inheritDoc}
+	**/
+	public override void PreAttack()
+	{
+
+	}
+
+	/**
+	* {@inheritDoc}
+	**/
+	public override void PostAttack()
+	{
+		
 	}
 }

@@ -38,7 +38,6 @@ public abstract class Hero : Unit {
 	// Update is called once per frame
 	protected void Update () {
 		checkLevel();
-		//adaptStatAccordingToLevel();
 		if(specialCapacityUnlocked)
 		{
 			SpecialCapacitySpell();
@@ -694,7 +693,7 @@ public abstract class Hero : Unit {
 	**/
 	public virtual void adaptStatAccordingToLevel()
 	{
-
+		
 	}
 
 	/**
