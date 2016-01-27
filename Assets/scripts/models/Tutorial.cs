@@ -82,127 +82,7 @@ public class Tutorial {
 	}
 
 	public bool requestTrigger(){
-		if (name == "onPop"  && !GameModel.ListTutoriel.Contains("onPop")) {
-			
-			if(GameModel.HerosInGame [0].GetPosition ().z >= 5.0f) {
-				GameModel.ListTutoriel.Add("onPop");
-				return true;
-			}
-			return false;
-
-		} else if (name == "leapMotion" && !GameModel.ListTutoriel.Contains("leapMotion")) {
-
-			if(GameModel.HerosInGame [0].GetPosition ().z >= 7.0f && GameModel.PlayWithLeap == true) {
-				GameModel.ListTutoriel.Add("leapMotion");
-				return true;
-			}
-			return false;
-
-		} else if (name == "keyboard" && !GameModel.ListTutoriel.Contains("keyboard")) {
-
-			if(GameModel.HerosInGame [0].GetPosition ().z >= 8.0f && GameModel.PlayWithLeap == false){
-				GameModel.ListTutoriel.Add("keyboard");
-				return true;
-			}
-			return false;
-
-		} else if (name == "warriorAttackLeap" && !GameModel.ListTutoriel.Contains("warriorAttackLeap")) {
-
-			if(GameModel.HerosInGame [0].GetPosition ().z >= 10.0f && GameModel.HerosInGame[0].GetType().ToString() == "Warrior" && GameModel.PlayWithLeap == true) {
-				GameModel.ListTutoriel.Add("warriorAttaLeap");
-				return true;
-			}
-			return false;
-
-		} else if (name == "warriorDefenceLeap" && !GameModel.ListTutoriel.Contains("warriorDefenceLeap")) {
-
-			if (GameModel.HerosInGame [0].GetPosition ().z >= 15.0f && GameModel.HerosInGame[0].GetType().ToString() == "Warrior" && GameModel.PlayWithLeap == true){
-				GameModel.ListTutoriel.Add("warriorDefenceLeap");
-				return true;
-			}
-			return false;
-
-		} else if (name == "wizardAttackLeap" && !GameModel.ListTutoriel.Contains("wizardAttackLeap")) {
-
-			if(GameModel.HerosInGame [0].GetPosition ().z >= 10.0f && GameModel.HerosInGame[0].GetType().ToString() == "Wizard" && GameModel.PlayWithLeap == true){
-				GameModel.ListTutoriel.Add("wizardAttackLeap");
-				return true;
-			}
-			return false;
-
-		} else if (name == "wizardDefenceLeap" && !GameModel.ListTutoriel.Contains("wizardDefenceLeap")) {
-
-			if(GameModel.HerosInGame [0].GetPosition ().z >= 15.0f && GameModel.HerosInGame[0].GetType().ToString() == "Wizard" && GameModel.PlayWithLeap == true){
-				GameModel.ListTutoriel.Add("wizardDefenceLeap");
-				return true;
-			}
-			return false;
-
-		} else if (name == "monkAttackLeap" && !GameModel.ListTutoriel.Contains("monkAttackLeap")) {
-
-			if(GameModel.HerosInGame [0].GetPosition ().z >= 10.0f && GameModel.HerosInGame[0].GetType().ToString() == "Monk" && GameModel.PlayWithLeap == true){
-				GameModel.ListTutoriel.Add("monkAttackLeap");
-				return true;
-			}
-			return false;
-
-		} else if (name == "monkDefenceLeap" && !GameModel.ListTutoriel.Contains("monkDefenceLeap")) {
-
-			if(GameModel.HerosInGame [0].GetPosition ().z >= 15.0f && GameModel.HerosInGame[0].GetType().ToString() == "Monk" && GameModel.PlayWithLeap == true){
-				GameModel.ListTutoriel.Add("monkDefenceLeap");
-				return true;
-			}
-			return false;
-
-		} else if (name == "warriorAttackKeyboard" && !GameModel.ListTutoriel.Contains("warriorAttackKeyboard")) {
-
-			if(GameModel.HerosInGame [0].GetPosition ().z >= 10.0f && GameModel.HerosInGame[0].GetType().ToString() == "Warrior" && GameModel.PlayWithLeap == false){
-				GameModel.ListTutoriel.Add("warriorAttackKeyboard");
-				return true;
-			}
-			return false;
-
-		} else if (name == "warriorDefenceKeyboard" && !GameModel.ListTutoriel.Contains("warriorDefenceKeyboard")) {
-
-			if(GameModel.HerosInGame [0].GetPosition ().z >= 15.0f && GameModel.HerosInGame[0].GetType().ToString() == "Warrior" && GameModel.PlayWithLeap == false){
-				GameModel.ListTutoriel.Add("warriorDefenceKeyboard");
-				return true;
-			}
-			return false;
-
-		} else if (name == "wizardAttackKeyboard" && !GameModel.ListTutoriel.Contains("wizardAttackKeyboard")) {
-
-			if(GameModel.HerosInGame [0].GetPosition ().z >= 10.0f && GameModel.HerosInGame[0].GetType().ToString() == "Wizard" && GameModel.PlayWithLeap == false){
-				GameModel.ListTutoriel.Add("wizardAttackKeyboard");
-				return true;
-			}
-			return false;
-
-		} else if (name == "wizardDefenceKeyboard" && !GameModel.ListTutoriel.Contains("wizardDefenceKeyboard")) {
-
-			if(GameModel.HerosInGame [0].GetPosition ().z >= 15.0f && GameModel.HerosInGame[0].GetType().ToString() == "Wizard" && GameModel.PlayWithLeap == false){
-				GameModel.ListTutoriel.Add("wizardDefenceKeyboard");
-				return true;
-			}
-			return false;
-
-		} else if (name == "monkAttackKeyboard" && !GameModel.ListTutoriel.Contains("monkAttackKeyboard")) {
-
-			if(GameModel.HerosInGame [0].GetPosition ().z >= 10.0f && GameModel.HerosInGame[0].GetType().ToString() == "Monk" && GameModel.PlayWithLeap == false){
-				GameModel.ListTutoriel.Add("monkAttackKeyboard");
-				return true;
-			}
-			return false;
-
-		} else if (name == "monkDefenceKeyboard" && !GameModel.ListTutoriel.Contains("monkDefenceKeyboard")) {
-
-			if(GameModel.HerosInGame [0].GetPosition ().z >= 15.0f && GameModel.HerosInGame[0].GetType().ToString() == "Monk" && GameModel.PlayWithLeap == false){
-				GameModel.ListTutoriel.Add("monkDefenceKeyboard");
-				return true;
-			}
-			return false;
-
-		} else if (name == "Lancer" && !GameModel.ListTutoriel.Contains("Lancer")) {
+		if (name == "Lancer" && !GameModel.ListTutoriel.Contains("Lancer")) {
 			
 			NPC npc = GameModel.getNearestNPC ();
 			if (npc != null && npc.GetType().ToString().Contains("Lancer") && npc.GetPosition().z-GameModel.HerosInGame[0].GetPosition().z < distTrigger) {
@@ -274,20 +154,20 @@ public class Tutorial {
 			}
 			return false;
 
-		} else if (name == "Fire" && !GameModel.ListTutoriel.Contains("Fire")) {
+		} else if (name == "fire" && !GameModel.ListTutoriel.Contains("Fire")) {
 
 			NPC npc = GameModel.getNearestNPC ();
 			if(npc != null && npc.GetType().ToString().Contains("Fire") && npc.GetPosition().z-GameModel.HerosInGame[0].GetPosition().z < distTrigger){
-				GameModel.ListTutoriel.Add("Fire");
+				GameModel.ListTutoriel.Add("fire");
 				return true;
 			}
 			return false;
 		
-		} else if (name == "Ice" && !GameModel.ListTutoriel.Contains("Ice")) {
+		} else if (name == "ice" && !GameModel.ListTutoriel.Contains("Ice")) {
 
 			NPC npc = GameModel.getNearestNPC ();
 			if(npc != null && npc.GetType().ToString().Contains("Ice") && npc.GetPosition().z-GameModel.HerosInGame[0].GetPosition().z < distTrigger){
-				GameModel.ListTutoriel.Add("Ice");
+				GameModel.ListTutoriel.Add("ice");
 				return true;
 			}
 			return false;
