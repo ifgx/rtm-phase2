@@ -60,7 +60,7 @@ public class Monk : Hero {
 		//Debug.Log("powerHealConsumption debut prière:"+powerHealConsumption);
 		if(PowerQuantity <= 0.0f)
 		{
-			Debug.Log("prayerMode = false beacause powerquantity empty");
+			//Debug.Log("prayerMode = false beacause powerquantity empty");
 			PrayerMode = false;
 		}
 		else
@@ -128,7 +128,7 @@ public class Monk : Hero {
 			return prayerMode;
 		}
 		set{
-			Debug.Log ("Setter PrayerMode="+value);
+			//Debug.Log ("Setter PrayerMode="+value);
 			prayerMode = value;
 		}
 	}

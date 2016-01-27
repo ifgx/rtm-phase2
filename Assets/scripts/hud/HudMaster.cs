@@ -19,11 +19,13 @@ public class HudMaster : MonoBehaviour {
     public GameObject hudSpecial;
 	public GameObject hudXPBar;
 	public GameObject hudXPText;
-	public GameObject hudShield;
+	public GameObject hudCanvasEffect;
 	public GameObject hudClassText;
 
 
 	private Hero hero;
+
+	int actualLevel = 1;
 
 	
 	public void setHero(Hero hero) {
@@ -36,15 +38,17 @@ public class HudMaster : MonoBehaviour {
      */
     void Start () {
 
-
-		string heroClass = hero.GetType().ToString();
-
-		if (heroClass == "Warrior")
+		if (hero != null)
 		{
-			//warrior uses rage not mana, so get the right orb
-			Sprite spr = Resources.Load<Sprite>("sprite/orb_fill_right_green");
-			
-			hudSpecial.GetComponent<Image>().overrideSprite = spr;
+			string heroClass = hero.GetType().ToString();
+
+			if (heroClass == "Warrior")
+			{
+				//warrior uses rage not mana, so get the right orb
+				Sprite spr = Resources.Load<Sprite>("sprite/orb_fill_right_green");
+				
+				hudSpecial.GetComponent<Image>().overrideSprite = spr;
+			}
 		}
     }	
 
@@ -83,13 +87,20 @@ public class HudMaster : MonoBehaviour {
      * @param int level The level number
      */
 	public void updateXP(float xpPercent, int level) {
-		
+
+		//if we upped level, play the animation
+		if (level > actualLevel)
+		{
+			hudCanvasEffect.GetComponent<Animator>().SetTrigger("level_up");
+			//Debug.Log("Animator from level "+level+" to "+actualLevel + hudCanvasEffect.GetComponent<Animator>());
+			actualLevel = level;
+		}
+
 		hudXPText.GetComponentInChildren<Text>().text = level.ToString();
 		hudClassText.GetComponentInChildren<Text>().text = hero.GetType().ToString() + " rank ";
-
 		hudXPBar.GetComponent<Image>().fillAmount =  xpPercent / 100.0f;
-		
 	}
+
 	public void setRenderCamera(Camera cam) {
 		Canvas can = GetComponent<Canvas> ();
 		can.worldCamera = cam;

@@ -103,20 +103,7 @@ public class SandboxController : MonoBehaviour {
 
 		//Génération du HUD
 		hudMaster = Instantiate (hud).GetComponent<HudMaster>();
-/*<<<<<<< HEAD
-		hudMaster.setHero(hero);
-
-		
-		Camera.main.transform.parent = heroGameObject.transform;
-		Camera.main.transform.position = new Vector3 (0, 2.18f, 0);
-		GameObject MainCamera = GameObject.Find("Main Camera");
-		hero.HeroCamera = MainCamera;
-=======*/
 		hudMaster.setHero (hero);
-
-		
-
-
 	}
 	
 	// Update is called once per frame
@@ -136,7 +123,7 @@ public class SandboxController : MonoBehaviour {
 		
 			hudMaster.setLevel (HudMaster.HudType.Life, currentHealthPercent);
 			hudMaster.setLevel (HudMaster.HudType.Special, currentPowerPercent);
-			hudMaster.updateXP ((hero.XpQuantity - hero.XpQuantityLastLevel) / (hero.XpQuantityNextLevel - hero.XpQuantityLastLevel) * 100.0f, (int)hero.Level + 1);
+			hudMaster.updateXP ((hero.XpQuantity - hero.XpQuantityLastLevel) / (hero.XpQuantityNextLevel - hero.XpQuantityLastLevel) * 100.0f, (int)hero.Level);
 
 			if (Input.GetKeyDown (KeyCode.L)) {
 				GameModel.HerosInGame [0].XpQuantity += 100.0f;
