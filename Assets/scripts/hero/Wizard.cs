@@ -19,7 +19,6 @@ public class Wizard : Hero {
 	// Update is called once per frame
 	void Update () {
 		base.Update();
-		Debug.LogError("MY XP:"+XpQuantity);
 		if(PowerQuantity < MaxPowerQuantity)
 		{
 			if(base.lastRegenPower + 1 < Time.time)
@@ -67,7 +66,6 @@ public class Wizard : Hero {
 	{
 		if(level > 5)
 		{
-			Debug.LogWarning("LVL UP 2");
 			SpecialCapacityUnlocked = true;
 			LastCapacityUsed = Time.time;
 		}
@@ -85,7 +83,6 @@ public class Wizard : Hero {
 		}
 		else if(level > 1)
 		{
-			Debug.LogWarning("LVL UP");
 			Damage *= 1.1f;
 		}
 	}
