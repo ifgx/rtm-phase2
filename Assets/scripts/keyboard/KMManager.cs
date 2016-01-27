@@ -195,7 +195,7 @@ public class KMManager : MonoBehaviour {
 	private void WarriorUpdate(){
 		
 		
-		if (Input.GetMouseButton (0) && swordMov == 0) {
+		if (Input.GetMouseButton (0) && swordMov == 0 && Time.timeScale > 0) {
 			//Debug.Log("mouse button down");
 			swordMov = 1;
 		}
@@ -254,7 +254,7 @@ public class KMManager : MonoBehaviour {
 		
 		
 		
-		if (Input.GetMouseButton (0) && fireball == null && hero.PowerQuantity > HeroConfigurator.wizardAttackCost) {
+		if (Input.GetMouseButton (0) && fireball == null && hero.PowerQuantity > HeroConfigurator.wizardAttackCost && Time.timeScale > 0) {
 			//Debug.Log ("mouse button down");
 			
 			fireball = Instantiate (fireballGO);
@@ -302,7 +302,7 @@ public class KMManager : MonoBehaviour {
 		((Monk)hero).PrayerMode = Input.GetKey (KeyCode.Space);
 
 
-		if (Input.GetMouseButton (0) && staffMov == 0) {
+		if (Input.GetMouseButton (0) && staffMov == 0 && Time.timeScale > 0) {
 			//Debug.Log("mouse button down");
 			staffMov = 1;
 		}
