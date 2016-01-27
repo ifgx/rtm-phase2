@@ -2,6 +2,7 @@ using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 using SimpleJSON;
+using UnityEngine.UI;
 
 /**
  * @author Adrien D
@@ -297,6 +298,9 @@ public class GameController : MonoBehaviour {
 
 		pausedMenu = GameObject.Find("PauseCanvas");
 		pausedMenu.SetActive(false);
+
+		deathHud = GameObject.Find ("DeathCanvas");
+		deathHud.SetActive (false);
 
 		Time.timeScale = 1.0f;
 
@@ -600,14 +604,15 @@ public class GameController : MonoBehaviour {
 	 */
 	void dead(){
 		if (!deathDone) {
-			Instantiate (deathHud);
+			deathHud.SetActive(true);
+			
+			Text scoreTxt = deathHud.transform.Find("CanvasChild/Score").GetComponent<Text>();
+			scoreTxt.text = "Score : "+GameModel.Score;
 			HighScoreParser.addHighScore(GameModel.Hero.Name, GameModel.Score);
 			deathDone = true;
 			Cursor.visible = true;
 		}
-		if (Input.GetKeyDown(KeyCode.R)){
-			ReturnToMainMenu();
-		}
+		
 	}
 
 
