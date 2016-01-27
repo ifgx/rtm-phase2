@@ -109,7 +109,7 @@ public abstract class Dragonet : NPC {
 	**/
 	public void MoveToAttack()
 	{
-		Vector3 moveToAttack = new Vector3(Random.Range(-2.0F, 2.0F),Random.Range(0.0F, 2.0F),transform.position.z);
+		Vector3 moveToAttack = new Vector3(Random.Range(-10.0F, 10.0F),Random.Range(-10.0F, 10.0F),transform.position.z);
 		transform.Translate(base.MovementSpeed * moveToAttack * Time.deltaTime, Space.World);
 		//transform.position = new Vector3(Random.Range(-2.0F, 2.0F),Random.Range(0.0F, 2.0F),transform.position.z);
 	}

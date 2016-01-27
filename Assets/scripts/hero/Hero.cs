@@ -763,6 +763,7 @@ public abstract class Hero : Unit {
 				//Debug.LogWarning("BOOOM");
                 
                 LostHP(ennemy.Damage);
+                ennemy.SuccessiveBlocked = 0;
 			}
 		}
 		else if(hit.gameObject.tag == "ennemy_projectile")
