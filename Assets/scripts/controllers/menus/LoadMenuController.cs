@@ -6,6 +6,7 @@ using System.Collections.Generic;
 public class LoadMenuController : MonoBehaviour {
 
 	public GameObject go;
+	public GameObject loadingCanvas;
 
 	Button buttonPlay;
 	Button buttonSlot1;
@@ -119,6 +120,8 @@ public class LoadMenuController : MonoBehaviour {
 	}
 
 	public void Play() {
+
+		loadingCanvas.SetActive(true);
 		GameModel.loadSave(save);
 		Application.LoadLevel ("GameScene");
 	}

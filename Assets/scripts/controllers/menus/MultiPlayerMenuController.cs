@@ -6,6 +6,7 @@ using Leap;
 public class MultiPlayerMenuController : MonoBehaviour {
 
 	public GameObject go;
+	public GameObject loadingCanvas;
 
 	string userNamePlayer1;
 	InputField inputNamePlayer1;
@@ -174,6 +175,8 @@ public class MultiPlayerMenuController : MonoBehaviour {
 	public void Play(){
 		//menu.SetActive(false);
 		//loading.SetActive(true);
+
+		loadingCanvas.SetActive(true);
 
 		Hero hero1 = null;
 		if (warriorPlayer1) hero1 = new Warrior();

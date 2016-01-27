@@ -17,6 +17,8 @@ public class SingleMenuController : MonoBehaviour {
 	GameObject goCustom;
 	GameObject goTutorial;
 
+	public GameObject loadingCanvas;
+
 	UnityEngine.UI.Image imageCampaign;
 	UnityEngine.UI.Image imageCustom;
 	UnityEngine.UI.Image imageTutorial;
@@ -139,7 +141,10 @@ public class SingleMenuController : MonoBehaviour {
 
 	public void Play(){
 
+		loadingCanvas.SetActive(true);
+
 		if (campaign) {
+
 			GameModel.resetSaveSlot(HeroMenuController.Save);
 			GameModel.Hero.Name = HeroMenuController.Name;
 			GameModel.PlayWithLeap = LM;

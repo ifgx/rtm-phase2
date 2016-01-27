@@ -11,14 +11,13 @@ using System.Collections;
   * It is the entry point of the game to initialize the Game Model
   */
 public class LoadingController : MonoBehaviour {
-	
 
-	// Update is called once per frame
-	/**
-	 * Initialization of Game Model
-	 */
-	void Start () {
+
+	//Fix Unity crash bug if loadlevel on pre-frame
+	IEnumerator Start()
+	{
+		yield return null;
 		GameModel.Init ();
-		Application.LoadLevel ("Main_menu");
+		Application.LoadLevel("Main_menu");
 	}
 }
