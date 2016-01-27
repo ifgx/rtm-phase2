@@ -10,6 +10,9 @@ public class KMManager : MonoBehaviour {
 	GameObject fireball = null;
 	GameObject vortexGO;
 	GameObject vortex = null;
+
+	GameObject lifeEffectPrefab = null;
+	GameObject monkRegenPrefab = null;
 	
 	Camera cam = null;
 	
@@ -171,18 +174,6 @@ public class KMManager : MonoBehaviour {
 		} else if (Input.GetKey (KeyCode.D) && leftHand.transform.localPosition.x < screenBoundX) {
 			leftHand.transform.Translate(movSpeed*LEFT*Time.deltaTime);
 		}
-/*<<<<<<< HEAD
-		
-		
-		
-		if (swordMov == 0 && staffMov == 0) {
-			Vector3 lastPosition = rightHand.transform.position;
-			Vector3 v3 = Input.mousePosition;
-			
-			//NOT A GOOD WAY TO DO MOUSE CLAMPING BUT AT LEAST IT WORKS
-			
-			
-=======*/
 
 
 
@@ -192,7 +183,6 @@ public class KMManager : MonoBehaviour {
 		
 		
 		
-//>>>>>>> f17bbd7f6cedb82988adc926022f4a48dfb1afca
 			v3.z = 2;
 			v3 = cam.ScreenToWorldPoint (v3);
 			if (v3.x > 1 || !GameModel.MultiplayerModeOn) {
@@ -315,6 +305,19 @@ public class KMManager : MonoBehaviour {
 	private void MonkUpdate() {
 		//Animator anim = rightHand.GetComponentInChildren<Animator> ();
 		((Monk)hero).PrayerMode = Input.GetKey (KeyCode.Space);
+
+		if (((Monk)hero).PrayerMode) {
+			if (monkRegenPrefab == null) {
+				lifeEffectPrefab = Resources.Load("prefabs/hud/LifePotionEffect") as GameObject;
+				monkRegenPrefab = hero.attachHudPrefab (lifeEffectPrefab, -1, true);
+			}
+		} else {
+			if (monkRegenPrefab != null)
+			{
+				Destroy(monkRegenPrefab);
+				monkRegenPrefab = null;
+			}
+		}
 
 
 		if (Input.GetMouseButton (0) && staffMov == 0 && Time.timeScale > 0) {
