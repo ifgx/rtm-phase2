@@ -44,7 +44,7 @@ public class KMManager : MonoBehaviour {
 	float screenYFactor = 640;
 	float screenBoundYcenter;
 	
-	float movSpeed = 0.05f;
+	float movSpeed = 4f;
 	
 	
 	Vector3 UP;
@@ -160,24 +160,23 @@ public class KMManager : MonoBehaviour {
 	
 	private void updatePosition() {
 		if (Input.GetKey (KeyCode.Z) && leftHand.transform.localPosition.y < screenBoundY+screenBoundYcenter) {
-			leftHand.transform.Translate(movSpeed*UP);
+			leftHand.transform.Translate(movSpeed*UP*Time.deltaTime);
 		} else if (Input.GetKey (KeyCode.S) && leftHand.transform.localPosition.y > -screenBoundY+screenBoundYcenter) {
-			leftHand.transform.Translate(movSpeed*DOWN);
+			leftHand.transform.Translate(movSpeed*DOWN*Time.deltaTime);
 		}
 		//Debug.Log (leftHand.transform.position.x + " | " + screenBoundX);
 		if (Input.GetKey (KeyCode.Q) && leftHand.transform.localPosition.x > -screenBoundX) {
-			leftHand.transform.Translate(movSpeed*RIGHT);
+			leftHand.transform.Translate(movSpeed*RIGHT*Time.deltaTime);
 		} else if (Input.GetKey (KeyCode.D) && leftHand.transform.localPosition.x < screenBoundX) {
-			leftHand.transform.Translate(movSpeed*LEFT);
+			leftHand.transform.Translate(movSpeed*LEFT*Time.deltaTime);
 		}
 
 
 
-		if (swordMov == 0 && staffMov == 0) {
+		if (swordMov == 0 && staffMov == 0 && Time.timeScale > 0) {
 			Vector3 lastPosition = rightHand.transform.position;
 			Vector3 v3 = Input.mousePosition;
 		
-			//NOT A GOOD WAY TO DO MOUSE CLAMPING BUT AT LEAST IT WORKS
 		
 		
 			v3.z = 2;
