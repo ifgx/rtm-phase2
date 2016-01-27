@@ -512,13 +512,6 @@ public class GameController : MonoBehaviour {
 	 */
 	void play(){
 		//Gestion hÃ©ros
-		/*if (!bloque) {
-			//faire avancer HÃ©ros
-			//hero.Run(Time.deltaTime);
-			GameModel.HerosInGame[0].Run(Time.deltaTime);
-			//Camera.main.transform.position = new Vector3(0, 2.18f, hero.GetPosition().z);
-		}*/
-
 		
 		Hero hero = GameModel.HerosInGame [0];
 		
@@ -541,7 +534,7 @@ public class GameController : MonoBehaviour {
 			
 			hudMaster2.setLevel (HudMaster.HudType.Life, currentHealthPercent);
 			hudMaster2.setLevel (HudMaster.HudType.Special, currentPowerPercent);
-			hudMaster2.updateXP (hero.XpQuantity/hero.XpQuantityNextLevel*100.0f, (int)hero.Level + 1);
+			hudMaster2.updateXP (hero.XpQuantity/hero.XpQuantityNextLevel*100.0f, (int)hero.Level);
 		}
 
 		//Debug.Log (GameModel.NPCsInGame.Count);

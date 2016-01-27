@@ -1,6 +1,1 @@
-{"name":"level 3","music":"The Complex","map":"terrain3","tutorial":false,"items":[
-  {"id":1,"type":"basicLancer","position_seconds":"5","position_x":"0"},
-  {"id":2,"type":"life","position_seconds":"10","position_x":"1"},
-  {"id":3,"type":"fireLancer","position_seconds":"30","position_x":"1"}
-
-  ]}
+{"name":"level 3","music":"The Complex","map":"terrain3","tutorial":false,"items":[{"id":1,"type":"basicLancer","position_seconds":"5","position_x":"0"},{"id":2,"type":"fireLancer","position_seconds":"10","position_x":"1"}]}
