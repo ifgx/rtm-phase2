@@ -211,7 +211,7 @@ public class GameController : MonoBehaviour {
 				ter = Instantiate (terrain1, new Vector3 (-100, -2, 0), Quaternion.identity) as Terrain;
 				break;
 			case "terrain2":
-				Debug.Log("LEVEL NAME :"+GameModel.ActualLevel.Map+"|");
+				//Debug.Log("LEVEL NAME :"+GameModel.ActualLevel.Map+"|");
 				ter = Instantiate (terrain2, new Vector3 (-100, -2, 0), Quaternion.identity) as Terrain;
 				break;
 			case "terrain3":
@@ -265,13 +265,26 @@ public class GameController : MonoBehaviour {
 
 			if (go != null){
 
-				float posX;
+				float posX = 0f;
 				if (!GameModel.MultiplayerModeOn){
 					posX = item.PositionInX;
 				}else {
-					//if (item.PositionInX == 0) item.PositionInX = Mathf.Sign(Random.Range(-1,1))*Random.Range(0.1f,1);
-					//posX = Mathf.Sign(item.PositionInX)*Mathf.Log(Mathf.Abs(item.PositionInX))*1.8f;
-					posX = item.PositionInX;
+					
+					// a gauche ou a droite
+					if (item.Type.Contains("Lancer") || item.Type == "assassin" || item.Type == "life" || item.Type == "power" || item.Type == "invincibility") {
+						float sign = Mathf.Sign(Random.Range(-1f,1f));
+						
+						posX = item.PositionInX/2f+sign*2f;
+					}else if (item.Type.Contains("Dragonet")){
+						posX = item.PositionInX/2f-2f;
+						GameObject instancep = Instantiate(go, new Vector3(posX, go.transform.localScale.y/2, vitesseHeros*item.PositionInSeconds), Quaternion.identity) as GameObject;
+						NPC npcp = instancep.GetComponent<NPC>();
+						GameModel.NPCsInGame.Add(npcp);
+						
+						posX = item.PositionInX/2f+2f;
+					} else {
+						posX = item.PositionInX;
+					}
 				}
 				GameObject instance = Instantiate(go, new Vector3(posX, go.transform.localScale.y/2, vitesseHeros*item.PositionInSeconds), Quaternion.identity) as GameObject;
 				NPC npc = instance.GetComponent<NPC>();
@@ -653,7 +666,7 @@ public class GameController : MonoBehaviour {
 	 * Trigger the next level scene
 	 */
 	public void NextLevel(){
-		//GameModel.ActualLevelId++;
+		GameModel.ActualLevelId++;
 		if(GameModel.HerosInGame.Count < 2)
 		{
 			//Debug.LogError("To save:"+GameModel.HerosInGame[0].Name+" ,XP:"+GameModel.HerosInGame[0].XpQuantity);
