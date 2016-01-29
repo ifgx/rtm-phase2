@@ -530,7 +530,8 @@ public class HandController : MonoBehaviour
 				else if (distance > 100)
 				{
 					//Debug.Log ("Handcontroller setting PayerMode to false. Distance = "distance+" | MonkParayer);
-					((Monk) hero).PrayerMode = false;
+					if (((Monk) hero).PrayerMode == true)
+						((Monk) hero).PrayerMode = false;
 
 					if (monkRegenPrefab != null)
 					{
@@ -542,7 +543,8 @@ public class HandController : MonoBehaviour
 
 			if(nbHandValid < 2)
 			{
-				((Monk) hero).PrayerMode = false;
+				if (((Monk) hero).PrayerMode == true)
+					((Monk) hero).PrayerMode = false;
 			}
 		}
 	}

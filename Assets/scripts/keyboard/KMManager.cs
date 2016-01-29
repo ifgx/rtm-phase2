@@ -304,6 +304,7 @@ public class KMManager : MonoBehaviour {
 	
 	private void MonkUpdate() {
 		//Animator anim = rightHand.GetComponentInChildren<Animator> ();
+		//if (Input.GetKey (KeyCode.Space) && 
 		((Monk)hero).PrayerMode = Input.GetKey (KeyCode.Space);
 
 		if (((Monk)hero).PrayerMode) {
@@ -324,7 +325,7 @@ public class KMManager : MonoBehaviour {
 			//Debug.Log("mouse button down");
 			staffMov = 1;
 		}
-		Debug.Log (staffMov);
+		//Debug.Log (staffMov);
 		if (staffMov == 1) {
 
 			rightHand.transform.Rotate (new Vector3(0,-staffRotateSpeed1,0)*Time.deltaTime, Space.World);

@@ -61,7 +61,8 @@ public class Monk : Hero {
 		if(PowerQuantity <= 0.0f)
 		{
 			//Debug.Log("prayerMode = false beacause powerquantity empty");
-			PrayerMode = false;
+			if (this.PrayerMode == true)
+				PrayerMode = false;
 		}
 		else
 		{
@@ -134,14 +135,18 @@ public class Monk : Hero {
 			return prayerMode;
 		}
 		set{
-			//Debug.Log ("Setter PrayerMode="+value);
-			prayerMode = value;
-
-			if (prayerMode == false)
+			//avoid variable rewrite and spam if same state
+			if (prayerMode != value)
 			{
-				audioManager.stopHealSound();
-			}
+				Debug.Log ("Setter PrayerMode="+value);
+				prayerMode = value;
 
+				if (prayerMode == false)
+				{
+					if (audioManager != null)
+						audioManager.stopHealSound();
+				}
+			}
 		}
 	}
 
