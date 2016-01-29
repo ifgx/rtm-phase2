@@ -121,7 +121,7 @@ public class HudMaster : MonoBehaviour {
 
 		hudXPText.GetComponentInChildren<Text>().text = level.ToString();
 		hudClassText.GetComponentInChildren<Text>().text = hero.GetType().ToString() + " rank ";
-		hudXPBar.GetComponent<Image>().fillAmount =  xpPercent / 100.0f;
+		hudXPBar.GetComponent<Image>().fillAmount =  xpPercent;
 	}
 
 	public void setRenderCamera(Camera cam) {
