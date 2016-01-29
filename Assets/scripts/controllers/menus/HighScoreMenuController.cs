@@ -53,7 +53,7 @@ public class HighScoreMenuController : MonoBehaviour {
 			//rect.position = new Vector3(-8.5f, 152.4f, 0.0f);
 
 			if(i < highScores.Count) {
-				text.text = pos.ToString()+"\tName : "+highScores[i].Name+"\t\tScore : "+highScores[i].Score;
+				text.text = pos.ToString()+"\t"+highScores[i].Name+" -- "+highScores[i].Score;
 			} else {
 				text.text = pos.ToString()+"\tEmpty";
 			}
