@@ -117,7 +117,7 @@ public class AudioProcessor : MonoBehaviour
 
         int average = (int)(sum / entries);
 
-        Debug.Log("average = " + average);
+        //Debug.Log("average = " + average);
     }
 
     double[] toDoubleArray(float[] arr)

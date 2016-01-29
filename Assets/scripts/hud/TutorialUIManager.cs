@@ -26,7 +26,7 @@ public class TutorialUIManager : MonoBehaviour {
 		title = GameObject.Find("Title").GetComponent<Text>();
 		attack = GameObject.Find("Attack").GetComponent<Text>();
 		desc = GameObject.Find("Description").GetComponent<Text>();
-		Debug.Log ("text : " + title);
+		//Debug.Log ("text : " + title);
 		image = transform.GetComponentsInChildren<Image>()[1];
 	}
 
@@ -57,7 +57,7 @@ public class TutorialUIManager : MonoBehaviour {
 	 */
 	public void setImage(string imageName){
 		Sprite sprite = Resources.Load<Sprite>("helpImages/"+imageName) as Sprite;
-		Debug.Log ("helpImages/" + imageName);
+		//Debug.Log ("helpImages/" + imageName);
 		//Debug.Log (sprite.bounds);
 		image.sprite = sprite;
 	}

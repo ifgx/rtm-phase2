@@ -178,8 +178,8 @@ public class GameController : MonoBehaviour {
 
 		
 
-		Debug.Log (level.Name);
-		Debug.Log (level.Tutorial);
+		//Debug.Log (level.Name);
+		//Debug.Log (level.Tutorial);
 		//Debug.Log ("START Start GameController");
 
 
@@ -349,7 +349,7 @@ public class GameController : MonoBehaviour {
 		//ADD TUTORIAL MANAGER
 
 		if (level.Tutorial) {
-			Debug.Log("ZBRA");
+			//Debug.Log("ZBRA");
 			GameObject tutoGO = Resources.Load("prefabs/controllers/TutorialManager") as GameObject;
 		 	Instantiate (tutoGO);
 		}
