@@ -167,12 +167,16 @@ public class GameController : MonoBehaviour {
 
 		//GameModel.Init();
 		GameModel.resetDataBeforeLevel ();
-
-		GameModel.loadSave(GameModel.Slot);
+		
+		if (!GameModel.PlayWithTuto){
+			GameModel.loadSave(GameModel.Slot);
+		}
 		level = GameModel.ActualLevel;
 
-		//Debug.Log (level.Name);
+		
 
+		Debug.Log (level.Name);
+		Debug.Log (level.Tutorial);
 		//Debug.Log ("START Start GameController");
 
 
@@ -342,6 +346,7 @@ public class GameController : MonoBehaviour {
 		//ADD TUTORIAL MANAGER
 
 		if (level.Tutorial) {
+			Debug.Log("ZBRA");
 			GameObject tutoGO = Resources.Load("prefabs/controllers/TutorialManager") as GameObject;
 		 	Instantiate (tutoGO);
 		}

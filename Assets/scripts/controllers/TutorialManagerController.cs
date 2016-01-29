@@ -91,7 +91,7 @@ public class TutorialManagerController : MonoBehaviour {
 //			timerFreeze = 0.0f;
 //		}
 
-		if (Input.GetKey(KeyCode.Space) || Input.GetMouseButton (0)) {
+		if (Input.GetKey(KeyCode.Return)) {
 			Destroy(tutoUIInstance);
 			state = TutorialState.NORMAL;
 			Time.timeScale = 1.0f;
@@ -99,7 +99,7 @@ public class TutorialManagerController : MonoBehaviour {
 	}
 
 	/**
-	 * The update method when we are on NORMAL mode
+	 * The update method when we are on NORMAL mod
 	 */
 	private void normal(){
 		timerNormal += Time.deltaTime;
