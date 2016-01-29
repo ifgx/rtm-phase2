@@ -37,6 +37,6 @@ public class FireDragonet : Dragonet {
 			EnnemyConfigurator.fireDragonetAttackType,
 			EnnemyConfigurator.fireDragonetName)
 	{
-
+		fireBallTint = new Color(255.0f/255,37.0f/255,13.0f/255,59.0f/255);//new Color(115.0f/255,88.0f/255,85.0f/255,89.0f/255);
 	}
 }

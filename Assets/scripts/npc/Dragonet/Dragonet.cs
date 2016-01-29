@@ -9,6 +9,7 @@ public abstract class Dragonet : NPC {
 	
 	private GameObject fireball = null;
 	private GameObject fireballGo = null;
+	protected Color fireBallTint;
 	
 	protected void Awake(){
 		
@@ -76,6 +77,8 @@ public abstract class Dragonet : NPC {
 				fireball = Instantiate(fireballGo);
 				//fireball.GetComponentInChildren<HeroLinkWeapon>().Hero = hero;
 				fireball.transform.parent = transform; //need to attach to this
+				Debug.Log(fireBallTint);
+				fireball.transform.GetComponent<Renderer>().material.SetColor("_TintColor", fireBallTint);
 				//get the lifebar position because dragonnet position is messed up
 				fireball.transform.position = this.transform.position; //GetComponentInChildren<Canvas>().transform.position;
 				fireball.transform.localPosition = new Vector3(0, 2.3f, 0);
