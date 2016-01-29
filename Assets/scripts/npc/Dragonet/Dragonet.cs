@@ -77,7 +77,7 @@ public abstract class Dragonet : NPC {
 				fireball = Instantiate(fireballGo);
 				//fireball.GetComponentInChildren<HeroLinkWeapon>().Hero = hero;
 				fireball.transform.parent = transform; //need to attach to this
-				Debug.Log(fireBallTint);
+				//Debug.Log(fireBallTint);
 				fireball.transform.GetComponent<Renderer>().material.SetColor("_TintColor", fireBallTint);
 				//get the lifebar position because dragonnet position is messed up
 				fireball.transform.position = this.transform.position; //GetComponentInChildren<Canvas>().transform.position;
