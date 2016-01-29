@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using Game;
+using Leap;
 
 /**
  * @author Adrien D
@@ -40,6 +41,9 @@ public class SandboxController : MonoBehaviour {
 	private GameObject leapPrefab;
 	private GameObject leapInstance;
 	private HandController leapControl;
+
+	private GameObject kmManagerPrefab;
+	private GameObject kmManager;
 	
 	private Hero hero;
 	private GameObject heroGameObject;
@@ -78,6 +82,8 @@ public class SandboxController : MonoBehaviour {
 		wizard = Resources.Load("prefabs/hero/Wizard") as GameObject;
 		
 		leapPrefab = Resources.Load("prefabs/leapmotion/LeapMotionScene") as GameObject;
+
+		kmManagerPrefab = Resources.Load ("prefabs/keyboard/KMManager") as GameObject;
 	}
 
 	// Use this for initialization
@@ -221,15 +227,24 @@ public class SandboxController : MonoBehaviour {
 		GameModel.HerosInGame.Add (hero);
 		//string heroClass = hero.GetType ().ToString ();
 		//LEAP
-		leapInstance = Instantiate (leapPrefab);
-		//Debug.Log ("leapInstance : " + leapInstance);
-		//the leap motion scene is child of camera so it follow the translation
-		leapInstance.transform.parent = Camera.main.transform;
-		leapInstance.transform.position = new Vector3 (0f, 2.5f, 1.6f);
-		//sets the "hand parent" field so the arms also are child of camera and don't flicker
-		leapControl = leapInstance.GetComponent<HandController> ();
-		leapControl.setModel(handSide, hero);
-		leapControl.handParent = Camera.main.transform;
+		Controller controllerLM = new Controller();
+		if (controllerLM != null && controllerLM.IsConnected) {
+			leapInstance = Instantiate (leapPrefab);
+			//Debug.Log ("leapInstance : " + leapInstance);
+			//the leap motion scene is child of camera so it follow the translation
+			leapInstance.transform.parent = Camera.main.transform;
+			leapInstance.transform.position = new Vector3 (0f, 2.5f, 1.6f);
+			//sets the "hand parent" field so the arms also are child of camera and don't flicker
+			leapControl = leapInstance.GetComponent<HandController> ();
+			leapControl.setModel (handSide, hero);
+			leapControl.handParent = Camera.main.transform;
+		} else {
+			kmManager = Instantiate (kmManagerPrefab);
+			
+			KMManager keyboardManager = kmManager.GetComponent<KMManager> ();
+			keyboardManager.setHero (hero);
+			keyboardManager.setCamera (Camera.main);
+		}
 
 		Camera.main.transform.parent = heroGameObject.transform;
 		Camera.main.transform.position = new Vector3 (0, 2.18f, 0);
