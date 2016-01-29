@@ -54,8 +54,9 @@ public class TerrainAutoGeneration : MonoBehaviour {
 
                 //Debug.Log ("#### MIDDLE #### " + middleTerrainZ);
                 string terrainToLoad = "";
-                switch (GameModel.ActualLevel.Map)
-                {
+				if (GameModel.ActualLevelId != -1) {
+                	switch (GameModel.ActualLevel.Map)
+                	{
                     case "terrain1":
                         terrainToLoad = "terrain1";
                         break;
@@ -68,7 +69,10 @@ public class TerrainAutoGeneration : MonoBehaviour {
                     default:
                         terrainToLoad = "terrain1";
                         break;
-                }
+                	}
+				}else{
+					terrainToLoad = "terrain1";
+				}
                 Instantiate(Resources.Load("prefabs/"+terrainToLoad) as GameObject, new Vector3 (-100, -2, terrainPosZ + terrainLength), Quaternion.identity);
 				terrainCreated = true;
 			}
