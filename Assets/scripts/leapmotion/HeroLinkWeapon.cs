@@ -27,9 +27,11 @@ public class HeroLinkWeapon : MonoBehaviour {
 	}
 
 	public void Start(){
-		float diameter = ((Wizard)hero).fireBallDiameter/2;
-		transform.localScale = new Vector3(diameter/2, 0, 0);
-		this.GetComponent<ParticleSystem>().startSize = diameter;
+		if (hero.GetType().ToString() == "Wizard") {
+			float diameter = ((Wizard)hero).fireBallDiameter/2;
+			transform.localScale = new Vector3(diameter/2, 0, 0);
+			this.GetComponent<ParticleSystem>().startSize = diameter;
+		}
 
 		if(child == false){
 			if(hero.SpecialCapacityUnlocked)

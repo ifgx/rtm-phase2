@@ -137,7 +137,7 @@ public class Monk : Hero {
 			//Debug.Log ("Setter PrayerMode="+value);
 			prayerMode = value;
 
-			if (prayerMode == false)
+			if (audioManager != null && prayerMode == false)
 			{
 				audioManager.stopHealSound();
 			}
