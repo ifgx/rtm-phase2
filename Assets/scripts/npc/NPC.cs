@@ -51,6 +51,7 @@ public abstract class NPC : Unit {
 
 
     Image lifeImageNPC;
+	//Text classTextNPC;
 
 	AudioSource audio;
 	protected bool audioInit = false;
@@ -178,6 +179,11 @@ public abstract class NPC : Unit {
 		}
 
 		lifeImageNPC = this.gameObject.GetComponentInChildren<Image> ();
+
+
+		//below works but is not eathetics
+		//classTextNPC = this.gameObject.GetComponentInChildren<Text>();
+		//classTextNPC.text = this.GetType().ToString();
 
 		initiated = true;
 	}
@@ -462,9 +468,10 @@ public abstract class NPC : Unit {
 			}else{
 				audioManager.playHeroSwordSound();
 			}
-            Vector3 imageScale = lifeImageNPC.rectTransform.localScale;
-			imageScale.Set(hp / maxHp, 1, 0);
-			lifeImageNPC.rectTransform.localScale = imageScale;
+//Vector3 imageScale = lifeImageNPC.rectTransform.localScale;
+			//imageScale.Set(hp / maxHp, 1, 0);
+			//lifeImageNPC.rectTransform.localScale = imageScale;
+			lifeImageNPC.fillAmount = hp / maxHp;
 			
 			if(IsDead())
 			{
@@ -489,9 +496,10 @@ public abstract class NPC : Unit {
             audioManager = GameObject.Find("Main Camera").GetComponent<AudioManager>();
             audioManager.playFireballSound();
 
-            Vector3 imageScale = lifeImageNPC.rectTransform.localScale;
-			imageScale.Set(hp / maxHp, 1, 0);
-			lifeImageNPC.rectTransform.localScale = imageScale;
+            //Vector3 imageScale = lifeImageNPC.rectTransform.localScale;
+			//imageScale.Set(hp / maxHp, 1, 0);
+			//lifeImageNPC.rectTransform.localScale = imageScale;
+			lifeImageNPC.fillAmount = hp / maxHp;
 			
 			if(IsDead())
 			{
