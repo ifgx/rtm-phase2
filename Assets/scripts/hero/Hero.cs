@@ -870,7 +870,7 @@ public abstract class Hero : Unit {
 			foreach( ParticleSystem ps in particleSystems)
 			{
 				ps.loop = true;
-				Debug.Log ("foreach of "+ps);
+				//Debug.Log ("foreach of "+ps);
 			}
 		}
 

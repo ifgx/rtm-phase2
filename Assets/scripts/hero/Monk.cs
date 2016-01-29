@@ -138,7 +138,7 @@ public class Monk : Hero {
 			//avoid variable rewrite and spam if same state
 			if (prayerMode != value)
 			{
-				Debug.Log ("Setter PrayerMode="+value);
+				//Debug.Log ("Setter PrayerMode="+value);
 				prayerMode = value;
 
 				if (prayerMode == false)
