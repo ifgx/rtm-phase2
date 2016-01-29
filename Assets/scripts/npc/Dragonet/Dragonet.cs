@@ -148,10 +148,8 @@ public abstract class Dragonet : NPC {
 		}
 		newX = Random.Range(xMin, xMax);
 		newY = Random.Range(-yMin, yMax);
-		Debug.Log("newX:"+newX);
-		Debug.Log("newY:"+newY);
+
 		moveToAttack = new Vector3(factorX*newX,factorY*newY,0);
-		Debug.Log("posX:"+transform.position.x+",posy:"+transform.position.y);
 		transform.Translate(moveToAttack, Space.World);
 		//transform.position = new Vector3(Random.Range(-2.0F, 2.0F),Random.Range(0.0F, 2.0F),transform.position.z);
 	}
