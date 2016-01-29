@@ -91,6 +91,8 @@ public class GameController : MonoBehaviour {
 	private HandSide handSide;
 
 
+		private AudioClip soundClosing;
+
 
 	private float tempsMusique = 240f;
 
@@ -155,6 +157,7 @@ public class GameController : MonoBehaviour {
 		kmManagerPrefab = Resources.Load ("prefabs/keyboard/KMManager") as GameObject;
 
 		//Debug.Log (" END Awake GameController");
+		soundClosing = Resources.Load("sounds/pop-up-close") as AudioClip;
 
 	}
 
@@ -596,12 +599,13 @@ public class GameController : MonoBehaviour {
 		}
 
 		if (!pauseFlag && (Input.GetKey(KeyCode.Escape) || Input.GetKeyDown(KeyCode.P))){
-			state = GameState.PLAY;
+			/*state = GameState.PLAY;
 			Time.timeScale = 1.0f;
 			pausedMenu.SetActive(false);
 			Cursor.visible = false;
 			
-			pauseFlag = true;
+			pauseFlag = true;*/
+				Resume ();
 		}
 	}
 
@@ -620,9 +624,7 @@ public class GameController : MonoBehaviour {
 		}
 		
 	}
-
-
-
+		
 	/**
 	 * Restarts the level
 	 * For test purposes
@@ -679,11 +681,15 @@ public class GameController : MonoBehaviour {
 	 * Resume the game scene
 	 * for test purposes
 	 */
-	public void Resume(){
+	public void Resume()
+	{
+		
+		(hudMaster.GetComponent<AudioSource>()).PlayOneShot(soundClosing);
 		pausedMenu.SetActive(false);
 		state = GameState.PLAY;
 		Time.timeScale = 1.0f;
 		Cursor.visible = false;
+		pauseFlag = true;
 		//leapControl.setPointerMode(false);
 	}
 	
