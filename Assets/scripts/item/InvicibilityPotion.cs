@@ -11,6 +11,12 @@ using System.Collections;
  */
 public class InvicibilityPotion : Potion {
 
+	AudioSource audioSource;
+
+	void Start()
+	{
+		audioSource = GetComponent<AudioSource>();
+	}
 	//private float gain = 200.0f;
 
 	/**
@@ -20,6 +26,6 @@ public class InvicibilityPotion : Potion {
 
 		hero.makeInvincible (7.0f);
 		hero.attachHudPrefab(Resources.Load("prefabs/hud/InvinciblePotionEffect") as GameObject, 7);
-
+		audioSource.PlayScheduled(0); //immediate play loaded clip
 	}
 }

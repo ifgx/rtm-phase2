@@ -14,7 +14,7 @@ public abstract class Potion : MonoBehaviour {
     private AudioManager audioManager;
 
     public Potion(){
-		
+		audioManager = GameObject.Find("Main Camera").GetComponent<AudioManager>();
 	}
 
 	public Vector3 GetPosition()
@@ -33,7 +33,7 @@ public abstract class Potion : MonoBehaviour {
 		if (other.gameObject.tag == "Player") {
 			Hero hero = other.gameObject.GetComponentInParent<Hero> ();
 			triggerEffect (hero);
-            audioManager = GameObject.Find("Main Camera").GetComponent<AudioManager>();
+            
             audioManager.playPotionSound();
             GameModel.PotionsInGame.Remove (this);
 			Destroy(this.gameObject);
