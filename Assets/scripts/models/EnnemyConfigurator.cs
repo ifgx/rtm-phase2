@@ -41,7 +41,7 @@ public class EnnemyConfigurator : MonoBehaviour {
 	public static float basicDragonetMovementSpeed = 5.0f;
 	public static float basicDragonetAttackSpeed = 2.0f;
 	public static float basicDragonetXpGain = 30.0f;
-	public static float basicDragonetHp = 30.0f;
+	public static float basicDragonetHp = 50.0f;
 	public static float basicDragonetDamage = 40.0f;
 	public static float basicDragonetAggroDistance = 30.0f;
 	public static float basicDragonetAttackRange = 2.5f;
@@ -53,7 +53,7 @@ public class EnnemyConfigurator : MonoBehaviour {
 	public static float fireDragonetMovementSpeed = 5.0f;
 	public static float fireDragonetAttackSpeed = 2.0f;
 	public static float fireDragonetXpGain = 75.0f;
-	public static float fireDragonetHp = 30.0f;
+	public static float fireDragonetHp = 80.0f;
 	public static float fireDragonetDamage = 60.0f;
 	public static float fireDragonetAggroDistance = 30.0f;
 	public static float fireDragonetAttackRange = 2.5f;
@@ -65,7 +65,7 @@ public class EnnemyConfigurator : MonoBehaviour {
 	public static float iceDragonetMovementSpeed = 5.0f;
 	public static float iceDragonetAttackSpeed = 2.0f;
 	public static float iceDragonetXpGain = 150.0f;
-	public static float iceDragonetHp = 30.0f;
+	public static float iceDragonetHp = 180.0f;
 	public static float iceDragonetDamage = 80.0f;
 	public static float iceDragonetAggroDistance = 30.0f;
 	public static float iceDragonetAttackRange = 2.5f;

@@ -27,7 +27,16 @@ public class Monk : Hero {
 		{
 			Pray();
 		}
+
+		if(PowerQuantity < MaxPowerQuantity)
+		{
+			if(base.lastRegenPower + 1 < Time.time)
+			{
+				base.RegenPower();	
+			}
+		}
 	}
+
 
 	/**
 	* Constructeur de la classe Monk
