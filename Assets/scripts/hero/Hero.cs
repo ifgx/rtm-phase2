@@ -817,6 +817,7 @@ public abstract class Hero : Unit {
 	{
 		invincibleTime = Time.time + time;
 		isInvincible = true;
+		this.attachHudPrefab(Resources.Load("prefabs/hud/InvinciblePotionEffect") as GameObject, (int)time);
 	}
 
 	public void unmakeInvincible()

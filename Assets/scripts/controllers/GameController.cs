@@ -170,12 +170,16 @@ public class GameController : MonoBehaviour {
 
 		//GameModel.Init();
 		GameModel.resetDataBeforeLevel ();
-
-		GameModel.loadSave(GameModel.Slot);
+		
+		if (!GameModel.PlayWithTuto){
+			GameModel.loadSave(GameModel.Slot);
+		}
 		level = GameModel.ActualLevel;
 
-		//Debug.Log (level.Name);
+		
 
+		Debug.Log (level.Name);
+		Debug.Log (level.Tutorial);
 		//Debug.Log ("START Start GameController");
 
 
@@ -345,6 +349,7 @@ public class GameController : MonoBehaviour {
 		//ADD TUTORIAL MANAGER
 
 		if (level.Tutorial) {
+			Debug.Log("ZBRA");
 			GameObject tutoGO = Resources.Load("prefabs/controllers/TutorialManager") as GameObject;
 		 	Instantiate (tutoGO);
 		}
@@ -538,7 +543,7 @@ public class GameController : MonoBehaviour {
 		
 		hudMaster.setLevel (HudMaster.HudType.Life, currentHealthPercent);
 		hudMaster.setLevel (HudMaster.HudType.Special, currentPowerPercent);
-		hudMaster.updateXP (hero.XpQuantity/hero.XpQuantityNextLevel*100.0f, (int)hero.Level);
+		hudMaster.updateXP (hero.XpQuantityToDisplay(), (int)hero.Level);
 
 		if (hudMaster2 != null) {
 			hero = GameModel.HerosInGame [1];
@@ -550,7 +555,7 @@ public class GameController : MonoBehaviour {
 			
 			hudMaster2.setLevel (HudMaster.HudType.Life, currentHealthPercent);
 			hudMaster2.setLevel (HudMaster.HudType.Special, currentPowerPercent);
-			hudMaster2.updateXP (hero.XpQuantity/hero.XpQuantityNextLevel*100.0f, (int)hero.Level);
+			hudMaster2.updateXP (hero.XpQuantityToDisplay(), (int)hero.Level);
 		}
 
 		//Debug.Log (GameModel.NPCsInGame.Count);
