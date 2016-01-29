@@ -112,8 +112,45 @@ public abstract class Dragonet : NPC {
 	**/
 	public void MoveToAttack()
 	{
-		Vector3 moveToAttack = new Vector3(Random.Range(-10.0F, 10.0F),Random.Range(-10.0F, 10.0F),transform.position.z);
-		transform.Translate(base.MovementSpeed * moveToAttack * Time.deltaTime, Space.World);
+		float x = transform.position.x;
+		float y = transform.position.y;
+		float xMin = -1.0f;
+		float xMax = 1.0f;
+		float yMin = -0.5f;
+		float yMax = 0.5f;
+		float newX;
+		float newY;
+		Vector3 moveToAttack;
+		float factorX = 1.0f;
+		float factorY = 1.0f;
+
+		if(x > 2.0f)
+		{
+			xMin = -3.0f;
+			xMax = 0.0f;
+			factorX = -factorX;
+		}
+		if(x < -2.0f)
+		{
+			xMin = 0.0f;
+			xMax = 3.0f;
+		}
+		if(y > 0.4f)
+		{
+			yMin = -0.3f;
+			yMax = 0.0f;
+			factorY = -factorY;
+		}
+		if(y < 0.1f)
+		{
+			yMin = 0.0f;
+			yMax = 0.20f;
+		}
+		newX = Random.Range(xMin, xMax);
+		newY = Random.Range(-yMin, yMax);
+
+		moveToAttack = new Vector3(factorX*newX,factorY*newY,0);
+		transform.Translate(moveToAttack, Space.World);
 		//transform.position = new Vector3(Random.Range(-2.0F, 2.0F),Random.Range(0.0F, 2.0F),transform.position.z);
 	}
 }
