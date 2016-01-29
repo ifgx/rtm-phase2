@@ -22,7 +22,8 @@ public class HudMaster : MonoBehaviour {
 	public GameObject hudCanvasEffect;
 	public GameObject hudClassText;
 
-
+	private AudioSource audioSource;
+	private AudioClip levelUpSound;
 	private Hero hero;
 
 	int actualLevel = 1;
@@ -30,6 +31,13 @@ public class HudMaster : MonoBehaviour {
 	
 	public void setHero(Hero hero) {
 		this.hero = hero;
+	}
+
+
+
+	void Awake() {
+		audioSource = GetComponent<AudioSource>();
+		levelUpSound = Resources.Load("sounds/level_up") as AudioClip;
 	}
 
     // Use this for initialization
@@ -88,6 +96,14 @@ public class HudMaster : MonoBehaviour {
         }
     }
 
+	private void LevelUpHud()
+	{
+		hudCanvasEffect.GetComponent<Animator>().SetTrigger("level_up");
+		audioSource.PlayOneShot(levelUpSound);
+	}
+
+				
+
     /**
      * Update XP bar to a certain value
      * @param float xpPercent The XP percent from 0 to 100
@@ -98,7 +114,8 @@ public class HudMaster : MonoBehaviour {
 		//if we upped level, play the animation
 		if (level > actualLevel)
 		{
-			hudCanvasEffect.GetComponent<Animator>().SetTrigger("level_up");
+			LevelUpHud();
+			
 			//Debug.Log("Animator from level "+level+" to "+actualLevel + hudCanvasEffect.GetComponent<Animator>());
 			actualLevel = level;
 		}

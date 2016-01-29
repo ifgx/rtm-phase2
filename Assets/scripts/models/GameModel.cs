@@ -254,9 +254,9 @@ public class GameModel {
 	public static void Init(){
 		levels = LevelParser.parseAllLevelFiles ("LvlList");
 
-		foreach (Level level in levels) {
+		/*foreach (Level level in levels) {
 			//Debug.Log(level.Tutorial);
-		}
+		}*/
 
 		ActualLevelId = 0;
 

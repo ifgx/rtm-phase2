@@ -13,3 +13,5 @@ EditorBuildSettings:
     path: Assets/scenes/game/GameScene.unity
   - enabled: 1
     path: Assets/scenes/game/NextLevelScene.unity
+  - enabled: 1
+    path: Assets/scenes/menus/TutoScene.unity

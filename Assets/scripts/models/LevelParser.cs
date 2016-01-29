@@ -16,7 +16,7 @@ using SimpleJSON;
 public class LevelParser {
 
 	public static void saveLevelToFile(Level level) {
-		JSONNode json = LevelToJSON (level);
+		//JSONNode json = LevelToJSON (level);
 
 		System.IO.File.WriteAllText (Application.dataPath + "/../Levels/" + level.Name + ".JSON", LevelToJSON(level).ToString());
 		Debug.Log (level.Name);

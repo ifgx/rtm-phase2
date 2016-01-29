@@ -9,11 +9,11 @@ public abstract class Lancer : NPC {
 
 	Animation animation;
 	
-	AudioSource audio;
+	//AudioSource audio;
 
 	protected void Awake(){
 		animation = GetComponentInChildren<Animation>();
-		audio = GetComponentInChildren<AudioSource>();
+		//audio = GetComponentInChildren<AudioSource>();
 	}
 
 	// Use this for initialization

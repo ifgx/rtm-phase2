@@ -199,7 +199,7 @@ public class GameController : MonoBehaviour {
 
 
 		//GÃ©nÃ©ration de terrain
-		float longueurTerrain = vitesseHeros * tempsMusique;
+		//float longueurTerrain = vitesseHeros * tempsMusique;
 
 		/*ter = Instantiate( terrain, new Vector3(0,0,0), Quaternion.identity) as GameObject;
 		ter.transform.Rotate (0, -90, 0);
