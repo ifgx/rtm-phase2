@@ -103,7 +103,6 @@ public class HudMaster : MonoBehaviour {
 	}
 
 				
-
     /**
      * Update XP bar to a certain value
      * @param float xpPercent The XP percent from 0 to 100

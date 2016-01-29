@@ -26,6 +26,7 @@ public class NextLevelController : MonoBehaviour {
 	 * Initialize max timer and timer
 	 */
 	void Start () {
+		Cursor.visible = false;
 		max = 3.0f;
 		time = 0.0f;
 	}

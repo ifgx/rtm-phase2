@@ -628,6 +628,7 @@ public class GameController : MonoBehaviour {
 	 * For test purposes
 	 */
 	public void Restart() {
+		Cursor.visible = false;
 		Application.LoadLevel ("GameScene");
 	}
 
@@ -682,6 +683,7 @@ public class GameController : MonoBehaviour {
 		pausedMenu.SetActive(false);
 		state = GameState.PLAY;
 		Time.timeScale = 1.0f;
+		Cursor.visible = false;
 		//leapControl.setPointerMode(false);
 	}
 	

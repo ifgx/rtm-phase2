@@ -2,10 +2,7 @@
 using System.Collections;
 
 public class HeroConfigurator : MonoBehaviour {
-
-	// HERO
-	/*public static string ;
-	public static float ;*/
+	
 
 	// WARRIOR
 	public static string warriorAttackType = "CaC";
@@ -15,7 +12,7 @@ public class HeroConfigurator : MonoBehaviour {
 	public static float warriorHpRefresh = 20.0f;
 	public static float warriorPowerRefresh = 200.0f;
 	public static float warriorHp = 1000.0f;
-	public static float warriorDamage = 10.0f;
+	public static float warriorDamage = 15.0f;
 	public static float warriorMovementSpeed = 3.0f;
 	public static float warriorRange = 5.0f;
 
@@ -25,9 +22,9 @@ public class HeroConfigurator : MonoBehaviour {
 	public static float monkBlockingPercent = 50.0f;
 	public static float monkPowerQuantity = 1000.0f;
 	public static float monkHpRefresh = 20.0f;
-	public static float monkPowerRefresh = 100.0f;
+	public static float monkPowerRefresh = 30.0f;
 	public static float monkHp = 1100.0f;
-	public static float monkDamage = 8.0f;
+	public static float monkDamage = 11.0f;
 	public static float monkMovementSpeed = 3.0f;
 	public static float monkRange = 5.0f;
 
@@ -43,7 +40,7 @@ public class HeroConfigurator : MonoBehaviour {
 	public static float wizardHpRefresh = 10.0f;
 	public static float wizardPowerRefresh = 10.0f;
 	public static float wizardHp = 1100.0f;
-	public static float wizardDamage = 15.0f;
+	public static float wizardDamage = 8.0f;
 	public static float wizardMovementSpeed = 3.0f;
 	public static float wizardRange = 5.0f;
 	public static float wizardAttackCost = 100;

@@ -23,7 +23,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 194824}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 13.4407, y: 0.49597132, z: 33.600655}
+  m_LocalPosition: {x: 13.4406996, y: .495971322, z: 33.6006546}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -39,13 +39,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5d712f4686122047a1bfcbe3301952d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  cursorTexture: {fileID: 2800000, guid: 516f9a0f90df4b74b8436b65a316f613, type: 3}
+  cursorMode: 1
+  hotSpot: {x: 0, y: 0}
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1
   serializedVersion: 2
   m_Modification:
     m_TransformParent: {fileID: 0}
-    m_Modifications: []
+    m_Modifications:
+    - target: {fileID: 0}
+      propertyPath: cursorTexture
+      value: 
+      objectReference: {fileID: 2800000, guid: 516f9a0f90df4b74b8436b65a316f613, type: 3}
+    - target: {fileID: 0}
+      propertyPath: cursorMode
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 194824}

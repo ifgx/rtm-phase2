@@ -12,10 +12,15 @@ using System.Collections;
   */
 public class LoadingController : MonoBehaviour {
 
+	void Awake() {
+		Cursor.visible = false;
+	}
 
 	//Fix Unity crash bug if loadlevel on pre-frame
 	IEnumerator Start()
 	{
+		Cursor.visible = false;
+
 		yield return null;
 		GameModel.Init ();
 		Application.LoadLevel("Main_menu");
