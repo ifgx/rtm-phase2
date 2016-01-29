@@ -253,7 +253,7 @@ public class GameModel {
 	 */
 	public static void Init(){
 
-		Debug.Log ("INIT !!!!!!");
+		//Debug.Log ("INIT !!!!!!");
 		levels = LevelParser.parseAllLevelFiles ("LvlList");
 
 		/*foreach (Level level in levels) {
@@ -261,11 +261,7 @@ public class GameModel {
 		}*/
 
 		ActualLevelId = 0;
-
-		heros = new List<Hero> ();
-		heros.Add (new Warrior ());
-		heros.Add (new Wizard ());
-
+		
 		herosInGame = new List<Hero> ();
 
 		heros = new List<Hero> ();

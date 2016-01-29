@@ -148,9 +148,8 @@ public class SingleMenuController : MonoBehaviour {
 		loadingCanvas.SetActive(true);
 
 		if (campaign) {
-
-			GameModel.resetSaveSlot(HeroMenuController.Save);
 			GameModel.Hero.Name = HeroMenuController.Name;
+			GameModel.resetSaveSlot(HeroMenuController.Save);
 			GameModel.PlayWithLeap = LM;
 			GameModel.PlayWithTuto = false;
 			GameModel.goToFirstLevel();
