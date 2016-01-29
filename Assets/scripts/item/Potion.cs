@@ -14,7 +14,7 @@ public abstract class Potion : MonoBehaviour {
     private AudioManager audioManager;
 
     public Potion(){
-		audioManager = GameObject.Find("Main Camera").GetComponent<AudioManager>();
+
 	}
 
 	public Vector3 GetPosition()
@@ -24,6 +24,14 @@ public abstract class Potion : MonoBehaviour {
 		float z = this.transform.position.z;
 
 		return new Vector3(x,y,z);
+	}
+
+	void Update() {
+
+		if (audioManager == null) {
+			audioManager = GameObject.Find("Main Camera").GetComponent<AudioManager>();
+		}
+	
 	}
 
 	/**
