@@ -71,7 +71,16 @@ public class LevelGenerator {
 				depthCount += Random.Range (itemSpaceMin, itemSpaceMax);
 			}
 			//clip.name = "zbra";
-			Level level = new Level (musicName, musicName, "undefined", itemList, false);
+			int terrainNum = Random.Range(0,3);
+			string terrainName;
+			switch (terrainNum) {
+			case 0: terrainName = "terrain1"; break;
+			case 1: terrainName = "terrain1"; break;
+			case 2: terrainName = "terrain1"; break;
+			default: terrainName = "undefined"; break;
+			}
+
+			Level level = new Level (musicName, musicName, terrainName, itemList, false);
 	
 			LevelParser.saveLevelToFile (level);
 

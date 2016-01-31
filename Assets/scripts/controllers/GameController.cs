@@ -159,7 +159,7 @@ public class GameController : MonoBehaviour {
 		//GameModel.Init();
 		GameModel.resetDataBeforeLevel ();
 		
-		if (!GameModel.PlayWithTuto){
+		if (!GameModel.PlayWithTuto && !GameModel.CustomLevel){
 			GameModel.loadSave(GameModel.Slot);
 		}
 		level = GameModel.ActualLevel;
