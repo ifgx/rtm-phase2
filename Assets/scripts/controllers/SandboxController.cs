@@ -104,9 +104,7 @@ public class SandboxController : MonoBehaviour {
 
 		ter = Instantiate (terrain, new Vector3 (-100, -2, 0), Quaternion.identity) as Terrain;
 
-		//Génération du HUD
-		hudMaster = Instantiate (hud).GetComponent<HudMaster>();
-		hudMaster.setHero (hero);
+
 	}
 	
 	// Update is called once per frame
@@ -251,6 +249,10 @@ public class SandboxController : MonoBehaviour {
 		Camera.main.transform.parent = heroGameObject.transform;
 		Camera.main.transform.position = new Vector3 (0, 2.18f, 0);
 
+		//Génération du HUD
+		hudMaster = Instantiate (hud).GetComponent<HudMaster>();
+		hudMaster.setHero (hero);
+
 
 	}
 
@@ -273,5 +275,7 @@ public class SandboxController : MonoBehaviour {
 		GameModel.HerosInGame.Clear ();
 
 		Camera.main.transform.position = new Vector3 (0, 4, 0);
+
+		Destroy (hudMaster.gameObject);
 	}
 }
