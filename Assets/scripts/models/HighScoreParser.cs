@@ -35,28 +35,44 @@ public class HighScoreParser {
 		highScores = parseHighScoreFile();
 
 		int size = highScores.Count;
+		Debug.Log("init size : "+size);
 
 		string lastName = "";
 		int lastScore = 0;
 		int i = size-1;
+		Debug.Log("init i : "+i);
 
-		while(i != 0) {
 
-			lastName = highScores[i].Name;
-			lastScore = highScores[i].Score;
+		if(i != -1) { // si le fichier highScore.json est vide
+			Debug.Log("fichier highScore non vide");
+			while(i != -1) {
+				lastName = highScores[i].Name;
+				lastScore = highScores[i].Score;
 
-			if(score > lastScore){
-				highScores[i].Name = name;
-				highScores[i].Score = score;
+				if(score > lastScore){
+					Debug.Log("score plus élevé que le dernier verifier");
+					highScores[i].Name = name;
+					highScores[i].Score = score;
 
-				if(size - 1 != i){
-					highScores[i+1].Name = lastName;
-					highScores[i+1].Score = lastScore;
+					Debug.Log("i : "+i);
+					Debug.Log("size : "+(size-1));
+					if(size - 1 != i){
+						Debug.Log("pas de nouvelle case");
+						highScores[i+1].Name = lastName;
+						highScores[i+1].Score = lastScore;
+					} else if(size <= 10){
+						Debug.Log("nouvelle case a jouter");
+						highScores.Add(new HighScore(lastName, lastScore));
+					}
+
 				}
-			}
 
-			i--;
+				i--;
+			}
+		} else {
+			highScores.Add(new HighScore(name, score));
 		}
+
 
 		saveHighScoreToFile();
 	}
