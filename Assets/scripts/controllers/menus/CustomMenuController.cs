@@ -7,7 +7,7 @@ public class CustomMenuController : MonoBehaviour {
 
 	public GameObject go;
 
-	string customSong;
+	private static string customSong;
 	string[] tmp;
 
 	Button buttonSong;
@@ -85,6 +85,16 @@ public class CustomMenuController : MonoBehaviour {
 
 		set {
 			songText.text = value;
+		}
+	}
+
+	public static string CustomSong {
+		get {
+			return customSong;
+		}
+
+		set {
+			customSong = value;
 		}
 	}
 }
