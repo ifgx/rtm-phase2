@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using Game;
+using Leap;
 
 /**
  * @author Adrien D
@@ -40,6 +41,9 @@ public class SandboxController : MonoBehaviour {
 	private GameObject leapPrefab;
 	private GameObject leapInstance;
 	private HandController leapControl;
+
+	private GameObject kmManagerPrefab;
+	private GameObject kmManager;
 	
 	private Hero hero;
 	private GameObject heroGameObject;
@@ -78,6 +82,8 @@ public class SandboxController : MonoBehaviour {
 		wizard = Resources.Load("prefabs/hero/Wizard") as GameObject;
 		
 		leapPrefab = Resources.Load("prefabs/leapmotion/LeapMotionScene") as GameObject;
+
+		kmManagerPrefab = Resources.Load ("prefabs/keyboard/KMManager") as GameObject;
 	}
 
 	// Use this for initialization
@@ -94,21 +100,11 @@ public class SandboxController : MonoBehaviour {
         audioManager = GameObject.Find("Main Camera").GetComponent<AudioManager>();
         audioManager.Init();
 
-        //If leap is not connected, Pause game and show warning message
-        if ( !leapControl.IsConnected())
-		{
-			//pause()
-			Time.timeScale = 0.0f;
-			
-			GameObject detectedCanvas = GameObject.Find("DetectedLeapCanvas");
-			detectedCanvas.GetComponent<Canvas>().enabled = true;
-		}
+        
 
 		ter = Instantiate (terrain, new Vector3 (-100, -2, 0), Quaternion.identity) as Terrain;
 
-		//Génération du HUD
-		hudMaster = Instantiate (hud).GetComponent<HudMaster>();
-		hudMaster.setHero (hero);
+
 	}
 	
 	// Update is called once per frame
@@ -128,7 +124,7 @@ public class SandboxController : MonoBehaviour {
 		
 			hudMaster.setLevel (HudMaster.HudType.Life, currentHealthPercent);
 			hudMaster.setLevel (HudMaster.HudType.Special, currentPowerPercent);
-			hudMaster.updateXP ((hero.XpQuantity - hero.XpQuantityLastLevel) / (hero.XpQuantityNextLevel - hero.XpQuantityLastLevel) * 100.0f, (int)hero.Level);
+			hudMaster.updateXP ((hero.XpQuantityToDisplay()), (int)hero.Level);
 
 			if (Input.GetKeyDown (KeyCode.L)) {
 				GameModel.HerosInGame [0].XpQuantity += 100.0f;
@@ -221,18 +217,41 @@ public class SandboxController : MonoBehaviour {
 		GameModel.HerosInGame.Add (hero);
 		//string heroClass = hero.GetType ().ToString ();
 		//LEAP
-		leapInstance = Instantiate (leapPrefab);
-		//Debug.Log ("leapInstance : " + leapInstance);
-		//the leap motion scene is child of camera so it follow the translation
-		leapInstance.transform.parent = Camera.main.transform;
-		leapInstance.transform.position = new Vector3 (0f, 2.5f, 1.6f);
-		//sets the "hand parent" field so the arms also are child of camera and don't flicker
-		leapControl = leapInstance.GetComponent<HandController> ();
-		leapControl.setModel(handSide, hero);
-		leapControl.handParent = Camera.main.transform;
+		Controller controllerLM = new Controller();
+		if (controllerLM != null && controllerLM.IsConnected) {
+			leapInstance = Instantiate (leapPrefab);
+			//Debug.Log ("leapInstance : " + leapInstance);
+			//the leap motion scene is child of camera so it follow the translation
+			leapInstance.transform.parent = Camera.main.transform;
+			leapInstance.transform.position = new Vector3 (0f, 2.5f, 1.6f);
+			//sets the "hand parent" field so the arms also are child of camera and don't flicker
+			leapControl = leapInstance.GetComponent<HandController> ();
+			leapControl.setModel (handSide, hero);
+			leapControl.handParent = Camera.main.transform;
+
+			//If leap is not connected, Pause game and show warning message
+			if ( !leapControl.IsConnected())
+			{
+				//pause()
+				Time.timeScale = 0.0f;
+				
+				GameObject detectedCanvas = GameObject.Find("DetectedLeapCanvas");
+				detectedCanvas.GetComponent<Canvas>().enabled = true;
+			}
+		} else {
+			kmManager = Instantiate (kmManagerPrefab);
+			
+			KMManager keyboardManager = kmManager.GetComponent<KMManager> ();
+			keyboardManager.setHero (hero);
+			keyboardManager.setCamera (Camera.main);
+		}
 
 		Camera.main.transform.parent = heroGameObject.transform;
 		Camera.main.transform.position = new Vector3 (0, 2.18f, 0);
+
+		//Génération du HUD
+		hudMaster = Instantiate (hud).GetComponent<HudMaster>();
+		hudMaster.setHero (hero);
 
 
 	}
@@ -240,10 +259,23 @@ public class SandboxController : MonoBehaviour {
 	public void deleteHero(){
 		Camera.main.transform.parent = null;
 
-		Destroy (leapInstance);
+		if (kmManager != null) {
+			Destroy(kmManager);
+			kmManager = null;
+		}
+
+		foreach (Transform child in Camera.main.transform) {
+			GameObject.Destroy(child.gameObject);
+		}
+
 		Destroy (heroGameObject);
+		Destroy (leapInstance);
+		Destroy (leapControl);
+
 		GameModel.HerosInGame.Clear ();
 
 		Camera.main.transform.position = new Vector3 (0, 4, 0);
+
+		Destroy (hudMaster.gameObject);
 	}
 }
