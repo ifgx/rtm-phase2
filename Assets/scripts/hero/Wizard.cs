@@ -58,6 +58,7 @@ public class Wizard : Hero {
 		RegenPower();
 		RegenPower();
 		powerQuantity += HeroConfigurator.wizardRegenAttack;
+		GameModel.Score += 100;
 	}
 	
 	/**
