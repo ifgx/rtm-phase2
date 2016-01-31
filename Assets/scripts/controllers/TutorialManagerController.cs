@@ -34,12 +34,10 @@ public class TutorialManagerController : MonoBehaviour {
 	 * Max timers
 	 */
 	private float maxTimerFreeze = 3.0f;
-	private float maxTimerNormal = 3.0f;
 
 	/**
 	 * Timers
 	 */
-	private float timerFreeze = 0.0f;
 	private float timerNormal = 0.0f;
 
 	/**

@@ -31,10 +31,10 @@ public class LevelParser {
 		root.Add ("name",name);
 
 		JSONData music = new JSONData (level.MusicPath);
-		root.Add ("music",name);
+		root.Add ("music",music);
 
 		JSONData map = new JSONData (level.Map);
-		root.Add ("map",name);
+		root.Add ("map",map);
 
 		JSONData tutorial = new JSONData (level.Tutorial);
 		root.Add ("tutorial", tutorial);

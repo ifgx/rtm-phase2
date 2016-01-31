@@ -19,7 +19,6 @@ public class SandboxController : MonoBehaviour {
 	private GameObject terrain;
 	
 	private GameObject hud;
-	private GameObject deathHud;
 	private HudMaster hudMaster;
 	
 	private GameObject basicLancer;
@@ -47,7 +46,6 @@ public class SandboxController : MonoBehaviour {
 	
 	private Hero hero;
 	private GameObject heroGameObject;
-	private Terrain ter;
 
 	private bool paused;
 	private GameObject pausedMenu;
@@ -63,7 +61,6 @@ public class SandboxController : MonoBehaviour {
 		terrain = Resources.Load ("prefabs/Terrain1") as GameObject;
 		
 		hud = Resources.Load ("prefabs/hud/hudPrefab") as GameObject;
-		deathHud = Resources.Load("prefabs/hud/DeathHud") as GameObject;
 		
 		basicLancer = Resources.Load("prefabs/npc/BasicLancer") as GameObject;
 		fireLancer = Resources.Load("prefabs/npc/FireLancer") as GameObject;
@@ -102,7 +99,7 @@ public class SandboxController : MonoBehaviour {
 
         
 
-		ter = Instantiate (terrain, new Vector3 (-100, -2, 0), Quaternion.identity) as Terrain;
+		Instantiate (terrain, new Vector3 (-100, -2, 0), Quaternion.identity);
 
 
 	}

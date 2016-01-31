@@ -27,16 +27,12 @@ public class KMManager : MonoBehaviour {
 	
 	int staffMov = 0;
 	float staffRotateSpeed1 = 150;
-	float staffRotateSpeed2 = 200;
 	float staffTranslateSpeedX1 = 10;
-	float staffTranslateSpeedZ = 20;
 	float staffTranslateSpeedX2 = 10;
 	float staffTranslateSpeedX3 = 30;
 	
 	
 	float shieldTranslateSpeed = 5;
-	
-	float mouseSpeed = 100f;
 	
 	Hero hero;
 	string heroClass;
