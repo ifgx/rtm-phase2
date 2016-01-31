@@ -626,6 +626,9 @@ public class GameController : MonoBehaviour {
 			HighScoreParser.addHighScore(GameModel.Hero.Name, GameModel.Score);
 			deathDone = true;
 			Cursor.visible = true;
+			
+			
+			Time.timeScale = 0.0f;
 		}
 		
 	}
