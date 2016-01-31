@@ -14,6 +14,6 @@ public class CanonBall : MonoBehaviour {
 
 
 	public CanonBall(){
-		Debug.Log ("Position:"+this.gameObject.transform.position.y);
+		//Debug.Log ("Position:"+this.gameObject.transform.position.y);
 	}
 }

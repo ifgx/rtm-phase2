@@ -176,7 +176,7 @@ public class GameModel {
 		}else{
 			while (actualLevelId+1 < levels.Count) {
 				ActualLevelId ++;
-				Debug.Log("level : " + ActualLevel.Name);
+				//Debug.Log("level : " + ActualLevel.Name);
 				if (ActualLevel.Tutorial == playWithTuto){
 					return true;
 				}
@@ -255,7 +255,7 @@ public class GameModel {
 	 */
 	public static void Init(){
 
-		Debug.Log ("INIT !!!!!!");
+		//Debug.Log ("INIT !!!!!!");
 		levels = LevelParser.parseAllLevelFiles ("LvlList");
 
 		/*foreach (Level level in levels) {
