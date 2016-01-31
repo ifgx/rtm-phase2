@@ -100,15 +100,7 @@ public class SandboxController : MonoBehaviour {
         audioManager = GameObject.Find("Main Camera").GetComponent<AudioManager>();
         audioManager.Init();
 
-        //If leap is not connected, Pause game and show warning message
-        if ( !leapControl.IsConnected())
-		{
-			//pause()
-			Time.timeScale = 0.0f;
-			
-			GameObject detectedCanvas = GameObject.Find("DetectedLeapCanvas");
-			detectedCanvas.GetComponent<Canvas>().enabled = true;
-		}
+        
 
 		ter = Instantiate (terrain, new Vector3 (-100, -2, 0), Quaternion.identity) as Terrain;
 
@@ -134,7 +126,7 @@ public class SandboxController : MonoBehaviour {
 		
 			hudMaster.setLevel (HudMaster.HudType.Life, currentHealthPercent);
 			hudMaster.setLevel (HudMaster.HudType.Special, currentPowerPercent);
-			hudMaster.updateXP ((hero.XpQuantity - hero.XpQuantityLastLevel) / (hero.XpQuantityNextLevel - hero.XpQuantityLastLevel) * 100.0f, (int)hero.Level);
+			hudMaster.updateXP ((hero.XpQuantityToDisplay()), (int)hero.Level);
 
 			if (Input.GetKeyDown (KeyCode.L)) {
 				GameModel.HerosInGame [0].XpQuantity += 100.0f;
@@ -238,6 +230,16 @@ public class SandboxController : MonoBehaviour {
 			leapControl = leapInstance.GetComponent<HandController> ();
 			leapControl.setModel (handSide, hero);
 			leapControl.handParent = Camera.main.transform;
+
+			//If leap is not connected, Pause game and show warning message
+			if ( !leapControl.IsConnected())
+			{
+				//pause()
+				Time.timeScale = 0.0f;
+				
+				GameObject detectedCanvas = GameObject.Find("DetectedLeapCanvas");
+				detectedCanvas.GetComponent<Canvas>().enabled = true;
+			}
 		} else {
 			kmManager = Instantiate (kmManagerPrefab);
 			
@@ -255,8 +257,10 @@ public class SandboxController : MonoBehaviour {
 	public void deleteHero(){
 		Camera.main.transform.parent = null;
 
-		Destroy (leapInstance);
 		Destroy (heroGameObject);
+		Destroy (leapInstance);
+		Destroy (leapControl);
+
 		GameModel.HerosInGame.Clear ();
 
 		Camera.main.transform.position = new Vector3 (0, 4, 0);

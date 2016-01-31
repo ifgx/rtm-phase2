@@ -46,6 +46,8 @@ public class GameModel {
 	private static int slot;
 
 	private static bool playWithTuto;
+
+	private static bool onSandBox;
 		
 	private static List<string> listTutoriel; // permet de prendre en compte les tuto déja passé
 
@@ -282,6 +284,8 @@ public class GameModel {
 
 		TutorialManagerController.tutorials = new List<Tutorial> ();
 		listTutoriel = new List<string>();
+
+		onSandBox = false;
 	}
 
 	public static void resetDataBeforeLevel(){
@@ -364,6 +368,15 @@ public class GameModel {
 		}
 		set {
 			playWithTuto = value;
+		}
+	}
+
+	public static bool OnSandBox {
+		get {
+			return onSandBox;
+		}
+		set {
+			onSandBox = value;
 		}
 	}
 

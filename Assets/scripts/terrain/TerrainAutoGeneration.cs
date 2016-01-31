@@ -39,6 +39,8 @@ public class TerrainAutoGeneration : MonoBehaviour {
 		createMusicalLights ();
 		createMushrooms ();	
 		createParticleLights ();
+
+		GameModel.OnSandBox = true;
 	}
 	
 	
@@ -54,7 +56,8 @@ public class TerrainAutoGeneration : MonoBehaviour {
 
                 //Debug.Log ("#### MIDDLE #### " + middleTerrainZ);
                 string terrainToLoad = "";
-				if (GameModel.ActualLevelId != -1) {
+				//Debug.Log (GameModel.ActualLevelId);
+				if (!GameModel.OnSandBox) {
                 	switch (GameModel.ActualLevel.Map)
                 	{
                     case "terrain1":
