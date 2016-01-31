@@ -257,6 +257,15 @@ public class SandboxController : MonoBehaviour {
 	public void deleteHero(){
 		Camera.main.transform.parent = null;
 
+		if (kmManager != null) {
+			Destroy(kmManager);
+			kmManager = null;
+		}
+
+		foreach (Transform child in Camera.main.transform) {
+			GameObject.Destroy(child.gameObject);
+		}
+
 		Destroy (heroGameObject);
 		Destroy (leapInstance);
 		Destroy (leapControl);
