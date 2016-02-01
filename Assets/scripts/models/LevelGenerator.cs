@@ -34,7 +34,7 @@ public class LevelGenerator {
 		string fileName = splitedPath [splitedPath.Length - 1];
 		string[] splitedFileName = fileName.Split ('.');
 		string musicName = splitedFileName[0];
-		Debug.Log (musicName);
+		//Debug.Log (musicName);
 
 		//USING WWW to load the audioclip in root/Musics
 		string path = "file://" + Application.dataPath + "/../Musics/" + musicName + ".wav";

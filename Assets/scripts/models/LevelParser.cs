@@ -19,7 +19,7 @@ public class LevelParser {
 		//JSONNode json = LevelToJSON (level);
 
 		System.IO.File.WriteAllText (Application.dataPath + "/../Levels/" + level.Name + ".JSON", LevelToJSON(level).ToString());
-		Debug.Log (level.Name);
+		//Debug.Log (level.Name);
 		//json.SaveToFile(Application.dataPath + "/../Levels/" + level.Name + ".JSON");
 	}
 

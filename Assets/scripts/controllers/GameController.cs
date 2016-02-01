@@ -73,6 +73,7 @@ public class GameController : MonoBehaviour {
 	private GameObject leapInstance;
 	private HandController leapControl;
 	private GameObject leapCanvasPrefab;
+	private GameObject leapCanvas;
 
 	private GameObject kmManagerPrefab;
 	private GameObject kmManager;
@@ -81,6 +82,7 @@ public class GameController : MonoBehaviour {
 	
 	private Hero hero;
 	private GameObject heroGameObject;
+	private Terrain ter;
 
 	private GameState state;
 	private bool pauseFlag = false;
@@ -89,9 +91,14 @@ public class GameController : MonoBehaviour {
 	private HandSide handSide;
 
 
-	private AudioClip soundClosing;
+		private AudioClip soundClosing;
+
+
+	private float tempsMusique = 240f;
 
 	private float multiplayerHerosOffset = 1.7f;
+
+	private List<GameObject> npcList;
 
 	/**
 	 * Timers
@@ -100,8 +107,13 @@ public class GameController : MonoBehaviour {
 	private float timerEnd = 0.0f;
 	private float maxTimerEnd = 3.0f;
 
+	private float timerGeste = 0.0f;
+	private float maxTimerGesteAttaque = 1.0f;
+	private float maxTimerGesteDefense = 2.0f;
 	private LeapControl.ActionState lastState;
+	private bool actionDone = false;
 
+	private bool bloque = false;
 
 	private bool deathDone = false;
 
@@ -159,14 +171,14 @@ public class GameController : MonoBehaviour {
 		//GameModel.Init();
 		GameModel.resetDataBeforeLevel ();
 		
-		if (!GameModel.PlayWithTuto && !GameModel.CustomLevel){
+		if (!GameModel.PlayWithTuto){
 			GameModel.loadSave(GameModel.Slot);
 		}
 		level = GameModel.ActualLevel;
 
 		
 
-		Debug.Log (level.Name);
+		//Debug.Log (level.Name);
 		//Debug.Log (level.Tutorial);
 		//Debug.Log ("START Start GameController");
 
@@ -174,7 +186,8 @@ public class GameController : MonoBehaviour {
 		//recupÃ©ration des options
 		handSide = HandSide.RIGHT_HAND;
 
-
+		//lire fichier niveau
+		//LevelParser parser = new LevelParser (FILE_PATH);
 
 		//gÃ©nÃ©ration du hÃ©ros
 
@@ -192,28 +205,42 @@ public class GameController : MonoBehaviour {
 		
 
 
-	
+		//GÃ©nÃ©ration de terrain
+		//float longueurTerrain = vitesseHeros * tempsMusique;
+
+		/*ter = Instantiate( terrain, new Vector3(0,0,0), Quaternion.identity) as GameObject;
+		ter.transform.Rotate (0, -90, 0);
+		ter.transform.localScale = new Vector3 (longueurTerrain, 1, 1);
+		*/
+		//Debug.Log("LEVEL NAME :"+GameModel.ActualLevel.Map+"|");
 		switch(GameModel.ActualLevel.Map){
 			case "terrain1":
-				Instantiate (terrain1, new Vector3 (-100, -2, 0), Quaternion.identity);
+				ter = Instantiate (terrain1, new Vector3 (-100, -2, 0), Quaternion.identity) as Terrain;
 				break;
 			case "terrain2":
 				//Debug.Log("LEVEL NAME :"+GameModel.ActualLevel.Map+"|");
-				Instantiate (terrain2, new Vector3 (-100, -2, 0), Quaternion.identity);
+				ter = Instantiate (terrain2, new Vector3 (-100, -2, 0), Quaternion.identity) as Terrain;
 				break;
 			case "terrain3":
-				Instantiate (terrain3, new Vector3 (-100, -2, 0), Quaternion.identity);
+				ter = Instantiate (terrain3, new Vector3 (-100, -2, 0), Quaternion.identity) as Terrain;
 				break;
 			default:
+				//ter = Instantiate (terrain1, new Vector3 (-100, -2, 0), Quaternion.identity) as Terrain;
 				break;
 			}
 		
+		//ter.terrainData.size = new Vector3 (1.0f, 1.0f, 1.0f);
+		//ter.terrainData.size = new Vector3 (200, 200, 1);
 
 
-		
 
+		//gÃ©nÃ©ration des ennemis
+		npcList = new List<GameObject> ();
+		//Debug.Log (npcList);
+
+		//List<Thing> ennemies = parser.getEnnemies ();
 		List<Item> items = level.ItemList;
-		
+		//Debug.Log ("FINAL ITEM LIST COUNT : " + items.Count);
 
 		foreach (Item item in items) {
 			GameObject go = null;
@@ -366,7 +393,7 @@ public class GameController : MonoBehaviour {
 				
 				leapControl.handParent = Camera.allCameras[0].transform;
 				
-				Instantiate(leapCanvasPrefab);
+				leapCanvas = Instantiate(leapCanvasPrefab);
 			}else{
 			
 				kmManager = Instantiate (kmManagerPrefab);
@@ -435,8 +462,7 @@ public class GameController : MonoBehaviour {
 			
 			leapControl.handParent = camL.transform;
 			
-
-			Instantiate(leapCanvasPrefab);
+			leapCanvas = Instantiate(leapCanvasPrefab);
 			
 			
 			
@@ -600,9 +626,6 @@ public class GameController : MonoBehaviour {
 			HighScoreParser.addHighScore(GameModel.Hero.Name, GameModel.Score);
 			deathDone = true;
 			Cursor.visible = true;
-			
-			
-			Time.timeScale = 0.0f;
 		}
 		
 	}

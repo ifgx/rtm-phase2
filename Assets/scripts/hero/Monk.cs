@@ -108,6 +108,7 @@ public class Monk : Hero {
 		}
 		else if(level > 4)
 		{
+			hpHealed *= 1.5f;
 			HpRefresh +=1;
 		}
 		else if(level > 3)
@@ -116,6 +117,7 @@ public class Monk : Hero {
 		}
 		else if(level > 2)
 		{
+			hpHealed *= 1.25f;
 			MaxHealthPoint *= 1.1f;
 		}
 		else if(level > 1)

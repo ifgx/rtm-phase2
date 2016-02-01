@@ -161,7 +161,7 @@ public class SingleMenuController : MonoBehaviour {
 			//GameModel.goToFirstLevel();
 			Application.LoadLevel("GameScene");
 		} else if (tutorial) {
-			Debug.Log("Tutorial activate");
+			//Debug.Log("Tutorial activate");
 			GameModel.PlayWithLeap = LM;
 			GameModel.PlayWithTuto = true;
 			GameModel.goToFirstLevel();
