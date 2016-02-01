@@ -5,55 +5,98 @@ public class HeroConfigurator : MonoBehaviour {
 	
 
 	// WARRIOR
-	public static string warriorAttackType = "CaC";
-	public static float warriorXpQuantity = 0.0f;
-	public static float warriorBlockingPercent = 100.0f;
-	public static float warriorPowerQuantity = 1000.0f;
-	public static float warriorHpRefresh = 25.0f;
-	public static float warriorPowerRefresh = 200.0f;
-	public static float warriorHp = 1000.0f;
-	public static float warriorDamage = 15.0f;
-	public static float warriorMovementSpeed = 3.0f;
-	public static float warriorRange = 5.0f;
+	public static string warriorAttackType;
+	public static float warriorXpQuantity;
+	public static float warriorBlockingPercent;
+	public static float warriorPowerQuantity;
+	public static float warriorHpRefresh;
+	public static float warriorPowerRefresh;
+	public static float warriorHp;
+	public static float warriorDamage;
+	public static float warriorMovementSpeed;
+	public static float warriorRange;
 
 	// MONK
-	public static string monkAttackType = "CaC";
-	public static float monkXpQuantity = 0.0f;
-	public static float monkBlockingPercent = 50.0f;
-	public static float monkPowerQuantity = 1000.0f;
-	public static float monkHpRefresh = 30.0f;
-	public static float monkPowerRefresh = 25.0f;
-	public static float monkHp = 1100.0f;
-	public static float monkDamage = 11.0f;
-	public static float monkMovementSpeed = 3.0f;
-	public static float monkRange = 5.0f;
+	public static string monkAttackType;
+	public static float monkXpQuantity;
+	public static float monkBlockingPercent;
+	public static float monkPowerQuantity;
+	public static float monkHpRefresh;
+	public static float monkPowerRefresh;
+	public static float monkHp;
+	public static float monkDamage;
+	public static float monkMovementSpeed;
+	public static float monkRange;
 
-	public static float monkSpeedHeal = 1.0f;
-	public static float monkPowerHealConsumption = 70.0f;
-	public static float monkHpHealed = 60.0f;
+	public static float monkSpeedHeal;
+	public static float monkPowerHealConsumption;
+	public static float monkHpHealed;
 
 	// WIZARD
-	public static string wizardAttackType = "Distance";
-	public static float wizardXpQuantity = 0.0f;
-	public static float wizardBlockingPercent = 100.0f;
-	public static float wizardPowerQuantity = 1000.0f;
-	public static float wizardHpRefresh = 15.0f;
-	public static float wizardPowerRefresh = 15.0f;
-	public static float wizardHp = 1100.0f;
-	public static float wizardDamage = 8.0f;
-	public static float wizardMovementSpeed = 3.0f;
-	public static float wizardRange = 5.0f;
-	public static float wizardAttackCost = 100;
-	public static float wizardDefenseCost = 70;
-	public static float wizardRegenAttack = 230;
+	public static string wizardAttackType;
+	public static float wizardXpQuantity;
+	public static float wizardBlockingPercent;
+	public static float wizardPowerQuantity;
+	public static float wizardHpRefresh;
+	public static float wizardPowerRefresh;
+	public static float wizardHp;
+	public static float wizardDamage;
+	public static float wizardMovementSpeed;
+	public static float wizardRange;
+	public static float wizardAttackCost;
+	public static float wizardDefenseCost;
+	public static float wizardRegenAttack;
 
 
 
 	public void Init()
 	{
-		//TODO
-		// Lire dans le fichier JSON
+		JSONNode root = getJsonFile ("Config/Hero.JSON");
 
-		// Hydrater les variables
+		warriorAttackType = root["warriorAttackType"];
+		warriorXpQuantity = root["warriorXpQuantity"].AsFloat;
+		warriorBlockingPercent = root["warriorBlockingPercent"].AsFloat;
+		warriorPowerQuantity = root["warriorPowerQuantity"].AsFloat;
+		warriorHpRefresh = root["warriorHpRefresh"].AsFloat;
+		warriorPowerRefresh = root["warriorPowerRefresh"].AsFloat;
+		warriorHp = root["warriorHp"].AsFloat;
+		warriorDamage = root["warriorDamage"].AsFloat;
+		warriorMovementSpeed = root["warriorMovementSpeed"].AsFloat;
+		warriorRange = root["warriorRange"].AsFloat;
+		monkAttackType = root["monkAttackType"];
+		monkXpQuantity = root["monkXpQuantity"].AsFloat;
+		monkBlockingPercent = root["monkBlockingPercent"].AsFloat;
+		monkPowerQuantity = root["monkPowerQuantity"].AsFloat;
+		monkHpRefresh = root["monkHpRefresh"].AsFloat;
+		monkPowerRefresh = root["monkPowerRefresh"].AsFloat;
+		monkHp = root["monkHp"].AsFloat;
+		monkDamage = root["monkDamage"].AsFloat;
+		monkMovementSpeed = root["monkMovementSpeed"].AsFloat;
+		monkRange = root["monkRange"].AsFloat;
+		monkSpeedHeal = root["monkSpeedHeal"].AsFloat;
+		monkPowerHealConsumption = root["monkPowerHealConsumption"].AsFloat;
+		monkHpHealed = root["monkHpHealed"].AsFloat;
+		wizardAttackType = root["wizardAttackType"];
+		wizardXpQuantity = root["wizardXpQuantity"].AsFloat;
+		wizardBlockingPercent = root["wizardBlockingPercent"].AsFloat;
+		wizardPowerQuantity = root["wizardPowerQuantity"].AsFloat;
+		wizardHpRefresh = root["wizardHpRefresh"].AsFloat;
+		wizardPowerRefresh = root["wizardPowerRefresh"].AsFloat;
+		wizardHp = root["wizardHp"].AsFloat;
+		wizardDamage = root["wizardDamage"].AsFloat;
+		wizardMovementSpeed = root["wizardMovementSpeed"].AsFloat;
+		wizardRange = root["wizardRange"].AsFloat;
+		wizardAttackCost = root["wizardAttackCost"].AsFloat;
+		wizardDefenseCost = root["wizardDefenseCost"].AsFloat;
+		wizardRegenAttack = root["wizardRegenAttack"].AsFloat;
+	}
+
+	private static JSONNode getJsonFile(string path){
+		StreamReader r = new StreamReader (path); // access the json file
+		string json = r.ReadToEnd (); // convert its content to a string 
+
+		r.Close();
+
+		return JSON.Parse(json); // return the content as a JSONNode
 	}
 }
