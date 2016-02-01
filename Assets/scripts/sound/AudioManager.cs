@@ -54,10 +54,10 @@ public class AudioManager : MonoBehaviour, AudioProcessor.AudioCallbacks
             audioSource = GameObject.Find("Main Camera").GetComponent<AudioSource>();
             
             string path = "file://" + Application.dataPath + "/../Musics/"+musicName+".wav";
-			//Debug.Log ("music : " + path);
+			
 			WWW www = new WWW(path);
             while (!www.isDone) {
-				//Debug.Log ("loading music ...");
+				
 			}
 
             clip = www.GetAudioClip(false);

@@ -90,7 +90,6 @@ public class AudioProcessor : MonoBehaviour
     {
         start = false;
         callbacks = new List<AudioCallbacks>();
-		//Debug.Log ("callbacks : " + callbacks);
 
         initArrays();
 
@@ -117,7 +116,7 @@ public class AudioProcessor : MonoBehaviour
 
         int average = (int)(sum / entries);
 
-        Debug.Log("average = " + average);
+        //Debug.Log("average = " + average);
     }
 
     double[] toDoubleArray(float[] arr)
