@@ -17,7 +17,7 @@ public class AudioManager : MonoBehaviour, AudioProcessor.AudioCallbacks
     AudioClip heroSword;
 	AudioClip heroWood1,heroWood2;
     AudioClip potion;
-    AudioClip heal;
+    AudioClip heal, wall, lancer, dragonet;
 
     private string musicName;
 
@@ -40,11 +40,14 @@ public class AudioManager : MonoBehaviour, AudioProcessor.AudioCallbacks
 		heroWood2 = Resources.Load("sounds/impactbaton") as AudioClip;
         potion = Resources.Load("sounds/potion") as AudioClip;
         heal = Resources.Load("sounds/priere") as AudioClip;
+        wall = Resources.Load("sounds/entrepot") as AudioClip;
+        lancer = Resources.Load("sounds/lancer") as AudioClip;
+        dragonet = Resources.Load("sounds/dragonet") as AudioClip;
 
         if (musicName != null) {
 
             audioSourceHB = gameObject.AddComponent<AudioSource>();
-            audioSourceHB.clip = Resources.Load("Musics/Hearbeat") as AudioClip;
+            audioSourceHB.clip = Resources.Load("sounds/heartbeat2") as AudioClip;
             audioSourceHB.volume = 0;
             audioSourceHB.Play();
             //audioSource = GetComponent<AudioSource>();
@@ -87,7 +90,33 @@ public class AudioManager : MonoBehaviour, AudioProcessor.AudioCallbacks
         noiseSource.volume = 0.6f;
         noiseSource.PlayOneShot(heroShield);
     }
-
+    public void PlayDeadSound(string NPCtype)
+    {
+        switch (NPCtype)
+        {
+            case "BasicDragonet":
+            case "fireDragonet":
+            case "iceDragonet":
+                noiseSource.volume = 0.6f;
+                noiseSource.PlayOneShot(dragonet);
+                break;
+            case "BasicLancer":
+            case "fireLancer":
+            case "iceLancer":
+                noiseSource.volume = 0.8f;
+                noiseSource.PlayOneShot(lancer);
+                break;
+            case "Assassin":
+                noiseSource.volume = 0.8f;
+                noiseSource.PlayOneShot(lancer);
+                break;
+            case "Wall":
+                noiseSource.volume = 1.0f;
+                noiseSource.PlayOneShot(wall);
+                break;
+        }
+        
+    }
     public void playHeroSwordSound()
     {
         noiseSource.volume = 1.0f;
@@ -165,6 +194,7 @@ public class AudioManager : MonoBehaviour, AudioProcessor.AudioCallbacks
                 if(healthPointratio < 0.4f)
                 {
                     audioSourceHB.pitch = 1.2f;
+                    audioSourceHB.volume = audioSourceHB.volume + 0.2f;
                 }
                 else
                 {

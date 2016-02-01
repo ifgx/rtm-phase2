@@ -475,8 +475,9 @@ public abstract class NPC : Unit {
 			
 			if(IsDead())
 			{
-				//Debug.LogError("MORT:"+hero.Name);
-				hero.HasKilled(XpGain);
+                //Debug.LogError("MORT:"+hero.Name);
+                audioManager.PlayDeadSound(this.GetType().ToString());
+                hero.HasKilled(XpGain);
 				//Debug.LogError("XPQUANTITY:"+hero.XpQuantity);
 				foreach(Hero hero_list in heros)
 				{
@@ -503,8 +504,9 @@ public abstract class NPC : Unit {
 			
 			if(IsDead())
 			{
-				//Debug.LogError("MORT:"+hero.Name);
-				hero.HasKilled(XpGain);
+                //Debug.LogError("MORT:"+hero.Name);
+                audioManager.PlayDeadSound(this.GetType().ToString());
+                hero.HasKilled(XpGain);
 				//Debug.LogError("XPQUANTITY:"+hero.XpQuantity);
 				foreach(Hero hero_list in heros)
 				{
