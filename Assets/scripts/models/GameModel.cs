@@ -263,11 +263,7 @@ public class GameModel {
 		}*/
 
 		ActualLevelId = 0;
-
-		heros = new List<Hero> ();
-		heros.Add (new Warrior ());
-		heros.Add (new Wizard ());
-
+		
 		herosInGame = new List<Hero> ();
 
 		heros = new List<Hero> ();
