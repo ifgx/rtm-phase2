@@ -23,6 +23,11 @@ public class LoadingController : MonoBehaviour {
 
 		yield return null;
 		GameModel.Init ();
+		EnnemyConfigurator.Init();
+		HeroConfigurator.Init();
 		Application.LoadLevel("Main_menu");
+
+		
 	}
 }
+
