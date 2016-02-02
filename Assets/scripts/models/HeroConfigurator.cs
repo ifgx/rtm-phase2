@@ -1,5 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
+using SimpleJSON;
+using System.IO; //pour StreamReader
 
 public class HeroConfigurator : MonoBehaviour {
 	
@@ -49,7 +51,7 @@ public class HeroConfigurator : MonoBehaviour {
 
 
 
-	public void Init()
+	public static void Init()
 	{
 		JSONNode root = getJsonFile ("Config/Hero.JSON");
 
