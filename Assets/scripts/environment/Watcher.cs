@@ -19,7 +19,7 @@ public class Watcher : MonoBehaviour {
         points.Add(pointA);
         points.Add(pointB);
         points.Add(pointC);
-        //points.add(pointA);
+        
         nb_points = points.Count;
         i = 0;
 
