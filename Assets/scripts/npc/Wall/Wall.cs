@@ -13,7 +13,12 @@ public class Wall : NPC {
 
 	// Use this for initialization
 	void Start () {
-	
+		if (GameModel.HerosInGame [0].GetType ().ToString () == "Warrior") {
+			BoxCollider collider = GetComponent<BoxCollider>();
+			Vector3 size = collider.size;
+			size.z = 4f;
+			collider.size = size;
+		}
 	}
 	
 	// Update is called once per frame
