@@ -56,7 +56,7 @@ public class SingleMenuController : MonoBehaviour {
 		deviceInfo.SetActive(false);
 
 		spriteNormal = Resources.Load <Sprite> ("prefabs/menus/button_normal");
-		spriteSelect = Resources.Load <Sprite> ("prefabs/menus/button_over");
+		spriteSelect = Resources.Load <Sprite> ("prefabs/menus/button_hover");
 
 		imageCampaign.sprite = spriteSelect;
 		campaign = true;
@@ -84,7 +84,6 @@ public class SingleMenuController : MonoBehaviour {
 			LM = false;
 		}
 
-
 		if((campaign && (HeroMenuController.BSlot1 || HeroMenuController.BSlot2 || HeroMenuController.BSlot3) && HeroMenuController.Name != "") ||
 			(custom && CustomMenuController.Song != "Empty") ||
 			tutorial){
@@ -92,9 +91,6 @@ public class SingleMenuController : MonoBehaviour {
 		} else {
 			buttonPlay.interactable = false;
 		}
-
-		//Debug.Log("Browser is on : "+CustomMenuController.LauncherBrowser);
-
 
 		if(CustomMenuController.LauncherBrowser) {
 			buttonCampaign.interactable = false;
@@ -112,11 +108,10 @@ public class SingleMenuController : MonoBehaviour {
 
 	public void Campaign(){
 
-		//buttonCampaign.
+
 		imageCampaign.sprite = spriteSelect;
 		imageCustom.sprite = spriteNormal;
 		imageTutorial.sprite = spriteNormal;
-
 
 		campaign = true;
 		custom = false;
@@ -167,8 +162,6 @@ public class SingleMenuController : MonoBehaviour {
 			GameModel.goToFirstLevel();
 			Application.LoadLevel("TutoScene");
 		}
-
-
 	}
 
 	public void Return(){
