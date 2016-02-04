@@ -21,8 +21,8 @@ public class LevelGenerator {
 		"invincibility"
 	};
 
-	private static float itemSpaceMin = 5.0f;
-	private static float itemSpaceMax = 10.0f;
+	private static float itemSpaceMin = 2.0f;
+	private static float itemSpaceMax = 5.0f;
 	private static float itemSpaceBase = 10.0f;
 
 	private static float depthCount;
@@ -64,9 +64,17 @@ public class LevelGenerator {
 
 			List<Item> itemList = new List<Item> ();
 			while (depthCount < levelLength) {
+				float posX = Random.Range (-2.0f, 2.0f);
+				string type = randomItemType (depthCount);
+
+				if (type == "wall") {
+					posX = 0;
+				}
+
+				Item i = new Item (type, (int)depthCount, posX);
 
 
-				itemList.Add (new Item (randomItemType (depthCount), (int)depthCount, Random.Range (-2.0f, 2.0f)));
+				itemList.Add (i);
 			
 				depthCount += Random.Range (itemSpaceMin, itemSpaceMax);
 			}

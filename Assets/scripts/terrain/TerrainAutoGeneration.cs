@@ -58,24 +58,12 @@ public class TerrainAutoGeneration : MonoBehaviour {
                 string terrainToLoad = "";
 				//Debug.Log (GameModel.ActualLevelId);
 				if (!GameModel.OnSandBox) {
-                	switch (GameModel.ActualLevel.Map)
-                	{
-                    case "terrain1":
-                        terrainToLoad = "terrain1";
-                        break;
-                    case "terrain2":
-                        terrainToLoad = "terrain2";
-                        break;
-                    case "terrain3":
-                        terrainToLoad = "terrain3";
-                        break;
-                    default:
-                        terrainToLoad = "terrain1";
-                        break;
-                	}
+                	
+					terrainToLoad = GameModel.ActualLevel.Map;
 				}else{
 					terrainToLoad = "terrain1";
 				}
+
                 Instantiate(Resources.Load("prefabs/"+terrainToLoad) as GameObject, new Vector3 (-100, -2, terrainPosZ + terrainLength), Quaternion.identity);
 				terrainCreated = true;
 			}
