@@ -91,8 +91,8 @@ public class TerrainAutoGeneration : MonoBehaviour {
 			sign = Random.Range(-1.0f, 1.0f);
 			randomX = Random.Range(Mathf.Sign(sign) * 3.0f, Mathf.Sign(sign) * 30.0f);
 			randomZ = Random.Range(terrainPosZ, terrainPosZ + terrainLength);
-			randomPos = new Vector3(randomX,0,randomZ);
-			allParticles[i] = Instantiate (particlePrefab, new Vector3(randomX, terrain.SampleHeight(randomPos), randomZ), Quaternion.identity) as GameObject;
+			randomPos = new Vector3(randomX, 0,randomZ);
+			allParticles[i] = Instantiate (particlePrefab, new Vector3(randomX, terrain.SampleHeight(randomPos) + 2, randomZ), Quaternion.identity) as GameObject;
 		}
 	}
 
