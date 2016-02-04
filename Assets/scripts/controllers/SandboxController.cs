@@ -89,6 +89,8 @@ public class SandboxController : MonoBehaviour {
 	 */
 	void Start () {
 		GameModel.initSandbox ();
+		EnnemyConfigurator.Init();
+		HeroConfigurator.Init();
 
 		handSide = HandSide.RIGHT_HAND;
 
