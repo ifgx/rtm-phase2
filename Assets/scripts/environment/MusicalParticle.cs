@@ -37,7 +37,7 @@ public class MusicalParticle : MonoBehaviour, AudioProcessor.AudioCallbacks {
 		//light.color = new Color(Random.Range(0.0f, 1.0f), Random.Range(0.0f, 1.0f), Random.Range(0.0f, 1.0f), 1.0f);
 		if (switcher == 0) {
 			switcher = 1;
-			particleSys.emissionRate = 30;
+			particleSys.emissionRate = 90;
 		} else {
 			switcher = 0;
 			particleSys.emissionRate = 0;
