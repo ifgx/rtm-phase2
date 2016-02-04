@@ -1,4 +1,4 @@
-{"name":"level 1","music":"Precious","map":"terrain1","tutorial":false,"items":[
+{"name":"level 1","music":"ANW2297_03_Fangs","map":"terrain1","tutorial":false,"items":[
   {"id":1,"type":"basicLancer","position_seconds":"20","position_x":"0.2"},
   {"id":3,"type":"basicDragonet","position_seconds":"30","position_x":"-0.1"},
   {"id":4,"type":"wall","position_seconds":"50","position_x":"0"},
