@@ -23,7 +23,7 @@ public class LevelGenerator {
 
 	private static float itemSpaceMin = 5.0f;
 	private static float itemSpaceMax = 10.0f;
-	private static float itemSpaceBase = 7.0f;
+	private static float itemSpaceBase = 10.0f;
 
 	private static float depthCount;
 
@@ -66,7 +66,7 @@ public class LevelGenerator {
 			while (depthCount < levelLength) {
 
 
-				itemList.Add (new Item (randomItemType (), (int)depthCount, Random.Range (-2.0f, 2.0f)));
+				itemList.Add (new Item (randomItemType (depthCount), (int)depthCount, Random.Range (-2.0f, 2.0f)));
 			
 				depthCount += Random.Range (itemSpaceMin, itemSpaceMax);
 			}
@@ -96,9 +96,14 @@ public class LevelGenerator {
 		GameModel.CustomLevel = true;
 	}
 
-	private static string randomItemType() {
+	private static string randomItemType(float depth) {
 		//Item item = new Item ("type", depthCount, Random.Range (-2.0f, 2.0f));
-		return items [Random.Range (0, 11)];
+		//return 
+		string item = items [Random.Range (0, 11)];
+		while (item.Contains("ice") && depth < 50) {
+			item = items [Random.Range (0, 11)];
+		}
+		return item;
 	}
 
 

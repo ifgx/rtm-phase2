@@ -175,7 +175,7 @@ public class GameController : MonoBehaviour {
 			GameModel.loadSave(GameModel.Slot);
 		}
 		level = GameModel.ActualLevel;
-		Debug.Log (level.Name+"  --  "+level.MusicPath);
+		//Debug.Log (level.Name+"  --  "+level.MusicPath);
 		
 
 		//Debug.Log (level.Name);

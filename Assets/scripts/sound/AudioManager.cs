@@ -56,7 +56,7 @@ public class AudioManager : MonoBehaviour, AudioProcessor.AudioCallbacks
 			string folderPath;
 			if (GameModel.CustomLevel) folderPath = "/../PersonalMusics/";
 			else folderPath = "/../Musics/";
-			Debug.Log(Application.dataPath + folderPath + musicName+".wav");
+			//Debug.Log(Application.dataPath + folderPath + musicName+".wav");
 			string path = "file://" + Application.dataPath + folderPath + musicName+".wav";
 			
 			WWW www = new WWW(path);
