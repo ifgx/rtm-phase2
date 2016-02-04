@@ -48,6 +48,7 @@ public class CustomMenuController : MonoBehaviour {
 			canvas.SetActive(true);
 			launchBrowser.Select = false;
 			browser = false;
+			customSong = tmp[tmp.Length-1];
 		}
 		
 		if(launchBrowser.Cancel){

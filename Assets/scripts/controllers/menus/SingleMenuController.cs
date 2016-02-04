@@ -154,6 +154,7 @@ public class SingleMenuController : MonoBehaviour {
 			GameModel.PlayWithTuto = false;
 			LevelGenerator.generateLevelFromFile(CustomMenuController.CustomSong);
 			//GameModel.goToFirstLevel();
+			Debug.Log(GameModel.ActualLevel.Name+"-"+GameModel.ActualLevel.MusicPath);
 			Application.LoadLevel("GameScene");
 		} else if (tutorial) {
 			//Debug.Log("Tutorial activate");

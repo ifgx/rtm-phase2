@@ -53,7 +53,11 @@ public class AudioManager : MonoBehaviour, AudioProcessor.AudioCallbacks
             //audioSource = GetComponent<AudioSource>();
             audioSource = GameObject.Find("Main Camera").GetComponent<AudioSource>();
             
-            string path = "file://" + Application.dataPath + "/../Musics/"+musicName+".wav";
+			string folderPath;
+			if (GameModel.CustomLevel) folderPath = "/../PersonalMusics/";
+			else folderPath = "/../Musics/";
+			Debug.Log(Application.dataPath + folderPath + musicName+".wav");
+			string path = "file://" + Application.dataPath + folderPath + musicName+".wav";
 			
 			WWW www = new WWW(path);
             while (!www.isDone) {

@@ -171,11 +171,11 @@ public class GameController : MonoBehaviour {
 		//GameModel.Init();
 		GameModel.resetDataBeforeLevel ();
 		
-		if (!GameModel.PlayWithTuto){
+		if (!GameModel.PlayWithTuto && !GameModel.CustomLevel){
 			GameModel.loadSave(GameModel.Slot);
 		}
 		level = GameModel.ActualLevel;
-
+		Debug.Log (level.Name+"  --  "+level.MusicPath);
 		
 
 		//Debug.Log (level.Name);
